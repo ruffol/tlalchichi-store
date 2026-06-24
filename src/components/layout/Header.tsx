@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { useCartStore, getItemCount } from '@/store/cart'
 import LanguageToggle from './LanguageToggle'
+import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   const t = useTranslations('Navbar')
@@ -44,7 +45,8 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
             <LanguageToggle />
             <button
               onClick={openCart}

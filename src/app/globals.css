@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafaf9;
   --foreground: #1c1917;
@@ -9,6 +11,27 @@
   --terracota-light: #e89b7a;
   --negro-suave: #292524;
   --blanco: #fafaf9;
+  --border-arena: #e5ddd5;
+  --footer-bg: #292524;
+  --footer-text: #a8a29e;
+  --card-bg: #ffffff;
+  --hero-gradient: from-arena/50 to-blanco;
+}
+
+.dark {
+  --background: #0f0f1a;
+  --foreground: #e4e0d6;
+  --arena: #1a1a2e;
+  --terracota: #d4775a;
+  --terracota-dark: #c86a4e;
+  --terracota-light: #e89b7a;
+  --negro-suave: #e4e0d6;
+  --blanco: #16162a;
+  --border-arena: #2a2a42;
+  --footer-bg: #0a0a14;
+  --footer-text: #7a7a9a;
+  --card-bg: #1a1a30;
+  --hero-gradient: from-arena to-blanco;
 }
 
 @theme inline {
@@ -27,4 +50,5 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

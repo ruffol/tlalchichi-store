@@ -46,7 +46,19 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={inter.className}>
+    <html lang={locale} className={inter.className} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              const theme = localStorage.getItem('theme');
+              if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+              }
+            } catch(e) {}
+          `
+        }} />
+      </head>
       <body className="min-h-screen flex flex-col bg-blanco text-negro-suave antialiased">
         <NextIntlClientProvider messages={messages}>
           <Header />
