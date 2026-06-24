@@ -126,8 +126,8 @@ function seedProductsForce() {
   }
 
   const insert = db.prepare(`
-    INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
-    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, 1)
+    INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
+    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, 1)
   `)
 
   let inserted = 0
@@ -236,14 +236,14 @@ export function upsertProduct(data: any): any {
   const exists = db.prepare('SELECT id FROM products WHERE slug = ?').get(data.slug) as any
   if (exists) {
     db.prepare(`
-      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en, precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock, peso_kg=@peso_kg, imagenes=@imagenes, destacado=@destacado, activo=@activo
+      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en, precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock=@imagenes=@imagenes, destacado=@destacado, activo=@activo
       WHERE id = @id
     `).run(data)
     return db.prepare('SELECT * FROM products WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
-      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, @activo)
+      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @@imagenes, @destacado, @activo)
     `).run(data)
     return db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid)
   }
