@@ -21,7 +21,7 @@ export function getDb(): Database.Database {
     _db.pragma('journal_mode = WAL')
     _db.pragma('foreign_keys = ON')
     initTables()
-    seedIfEmpty()
+    seedProductsForce()
   }
   return _db
 }
@@ -106,21 +106,25 @@ function initTables() {
   }
 }
 
-function seedIfEmpty() {
+function seedProductsForce() {
   const db = _db!
-  const count = db.prepare('SELECT COUNT(*) as count FROM products').get() as any
-  if (count.count === 0 && seedProducts.length > 0) {
-    const insert = db.prepare(`
-      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, 1)
-    `)
-    for (const product of seedProducts) {
-      insert.run({
-        ...product,
-        imagenes: JSON.stringify(product.imagenes),
-        destacado: product.destacado ? 1 : 0,
-      })
-    }
+  if (seedProducts.length === 0) return
+
+  // Siempre resiembra los productos desde seed.json
+  // En producción, si hay órdenes, los productos existentes se actualizan
+  db.exec('DELETE FROM products')
+  db.exec('DELETE FROM sqlite_sequence WHERE name="products"')
+
+  const insert = db.prepare(`
+    INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
+    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, 1)
+  `)
+  for (const product of seedProducts) {
+    insert.run({
+      ...product,
+      imagenes: JSON.stringify(product.imagenes),
+      destacado: product.destacado ? 1 : 0,
+    })
   }
 }
 
