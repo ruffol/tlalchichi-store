@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3'
 import path from 'path'
 import seedData from './seed.json'
+const seedProducts: any[] = seedData
 
 const DB_PATH = process.env.NODE_ENV === 'production'
   ? '/data/tlalchichi.db'
@@ -108,12 +109,12 @@ function initTables() {
 function seedIfEmpty() {
   const db = _db!
   const count = db.prepare('SELECT COUNT(*) as count FROM products').get() as any
-  if (count.count === 0 && seedData.length > 0) {
+  if (count.count === 0 && seedProducts.length > 0) {
     const insert = db.prepare(`
       INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
       VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, 1)
     `)
-    for (const product of seedData) {
+    for (const product of seedProducts) {
       insert.run({
         ...product,
         imagenes: JSON.stringify(product.imagenes),
