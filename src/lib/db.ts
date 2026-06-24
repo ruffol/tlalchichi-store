@@ -108,24 +108,42 @@ function initTables() {
 
 function seedProductsForce() {
   const db = _db!
-  if (seedProducts.length === 0) return
+  if (seedProducts.length === 0) {
+    console.log('[seed] No hay productos en seed.json')
+    return
+  }
+
+  console.log('[seed] Forzando resiembra de', seedProducts.length, 'productos...')
 
   // Siempre resiembra los productos desde seed.json
-  // En producción, si hay órdenes, los productos existentes se actualizan
-  db.exec('DELETE FROM products')
-  db.exec('DELETE FROM sqlite_sequence WHERE name="products"')
+  try {
+    db.exec('DELETE FROM products')
+    db.exec('DELETE FROM sqlite_sequence WHERE name="products"')
+    console.log('[seed] Productos viejos eliminados')
+  } catch (e) {
+    console.error('[seed] Error al eliminar productos:', e)
+    return
+  }
 
   const insert = db.prepare(`
     INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, destacado, activo)
     VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @destacado, 1)
   `)
+
+  let inserted = 0
   for (const product of seedProducts) {
-    insert.run({
-      ...product,
-      imagenes: JSON.stringify(product.imagenes),
-      destacado: product.destacado ? 1 : 0,
-    })
+    try {
+      insert.run({
+        ...product,
+        imagenes: JSON.stringify(product.imagenes),
+        destacado: product.destacado ? 1 : 0,
+      })
+      inserted++
+    } catch (e) {
+      console.error('[seed] Error insertando producto', product.slug, ':', e)
+    }
   }
+  console.log('[seed] Insertados', inserted, 'de', seedProducts.length, 'productos')
 }
 
 export function getProducts(opts?: { destacado?: boolean; categoria?: string; slug?: string; activo?: boolean }): any[] {
