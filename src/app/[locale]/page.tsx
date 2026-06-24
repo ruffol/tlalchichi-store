@@ -15,13 +15,13 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <section className="relative min-h-[80vh] flex items-center bg-gradient-to-b from-arena/50 to-blanco">
+      <section className="relative min-h-[80vh] flex items-center" style={{ background: 'linear-gradient(to bottom, var(--bg-arena-light), var(--bg-page))' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="max-w-2xl">
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-negro-suave">
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-negro-suave leading-[1.1]">
               {t('titulo')}
             </h1>
-            <p className="mt-6 text-lg sm:text-xl text-negro-suave/60 leading-relaxed">
+            <p className="mt-6 text-lg sm:text-xl text-muted leading-relaxed">
               {t('subtitulo')}
             </p>
             <div className="mt-10 flex gap-4">
@@ -41,7 +41,7 @@ export default async function HomePage({ params }: Props) {
       {products.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-negro-suave">
+            <h2 className="text-3xl sm:text-4xl font-bold text-negro-suave tracking-tight">
               {t('destacados')}
             </h2>
             <Link
@@ -55,13 +55,13 @@ export default async function HomePage({ params }: Props) {
         </section>
       )}
 
-      <section className="bg-arena/50 py-24">
+      <section className="py-24" style={{ background: 'var(--bg-arena-light)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-negro-suave mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-negro-suave mb-6 tracking-tight">
               {t('historia_titulo')}
             </h2>
-            <p className="text-lg text-negro-suave/60 leading-relaxed">
+            <p className="text-lg text-muted leading-relaxed">
               {t('historia_texto')}
             </p>
           </div>

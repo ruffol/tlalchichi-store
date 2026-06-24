@@ -59,7 +59,7 @@ export default async function LocaleLayout({
           `
         }} />
       </head>
-      <body className="min-h-screen flex flex-col bg-blanco text-negro-suave antialiased">
+      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased transition-colors duration-300">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>
