@@ -168,7 +168,7 @@ export function getProducts(opts?: { destacado?: boolean; categoria?: string; sl
     params.push(opts.categoria, opts.categoria)
   }
 
-  sql += ' ORDER BY created_at DESC'
+  sql += ' ORDER BY id ASC'
   const rows = db.prepare(sql).all(...params) as any[]
   return rows.map(normalizeProduct)
 }

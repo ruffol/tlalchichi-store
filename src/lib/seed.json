@@ -1,37 +1,22 @@
 [
   {
-    "slug": "tlalchichi-viejo-sentado",
-    "nombre_es": "Tlalchichi Viejo Sentado",
-    "nombre_en": "Old Sitting Tlalchichi",
-    "descripcion_es": "Figura artesanal de un Tlalchichi sentado con expresión sabia. Cada pieza es única, tallada y pintada a mano con colores tradicionales.",
-    "descripcion_en": "Handcrafted figurine of a sitting Tlalchichi with a wise expression. Each piece is unique, hand-carved and hand-painted with traditional colors.",
-    "historia_es": "Los Tlalchichis son figuras tradicionales mexicanas que representan espíritus protectores del hogar. Esta pieza simboliza la sabiduría de los ancestros.",
-    "historia_en": "Tlalchichis are traditional Mexican figures representing protective household spirits. This piece symbolizes the wisdom of ancestors.",
-    "categoria_es": "Alcancías",
-    "categoria_en": "Piggy Banks",
-    "precio_mxn": 450,
-    "precio_usd": 24,
-    "stock": 10,
-    "peso_kg": 0.3,
-    "imagenes": ["/img/productos/Tlalchichiviejosentado.png", "/img/productos/Tlalchichiviejosentado2.png"],
-    "destacado": true
-  },
-  {
-    "slug": "tlalchichi-sentado",
-    "nombre_es": "Tlalchichi Sentado",
-    "nombre_en": "Sitting Tlalchichi",
-    "descripcion_es": "Tlalchichi sentado en pose clásica, decorado con motivos tradicionales mexicanos. Perfecto como amuleto para el hogar.",
-    "descripcion_en": "Sitting Tlalchichi in classic pose, decorated with traditional Mexican motifs. Perfect as a home amulet.",
-    "historia_es": "La tradición de los Tlalchichis se remonta a las culturas prehispánicas de México. Eran colocados en las entradas de los hogares como protectores.",
-    "historia_en": "The tradition of Tlalchichis dates back to pre-Hispanic Mexican cultures. They were placed at home entrances as protectors.",
-    "categoria_es": "Alcancías",
-    "categoria_en": "Piggy Banks",
-    "precio_mxn": 380,
-    "precio_usd": 20,
-    "stock": 12,
-    "peso_kg": 0.25,
-    "imagenes": ["/img/productos/Tlalchichisentado.png", "/img/productos/Tlalchichisentado2.png"],
-    "destacado": true
+    "slug": "tlalchichi-miniatura-sentado",
+    "nombre_es": "Miniatura Tlalchichi Sentado",
+    "nombre_en": "Miniature Sitting Tlalchichi",
+    "descripcion_es": "Pequeño Tlalchichi sentado, perfecto para llevar como amuleto o para colección. Hecho a mano con el mismo cuidado que las piezas grandes.",
+    "descripcion_en": "Small sitting Tlalchichi, perfect to carry as an amulet or for collection. Handmade with the same care as the large pieces.",
+    "historia_es": "Las miniaturas de Tlalchichis eran populares como amuletos personales. Se creía que protegían a su portador durante los viajes.",
+    "historia_en": "Miniature Tlalchichis were popular as personal amulets. They were believed to protect their wearer during travels.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 250,
+    "precio_usd": 13,
+    "stock": 15,
+    "peso_kg": 0.1,
+    "imagenes": [
+      "/img/productos/Tlalchichisentado2.png"
+    ],
+    "destacado": false
   },
   {
     "slug": "tlalchichi-joven-viejo",
@@ -47,7 +32,9 @@
     "precio_usd": 28,
     "stock": 8,
     "peso_kg": 0.35,
-    "imagenes": ["/img/productos/Tlalchichijovenviejo.png"],
+    "imagenes": [
+      "/img/productos/Tlalchichijovenviejo.png"
+    ],
     "destacado": true
   },
   {
@@ -64,92 +51,10 @@
     "precio_usd": 22,
     "stock": 10,
     "peso_kg": 0.3,
-    "imagenes": ["/img/productos/Tlalchichiacostado.png", "/img/productos/Tlalchichiacostado2.png"],
-    "destacado": false
-  },
-  {
-    "slug": "tlalchichi-parado",
-    "nombre_es": "Tlalchichi Parado",
-    "nombre_en": "Standing Tlalchichi",
-    "descripcion_es": "Imponente Tlalchichi de pie, decorado con vibrantes colores y patrones geométricos tradicionales. Una pieza llamativa para cualquier colección.",
-    "descripcion_en": "Imposing standing Tlalchichi, decorated with vibrant colors and traditional geometric patterns. A striking piece for any collection.",
-    "historia_es": "El Tlalchichi de pie es el guardián por excelencia. Se colocaba en las entradas principales para proteger el hogar de malas energías.",
-    "historia_en": "The standing Tlalchichi is the ultimate guardian. It was placed at main entrances to protect the home from bad energies.",
-    "categoria_es": "Centro de mesa",
-    "categoria_en": "Centerpieces",
-    "precio_mxn": 480,
-    "precio_usd": 26,
-    "stock": 8,
-    "peso_kg": 0.4,
-    "imagenes": ["/img/productos/Tlalchichiparado.png", "/img/productos/Tlalchichiparado2.png"],
-    "destacado": true
-  },
-  {
-    "slug": "tlalchichi-con-mazorca",
-    "nombre_es": "Tlalchichi con Mazorca",
-    "nombre_en": "Tlalchichi with Corncob",
-    "descripcion_es": "Tlalchichi sosteniendo una mazorca de maíz, símbolo de abundancia y fertilidad. Una pieza que combina tradición y simbolismo mexicano.",
-    "descripcion_en": "Tlalchichi holding a corncob, symbol of abundance and fertility. A piece that combines tradition and Mexican symbolism.",
-    "historia_es": "El maíz es sagrado en la cultura mexicana. Este Tlalchichi con mazorca representa la conexión con la tierra y la bendición de la cosecha.",
-    "historia_en": "Corn is sacred in Mexican culture. This Tlalchichi with a corncob represents the connection with the earth and the blessing of the harvest.",
-    "categoria_es": "Centro de mesa",
-    "categoria_en": "Centerpieces",
-    "precio_mxn": 550,
-    "precio_usd": 29,
-    "stock": 6,
-    "peso_kg": 0.35,
-    "imagenes": ["/img/productos/Tlalchichiconmazorca.png", "/img/productos/Tlalchichiconmazorca2.png"],
-    "destacado": true
-  },
-  {
-    "slug": "tlalchichi-mascara",
-    "nombre_es": "Tlalchichi con Máscara",
-    "nombre_en": "Tlalchichi with Mask",
-    "descripcion_es": "Tlalchichi usando una máscara tradicional, inspirado en las danzas folclóricas mexicanas. Colorido y lleno de personalidad.",
-    "descripcion_en": "Tlalchichi wearing a traditional mask, inspired by Mexican folk dances. Colorful and full of personality.",
-    "historia_es": "Las máscaras en la cultura mexicana tienen un significado espiritual. Este Tlalchichi representa la dualidad entre lo humano y lo divino.",
-    "historia_en": "Masks in Mexican culture have spiritual meaning. This Tlalchichi represents the duality between the human and the divine.",
-    "categoria_es": "Centro de mesa",
-    "categoria_en": "Centerpieces",
-    "precio_mxn": 500,
-    "precio_usd": 27,
-    "stock": 7,
-    "peso_kg": 0.3,
-    "imagenes": ["/img/productos/Tlalchichimascara.png", "/img/productos/Tlalchichimascara2.png"],
-    "destacado": true
-  },
-  {
-    "slug": "tlalchichi-viejo-sentado-color",
-    "nombre_es": "Tlalchichi Viejo Sentado — Edición Color",
-    "nombre_en": "Old Sitting Tlalchichi — Color Edition",
-    "descripcion_es": "Variante a color del Tlalchichi viejo sentado, con detalles pintados a mano en tonos vibrantes. Pieza única con personalidad propia.",
-    "descripcion_en": "Color variant of the old sitting Tlalchichi, with hand-painted details in vibrant tones. Unique piece with its own personality.",
-    "historia_es": "Cada Tlalchichi es pintado individualmente por artesanos, lo que hace que no existan dos piezas iguales. Esta edición destaca por sus colores intensos.",
-    "historia_en": "Each Tlalchichi is individually painted by artisans, making no two pieces alike. This edition stands out for its intense colors.",
-    "categoria_es": "Cuenco",
-    "categoria_en": "Bowls",
-    "precio_mxn": 580,
-    "precio_usd": 31,
-    "stock": 5,
-    "peso_kg": 0.3,
-    "imagenes": ["/img/productos/Tlalchichiviejosentado2.png", "/img/productos/Tlalchichiviejosentado.png"],
-    "destacado": false
-  },
-  {
-    "slug": "tlalchichi-miniatura-sentado",
-    "nombre_es": "Miniatura Tlalchichi Sentado",
-    "nombre_en": "Miniature Sitting Tlalchichi",
-    "descripcion_es": "Pequeño Tlalchichi sentado, perfecto para llevar como amuleto o para colección. Hecho a mano con el mismo cuidado que las piezas grandes.",
-    "descripcion_en": "Small sitting Tlalchichi, perfect to carry as an amulet or for collection. Handmade with the same care as the large pieces.",
-    "historia_es": "Las miniaturas de Tlalchichis eran populares como amuletos personales. Se creía que protegían a su portador durante los viajes.",
-    "historia_en": "Miniature Tlalchichis were popular as personal amulets. They were believed to protect their wearer during travels.",
-    "categoria_es": "Llaveros",
-    "categoria_en": "Keychains",
-    "precio_mxn": 250,
-    "precio_usd": 13,
-    "stock": 15,
-    "peso_kg": 0.1,
-    "imagenes": ["/img/productos/Tlalchichisentado2.png"],
+    "imagenes": [
+      "/img/productos/Tlalchichiacostado.png",
+      "/img/productos/Tlalchichiacostado2.png"
+    ],
     "destacado": false
   },
   {
@@ -166,24 +71,49 @@
     "precio_usd": 21,
     "stock": 8,
     "peso_kg": 0.25,
-    "imagenes": ["/img/productos/Tlalchichiacostado2.png"],
+    "imagenes": [
+      "/img/productos/Tlalchichiacostado2.png"
+    ],
     "destacado": false
   },
   {
-    "slug": "tlalchichi-parado-guardian",
-    "nombre_es": "Tlalchichi Parado Guardián",
-    "nombre_en": "Guardian Standing Tlalchichi",
-    "descripcion_es": "Tlalchichi guardián de pie, con diseño robusto y colores protectores. Una pieza esencial para quienes buscan tradición y protección.",
-    "descripcion_en": "Guardian standing Tlalchichi, with robust design and protective colors. An essential piece for those seeking tradition and protection.",
-    "historia_es": "Este Tlalchichi guardián sigue la tradición de las culturas originarias de México, donde estas figuras velaban por la armonía del hogar.",
-    "historia_en": "This guardian Tlalchichi follows the tradition of Mexico's native cultures, where these figures watched over household harmony.",
-    "categoria_es": "Centro de mesa",
-    "categoria_en": "Centerpieces",
-    "precio_mxn": 520,
-    "precio_usd": 28,
-    "stock": 6,
-    "peso_kg": 0.4,
-    "imagenes": ["/img/productos/Tlalchichiparado2.png"],
+    "slug": "tlalchichi-sentado",
+    "nombre_es": "Tlalchichi Sentado",
+    "nombre_en": "Sitting Tlalchichi",
+    "descripcion_es": "Tlalchichi sentado en pose clásica, decorado con motivos tradicionales mexicanos. Perfecto como amuleto para el hogar.",
+    "descripcion_en": "Sitting Tlalchichi in classic pose, decorated with traditional Mexican motifs. Perfect as a home amulet.",
+    "historia_es": "La tradición de los Tlalchichis se remonta a las culturas prehispánicas de México. Eran colocados en las entradas de los hogares como protectores.",
+    "historia_en": "The tradition of Tlalchichis dates back to pre-Hispanic Mexican cultures. They were placed at home entrances as protectors.",
+    "categoria_es": "Alcancías",
+    "categoria_en": "Piggy Banks",
+    "precio_mxn": 380,
+    "precio_usd": 20,
+    "stock": 12,
+    "peso_kg": 0.25,
+    "imagenes": [
+      "/img/productos/Tlalchichisentado.png",
+      "/img/productos/Tlalchichisentado2.png"
+    ],
+    "destacado": true
+  },
+  {
+    "slug": "tlalchichi-viejo-sentado",
+    "nombre_es": "Tlalchichi Viejo Sentado",
+    "nombre_en": "Old Sitting Tlalchichi",
+    "descripcion_es": "Figura artesanal de un Tlalchichi sentado con expresión sabia. Cada pieza es única, tallada y pintada a mano con colores tradicionales.",
+    "descripcion_en": "Handcrafted figurine of a sitting Tlalchichi with a wise expression. Each piece is unique, hand-carved and hand-painted with traditional colors.",
+    "historia_es": "Los Tlalchichis son figuras tradicionales mexicanas que representan espíritus protectores del hogar. Esta pieza simboliza la sabiduría de los ancestros.",
+    "historia_en": "Tlalchichis are traditional Mexican figures representing protective household spirits. This piece symbolizes the wisdom of ancestors.",
+    "categoria_es": "Alcancías",
+    "categoria_en": "Piggy Banks",
+    "precio_mxn": 450,
+    "precio_usd": 24,
+    "stock": 10,
+    "peso_kg": 0.3,
+    "imagenes": [
+      "/img/productos/Tlalchichiviejosentado.png",
+      "/img/productos/Tlalchichiviejosentado2.png"
+    ],
     "destacado": true
   },
   {
@@ -200,7 +130,69 @@
     "precio_usd": 35,
     "stock": 4,
     "peso_kg": 0.35,
-    "imagenes": ["/img/productos/Tlalchichiconmazorca2.png"],
+    "imagenes": [
+      "/img/productos/Tlalchichiconmazorca2.png"
+    ],
+    "destacado": true
+  },
+  {
+    "slug": "tlalchichi-viejo-sentado-color",
+    "nombre_es": "Tlalchichi Viejo Sentado — Edición Color",
+    "nombre_en": "Old Sitting Tlalchichi — Color Edition",
+    "descripcion_es": "Variante a color del Tlalchichi viejo sentado, con detalles pintados a mano en tonos vibrantes. Pieza única con personalidad propia.",
+    "descripcion_en": "Color variant of the old sitting Tlalchichi, with hand-painted details in vibrant tones. Unique piece with its own personality.",
+    "historia_es": "Cada Tlalchichi es pintado individualmente por artesanos, lo que hace que no existan dos piezas iguales. Esta edición destaca por sus colores intensos.",
+    "historia_en": "Each Tlalchichi is individually painted by artisans, making no two pieces alike. This edition stands out for its intense colors.",
+    "categoria_es": "Cuenco",
+    "categoria_en": "Bowls",
+    "precio_mxn": 580,
+    "precio_usd": 31,
+    "stock": 5,
+    "peso_kg": 0.3,
+    "imagenes": [
+      "/img/productos/Tlalchichiviejosentado2.png",
+      "/img/productos/Tlalchichiviejosentado.png"
+    ],
+    "destacado": false
+  },
+  {
+    "slug": "tlalchichi-mascara",
+    "nombre_es": "Tlalchichi con Máscara",
+    "nombre_en": "Tlalchichi with Mask",
+    "descripcion_es": "Tlalchichi usando una máscara tradicional, inspirado en las danzas folclóricas mexicanas. Colorido y lleno de personalidad.",
+    "descripcion_en": "Tlalchichi wearing a traditional mask, inspired by Mexican folk dances. Colorful and full of personality.",
+    "historia_es": "Las máscaras en la cultura mexicana tienen un significado espiritual. Este Tlalchichi representa la dualidad entre lo humano y lo divino.",
+    "historia_en": "Masks in Mexican culture have spiritual meaning. This Tlalchichi represents the duality between the human and the divine.",
+    "categoria_es": "Centro de mesa",
+    "categoria_en": "Centerpieces",
+    "precio_mxn": 500,
+    "precio_usd": 27,
+    "stock": 7,
+    "peso_kg": 0.3,
+    "imagenes": [
+      "/img/productos/Tlalchichimascara.png",
+      "/img/productos/Tlalchichimascara2.png"
+    ],
+    "destacado": true
+  },
+  {
+    "slug": "tlalchichi-con-mazorca",
+    "nombre_es": "Tlalchichi con Mazorca",
+    "nombre_en": "Tlalchichi with Corncob",
+    "descripcion_es": "Tlalchichi sosteniendo una mazorca de maíz, símbolo de abundancia y fertilidad. Una pieza que combina tradición y simbolismo mexicano.",
+    "descripcion_en": "Tlalchichi holding a corncob, symbol of abundance and fertility. A piece that combines tradition and Mexican symbolism.",
+    "historia_es": "El maíz es sagrado en la cultura mexicana. Este Tlalchichi con mazorca representa la conexión con la tierra y la bendición de la cosecha.",
+    "historia_en": "Corn is sacred in Mexican culture. This Tlalchichi with a corncob represents the connection with the earth and the blessing of the harvest.",
+    "categoria_es": "Centro de mesa",
+    "categoria_en": "Centerpieces",
+    "precio_mxn": 550,
+    "precio_usd": 29,
+    "stock": 6,
+    "peso_kg": 0.35,
+    "imagenes": [
+      "/img/productos/Tlalchichiconmazorca.png",
+      "/img/productos/Tlalchichiconmazorca2.png"
+    ],
     "destacado": true
   },
   {
@@ -217,7 +209,48 @@
     "precio_usd": 28,
     "stock": 5,
     "peso_kg": 0.3,
-    "imagenes": ["/img/productos/Tlalchichimascara2.png"],
+    "imagenes": [
+      "/img/productos/Tlalchichimascara2.png"
+    ],
     "destacado": false
+  },
+  {
+    "slug": "tlalchichi-parado",
+    "nombre_es": "Tlalchichi Parado",
+    "nombre_en": "Standing Tlalchichi",
+    "descripcion_es": "Imponente Tlalchichi de pie, decorado con vibrantes colores y patrones geométricos tradicionales. Una pieza llamativa para cualquier colección.",
+    "descripcion_en": "Imposing standing Tlalchichi, decorated with vibrant colors and traditional geometric patterns. A striking piece for any collection.",
+    "historia_es": "El Tlalchichi de pie es el guardián por excelencia. Se colocaba en las entradas principales para proteger el hogar de malas energías.",
+    "historia_en": "The standing Tlalchichi is the ultimate guardian. It was placed at main entrances to protect the home from bad energies.",
+    "categoria_es": "Centro de mesa",
+    "categoria_en": "Centerpieces",
+    "precio_mxn": 480,
+    "precio_usd": 26,
+    "stock": 8,
+    "peso_kg": 0.4,
+    "imagenes": [
+      "/img/productos/Tlalchichiparado.png",
+      "/img/productos/Tlalchichiparado2.png"
+    ],
+    "destacado": true
+  },
+  {
+    "slug": "tlalchichi-parado-guardian",
+    "nombre_es": "Tlalchichi Parado Guardián",
+    "nombre_en": "Guardian Standing Tlalchichi",
+    "descripcion_es": "Tlalchichi guardián de pie, con diseño robusto y colores protectores. Una pieza esencial para quienes buscan tradición y protección.",
+    "descripcion_en": "Guardian standing Tlalchichi, with robust design and protective colors. An essential piece for those seeking tradition and protection.",
+    "historia_es": "Este Tlalchichi guardián sigue la tradición de las culturas originarias de México, donde estas figuras velaban por la armonía del hogar.",
+    "historia_en": "This guardian Tlalchichi follows the tradition of Mexico's native cultures, where these figures watched over household harmony.",
+    "categoria_es": "Centro de mesa",
+    "categoria_en": "Centerpieces",
+    "precio_mxn": 520,
+    "precio_usd": 28,
+    "stock": 6,
+    "peso_kg": 0.4,
+    "imagenes": [
+      "/img/productos/Tlalchichiparado2.png"
+    ],
+    "destacado": true
   }
 ]
