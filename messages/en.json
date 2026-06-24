@@ -8,11 +8,11 @@
   },
   "HomePage": {
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Handmade with love and tradition",
+    "subtitulo": "Handmade Tlalchichi figurines — crafted with love and tradition",
     "cta": "View products",
     "destacados": "Featured Products",
     "historia_titulo": "Our Story",
-    "historia_texto": "Each piece tells a story of generations of Mexican artisans who have preserved ancestral techniques."
+    "historia_texto": "Tlalchichis are pre-Hispanic ceramic figures from Colima, Mexico. Each piece tells a story of generations of artisans preserving this millenary tradition."
   },
   "ProductGrid": {
     "titulo": "Our Products",
@@ -103,8 +103,24 @@
     "cargando": "Loading..."
   },
   "About": {
-    "titulo": "Our Story",
-    "subtitulo": "Mexican craftsmanship, generation after generation",
+    "titulo": "What is a Tlalchichi?",
+    "subtitulo": "Dog of the earth — a millenary tradition from Colima",
+    "intro": "The term \"Tlalchichi\" comes from the Nahuatl \"tlalli\" (earth) and \"chichi\" (dog), meaning \"dog of the earth.\" This word is used in the state of Colima, Mexico, to refer to the famous pre-Hispanic ceramic figures representing dogs, created by the ancient cultures that inhabited western Mexico.",
+    "intro_2": "Colima Tlalchichis are much more than simple clay figurines: they represent one of the most important artistic and spiritual expressions of the pre-Hispanic cultures of western Mexico. These unique pieces have transcended millennia and are now recognized worldwide as icons of pre-Columbian art.",
+    "datos_titulo": "Key Facts",
+    "dato_nombre": "Nahuatl name",
+    "dato_nombre_valor": "Tlalchichi (tlalli + chichi)",
+    "dato_traduccion": "Translation",
+    "dato_traduccion_valor": "Dog of the earth",
+    "dato_region": "Region",
+    "dato_region_valor": "State of Colima, Mexico",
+    "dato_periodo": "Period",
+    "dato_periodo_valor": "300 BC — 400 AD",
+    "dato_cultura": "Associated culture",
+    "dato_cultura_valor": "Shaft Tomb Tradition",
+    "espiritual_titulo": "Spiritual Meaning",
+    "espiritual_texto": "Mesoamerican cultures believed that dogs represented guides for the souls of the dead. The ceramic Tlalchichis placed in tombs had a fundamental function: to accompany and guide the soul of the deceased through the dangers of Mictlán, the Aztec underworld.",
+    "espiritual_texto_2": "According to Mexica mythology, the god Xólotl created the xoloitzcuintle from a splinter of the Bone of Life. The sacred mission of these dogs was to guide their owners through the nine levels of the underworld until reaching eternal rest.",
     "mision_titulo": "Our Mission",
     "mision_texto": "Preserve and share traditional Mexican artisan techniques, connecting artisans with the world.",
     "proceso_titulo": "The Artisan Process",
