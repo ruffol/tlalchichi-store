@@ -17,8 +17,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="text-xl font-semibold tracking-tight text-negro-suave hover:text-terracota transition-colors"
+            className="flex items-center gap-2 text-xl font-semibold tracking-tight text-negro-suave hover:text-terracota transition-colors"
           >
+            <img src="/img/weblogotlalchichi.png" alt="Tlalchichi" className="h-8 w-auto" />
             Tlalchichi
           </Link>
 

@@ -5,8 +5,12 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
 export const metadata: Metadata = {
   title: 'Tlalchichi Store',
-  description: 'Artesanías mexicanas hechas a mano con amor y tradición — Tlalchichi',
+  description: 'Figuras artesanales Tlalchichi — hechas a mano con amor y tradición',
   metadataBase: new URL(baseUrl),
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
