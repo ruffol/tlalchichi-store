@@ -66,7 +66,7 @@ export default function ImageUploader({ images, onChange }: ImageUploaderProps) 
                   <button
                     type="button"
                     onClick={() => handleSetPrincipal(i)}
-                    className="bg-white text-negro-suave text-xs px-2 py-1 rounded font-medium hover:bg-arena transition-colors"
+                    className="bg-card text-negro-suave text-xs px-2 py-1 rounded font-medium hover:bg-arena transition-colors"
                   >
                     ★ Principal
                   </button>

@@ -29,7 +29,7 @@ export default function MobileMenu({ isOpen, onClose }: Props) {
   return (
     <div className="fixed inset-0 z-50 md:hidden">
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" onClick={onClose} />
-      <div className="fixed top-0 right-0 bottom-0 w-72 bg-white shadow-xl p-6">
+      <div className="fixed top-0 right-0 bottom-0 w-72 bg-card shadow-xl p-6">
         <div className="flex justify-between items-center mb-8">
           <LanguageToggle />
           <button onClick={onClose} className="p-2 text-negro-suave">

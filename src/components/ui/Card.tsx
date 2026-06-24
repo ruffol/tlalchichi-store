@@ -13,7 +13,7 @@ export default function Card({
 }: CardProps & Record<string, any>) {
   return (
     <Tag
-      className={`bg-white rounded-2xl border border-arena overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-arena/50 ${className}`}
+      className={`bg-card rounded-2xl border border-arena overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-arena/50 ${className}`}
       {...props}
     >
       {children}

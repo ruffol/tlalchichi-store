@@ -36,7 +36,7 @@ export default function CartDrawer() {
       {isOpen && (
         <div className="fixed inset-0 z-50">
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" onClick={closeCart} />
-          <div className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col">
+          <div className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-card shadow-2xl flex flex-col">
             <div className="flex items-center justify-between p-4 border-b border-arena">
               <h2 className="text-lg font-semibold">
                 {t('titulo')} ({count})
@@ -117,7 +117,7 @@ export default function CartDrawer() {
                     <select
                       value={pais}
                       onChange={(e) => setPais(e.target.value as ShippingDestination)}
-                      className="w-full px-3 py-2 rounded-xl border border-arena bg-white text-sm"
+                      className="w-full px-3 py-2 rounded-xl border border-arena bg-card text-foreground text-sm"
                     >
                       {shippingOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
