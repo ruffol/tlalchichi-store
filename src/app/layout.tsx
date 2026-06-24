@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Figuras artesanales Tlalchichi — hechas a mano con amor y tradición',
   metadataBase: new URL(baseUrl),
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/img/favilogotlalchichi.png',
+    apple: '/img/favilogotlalchichi.png',
   },
 }
 
