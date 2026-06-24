@@ -118,7 +118,7 @@ function seedProductsForce() {
   // Siempre resiembra los productos desde seed.json
   try {
     db.exec('DELETE FROM products')
-    db.exec('DELETE FROM sqlite_sequence WHERE name="products"')
+    try { db.exec("DELETE FROM sqlite_sequence WHERE name='products'") } catch(e) {}
     console.log('[seed] Productos viejos eliminados')
   } catch (e) {
     console.error('[seed] Error al eliminar productos:', e)
