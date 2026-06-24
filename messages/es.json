@@ -1,0 +1,137 @@
+{
+  "Navbar": {
+    "inicio": "Inicio",
+    "productos": "Productos",
+    "nosotros": "Nosotros",
+    "carrito": "Carrito",
+    "admin": "Admin"
+  },
+  "HomePage": {
+    "titulo": "Tlalchichi Store",
+    "subtitulo": "Hechas a mano con amor y tradición",
+    "cta": "Ver productos",
+    "destacados": "Productos Destacados",
+    "historia_titulo": "Nuestra Historia",
+    "historia_texto": "Cada pieza cuenta una historia de generaciones de artesanos mexicanos que han preservado técnicas ancestrales."
+  },
+  "ProductGrid": {
+    "titulo": "Nuestros Productos",
+    "sin_resultados": "No encontramos productos",
+    "cargando": "Cargando...",
+    "filtro_todas": "Todas"
+  },
+  "ProductDetail": {
+    "agregar": "Agregar al carrito",
+    "agregado": "¡Agregado!",
+    "sin_stock": "Sin stock",
+    "categoria": "Categoría",
+    "historia": "Historia Artesanal",
+    "descripcion": "Descripción",
+    "peso": "Peso",
+    "preguntar": "Preguntar por este producto",
+    "moneda": "Moneda",
+    "volver": "Volver al catálogo"
+  },
+  "Cart": {
+    "titulo": "Carrito de Compras",
+    "vacio": "Tu carrito está vacío",
+    "vacio_desc": "Explora nuestro catálogo y agrega productos",
+    "seguir": "Seguir comprando",
+    "subtotal": "Subtotal",
+    "envio": "Envío",
+    "total": "Total",
+    "seleccionar_pais": "Seleccionar país de envío",
+    "checkout_stripe": "Pagar con Stripe",
+    "checkout_paypal": "Pagar con PayPal",
+    "eliminar": "Eliminar",
+    "pagar": "Proceder al pago",
+    "resumen": "Resumen del pedido"
+  },
+  "Checkout": {
+    "titulo": "Completar pedido",
+    "email": "Correo electrónico",
+    "nombre": "Nombre completo",
+    "direccion": "Dirección",
+    "ciudad": "Ciudad",
+    "estado": "Estado / Provincia",
+    "codigo_postal": "Código postal",
+    "pais": "País",
+    "pagar": "Pagar",
+    "procesando": "Procesando...",
+    "exito_titulo": "¡Gracias por tu compra!",
+    "exito_desc": "Recibirás un correo con los detalles de tu pedido.",
+    "error": "Ocurrió un error al procesar el pago.",
+    "continuar": "Seguir comprando"
+  },
+  "Footer": {
+    "inicio": "Inicio",
+    "productos": "Productos",
+    "nosotros": "Nosotros",
+    "derechos": "Todos los derechos reservados",
+    "contacto": "Contacto",
+    "envios": "Envíos a todo el mundo",
+    "pagos": "Pagos seguros"
+  },
+  "Admin": {
+    "titulo": "Panel Administrativo",
+    "password": "Contraseña de administrador",
+    "entrar": "Entrar",
+    "productos": "Productos",
+    "ordenes": "Órdenes",
+    "nuevo_producto": "Nuevo Producto",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "stock": "Stock",
+    "precio_mxn": "Precio MXN",
+    "precio_usd": "Precio USD",
+    "slug": "Slug",
+    "categoria_es": "Categoría (Español)",
+    "categoria_en": "Category (English)",
+    "descripcion_es": "Descripción (Español)",
+    "descripcion_en": "Description (English)",
+    "historia_es": "Historia (Español)",
+    "historia_en": "Story (English)",
+    "imagen": "Imagen principal",
+    "imagenes": "Galería de imágenes",
+    "subir": "Subir imagen",
+    "destacado": "Producto destacado",
+    "activo": "Producto activo",
+    "peso_kg": "Peso (kg)",
+    "sin_ordenes": "No hay órdenes registradas",
+    "cargando": "Cargando..."
+  },
+  "About": {
+    "titulo": "Nuestra Historia",
+    "subtitulo": "Artesanía mexicana hecha a mano, generación tras generación",
+    "mision_titulo": "Nuestra Misión",
+    "mision_texto": "Preservar y compartir las técnicas artesanales tradicionales mexicanas, conectando a los artesanos con el mundo.",
+    "proceso_titulo": "El Proceso Artesanal",
+    "proceso_texto": "Cada pieza es única. Desde la selección de materiales hasta el último detalle, todo se hace a mano con dedicación y paciencia.",
+    "valores_titulo": "Nuestros Valores",
+    "valores_lista": ["Tradición", "Calidad", "Comercio Justo", "Sostenibilidad"],
+    "cta": "Explorar productos"
+  },
+  "Common": {
+    "cargando": "Cargando...",
+    "error": "Error al cargar",
+    "moneda_mxn": "MXN",
+    "moneda_usd": "USD",
+    "idioma_es": "Español",
+    "idioma_en": "English",
+    "precio_mxn": "${{price}} MXN",
+    "precio_usd": "${{price}} USD"
+  },
+  "WhatsApp": {
+    "mensaje": "Hola, me interesa este producto:\n{{nombre}}\n{{url}}\n¿Podrían darme más información?"
+  },
+  "Email": {
+    "confirmacion_asunto": "¡Gracias por tu compra! - Tlalchichi Store",
+    "confirmacion_saludo": "Hola {{nombre}}",
+    "confirmacion_texto": "Gracias por tu compra. Aquí están los detalles de tu pedido:",
+    "confirmacion_total": "Total pagado: {{total}}",
+    "confirmacion_envio": "Enviar a: {{direccion}}",
+    "confirmacion_gracias": "¡Gracias por apoyar el arte mexicano!"
+  }
+}
