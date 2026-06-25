@@ -4,6 +4,7 @@ import { getProducts } from '@/lib/db'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
+  const today = '2026-06-24'
 
   const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' }[] = [
     { path: '', priority: 1, freq: 'weekly' },
@@ -18,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const page of staticPages) {
       entries.push({
         url: `${baseUrl}/${locale}${page.path}`,
-        lastModified: new Date(),
+        lastModified: today,
         changeFrequency: page.freq,
         priority: page.priority,
       })
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       for (const product of products) {
         entries.push({
           url: `${baseUrl}/${locale}/producto/${product.slug}`,
-          lastModified: new Date(product.updated_at || Date.now()),
+          lastModified: today,
           changeFrequency: 'monthly',
           priority: 0.6,
         })
