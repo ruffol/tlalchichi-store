@@ -1,35 +1,45 @@
 import type { MetadataRoute } from 'next'
 import { locales } from '@/i18n/routing'
+import { getProducts } from '@/lib/db'
 
-const products = [
-  { slug: 'jarron-barro-negro', updated: '2026-01-01' },
-]
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tlalchichi-store-production.up.railway.app'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-
-  const staticPages = ['', '/productos', '/nosotros', '/carrito']
+  const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' }[] = [
+    { path: '', priority: 1, freq: 'weekly' },
+    { path: '/productos', priority: 0.9, freq: 'weekly' },
+    { path: '/nosotros', priority: 0.7, freq: 'monthly' },
+  ]
 
   const entries: MetadataRoute.Sitemap = []
 
+  // Pages estáticas por idioma
   for (const locale of locales) {
     for (const page of staticPages) {
       entries.push({
-        url: `${baseUrl}/${locale}${page}`,
+        url: `${baseUrl}/${locale}${page.path}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: page === '' ? 1 : 0.8,
+        changeFrequency: page.freq,
+        priority: page.priority,
       })
     }
+  }
 
-    for (const product of products) {
-      entries.push({
-        url: `${baseUrl}/${locale}/producto/${product.slug}`,
-        lastModified: new Date(product.updated),
-        changeFrequency: 'monthly',
-        priority: 0.6,
-      })
+  // Productos desde la base de datos
+  try {
+    const products = getProducts({ activo: true })
+    for (const locale of locales) {
+      for (const product of products) {
+        entries.push({
+          url: `${baseUrl}/${locale}/producto/${product.slug}`,
+          lastModified: new Date(product.updated_at || Date.now()),
+          changeFrequency: 'monthly',
+          priority: 0.6,
+        })
+      }
     }
+  } catch {
+    // Si la DB no existe (primer build), omitimos productos
   }
 
   return entries
