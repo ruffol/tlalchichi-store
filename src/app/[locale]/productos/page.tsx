@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { getProducts, getCategories } from '@/lib/db'
 import ProductGrid from '@/components/product/ProductGrid'
@@ -53,7 +54,9 @@ export default async function ProductosPage({ params, searchParams }: Props) {
         ))}
       </div>
 
-      <ProductGrid products={products} locale={locale} />
+      <Suspense fallback={<div className="text-center py-12 text-negro-suave/40">Cargando...</div>}>
+        <ProductGrid products={products} locale={locale} />
+      </Suspense>
     </div>
   )
 }

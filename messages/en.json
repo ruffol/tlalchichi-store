@@ -30,7 +30,9 @@
     "peso": "Weight",
     "preguntar": "Ask about this product",
     "moneda": "Currency",
-    "volver": "Back to catalog"
+    "volver": "Back to catalog",
+    "inicio": "Home",
+    "productos": "Products"
   },
   "Cart": {
     "titulo": "Shopping Cart",
@@ -61,7 +63,13 @@
     "exito_titulo": "Thank you for your purchase!",
     "exito_desc": "You will receive an email with your order details.",
     "error": "An error occurred while processing your payment.",
-    "continuar": "Continue shopping"
+    "continuar": "Continue shopping",
+    "email_invalido": "Invalid email address",
+    "nombre_requerido": "Name is required",
+    "direccion_requerida": "Address is required",
+    "ciudad_requerida": "City is required",
+    "estado_requerido": "State is required",
+    "cp_requerido": "ZIP code is required"
   },
   "Footer": {
     "inicio": "Home",
@@ -100,7 +108,9 @@
     "activo": "Active product",
     "peso_kg": "Weight (kg)",
     "sin_ordenes": "No orders registered",
-    "cargando": "Loading..."
+    "cargando": "Loading...",
+    "guardado": "Product saved successfully",
+    "creado": "Product created successfully"
   },
   "About": {
     "titulo": "What is a Tlalchichi?",

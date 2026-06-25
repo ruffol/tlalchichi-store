@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore, getSubtotal, getItemCount, getTotal, getShippingCost } from '@/store/cart'
 import { Link } from '@/i18n/routing'
 import { useEffect } from 'react'
@@ -8,6 +8,7 @@ import { SHIPPING_RATES, type ShippingDestination } from '@/types'
 
 export default function CartDrawer() {
   const t = useTranslations('Cart')
+  const locale = useLocale()
   const { items, isOpen, closeCart, pais, setPais, removeItem, updateQuantity } = useCartStore()
   const count = getItemCount(items)
   const subtotal = getSubtotal(items, pais === 'MX' ? 'MXN' : 'USD')
@@ -27,7 +28,7 @@ export default function CartDrawer() {
   const shippingOptions = (Object.entries(SHIPPING_RATES) as [ShippingDestination, typeof SHIPPING_RATES[ShippingDestination]][]).map(
     ([key, val]) => ({
       value: key,
-      label: `${val.label_es} — ${moneda === 'MXN' && val.MXN > 0 ? `$${val.MXN} MXN` : val.USD > 0 ? `$${val.USD / 100} USD` : 'Gratis'}`,
+      label: `${val.label_es} — ${moneda === 'MXN' && val.MXN > 0 ? `$${val.MXN} MXN` : val.USD > 0 ? `$${val.USD} USD` : 'Gratis'}`,
     })
   )
 
@@ -76,9 +77,9 @@ export default function CartDrawer() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm truncate">{item.product.nombre_es}</p>
+                          <p className="font-medium text-sm truncate">{locale === 'es' ? item.product.nombre_es : item.product.nombre_en}</p>
                           <p className="text-sm text-negro-suave/60 mt-1">
-                            {moneda === 'MXN' ? `$${precio} MXN` : `$${(precio / 100).toFixed(2)} USD`}
+                            {moneda === 'MXN' ? `$${precio} MXN` : `$${precio.toFixed(2)} USD`}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <button
@@ -130,15 +131,15 @@ export default function CartDrawer() {
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
                       <span className="text-negro-suave/60">{t('subtotal')}</span>
-                      <span>{moneda === 'MXN' ? `$${subtotal} MXN` : `$${(subtotal / 100).toFixed(2)} USD`}</span>
+                      <span>{moneda === 'MXN' ? `$${subtotal} MXN` : `$${subtotal.toFixed(2)} USD`}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-negro-suave/60">{t('envio')}</span>
-                      <span>{shipping === 0 ? 'Gratis' : moneda === 'MXN' ? `$${shipping} MXN` : `$${(shipping / 100).toFixed(2)} USD`}</span>
+                      <span>{shipping === 0 ? 'Gratis' : moneda === 'MXN' ? `$${shipping} MXN` : `$${shipping.toFixed(2)} USD`}</span>
                     </div>
                     <div className="flex justify-between font-semibold text-base pt-2 border-t border-arena">
                       <span>{t('total')}</span>
-                      <span>{moneda === 'MXN' ? `$${total} MXN` : `$${(total / 100).toFixed(2)} USD`}</span>
+                      <span>{moneda === 'MXN' ? `$${total} MXN` : `$${total.toFixed(2)} USD`}</span>
                     </div>
                   </div>
 

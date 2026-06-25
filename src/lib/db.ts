@@ -21,7 +21,7 @@ export function getDb(): Database.Database {
     _db.pragma('journal_mode = WAL')
     _db.pragma('foreign_keys = ON')
     initTables()
-    seedProductsForce()
+    seedOnce()
   }
   return _db
 }
@@ -98,7 +98,6 @@ function initTables() {
       ['shipping_eu_usd', '4000'],
       ['whatsapp_number', '521234567890'],
       ['store_email', 'ventas@tlalchichi.mx'],
-      ['admin_secret', 'admin123'],
     ]
     for (const [key, value] of defaults) {
       insert.run(key, value)
@@ -106,27 +105,17 @@ function initTables() {
   }
 }
 
-function seedProductsForce() {
+function seedOnce() {
   const db = _db!
-  if (seedProducts.length === 0) {
-    console.log('[seed] No hay productos en seed.json')
-    return
-  }
+  if (seedProducts.length === 0) return
 
-  console.log('[seed] Forzando resiembra de', seedProducts.length, 'productos...')
+  const count = db.prepare('SELECT COUNT(*) as count FROM products').get() as any
+  if (count.count > 0) return
 
-  // Siempre resiembra los productos desde seed.json
-  try {
-    db.exec('DELETE FROM products')
-    try { db.exec("DELETE FROM sqlite_sequence WHERE name='products'") } catch(e) {}
-    console.log('[seed] Productos viejos eliminados')
-  } catch (e) {
-    console.error('[seed] Error al eliminar productos:', e)
-    return
-  }
+  console.log('[seed] Insertando', seedProducts.length, 'productos iniciales...')
 
   const insert = db.prepare(`
-    INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
+    INSERT OR IGNORE INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
     VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, 1)
   `)
 
@@ -236,14 +225,14 @@ export function upsertProduct(data: any): any {
   const exists = db.prepare('SELECT id FROM products WHERE slug = ?').get(data.slug) as any
   if (exists) {
     db.prepare(`
-      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en, precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock=@imagenes=@imagenes, destacado=@destacado, activo=@activo
+      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en,       precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock, imagenes=@imagenes, destacado=@destacado, activo=@activo
       WHERE id = @id
     `).run(data)
     return db.prepare('SELECT * FROM products WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
       INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @@imagenes, @destacado, @activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, @activo)
     `).run(data)
     return db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid)
   }

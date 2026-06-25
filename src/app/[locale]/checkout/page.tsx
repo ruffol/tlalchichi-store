@@ -1,6 +1,6 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useCartStore, getSubtotal, getTotal, getItemCount } from '@/store/cart'
 import { SHIPPING_RATES, type ShippingDestination } from '@/types'
 import { useState } from 'react'
@@ -12,12 +12,14 @@ import Select from '@/components/ui/Select'
 export default function CheckoutPage() {
   const t = useTranslations('Checkout')
   const ct = useTranslations('Cart')
+  const locale = useLocale()
   const { items, pais, setPais } = useCartStore()
   const count = getItemCount(items)
   const moneda = pais === 'MX' ? 'MXN' : 'USD'
   const subtotal = getSubtotal(items, moneda)
   const total = getTotal(items, pais, moneda)
   const [loading, setLoading] = useState<'stripe' | 'paypal' | null>(null)
+  const [error, setError] = useState('')
   const [form, setForm] = useState({ email: '', nombre: '', direccion: '', ciudad: '', estado: '', cp: '' })
 
   if (items.length === 0) {
@@ -38,8 +40,21 @@ export default function CheckoutPage() {
     })
   )
 
+  function validateForm(): string | null {
+    if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) return t('email_invalido')
+    if (!form.nombre.trim()) return t('nombre_requerido')
+    if (!form.direccion.trim()) return t('direccion_requerida')
+    if (!form.ciudad.trim()) return t('ciudad_requerida')
+    if (!form.estado.trim()) return t('estado_requerido')
+    if (!form.cp.trim()) return t('cp_requerido')
+    return null
+  }
+
   const handleStripe = async () => {
+    const formError = validateForm()
+    if (formError) { setError(formError); return }
     setLoading('stripe')
+    setError('')
     try {
       const res = await fetch('/api/checkout/stripe', {
         method: 'POST',
@@ -60,24 +75,45 @@ export default function CheckoutPage() {
           shipping: getSubtotal(items, moneda) > 0 ? total - subtotal : 0,
         }),
       })
-      const session = await res.json()
-      window.location.assign(session.url)
-    } catch {
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Error al procesar el pago')
+      window.location.assign(data.url)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al procesar el pago')
       setLoading(null)
     }
   }
 
   const handlePayPal = async () => {
+    const formError = validateForm()
+    if (formError) { setError(formError); return }
     setLoading('paypal')
+    setError('')
     try {
       const res = await fetch('/api/checkout/paypal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, pais, moneda }),
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            id: i.product.id,
+            nombre: i.product.nombre_es,
+            precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
+            quantity: i.quantity,
+            imagen: i.product.imagen_principal,
+          })),
+          pais,
+          moneda,
+          email: form.email,
+          nombre: form.nombre,
+          direccion: `${form.direccion}, ${form.ciudad}, ${form.estado}, ${form.cp}`,
+          shipping: getSubtotal(items, moneda) > 0 ? total - subtotal : 0,
+        }),
       })
-      const { approvalUrl } = await res.json()
-      if (approvalUrl) window.location.href = approvalUrl
-    } catch {
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Error al procesar el pago')
+      if (data.approvalUrl) window.location.href = data.approvalUrl
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al procesar el pago')
       setLoading(null)
     }
   }
@@ -132,18 +168,18 @@ export default function CheckoutPage() {
           <h3 className="font-semibold">{ct('resumen')}</h3>
           {items.map((item) => (
             <div key={item.product.id} className="flex justify-between text-sm">
-              <span>{item.product.nombre_es} x{item.quantity}</span>
+              <span>{locale === 'es' ? item.product.nombre_es : item.product.nombre_en} x{item.quantity}</span>
               <span>
                 {moneda === 'MXN'
                   ? `$${item.product.precio_mxn * item.quantity} MXN`
-                  : `$${((item.product.precio_usd * item.quantity) / 100).toFixed(2)} USD`}
+                  : `$${(item.product.precio_usd * item.quantity).toFixed(2)} USD`}
               </span>
             </div>
           ))}
           <div className="border-t border-arena pt-3 space-y-1">
             <div className="flex justify-between text-sm text-negro-suave/60">
               <span>{ct('subtotal')}</span>
-              <span>{moneda === 'MXN' ? `$${subtotal} MXN` : `$${(subtotal / 100).toFixed(2)} USD`}</span>
+              <span>{moneda === 'MXN' ? `$${subtotal} MXN` : `$${subtotal.toFixed(2)} USD`}</span>
             </div>
             <div className="flex justify-between text-sm text-negro-suave/60">
               <span>{ct('envio')}</span>
@@ -152,15 +188,21 @@ export default function CheckoutPage() {
                   ? 'Gratis'
                   : moneda === 'MXN'
                   ? `$${total - subtotal} MXN`
-                  : `$${((total - subtotal) / 100).toFixed(2)} USD`}
+                  : `$${(total - subtotal).toFixed(2)} USD`}
               </span>
             </div>
             <div className="flex justify-between font-semibold text-lg pt-2 border-t border-arena">
               <span>{ct('total')}</span>
-              <span>{moneda === 'MXN' ? `$${total} MXN` : `$${(total / 100).toFixed(2)} USD`}</span>
+              <span>{moneda === 'MXN' ? `$${total} MXN` : `$${total.toFixed(2)} USD`}</span>
             </div>
           </div>
         </div>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+            {error}
+          </div>
+        )}
 
         <div className="flex flex-col gap-3">
           <Button

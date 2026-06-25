@@ -6,6 +6,7 @@ import ProductGallery from '@/components/product/ProductGallery'
 import AddToCartButton from './AddToCartButton'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import Badge from '@/components/ui/Badge'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>
@@ -50,15 +51,11 @@ export default async function ProductoDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <Link
-        href="/productos"
-        className="inline-flex items-center gap-1 text-sm text-negro-suave/50 hover:text-terracota transition-colors mb-8"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-        {t('volver')}
-      </Link>
+      <Breadcrumb items={[
+        { label: t('inicio'), href: '/' },
+        { label: t('productos'), href: '/productos' },
+        { label: nombre },
+      ]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
         <ProductGallery

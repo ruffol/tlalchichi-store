@@ -9,7 +9,6 @@ export interface Order {
   costo_envio: number
   total: number
   payment_provider: 'stripe' | 'paypal'
-  payment_id: string | null
   payment_status: string
   stripe_session_id: string | null
   paypal_order_id: string | null

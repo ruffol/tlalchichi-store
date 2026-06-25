@@ -12,6 +12,7 @@ interface Props {
 export default function ProductGallery({ images, principal, nombre, altTexts }: Props) {
   const allImages = [principal, ...images].filter(Boolean) as string[]
   const [selected, setSelected] = useState(0)
+  const [lightbox, setLightbox] = useState<number | null>(null)
 
   if (allImages.length === 0) {
     return (
@@ -25,13 +26,16 @@ export default function ProductGallery({ images, principal, nombre, altTexts }: 
 
   return (
     <div className="space-y-4">
-      <div className="aspect-square bg-arena rounded-3xl overflow-hidden">
+      <button
+        onClick={() => setLightbox(selected)}
+        className="aspect-square bg-arena rounded-3xl overflow-hidden w-full cursor-zoom-in"
+      >
         <img
           src={allImages[selected]}
           alt={altTexts?.[selected] || nombre}
           className="w-full h-full object-cover"
         />
-      </div>
+      </button>
       {allImages.length > 1 && (
         <div className="flex gap-3 overflow-x-auto pb-2">
           {allImages.map((img, i) => (
@@ -45,6 +49,41 @@ export default function ProductGallery({ images, principal, nombre, altTexts }: 
               <img src={img} alt={altTexts?.[i] || `${nombre} ${i + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
+        </div>
+      )}
+
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={allImages[lightbox]}
+            alt={altTexts?.[lightbox] || nombre}
+            className="max-h-full max-w-full object-contain rounded-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          {allImages.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {allImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setLightbox(i) }}
+                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                    i === lightbox ? 'bg-white' : 'bg-white/40 hover:bg-white/70'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

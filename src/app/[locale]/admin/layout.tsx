@@ -19,8 +19,8 @@ export default function AdminLayout({
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('admin_authed')
-    if (stored === 'true') setAuthed(true)
+    const token = sessionStorage.getItem('admin_token')
+    if (token) setAuthed(true)
   }, [])
 
   const handleLogin = async () => {
@@ -32,9 +32,10 @@ export default function AdminLayout({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       })
-      if (res.ok) {
+      const data = await res.json()
+      if (res.ok && data.token) {
         setAuthed(true)
-        sessionStorage.setItem('admin_authed', 'true')
+        sessionStorage.setItem('admin_token', data.token)
       } else {
         setError(true)
       }

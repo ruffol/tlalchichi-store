@@ -3,11 +3,14 @@
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { useCartStore, getItemCount } from '@/store/cart'
+import { useState } from 'react'
 import LanguageToggle from './LanguageToggle'
 import ThemeToggle from './ThemeToggle'
+import MobileMenu from './MobileMenu'
 
 export default function Header() {
   const t = useTranslations('Navbar')
+  const [mobileOpen, setMobileOpen] = useState(false)
   const items = useCartStore((s) => s.items)
   const openCart = useCartStore((s) => s.openCart)
   const count = getItemCount(items)
@@ -46,6 +49,15 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="md:hidden p-2 text-negro-suave/70 hover:text-terracota transition-colors"
+              aria-label="Menú"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
             <ThemeToggle />
             <LanguageToggle />
             <button
@@ -76,6 +88,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
   )
 }

@@ -12,6 +12,7 @@ export default function AdminProductosPage() {
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<number | null>(null)
+  const [toast, setToast] = useState('')
   const [form, setForm] = useState<ProductFormData & { imagenes: string[] }>({
     slug: '',
     nombre_es: '',
@@ -31,8 +32,13 @@ export default function AdminProductosPage() {
 
   useEffect(() => { loadProducts() }, [])
 
+  function authHeaders(): Record<string, string> {
+    const token = sessionStorage.getItem('admin_token')
+    return token ? { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+  }
+
   const loadProducts = async () => {
-    const res = await fetch('/api/admin/products')
+    const res = await fetch('/api/admin/products', { headers: authHeaders() })
     const data = await res.json()
     setProducts(data || [])
     setLoading(false)
@@ -41,10 +47,12 @@ export default function AdminProductosPage() {
   const handleSave = async () => {
     const res = await fetch('/api/admin/products', {
       method: editing ? 'PUT' : 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify(editing ? { ...form, id: editing, imagen_principal: form.imagenes[0] || '' } : { ...form, imagen_principal: form.imagenes[0] || '' }),
     })
     if (res.ok) {
+      setToast(editing ? t('guardado') : t('creado'))
+      setTimeout(() => setToast(''), 3000)
       setEditing(null)
       setForm({
         slug: '', nombre_es: '', nombre_en: '', descripcion_es: '',
@@ -80,7 +88,7 @@ export default function AdminProductosPage() {
     if (!confirm('¿Eliminar producto?')) return
     await fetch('/api/admin/products', {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify({ id }),
     })
     loadProducts()
@@ -90,6 +98,11 @@ export default function AdminProductosPage() {
 
   return (
     <div>
+      {toast && (
+        <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-5 py-3 rounded-xl shadow-lg text-sm animate-fade-in">
+          {toast}
+        </div>
+      )}
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">
           {editing ? t('editar') : t('nuevo_producto')}

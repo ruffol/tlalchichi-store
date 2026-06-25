@@ -9,7 +9,10 @@ export default function AdminOrdenesPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/admin/orders')
+    const token = sessionStorage.getItem('admin_token')
+    fetch('/api/admin/orders', {
+      headers: token ? { 'Authorization': `Bearer ${token}` } : undefined,
+    })
       .then((r) => r.json())
       .then((data) => {
         setOrders(data || [])
@@ -35,7 +38,7 @@ export default function AdminOrdenesPage() {
                 {order.payment_status}
               </span>
               <p className="text-sm font-medium mt-1">
-                {order.moneda === 'MXN' ? `$${order.total} MXN` : `$${(order.total / 100).toFixed(2)} USD`}
+                {order.moneda === 'MXN' ? `$${(order.total / 100).toFixed(2)} MXN` : `$${(order.total / 100).toFixed(2)} USD`}
               </p>
             </div>
           </div>

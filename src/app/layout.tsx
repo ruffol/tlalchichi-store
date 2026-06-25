@@ -5,7 +5,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
 
 export const metadata: Metadata = {
   title: 'Tlalchichi Store',
-  description: 'Figuras artesanales Tlalchichi — hechas a mano con amor y tradición',
+  description: 'Figuras de Tlalchichis — Hecho en Colima con amor y tradición',
   metadataBase: new URL(baseUrl),
   icons: {
     icon: '/img/favilogotlalchichi.png',

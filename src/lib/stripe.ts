@@ -15,7 +15,7 @@ export function getStripe(): Stripe {
 
 export function formatAmountForStripe(amount: number, currency: string): number {
   const currencyMap: Record<string, number> = {
-    MXN: 1,
+    MXN: 100,
     USD: 100,
   }
   const factor = currencyMap[currency.toUpperCase()] ?? 100

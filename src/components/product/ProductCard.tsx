@@ -50,7 +50,7 @@ export default function ProductCard({ product, locale }: Props) {
           {nombre}
         </h3>
         <p className="text-lg font-semibold text-terracota">
-          {moneda === 'MXN' ? `$${precio} MXN` : `$${(precio / 100).toFixed(2)} USD`}
+          {moneda === 'MXN' ? `$${precio} MXN` : `$${precio.toFixed(2)} USD`}
         </p>
       </div>
     </Link>

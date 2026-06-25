@@ -8,7 +8,7 @@
   },
   "HomePage": {
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Figuras artesanales Tlalchichi — hechas a mano con amor y tradición",
+    "subtitulo": "Figuras de Tlalchichis — Hecho en Colima con amor y tradición",
     "cta": "Ver productos",
     "destacados": "Productos Destacados",
     "historia_titulo": "Nuestra Historia",
@@ -30,7 +30,9 @@
     "peso": "Peso",
     "preguntar": "Preguntar por este producto",
     "moneda": "Moneda",
-    "volver": "Volver al catálogo"
+    "volver": "Volver al catálogo",
+    "inicio": "Inicio",
+    "productos": "Productos"
   },
   "Cart": {
     "titulo": "Carrito de Compras",
@@ -61,7 +63,13 @@
     "exito_titulo": "¡Gracias por tu compra!",
     "exito_desc": "Recibirás un correo con los detalles de tu pedido.",
     "error": "Ocurrió un error al procesar el pago.",
-    "continuar": "Seguir comprando"
+    "continuar": "Seguir comprando",
+    "email_invalido": "Correo electrónico inválido",
+    "nombre_requerido": "El nombre es obligatorio",
+    "direccion_requerida": "La dirección es obligatoria",
+    "ciudad_requerida": "La ciudad es obligatoria",
+    "estado_requerido": "El estado es obligatorio",
+    "cp_requerido": "El código postal es obligatorio"
   },
   "Footer": {
     "inicio": "Inicio",
@@ -100,7 +108,9 @@
     "activo": "Producto activo",
     "peso_kg": "Peso (kg)",
     "sin_ordenes": "No hay órdenes registradas",
-    "cargando": "Cargando..."
+    "cargando": "Cargando...",
+    "guardado": "Producto guardado correctamente",
+    "creado": "Producto creado correctamente"
   },
   "About": {
     "titulo": "¿Qué es un Tlalchichi?",
