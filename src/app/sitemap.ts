@@ -3,7 +3,7 @@ import { locales } from '@/i18n/routing'
 import { getProducts } from '@/lib/db'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tlalchichi-store-production.up.railway.app'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
 
   const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' }[] = [
     { path: '', priority: 1, freq: 'weekly' },
