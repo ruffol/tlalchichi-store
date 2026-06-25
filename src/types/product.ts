@@ -18,6 +18,12 @@ export interface Product {
   destacado: boolean
   activo: boolean
   created_at: string
+  titulo_seo_es?: string
+  titulo_seo_en?: string
+  descripcion_seo_es?: string
+  descripcion_seo_en?: string
+  alt_text_es?: string
+  alt_text_en?: string
 }
 
 export type ProductFormData = {
