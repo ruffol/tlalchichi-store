@@ -18,11 +18,12 @@ export async function generateMetadata({ params }: Props) {
   if (!product) return { title: 'Producto no encontrado' }
 
   const nombre = locale === 'es' ? product.nombre_es : product.nombre_en
+  const seoTitle = locale === 'es' ? (product.titulo_seo_es || nombre) : (product.titulo_seo_en || nombre)
   return {
-    title: nombre,
+    title: seoTitle,
     description: locale === 'es' ? product.descripcion_es : product.descripcion_en,
     openGraph: {
-      title: nombre,
+      title: seoTitle,
       description: locale === 'es' ? product.descripcion_es || '' : product.descripcion_en || '',
       images: product.imagenes?.[0] ? [{ url: product.imagenes[0] }] : [],
     },
@@ -76,7 +77,7 @@ export default async function ProductoDetailPage({ params }: Props) {
                 ? `$${product.precio_mxn} MXN`
                 : `$${product.precio_usd.toFixed(2)} USD`}
             </p>
-            {product.peso_kg && (
+            {product.peso_kg !== undefined && product.peso_kg !== null && (
               <p className="text-sm text-negro-suave/40">
                 {t('peso')}: {product.peso_kg} kg
               </p>

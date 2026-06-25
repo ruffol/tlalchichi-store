@@ -15,7 +15,9 @@
     "imagenes": [
       "/img/productos/Tlalchichisentado2.png"
     ],
-    "destacado": false
+    "destacado": false,
+    "titulo_seo_es": "LLAvero Tlalchichi artesanal miniatura perro sentado barro",
+    "titulo_seo_en": "Tlalchichi keychain miniature sitting dog ceramic handmade"
   },
   {
     "slug": "tlalchichi-joven-viejo",
@@ -33,7 +35,9 @@
     "imagenes": [
       "/img/productos/Tlalchichijovenviejo.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "LLAvero Tlalchichi artesanal doble rostro joven viejo barro",
+    "titulo_seo_en": "Tlalchichi keychain double face young old ceramic handmade"
   },
   {
     "slug": "tlalchichi-acostado",
@@ -52,7 +56,9 @@
       "/img/productos/Tlalchichiacostado.png",
       "/img/productos/Tlalchichiacostado2.png"
     ],
-    "destacado": false
+    "destacado": false,
+    "titulo_seo_es": "Portamaceta Tlalchichi artesanal perro acostado barro cocido",
+    "titulo_seo_en": "Tlalchichi planter pot lying dog fired clay handmade"
   },
   {
     "slug": "tlalchichi-acostado-mediano",
@@ -70,7 +76,9 @@
     "imagenes": [
       "/img/productos/Tlalchichiacostado2.png"
     ],
-    "destacado": false
+    "destacado": false,
+    "titulo_seo_es": "Portamaceta Tlalchichi artesanal tamaño mediano perro acostado",
+    "titulo_seo_en": "Tlalchichi medium planter pot lying dog ceramic"
   },
   {
     "slug": "tlalchichi-sentado",
@@ -89,7 +97,9 @@
       "/img/productos/Tlalchichisentado.png",
       "/img/productos/Tlalchichisentado2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Alcancía Tlalchichi artesanal perro sentado barro cocido",
+    "titulo_seo_en": "Tlalchichi piggy bank sitting dog fired clay handmade"
   },
   {
     "slug": "tlalchichi-viejo-sentado",
@@ -108,7 +118,9 @@
       "/img/productos/Tlalchichiviejosentado.png",
       "/img/productos/Tlalchichiviejosentado2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Alcancía Tlalchichi artesanal perro viejo sentado barro tradicional",
+    "titulo_seo_en": "Tlalchichi piggy bank old sitting dog traditional clay"
   },
   {
     "slug": "tlalchichi-mazorca-abundancia",
@@ -126,7 +138,9 @@
     "imagenes": [
       "/img/productos/Tlalchichiconmazorca2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Cuenco Tlalchichi artesanal mazorca abundancia barro decorativo",
+    "titulo_seo_en": "Tlalchichi bowl corn abundance decorative fired clay"
   },
   {
     "slug": "tlalchichi-viejo-sentado-color",
@@ -145,7 +159,9 @@
       "/img/productos/Tlalchichiviejosentado2.png",
       "/img/productos/Tlalchichiviejosentado.png"
     ],
-    "destacado": false
+    "destacado": false,
+    "titulo_seo_es": "Cuenco Tlalchichi artesanal edición color perro viejo barro",
+    "titulo_seo_en": "Tlalchichi bowl color edition old dog fired clay"
   },
   {
     "slug": "tlalchichi-mascara",
@@ -164,7 +180,9 @@
       "/img/productos/Tlalchichimascara.png",
       "/img/productos/Tlalchichimascara2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Centro de mesa Tlalchichi artesanal máscara tradicional barro",
+    "titulo_seo_en": "Tlalchichi centerpiece traditional mask fired clay handmade"
   },
   {
     "slug": "tlalchichi-con-mazorca",
@@ -183,7 +201,9 @@
       "/img/productos/Tlalchichiconmazorca.png",
       "/img/productos/Tlalchichiconmazorca2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Centro de mesa Tlalchichi artesanal mazorca maíz barro cocido",
+    "titulo_seo_en": "Tlalchichi centerpiece corn cob fired clay handmade"
   },
   {
     "slug": "tlalchichi-mascara-danza",
@@ -201,7 +221,9 @@
     "imagenes": [
       "/img/productos/Tlalchichimascara2.png"
     ],
-    "destacado": false
+    "destacado": false,
+    "titulo_seo_es": "Centro de mesa Tlalchichi artesanal máscara danza barro pintado",
+    "titulo_seo_en": "Tlalchichi centerpiece dance mask painted clay handmade"
   },
   {
     "slug": "tlalchichi-parado",
@@ -220,7 +242,9 @@
       "/img/productos/Tlalchichiparado.png",
       "/img/productos/Tlalchichiparado2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Centro de mesa Tlalchichi artesanal perro parado barro tradicional",
+    "titulo_seo_en": "Tlalchichi centerpiece standing dog traditional clay"
   },
   {
     "slug": "tlalchichi-parado-guardian",
@@ -238,6 +262,8 @@
     "imagenes": [
       "/img/productos/Tlalchichiparado2.png"
     ],
-    "destacado": true
+    "destacado": true,
+    "titulo_seo_es": "Centro de mesa Tlalchichi artesanal guardián perro barro grande",
+    "titulo_seo_en": "Tlalchichi centerpiece guardian standing dog large clay"
   }
 ]
