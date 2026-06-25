@@ -96,8 +96,8 @@ function initTables() {
       ['shipping_us_usd', '2500'],
       ['shipping_ca_usd', '3000'],
       ['shipping_eu_usd', '4000'],
-      ['whatsapp_number', '521234567890'],
-      ['store_email', 'ventas@tlalchichi.mx'],
+      ['whatsapp_number', '523121337694'],
+      ['store_email', 'srtlalchichi@gmail.com'],
     ]
     for (const [key, value] of defaults) {
       insert.run(key, value)
