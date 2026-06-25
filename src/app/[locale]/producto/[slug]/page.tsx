@@ -19,12 +19,13 @@ export async function generateMetadata({ params }: Props) {
 
   const nombre = locale === 'es' ? product.nombre_es : product.nombre_en
   const seoTitle = locale === 'es' ? (product.titulo_seo_es || nombre) : (product.titulo_seo_en || nombre)
+  const seoDesc = locale === 'es' ? (product.descripcion_seo_es || product.descripcion_es) : (product.descripcion_seo_en || product.descripcion_en)
   return {
     title: seoTitle,
-    description: locale === 'es' ? product.descripcion_es : product.descripcion_en,
+    description: seoDesc,
     openGraph: {
       title: seoTitle,
-      description: locale === 'es' ? product.descripcion_es || '' : product.descripcion_en || '',
+      description: seoDesc || '',
       images: product.imagenes?.[0] ? [{ url: product.imagenes[0] }] : [],
     },
   }
