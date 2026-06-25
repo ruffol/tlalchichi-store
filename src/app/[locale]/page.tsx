@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { getProducts } from '@/lib/db'
 import ProductGrid from '@/components/product/ProductGrid'
-import Button from '@/components/ui/Button'
+import HeroCarousel from '@/components/layout/HeroCarousel'
 
 interface Props {
   params: Promise<{ locale: string }>
@@ -15,28 +15,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <section className="relative min-h-[80vh] flex items-center" style={{ background: 'linear-gradient(to bottom, var(--bg-arena-light), var(--bg-page))' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-negro-suave leading-[1.1]">
-              {t('titulo')}
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-muted leading-relaxed">
-              {t('subtitulo')}
-            </p>
-            <div className="mt-10 flex gap-4">
-              <Link href="/productos">
-                <Button size="lg">{t('cta')}</Button>
-              </Link>
-              <Link href="/nosotros">
-                <Button variant="secondary" size="lg">
-                  {t('historia_titulo')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel locale={locale} />
 
       {products.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
