@@ -6,9 +6,10 @@ interface Props {
   images: string[]
   principal: string | null
   nombre: string
+  altTexts?: string[]
 }
 
-export default function ProductGallery({ images, principal, nombre }: Props) {
+export default function ProductGallery({ images, principal, nombre, altTexts }: Props) {
   const allImages = [principal, ...images].filter(Boolean) as string[]
   const [selected, setSelected] = useState(0)
 
@@ -27,7 +28,7 @@ export default function ProductGallery({ images, principal, nombre }: Props) {
       <div className="aspect-square bg-arena rounded-3xl overflow-hidden">
         <img
           src={allImages[selected]}
-          alt={nombre}
+          alt={altTexts?.[selected] || nombre}
           className="w-full h-full object-cover"
         />
       </div>
@@ -41,7 +42,7 @@ export default function ProductGallery({ images, principal, nombre }: Props) {
                 i === selected ? 'border-terracota' : 'border-transparent hover:border-arena'
               }`}
             >
-              <img src={img} alt={`${nombre} ${i + 1}`} className="w-full h-full object-cover" />
+              <img src={img} alt={altTexts?.[i] || `${nombre} ${i + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

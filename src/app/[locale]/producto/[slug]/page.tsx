@@ -44,6 +44,9 @@ export default async function ProductoDetailPage({ params }: Props) {
   const historia = locale === 'es' ? product.historia_es : product.historia_en
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   const productUrl = `${baseUrl}/${locale}/producto/${product.slug}`
+  const altTexts = (product.imagenes || []).map((_: string, i: number) =>
+    locale === 'es' ? (product.alt_text_es || nombre) : (product.alt_text_en || nombre)
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -62,6 +65,7 @@ export default async function ProductoDetailPage({ params }: Props) {
           images={product.imagenes || []}
           principal={product.imagenes?.[0] || null}
           nombre={nombre}
+          altTexts={altTexts}
         />
 
         <div className="space-y-6">

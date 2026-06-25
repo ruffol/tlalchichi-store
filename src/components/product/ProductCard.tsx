@@ -14,6 +14,7 @@ export default function ProductCard({ product, locale }: Props) {
   const categoria = locale === 'es' ? product.categoria_es : product.categoria_en
   const precio = locale === 'es' ? product.precio_mxn : product.precio_usd
   const moneda = locale === 'es' ? 'MXN' : 'USD'
+  const altText = locale === 'es' ? (product.alt_text_es || nombre) : (product.alt_text_en || nombre)
 
   return (
     <Link
@@ -24,13 +25,13 @@ export default function ProductCard({ product, locale }: Props) {
         {product.imagen_principal ? (
           <img
             src={product.imagen_principal}
-            alt={nombre}
+            alt={altText}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : product.imagenes?.[0] ? (
           <img
             src={product.imagenes[0]}
-            alt={nombre}
+            alt={altText}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (

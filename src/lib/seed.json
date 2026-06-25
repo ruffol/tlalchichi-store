@@ -13,13 +13,15 @@
     "precio_usd": 2,
     "stock": 15,
     "imagenes": [
-      "/img/productos/Tlalchichisentado2.png"
+      "/img/productos/tlalchichi-sentado-miniatura-colima.png"
     ],
     "destacado": false,
     "titulo_seo_es": "LLAvero Tlalchichi artesanal miniatura perro sentado barro",
     "titulo_seo_en": "Tlalchichi keychain miniature sitting dog ceramic handmade",
     "descripcion_seo_es": "LLAvero Tlalchichi sentado | Artesanía de Colima\n\nLLAvero artesanal inspirado en los famosos perros de barro de Colima. Hecho a mano por artesanos mexicanos. Ideal como amuleto o colección. Envío nacional e internacional.",
-    "descripcion_seo_en": "Tlalchichi keychain sitting dog | Colima handicraft\n\nHandcrafted keychain inspired by the famous clay dogs of Colima, Mexico. Made by Mexican artisans. Perfect as an amulet or collectible. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi keychain sitting dog | Colima handicraft\n\nHandcrafted keychain inspired by the famous clay dogs of Colima, Mexico. Made by Mexican artisans. Perfect as an amulet or collectible. Worldwide shipping.",
+    "alt_text_es": "LLAvero Tlalchichi sentado miniatura artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi keychain sitting dog from Colima"
   },
   {
     "slug": "tlalchichi-joven-viejo",
@@ -35,13 +37,15 @@
     "precio_usd": 2,
     "stock": 8,
     "imagenes": [
-      "/img/productos/Tlalchichijovenviejo.png"
+      "/img/productos/tlalchichi-joven-viejo-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "LLAvero Tlalchichi artesanal doble rostro joven viejo barro",
     "titulo_seo_en": "Tlalchichi keychain double face young old ceramic handmade",
     "descripcion_seo_es": "LLAvero Tlalchichi doble rostro | Artesanía de Colima\n\nLLAvero artesanal del Tlalchichi joven-viejo, una pieza única de cerámica que representa la dualidad de la vida. Hecho a mano en México. Envío seguro a todo el mundo.",
-    "descripcion_seo_en": "Tlalchichi double-face keychain | Colima craft\n\nHandcrafted keychain of the young-old Tlalchichi, a unique ceramic piece representing life duality. Handmade in Mexico. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi double-face keychain | Colima craft\n\nHandcrafted keychain of the young-old Tlalchichi, a unique ceramic piece representing life duality. Handmade in Mexico. Worldwide shipping.",
+    "alt_text_es": "LLAvero Tlalchichi doble rostro joven viejo artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi double face keychain young old Colima"
   },
   {
     "slug": "tlalchichi-acostado",
@@ -57,14 +61,16 @@
     "precio_usd": 11,
     "stock": 10,
     "imagenes": [
-      "/img/productos/Tlalchichiacostado.png",
-      "/img/productos/Tlalchichiacostado2.png"
+      "/img/productos/tlalchichi-acostado-colima.png",
+      "/img/productos/tlalchichi-acostado-mediano-colima.png"
     ],
     "destacado": false,
     "titulo_seo_es": "Portamaceta Tlalchichi artesanal perro acostado barro cocido",
     "titulo_seo_en": "Tlalchichi planter pot lying dog fired clay handmade",
     "descripcion_seo_es": "Portamaceta Tlalchichi acostado | Decoración artesanal\n\nPortamaceta artesanal con diseño de Tlalchichi acostado. Pieza única de cerámica hecha a mano, perfecta para decorar tu hogar con plantas y tradición mexicana. Envío a todo México.",
-    "descripcion_seo_en": "Tlalchichi lying planter pot | Artisan decor\n\nHandcrafted planter pot with lying Tlalchichi design. Unique ceramic piece handmade in Mexico, perfect for home decor with plants. Shipping worldwide."
+    "descripcion_seo_en": "Tlalchichi lying planter pot | Artisan decor\n\nHandcrafted planter pot with lying Tlalchichi design. Unique ceramic piece handmade in Mexico, perfect for home decor with plants. Shipping worldwide.",
+    "alt_text_es": "Portamaceta Tlalchichi acostado artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi lying planter pot from Colima"
   },
   {
     "slug": "tlalchichi-acostado-mediano",
@@ -80,13 +86,15 @@
     "precio_usd": 11,
     "stock": 8,
     "imagenes": [
-      "/img/productos/Tlalchichiacostado2.png"
+      "/img/productos/tlalchichi-acostado-mediano-colima.png"
     ],
     "destacado": false,
     "titulo_seo_es": "Portamaceta Tlalchichi artesanal tamaño mediano perro acostado",
     "titulo_seo_en": "Tlalchichi medium planter pot lying dog ceramic",
     "descripcion_seo_es": "Portamaceta Tlalchichi mediano | Artesanía mexicana\n\nPortamaceta de tamaño mediano con forma de Tlalchichi acostado. Cerámica artesanal mexicana ideal para macetas pequeñas y suculentas. Hecho a mano en Colima.",
-    "descripcion_seo_en": "Medium Tlalchichi planter pot | Mexican craft\n\nMedium-sized planter pot shaped like a lying Tlalchichi. Mexican artisan ceramic ideal for small plants and succulents. Handmade in Colima."
+    "descripcion_seo_en": "Medium Tlalchichi planter pot | Mexican craft\n\nMedium-sized planter pot shaped like a lying Tlalchichi. Mexican artisan ceramic ideal for small plants and succulents. Handmade in Colima.",
+    "alt_text_es": "Portamaceta Tlalchichi acostado mediano artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi medium lying planter pot Colima"
   },
   {
     "slug": "tlalchichi-sentado",
@@ -102,14 +110,16 @@
     "precio_usd": 9,
     "stock": 12,
     "imagenes": [
-      "/img/productos/Tlalchichisentado.png",
-      "/img/productos/Tlalchichisentado2.png"
+      "/img/productos/tlalchichi-sentado-colima.png",
+      "/img/productos/tlalchichi-sentado-miniatura-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Alcancía Tlalchichi artesanal perro sentado barro cocido",
     "titulo_seo_en": "Tlalchichi piggy bank sitting dog fired clay handmade",
     "descripcion_seo_es": "Alcancía Tlalchichi sentado | Cerámica de Colima\n\nAlcancía artesanal del Tlalchichi sentado, tradicional perro de barro de Colima. Pieza decorativa y funcional hecha a mano. Ideal para regalo. Envío a todo México y el mundo.",
-    "descripcion_seo_en": "Tlalchichi piggy bank sitting | Colima pottery\n\nHandcrafted piggy bank of the sitting Tlalchichi, traditional clay dog from Colima. Decorative and functional piece made by hand. Perfect gift idea. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi piggy bank sitting | Colima pottery\n\nHandcrafted piggy bank of the sitting Tlalchichi, traditional clay dog from Colima. Decorative and functional piece made by hand. Perfect gift idea. Worldwide shipping.",
+    "alt_text_es": "Alcancía Tlalchichi sentado artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi piggy bank sitting dog Colima"
   },
   {
     "slug": "tlalchichi-viejo-sentado",
@@ -125,14 +135,16 @@
     "precio_usd": 9,
     "stock": 10,
     "imagenes": [
-      "/img/productos/Tlalchichiviejosentado.png",
-      "/img/productos/Tlalchichiviejosentado2.png"
+      "/img/productos/tlalchichi-viejo-sentado-colima.png",
+      "/img/productos/tlalchichi-viejo-sentado-color-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Alcancía Tlalchichi artesanal perro viejo sentado barro tradicional",
     "titulo_seo_en": "Tlalchichi piggy bank old sitting dog traditional clay",
     "descripcion_seo_es": "Alcancía Tlalchichi viejo sentado | Barro tradicional\n\nAlcancía artesanal del Tlalchichi viejo sentado, una pieza única de cerámica con expresión sabia. Hecha a mano por artesanos de Colima. Envíos a todo México.",
-    "descripcion_seo_en": "Tlalchichi old sitting piggy bank | Traditional clay\n\nHandcrafted piggy bank of the old sitting Tlalchichi, a unique clay piece with a wise expression. Made by Colima artisans. Shipping to all Mexico."
+    "descripcion_seo_en": "Tlalchichi old sitting piggy bank | Traditional clay\n\nHandcrafted piggy bank of the old sitting Tlalchichi, a unique clay piece with a wise expression. Made by Colima artisans. Shipping to all Mexico.",
+    "alt_text_es": "Alcancía Tlalchichi viejo sentado artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi piggy bank old sitting Colima"
   },
   {
     "slug": "tlalchichi-mazorca-abundancia",
@@ -148,13 +160,15 @@
     "precio_usd": 11,
     "stock": 4,
     "imagenes": [
-      "/img/productos/Tlalchichiconmazorca2.png"
+      "/img/productos/tlalchichi-mazorca-abundancia-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Cuenco Tlalchichi artesanal mazorca abundancia barro decorativo",
     "titulo_seo_en": "Tlalchichi bowl corn abundance decorative fired clay",
     "descripcion_seo_es": "Cuenco Tlalchichi mazorca | Decoración artesanal\n\nCuenco decorativo del Tlalchichi con mazorca, símbolo de abundancia. Cerámica artesanal mexicana pintada a mano. Perfecto para decoración de interiores. Envío nacional e internacional.",
-    "descripcion_seo_en": "Tlalchichi corn bowl | Artisan decoration\n\nDecorative Tlalchichi bowl with corncob, symbol of abundance. Hand-painted Mexican artisan ceramic. Perfect for interior decoration. National and international shipping."
+    "descripcion_seo_en": "Tlalchichi corn bowl | Artisan decoration\n\nDecorative Tlalchichi bowl with corncob, symbol of abundance. Hand-painted Mexican artisan ceramic. Perfect for interior decoration. National and international shipping.",
+    "alt_text_es": "Cuenco Tlalchichi mazorca abundancia artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi corn abundance bowl Colima"
   },
   {
     "slug": "tlalchichi-viejo-sentado-color",
@@ -170,14 +184,16 @@
     "precio_usd": 11,
     "stock": 5,
     "imagenes": [
-      "/img/productos/Tlalchichiviejosentado2.png",
-      "/img/productos/Tlalchichiviejosentado.png"
+      "/img/productos/tlalchichi-viejo-sentado-color-colima.png",
+      "/img/productos/tlalchichi-viejo-sentado-colima.png"
     ],
     "destacado": false,
     "titulo_seo_es": "Cuenco Tlalchichi artesanal edición color perro viejo barro",
     "titulo_seo_en": "Tlalchichi bowl color edition old dog fired clay",
     "descripcion_seo_es": "Cuenco Tlalchichi edición color | Barro pintado\n\nCuenco artesanal del Tlalchichi viejo sentado en edición especial de colores vibrantes. Pieza única de cerámica mexicana hecha a mano. Envíos seguros a todo el mundo.",
-    "descripcion_seo_en": "Tlalchichi color edition bowl | Painted clay\n\nHandcrafted bowl of the old sitting Tlalchichi in special vibrant color edition. Unique handmade Mexican ceramic piece. Safe worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi color edition bowl | Painted clay\n\nHandcrafted bowl of the old sitting Tlalchichi in special vibrant color edition. Unique handmade Mexican ceramic piece. Safe worldwide shipping.",
+    "alt_text_es": "Cuenco Tlalchichi viejo sentado edición color artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi bowl color edition old sitting Colima"
   },
   {
     "slug": "tlalchichi-mascara",
@@ -193,14 +209,16 @@
     "precio_usd": 14,
     "stock": 7,
     "imagenes": [
-      "/img/productos/Tlalchichimascara.png",
-      "/img/productos/Tlalchichimascara2.png"
+      "/img/productos/tlalchichi-mascara-colima.png",
+      "/img/productos/tlalchichi-mascara-danza-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Centro de mesa Tlalchichi artesanal máscara tradicional barro",
     "titulo_seo_en": "Tlalchichi centerpiece traditional mask fired clay handmade",
     "descripcion_seo_es": "Centro de mesa Tlalchichi máscara | Arte popular\n\nCentro de mesa artesanal del Tlalchichi con máscara tradicional mexicana. Cerámica pintada a mano, pieza única llena de color y tradición. Ideal para decoración. Envíos a México y el extranjero.",
-    "descripcion_seo_en": "Tlalchichi centerpiece mask | Folk art\n\nHandcrafted centerpiece of the Tlalchichi wearing a traditional Mexican mask. Hand-painted ceramic, unique piece full of color and tradition. Ideal decor. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi centerpiece mask | Folk art\n\nHandcrafted centerpiece of the Tlalchichi wearing a traditional Mexican mask. Hand-painted ceramic, unique piece full of color and tradition. Ideal decor. Worldwide shipping.",
+    "alt_text_es": "Centro de mesa Tlalchichi con máscara artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi centerpiece with mask Colima"
   },
   {
     "slug": "tlalchichi-con-mazorca",
@@ -216,14 +234,16 @@
     "precio_usd": 14,
     "stock": 6,
     "imagenes": [
-      "/img/productos/Tlalchichiconmazorca.png",
-      "/img/productos/Tlalchichiconmazorca2.png"
+      "/img/productos/tlalchichi-mazorca-colima.png",
+      "/img/productos/tlalchichi-mazorca-abundancia-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Centro de mesa Tlalchichi artesanal mazorca maíz barro cocido",
     "titulo_seo_en": "Tlalchichi centerpiece corn cob fired clay handmade",
     "descripcion_seo_es": "Centro de mesa Tlalchichi mazorca | Artesanía mexicana\n\nCentro de mesa artesanal del Tlalchichi sosteniendo una mazorca de maíz. Cerámica tradicional mexicana hecha a mano. Símbolo de abundancia y prosperidad. Envíos internacionales.",
-    "descripcion_seo_en": "Tlalchichi centerpiece corn | Mexican craft\n\nHandcrafted centerpiece of the Tlalchichi holding a corncob. Traditional handmade Mexican ceramic. Symbol of abundance and prosperity. International shipping."
+    "descripcion_seo_en": "Tlalchichi centerpiece corn | Mexican craft\n\nHandcrafted centerpiece of the Tlalchichi holding a corncob. Traditional handmade Mexican ceramic. Symbol of abundance and prosperity. International shipping.",
+    "alt_text_es": "Centro de mesa Tlalchichi con mazorca artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi centerpiece with corn Colima"
   },
   {
     "slug": "tlalchichi-mascara-danza",
@@ -239,13 +259,15 @@
     "precio_usd": 14,
     "stock": 5,
     "imagenes": [
-      "/img/productos/Tlalchichimascara2.png"
+      "/img/productos/tlalchichi-mascara-danza-colima.png"
     ],
     "destacado": false,
     "titulo_seo_es": "Centro de mesa Tlalchichi artesanal máscara danza barro pintado",
     "titulo_seo_en": "Tlalchichi centerpiece dance mask painted clay handmade",
     "descripcion_seo_es": "Centro de mesa Tlalchichi danza | Arte tradicional\n\nCentro de mesa artesanal del Tlalchichi con máscara de danza tradicional. Cerámica pintada a mano con colores festivos. Celebra la riqueza cultural de México. Envíos a todo el mundo.",
-    "descripcion_seo_en": "Tlalchichi dance centerpiece | Traditional art\n\nHandcrafted centerpiece of the Tlalchichi with traditional dance mask. Hand-painted ceramic with festive colors. Celebrates Mexico cultural richness. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi dance centerpiece | Traditional art\n\nHandcrafted centerpiece of the Tlalchichi with traditional dance mask. Hand-painted ceramic with festive colors. Celebrates Mexico cultural richness. Worldwide shipping.",
+    "alt_text_es": "Centro de mesa Tlalchichi máscara danza artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi centerpiece dance mask Colima"
   },
   {
     "slug": "tlalchichi-parado",
@@ -261,14 +283,16 @@
     "precio_usd": 14,
     "stock": 8,
     "imagenes": [
-      "/img/productos/Tlalchichiparado.png",
-      "/img/productos/Tlalchichiparado2.png"
+      "/img/productos/tlalchichi-parado-colima.png",
+      "/img/productos/tlalchichi-parado-guardian-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Centro de mesa Tlalchichi artesanal perro parado barro tradicional",
     "titulo_seo_en": "Tlalchichi centerpiece standing dog traditional clay",
     "descripcion_seo_es": "Centro de mesa Tlalchichi parado | Barro tradicional\n\nCentro de mesa artesanal del Tlalchichi parado, el guardián del hogar. Cerámica de Colima hecha a mano con colores vibrantes. Pieza decorativa única. Envío a todo México.",
-    "descripcion_seo_en": "Tlalchichi standing centerpiece | Traditional clay\n\nHandcrafted centerpiece of the standing Tlalchichi, the home guardian. Handmade Colima ceramic with vibrant colors. Unique decorative piece. Shipping to all Mexico."
+    "descripcion_seo_en": "Tlalchichi standing centerpiece | Traditional clay\n\nHandcrafted centerpiece of the standing Tlalchichi, the home guardian. Handmade Colima ceramic with vibrant colors. Unique decorative piece. Shipping to all Mexico.",
+    "alt_text_es": "Centro de mesa Tlalchichi parado artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi standing centerpiece Colima"
   },
   {
     "slug": "tlalchichi-parado-guardian",
@@ -284,12 +308,14 @@
     "precio_usd": 14,
     "stock": 6,
     "imagenes": [
-      "/img/productos/Tlalchichiparado2.png"
+      "/img/productos/tlalchichi-parado-guardian-colima.png"
     ],
     "destacado": true,
     "titulo_seo_es": "Centro de mesa Tlalchichi artesanal guardián perro barro grande",
     "titulo_seo_en": "Tlalchichi centerpiece guardian standing dog large clay",
     "descripcion_seo_es": "Centro de mesa Tlalchichi guardián | Cerámica grande\n\nCentro de mesa artesanal del Tlalchichi guardián de pie, tamaño grande. Cerámica mexicana tradicional hecha a mano. Ideal como pieza central en tu hogar. Envíos a México y el mundo.",
-    "descripcion_seo_en": "Tlalchichi guardian centerpiece | Large ceramic\n\nHandcrafted centerpiece of the guardian standing Tlalchichi, large size. Traditional handmade Mexican ceramic. Perfect as a statement piece in your home. Worldwide shipping."
+    "descripcion_seo_en": "Tlalchichi guardian centerpiece | Large ceramic\n\nHandcrafted centerpiece of the guardian standing Tlalchichi, large size. Traditional handmade Mexican ceramic. Perfect as a statement piece in your home. Worldwide shipping.",
+    "alt_text_es": "Centro de mesa Tlalchichi guardián parado artesanal de Colima",
+    "alt_text_en": "Handcrafted Tlalchichi guardian standing centerpiece Colima"
   }
 ]
