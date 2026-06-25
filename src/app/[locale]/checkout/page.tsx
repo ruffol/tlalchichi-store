@@ -5,21 +5,24 @@ import { useCartStore, getSubtotal, getTotal, getItemCount } from '@/store/cart'
 import { SHIPPING_RATES, type ShippingDestination } from '@/types'
 import { useState } from 'react'
 import { Link } from '@/i18n/routing'
+import { useRouter } from '@/i18n/routing'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
+import StripePaymentForm from '@/components/checkout/StripePaymentForm'
 
 export default function CheckoutPage() {
   const t = useTranslations('Checkout')
   const ct = useTranslations('Cart')
   const locale = useLocale()
-  const { items, pais, setPais } = useCartStore()
-  const count = getItemCount(items)
+  const router = useRouter()
+  const { items, pais, setPais, clearCart } = useCartStore()
   const moneda = pais === 'MX' ? 'MXN' : 'USD'
   const subtotal = getSubtotal(items, moneda)
   const total = getTotal(items, pais, moneda)
-  const [loading, setLoading] = useState<'stripe' | 'paypal' | null>(null)
+  const [loading, setLoading] = useState<'paypal' | null>(null)
   const [error, setError] = useState('')
+  const [showStripe, setShowStripe] = useState(false)
   const [form, setForm] = useState({ email: '', nombre: '', direccion: '', ciudad: '', estado: '', cp: '' })
 
   if (items.length === 0) {
@@ -50,38 +53,16 @@ export default function CheckoutPage() {
     return null
   }
 
-  const handleStripe = async () => {
+  const handleStripeClick = () => {
     const formError = validateForm()
     if (formError) { setError(formError); return }
-    setLoading('stripe')
     setError('')
-    try {
-      const res = await fetch('/api/checkout/stripe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: items.map((i) => ({
-            id: i.product.id,
-            nombre: i.product.nombre_es,
-            precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
-            quantity: i.quantity,
-            imagen: i.product.imagen_principal,
-          })),
-          pais,
-          moneda,
-          email: form.email,
-          nombre: form.nombre,
-          direccion: `${form.direccion}, ${form.ciudad}, ${form.estado}, ${form.cp}`,
-          shipping: getSubtotal(items, moneda) > 0 ? total - subtotal : 0,
-        }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Error al procesar el pago')
-      window.location.assign(data.url)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al procesar el pago')
-      setLoading(null)
-    }
+    setShowStripe(true)
+  }
+
+  const handleStripeSuccess = () => {
+    clearCart()
+    router.push(`/checkout/success`)
   }
 
   const handlePayPal = async () => {
@@ -205,14 +186,31 @@ export default function CheckoutPage() {
         )}
 
         <div className="flex flex-col gap-3">
-          <Button
-            onClick={handleStripe}
-            loading={loading === 'stripe'}
-            size="lg"
-            className="w-full"
-          >
-            {ct('checkout_stripe')}
-          </Button>
+          {showStripe ? (
+            <StripePaymentForm
+              items={items.map((i) => ({
+                id: i.product.id,
+                nombre: i.product.nombre_es,
+                precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
+                quantity: i.quantity,
+                imagen: i.product.imagen_principal,
+              }))}
+              pais={pais}
+              moneda={moneda}
+              form={form}
+              shipping={getSubtotal(items, moneda) > 0 ? total - subtotal : 0}
+              total={total}
+              onSuccess={handleStripeSuccess}
+            />
+          ) : (
+            <Button
+              onClick={handleStripeClick}
+              size="lg"
+              className="w-full"
+            >
+              {ct('checkout_stripe')}
+            </Button>
+          )}
           <Button
             onClick={handlePayPal}
             loading={loading === 'paypal'}
