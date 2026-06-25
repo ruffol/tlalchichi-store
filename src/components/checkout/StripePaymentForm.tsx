@@ -1,14 +1,11 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import Button from '@/components/ui/Button'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '')
-
-interface StripePaymentFormProps {
-  items: { id: string | number; nombre: string; precio: number; quantity: number; imagen?: string | null }[]
+interface Props {
+  items: any[]
   pais: string
   moneda: string
   form: { email: string; nombre: string; direccion: string; ciudad: string; estado: string; cp: string }
@@ -17,131 +14,69 @@ interface StripePaymentFormProps {
   onSuccess: () => void
 }
 
-function PaymentForm({ onSuccess }: { onSuccess: () => void }) {
-  const stripe = useStripe()
-  const elements = useElements()
-  const [error, setError] = useState('')
+export default function StripePaymentForm({ items, pais, moneda, form, shipping, total, onSuccess }: Props) {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!stripe || !elements) return
+  const handlePayment = async () => {
     setLoading(true)
     setError('')
 
-    const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
-      elements,
-      redirect: 'if_required',
-    })
-
-    if (confirmError) {
-      setError(confirmError.message || 'Error al procesar el pago')
-      setLoading(false)
-      return
-    }
-
-    if (paymentIntent?.status === 'succeeded') {
-      onSuccess()
-    } else {
-      setError('El pago no se completó')
-      setLoading(false)
-    }
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <PaymentElement />
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
-          {error}
-        </div>
-      )}
-      <Button type="submit" disabled={!stripe || loading} loading={loading} size="lg" className="w-full">
-        Pagar
-      </Button>
-    </form>
-  )
-}
-
-export default function StripePaymentForm(props: StripePaymentFormProps) {
-  const [clientSecret, setClientSecret] = useState('')
-  const [error, setError] = useState('')
-
-  const body = useMemo(() => ({
-    items: props.items.map((i) => ({
-      id: i.id,
-      nombre: i.nombre,
-      precio: i.precio,
-      quantity: i.quantity,
-      imagen: i.imagen,
-    })),
-    pais: props.pais,
-    moneda: props.moneda,
-    email: props.form.email,
-    nombre: props.form.nombre,
-    direccion: `${props.form.direccion}, ${props.form.ciudad}, ${props.form.estado}, ${props.form.cp}`,
-    shipping: props.shipping,
-    total: props.total,
-  }), [props.items, props.pais, props.moneda, props.form, props.shipping, props.total])
-
-  useEffect(() => {
-    fetch('/api/checkout/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.clientSecret) setClientSecret(data.clientSecret)
-        else setError(data.error || 'Error al iniciar pago')
-      })
-      .catch((err) => setError(err.message))
-  }, [body])
-
-  const handleSuccess = async () => {
     try {
-      const res = await fetch('/api/checkout/confirm-order', {
+      const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      if (!publishableKey) {
+        throw new Error('Stripe no está configurado. Contacta al administrador.')
+      }
+
+      const stripe = await loadStripe(publishableKey)
+
+      const res = await fetch('/api/checkout/stripe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          paymentIntentId: clientSecret ? clientSecret.split('_secret_')[0] : '',
-          items: props.items,
-          pais: props.pais,
-          moneda: props.moneda,
-          form: props.form,
-          shipping: props.shipping,
-          total: props.total,
+          items: items.map((i) => ({
+            id: i.id,
+            nombre: i.nombre,
+            precio: i.precio,
+            quantity: i.quantity,
+            imagen: i.imagen,
+          })),
+          pais,
+          moneda,
+          email: form.email,
+          nombre: form.nombre,
+          direccion: `${form.direccion}, ${form.ciudad}, ${form.estado}, ${form.cp}`,
+          shipping,
         }),
       })
-      if (!res.ok) {
-        setError('Error al confirmar la orden')
-        return
-      }
-      props.onSuccess()
-    } catch {
-      setError('Error al confirmar la orden')
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Error al crear el pago')
+
+      const result = await stripe!.redirectToCheckout({ sessionId: data.id })
+      if (result.error) throw new Error(result.error.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al procesar el pago')
+      setLoading(false)
     }
   }
 
-  if (error) {
-    return (
-      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
-        {error}
-      </div>
-    )
-  }
-
-  if (!clientSecret) {
-    return (
-      <div className="bg-arena/30 rounded-2xl p-6 animate-pulse">
-        <div className="h-10 bg-arena rounded-xl" />
-      </div>
-    )
-  }
-
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-      <PaymentForm onSuccess={handleSuccess} />
-    </Elements>
+    <div>
+      <Button
+        onClick={handlePayment}
+        loading={loading}
+        size="lg"
+        className="w-full flex items-center justify-center gap-2"
+      >
+        <svg viewBox="0 0 48 20" className="w-10 h-4" fill="white">
+          <path d="M40.7 0C37.7 0 34.2 1.5 33 5.1c1.6-.5 3.1-.6 4.2-.6 2.3 0 4.3.6 5.8 1.8-1 3-3.7 5.2-7 5.2-.6 0-1.2-.1-1.7-.2l-.6 2.2c.7.1 1.5.2 2.3.2 4.5 0 8.3-2.8 9.7-7.1.5-1.6.7-3 .7-4.2C47.4.7 44.9 0 40.7 0zM33.3 12.2c-.3 0-.6-.1-.9-.2.1-.4.2-.8.3-1.2 1.2-4.9 5.5-8.6 10.5-8.6h.1c-.7-1.3-2-2.2-3.6-2.2-2.3 0-4.2 1.8-4.6 4.1-.2 1.2.3 2.4 1.3 3.1-.8.3-1.7.5-2.6.5.7.3 1.3.9 1.5 1.7.2.8 0 1.7-.6 2.3-.3.3-.7.5-1.2.5z" />
+        </svg>
+        Pagar con Stripe
+      </Button>
+      {error && (
+        <p className="text-sm text-red-500 mt-2">{error}</p>
+      )}
+    </div>
   )
 }
