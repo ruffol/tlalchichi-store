@@ -15,7 +15,7 @@ export default function WhatsAppButton({
 }: Props) {
   const t = useTranslations('WhatsApp')
 
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
+  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '523121337694'
   if (!number) return null
 
   const message = productName
