@@ -7,7 +7,7 @@ import { createOrder, createOrderItems, decrementStock } from '@/lib/db'
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { session_id, paypal_order_id } = body
+    const { session_id, paypal_order_id, email_usuario } = body
 
     if (!session_id && !paypal_order_id) {
       return NextResponse.json({ error: 'session_id or paypal_order_id required' }, { status: 400 })
@@ -134,13 +134,14 @@ export async function POST(req: Request) {
       }
     }
 
-    // Enviar email
-    if (process.env.RESEND_API_KEY) {
+    // Enviar email (al email real del usuario si se proporciono)
+    const emailDestino = email_usuario || email
+    if (process.env.RESEND_API_KEY && emailDestino) {
       try {
         const resend = getResend()
         await resend.emails.send({
           from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
-          to: email,
+          to: emailDestino,
           subject: 'Gracias por tu compra! - Tlalchichi Store',
           html: `
             <h1>Gracias por tu compra!</h1>

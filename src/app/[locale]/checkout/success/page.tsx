@@ -24,10 +24,11 @@ export default function SuccessPage() {
         body: JSON.stringify({ session_id: sessionId }),
       }).catch(() => {})
     } else if (paypalToken) {
+      const emailGuardado = sessionStorage.getItem('tlalchichi_email') || ''
       fetch('/api/checkout/confirm-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ paypal_order_id: paypalToken }),
+        body: JSON.stringify({ paypal_order_id: paypalToken, email_usuario: emailGuardado }),
       }).catch(() => {})
     }
   }, [sent])

@@ -96,6 +96,10 @@ export default function CheckoutPage() {
     if (formError) { setError(formError); return }
     setLoading('paypal')
     setError('')
+    // Guardar email para la pagina de exito
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('tlalchichi_email', form.email)
+    }
     try {
       const res = await fetch('/api/checkout/paypal', {
         method: 'POST',
