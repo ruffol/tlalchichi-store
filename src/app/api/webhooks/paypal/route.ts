@@ -93,17 +93,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
     }
 
-    if (body.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
-      const capture = body.resource
-      const orderId = capture?.supplementary_data?.related_ids?.order_id
+    if (body.event_type === 'CHECKOUT.ORDER.APPROVED') {
+      const resource = body.resource
+      const orderId = resource.id
       if (!orderId) {
-        console.error('No order_id in capture event')
+        console.error('No order id in event')
         return NextResponse.json({ received: true })
       }
 
       const paypalOrder = await fetchPayPalOrder(orderId)
       const purchaseUnit = paypalOrder.purchase_units?.[0]
-      const amount = parseFloat(purchaseUnit?.amount?.value || '0')
       const moneda = purchaseUnit?.amount?.currency_code || 'USD'
       const shipping = purchaseUnit?.shipping || {}
 

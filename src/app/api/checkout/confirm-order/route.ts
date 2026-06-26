@@ -17,8 +17,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Payment not completed' }, { status: 400 })
     }
 
-    const metadata = session.metadata || {}
-    const moneda = session.currency === 'mxn' ? 'MXN' : 'USD'
+    const s = session as any
+    const metadata = s.metadata || {}
+    const moneda = s.currency === 'mxn' ? 'MXN' : 'USD'
 
     // Extraer items del metadata
     let itemsData: any[] = []
@@ -28,25 +29,25 @@ export async function POST(req: Request) {
 
     // Crear orden si no existe ya
     const order = createOrder({
-      email: session.customer_details?.email || metadata.email || '',
+      email: s.customer_details?.email || metadata.email || '',
       nombre: metadata.nombre || '',
       pais: metadata.pais || 'MX',
-      direccion: session.shipping_details
+      direccion: s.shipping_details
         ? JSON.stringify({
-            line1: session.shipping_details.address?.line1,
-            city: session.shipping_details.address?.city,
-            state: session.shipping_details.address?.state,
-            postal_code: session.shipping_details.address?.postal_code,
-            country: session.shipping_details.address?.country,
+            line1: s.shipping_details.address?.line1,
+            city: s.shipping_details.address?.city,
+            state: s.shipping_details.address?.state,
+            postal_code: s.shipping_details.address?.postal_code,
+            country: s.shipping_details.address?.country,
           })
         : '',
       moneda,
-      subtotal: session.amount_subtotal || 0,
+      subtotal: s.amount_subtotal || 0,
       costo_envio: parseInt(metadata.shipping_cost || '0'),
-      total: session.amount_total || 0,
+      total: s.amount_total || 0,
       payment_provider: 'stripe',
       payment_status: 'completed',
-      stripe_session_id: session.id,
+      stripe_session_id: s.id,
     })
 
     if (itemsData.length > 0) {
