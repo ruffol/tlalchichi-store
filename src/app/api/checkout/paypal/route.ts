@@ -4,7 +4,7 @@ import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/li
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { items, pais, moneda, email, nombre, direccion, shipping } = body
+    const { items, pais, moneda, email, nombre, direccion, shipping, direccion_linea, ciudad, estado, cp } = body
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: 'Carrito vacío' }, { status: 400 })
@@ -81,8 +81,10 @@ export async function POST(req: Request) {
               shipping: {
                 name: { full_name: nombre || 'Cliente' },
                 address: {
-                  address_line_1: direccion || '',
-                  admin_area_2: '',
+                  address_line_1: direccion_linea || direccion?.split(',')[0]?.trim() || '',
+                  admin_area_2: ciudad || '',
+                  admin_area_1: estado || '',
+                  postal_code: cp || '',
                   country_code: pais === 'MX' ? 'MX' : 'US',
                 },
               },

@@ -114,6 +114,10 @@ export default function CheckoutPage() {
           nombre: form.nombre,
           direccion: `${form.direccion}, ${form.ciudad}, ${form.estado}, ${form.cp}`,
           shipping: getSubtotal(items, moneda) > 0 ? total - subtotal : 0,
+          direccion_linea: form.direccion,
+          ciudad: form.ciudad,
+          estado: form.estado,
+          cp: form.cp,
         }),
       })
       const data = await res.json()
