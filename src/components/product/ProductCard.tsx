@@ -26,12 +26,14 @@ export default function ProductCard({ product, locale }: Props) {
           <img
             src={product.imagen_principal}
             alt={altText}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : product.imagenes?.[0] ? (
           <img
             src={product.imagenes[0]}
             alt={altText}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (

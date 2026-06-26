@@ -1,8 +1,9 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { locales } from '@/i18n/routing'
+import { locales, defaultLocale } from '@/i18n/routing'
 import { Inter } from 'next/font/google'
+import { headers } from 'next/headers'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
@@ -24,9 +25,47 @@ export async function generateMetadata({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'HomePage' })
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
+  const h = await headers()
+  const pathname = h.get('x-invoke-path') || h.get('next-url') || ''
+  const currentUrl = `${baseUrl}/${locale}${pathname.replace(/^\/(es|en)/, '')}`
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const l of locales) {
+    alternateLanguages[l] = `${baseUrl}/${l}${pathname.replace(/^\/(es|en)/, '')}`
+  }
+  alternateLanguages['x-default'] = `${baseUrl}/es${pathname.replace(/^\/(es|en)/, '')}`
+
   return {
     title: t('titulo'),
     description: t('subtitulo'),
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: currentUrl,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t('titulo'),
+      description: t('subtitulo'),
+      url: currentUrl,
+      siteName: 'Tlalchichi Store',
+      locale: locale === 'es' ? 'es_MX' : 'en_US',
+      type: 'website',
+      images: [
+        {
+          url: `${baseUrl}/img/iconologotlalchichi.svg`,
+          width: 800,
+          height: 800,
+          alt: 'Tlalchichi Store',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('titulo'),
+      description: t('subtitulo'),
+      images: [`${baseUrl}/img/iconologotlalchichi.svg`],
+    },
   }
 }
 
@@ -44,6 +83,7 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages()
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
 
   return (
     <html lang={locale} className={inter.className} suppressHydrationWarning>
@@ -60,6 +100,33 @@ export default async function LocaleLayout({
         }} />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased transition-colors duration-300">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Tlalchichi Store',
+              url: baseUrl,
+              description: 'Figuras de Tlalchichis — Hecho en Colima con amor y tradición',
+              inLanguage: locale === 'es' ? 'es-MX' : 'en-US',
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Tlalchichi Store',
+              url: baseUrl,
+              logo: `${baseUrl}/img/iconologotlalchichi.svg`,
+              description: 'Tienda de figuras artesanales de Tlalchichis de Colima, México',
+              address: { '@type': 'PostalAddress', addressCountry: 'MX' },
+            }),
+          }}
+        />
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>

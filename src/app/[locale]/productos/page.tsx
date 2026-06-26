@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { getProducts, getCategories } from '@/lib/db'
+import { Link, locales } from '@/i18n/routing'
 import ProductGrid from '@/components/product/ProductGrid'
 
 interface Props {
@@ -11,7 +12,42 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'ProductGrid' })
-  return { title: t('titulo') }
+  const tHome = await getTranslations({ locale, namespace: 'HomePage' })
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
+  const currentUrl = `${baseUrl}/${locale}/productos`
+  const desc = locale === 'es'
+    ? 'Explora nuestra colección de figuras de Tlalchichis artesanales de Colima. Perros de la tierra hechos a mano con tradición milenaria.'
+    : 'Explore our collection of handmade Tlalchichi figurines from Colima. Dogs of the earth crafted with millenary tradition.'
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const l of locales) {
+    alternateLanguages[l] = `${baseUrl}/${l}/productos`
+  }
+  alternateLanguages['x-default'] = `${baseUrl}/es/productos`
+
+  return {
+    title: t('titulo'),
+    description: desc,
+    alternates: {
+      canonical: currentUrl,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t('titulo'),
+      description: desc,
+      url: currentUrl,
+      siteName: 'Tlalchichi Store',
+      locale: locale === 'es' ? 'es_MX' : 'en_US',
+      type: 'website',
+      images: [{ url: `${baseUrl}/img/iconologotlalchichi.svg`, width: 800, height: 800 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('titulo'),
+      description: desc,
+      images: [`${baseUrl}/img/iconologotlalchichi.svg`],
+    },
+  }
 }
 
 export default async function ProductosPage({ params, searchParams }: Props) {
@@ -29,8 +65,8 @@ export default async function ProductosPage({ params, searchParams }: Props) {
       </h1>
 
       <div className="flex flex-wrap gap-2 mb-8">
-        <a
-          href={`/${locale}/productos`}
+        <Link
+          href={`/productos`}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
             !categoria
               ? 'bg-terracota text-white'
@@ -38,11 +74,11 @@ export default async function ProductosPage({ params, searchParams }: Props) {
           }`}
         >
           {t('filtro_todas')}
-        </a>
+        </Link>
         {categorias.map((cat: string) => (
-          <a
+          <Link
             key={cat}
-            href={`/${locale}/productos?categoria=${encodeURIComponent(cat)}`}
+            href={`/productos?categoria=${encodeURIComponent(cat)}`}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               categoria === cat
                 ? 'bg-terracota text-white'
@@ -50,7 +86,7 @@ export default async function ProductosPage({ params, searchParams }: Props) {
             }`}
           >
             {cat}
-          </a>
+          </Link>
         ))}
       </div>
 

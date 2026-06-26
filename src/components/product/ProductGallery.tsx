@@ -33,6 +33,7 @@ export default function ProductGallery({ images, principal, nombre, altTexts }: 
         <img
           src={allImages[selected]}
           alt={altTexts?.[selected] || nombre}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
       </button>
@@ -46,7 +47,7 @@ export default function ProductGallery({ images, principal, nombre, altTexts }: 
                 i === selected ? 'border-terracota' : 'border-transparent hover:border-arena'
               }`}
             >
-              <img src={img} alt={altTexts?.[i] || `${nombre} ${i + 1}`} className="w-full h-full object-cover" />
+              <img src={img} alt={altTexts?.[i] || `${nombre} ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

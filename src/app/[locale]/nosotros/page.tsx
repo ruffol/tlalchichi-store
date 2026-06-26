@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { Link } from '@/i18n/routing'
+import { Link, locales } from '@/i18n/routing'
 import Button from '@/components/ui/Button'
 
 interface Props {
@@ -9,7 +9,41 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'About' })
-  return { title: t('titulo') }
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
+  const currentUrl = `${baseUrl}/${locale}/nosotros`
+  const desc = locale === 'es'
+    ? 'Descubre el origen y significado de los Tlalchichis, los perros de tierra de Colima. Arte prehispánico hecho a mano con tradición milenaria.'
+    : 'Discover the origin and meaning of Tlalchichis, the dogs of the earth from Colima. Pre-Hispanic art handmade with millenary tradition.'
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const l of locales) {
+    alternateLanguages[l] = `${baseUrl}/${l}/nosotros`
+  }
+  alternateLanguages['x-default'] = `${baseUrl}/es/nosotros`
+
+  return {
+    title: t('titulo'),
+    description: desc,
+    alternates: {
+      canonical: currentUrl,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t('titulo'),
+      description: desc,
+      url: currentUrl,
+      siteName: 'Tlalchichi Store',
+      locale: locale === 'es' ? 'es_MX' : 'en_US',
+      type: 'website',
+      images: [{ url: `${baseUrl}/img/iconologotlalchichi.svg`, width: 800, height: 800 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('titulo'),
+      description: desc,
+      images: [`${baseUrl}/img/iconologotlalchichi.svg`],
+    },
+  }
 }
 
 export default async function AboutPage({ params }: Props) {
