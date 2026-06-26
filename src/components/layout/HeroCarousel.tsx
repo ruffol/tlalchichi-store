@@ -11,6 +11,12 @@ const images = [
   '/img/carrucel/tlalchichi-mazorca-colima.png',
   '/img/carrucel/tlalchichi-mascara-colima.png',
   '/img/carrucel/tlalchichi-joven-viejo-colima.png',
+  '/img/carrucel/tlalchichi-acostado-mediano-colima.png',
+  '/img/carrucel/tlalchichi-mascara-danza-colima.png',
+  '/img/carrucel/tlalchichi-mazorca-abundancia-colima.png',
+  '/img/carrucel/tlalchichi-parado-guardian-colima.png',
+  '/img/carrucel/tlalchichi-sentado-miniatura-colima.png',
+  '/img/carrucel/tlalchichi-viejo-sentado-color-colima.png',
 ]
 
 const alts = [
@@ -21,6 +27,12 @@ const alts = [
   'Tlalchichi con mazorca artesanal de Colima',
   'Tlalchichi con máscara artesanal de Colima',
   'Tlalchichi joven-viejo artesanal de Colima',
+  'Tlalchichi acostado mediano artesanal de Colima',
+  'Tlalchichi con máscara de danza artesanal de Colima',
+  'Tlalchichi con mazorca de abundancia artesanal de Colima',
+  'Tlalchichi parado guardián artesanal de Colima',
+  'Tlalchichi sentado miniatura artesanal de Colima',
+  'Tlalchichi viejo sentado color artesanal de Colima',
 ]
 
 interface Props {}
