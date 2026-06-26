@@ -9,7 +9,6 @@ import { useRouter } from '@/i18n/routing'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import StripePaymentForm from '@/components/checkout/StripePaymentForm'
 
 export default function CheckoutPage() {
   const t = useTranslations('Checkout')
@@ -20,9 +19,8 @@ export default function CheckoutPage() {
   const moneda = pais === 'MX' ? 'MXN' : 'USD'
   const subtotal = getSubtotal(items, moneda)
   const total = getTotal(items, pais, moneda)
-  const [loading, setLoading] = useState<'paypal' | null>(null)
+  const [loading, setLoading] = useState<'stripe' | 'paypal' | null>(null)
   const [error, setError] = useState('')
-  const [showStripe, setShowStripe] = useState(false)
   const [form, setForm] = useState({ email: '', nombre: '', direccion: '', ciudad: '', estado: '', cp: '' })
 
   if (items.length === 0) {
@@ -53,11 +51,39 @@ export default function CheckoutPage() {
     return null
   }
 
-  const handleStripeClick = () => {
+  const handleStripeClick = async () => {
     const formError = validateForm()
     if (formError) { setError(formError); return }
     setError('')
-    setShowStripe(true)
+    setLoading('stripe')
+    try {
+      const res = await fetch('/api/checkout/stripe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            id: i.product.id,
+            nombre: i.product.nombre_es,
+            precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
+            quantity: i.quantity,
+            imagen: i.product.imagen_principal,
+          })),
+          pais,
+          moneda,
+          email: form.email,
+          nombre: form.nombre,
+          direccion: `${form.direccion}, ${form.ciudad}, ${form.estado}, ${form.cp}`,
+          shipping: getSubtotal(items, moneda) > 0 ? total - subtotal : 0,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Error al crear el pago')
+      if (data.url) window.location.href = data.url
+      else throw new Error('No se recibio la URL de pago')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al procesar el pago')
+      setLoading(null)
+    }
   }
 
   const handleStripeSuccess = () => {
@@ -186,26 +212,24 @@ export default function CheckoutPage() {
         )}
 
         <div className="flex flex-col gap-3">
-          {showStripe ? (
-            <StripePaymentForm
-              items={items.map((i) => ({
-                id: i.product.id,
-                nombre: i.product.nombre_es,
-                precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
-                quantity: i.quantity,
-                imagen: i.product.imagen_principal,
-              }))}
-              pais={pais}
-              moneda={moneda}
-              form={form}
-              shipping={getSubtotal(items, moneda) > 0 ? total - subtotal : 0}
-              total={total}
-              onSuccess={handleStripeSuccess}
-            />
+          {loading === 'stripe' ? (
+            <button
+              disabled
+              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors opacity-70"
+              style={{ background: 'linear-gradient(135deg, #635BFF, #0A2540)' }}
+            >
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                </svg>
+                Redirigiendo a Stripe...
+              </span>
+            </button>
           ) : (
             <button
               onClick={handleStripeClick}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors"
+              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors hover:opacity-90"
               style={{ background: 'linear-gradient(135deg, #635BFF, #0A2540)' }}
             >
               <svg viewBox="0 0 48 20" className="w-10 h-4" fill="white">
