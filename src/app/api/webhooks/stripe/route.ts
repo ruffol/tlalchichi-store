@@ -4,87 +4,105 @@ import { getResend } from '@/lib/resend'
 import { createOrder, createOrderItems, decrementStock } from '@/lib/db'
 
 export async function POST(req: Request) {
-  const body = await req.text()
-  const sig = req.headers.get('stripe-signature')!
-
-  let event
-  let stripe
   try {
-    stripe = getStripe()
-    event = stripe.webhooks.constructEvent(
-      body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    )
-  } catch {
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
-  }
+    const body = await req.text()
+    const sig = req.headers.get('stripe-signature')!
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as any
-    const metadata = session.metadata || {}
-    const moneda = session.currency === 'mxn' ? 'MXN' : 'USD'
-    const subtotal = session.amount_subtotal || 0
-    const shippingCost = parseInt(metadata.shipping_cost || '0')
-    const totalAmount = session.amount_total || 0
+    let event
+    let stripe
+    try {
+      stripe = getStripe()
+      event = stripe.webhooks.constructEvent(
+        body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET!
+      )
+    } catch (err) {
+      console.error('[stripe-webhook] Invalid signature:', err)
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+    }
 
-    const order = createOrder({
-      email: session.customer_details?.email || metadata.email || '',
-      nombre: metadata.nombre || '',
-      pais: metadata.pais || 'MX',
-      direccion: session.shipping_details
-        ? JSON.stringify({
-            line1: session.shipping_details.address?.line1,
-            city: session.shipping_details.address?.city,
-            state: session.shipping_details.address?.state,
-            postal_code: session.shipping_details.address?.postal_code,
-            country: session.shipping_details.address?.country,
-          })
-        : '',
-      moneda,
-      subtotal,
-      costo_envio: shippingCost,
-      total: totalAmount,
-      payment_provider: 'stripe',
-      payment_status: 'completed',
-      stripe_session_id: session.id,
-    })
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object as any
+      const metadata = session.metadata || {}
+      const moneda = session.currency === 'mxn' ? 'MXN' : 'USD'
+      const subtotal = session.amount_subtotal || 0
+      const shippingCost = parseInt(metadata.shipping_cost || '0')
+      const totalAmount = session.amount_total || 0
 
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id)
+      // Extraer items del metadata (pasados como JSON)
+      let itemsData: any[] = []
+      try {
+        if (metadata.items) itemsData = JSON.parse(metadata.items)
+      } catch {}
 
-    const items = lineItems.data.map((item: any) => ({
-      order_id: order.id,
-      product_id: parseInt(String(item.price?.product || '0')),
-      quantity: item.quantity || 1,
-      precio_unitario: item.amount_total || 0,
-    }))
-    createOrderItems(items)
+      const order = createOrder({
+        email: session.customer_details?.email || metadata.email || '',
+        nombre: metadata.nombre || '',
+        pais: metadata.pais || 'MX',
+        direccion: session.shipping_details
+          ? JSON.stringify({
+              line1: session.shipping_details.address?.line1,
+              city: session.shipping_details.address?.city,
+              state: session.shipping_details.address?.state,
+              postal_code: session.shipping_details.address?.postal_code,
+              country: session.shipping_details.address?.country,
+            })
+          : '',
+        moneda,
+        subtotal,
+        costo_envio: shippingCost,
+        total: totalAmount,
+        payment_provider: 'stripe',
+        payment_status: 'completed',
+        stripe_session_id: session.id,
+      })
 
-    for (const item of lineItems.data) {
-      const productId = parseInt(String(item.price?.product || '0'))
-      if (productId) {
-        decrementStock(productId, item.quantity || 1)
+      // Crear order_items desde el metadata (mas confiable que line items de Stripe)
+      if (itemsData.length > 0) {
+        const orderItems = itemsData.map((item: any) => ({
+          order_id: order.id,
+          product_id: parseInt(item.id) || 0,
+          quantity: item.quantity || 1,
+          precio_unitario: Math.round((item.precio || 0) * (moneda === 'MXN' ? 100 : 100)),
+        }))
+        createOrderItems(orderItems)
+
+        // Decrementar stock
+        for (const item of itemsData) {
+          const productId = parseInt(item.id)
+          if (productId) {
+            decrementStock(productId, item.quantity || 1)
+          }
+        }
+      }
+
+      // Enviar email (si Resend esta configurado)
+      try {
+        if (process.env.RESEND_API_KEY) {
+          const resend = getResend()
+          await resend.emails.send({
+          from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
+          to: session.customer_details?.email || metadata.email,
+          subject: 'Gracias por tu compra! - Tlalchichi Store',
+          html: `
+            <h1>Gracias por tu compra!</h1>
+            <p>Hola ${metadata.nombre || 'Cliente'},</p>
+            <p>Tu pedido ha sido confirmado.</p>
+            <p><strong>Total:</strong> $${((totalAmount) / 100).toFixed(2)} ${moneda}</p>
+            <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
+            <p>Gracias por apoyar el arte mexicano!</p>
+          `,
+        })
+        console.log('[stripe-webhook] Email sent to', metadata.email)
+      } catch (emailErr) {
+        console.error('[stripe-webhook] Email error:', emailErr)
       }
     }
 
-    try {
-      await getResend().emails.send({
-        from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
-        to: session.customer_details?.email || metadata.email,
-        subject: '¡Gracias por tu compra!',
-        html: `
-          <h1>¡Gracias por tu compra!</h1>
-          <p>Hola ${metadata.nombre || 'Cliente'},</p>
-          <p>Tu pedido ha sido confirmado.</p>
-          <p><strong>Total:</strong> $${((totalAmount) / 100).toFixed(2)} ${moneda}</p>
-          <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
-          <p>¡Gracias por apoyar el arte mexicano!</p>
-        `,
-      })
-    } catch (emailErr) {
-      console.error('Email error:', emailErr)
-    }
+    return NextResponse.json({ received: true })
+  } catch (err) {
+    console.error('[stripe-webhook] Unhandled error:', err)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
-
-  return NextResponse.json({ received: true })
 }
