@@ -203,7 +203,20 @@ export function createOrder(data: {
     INSERT INTO orders (email, nombre, pais, direccion, moneda, subtotal, costo_envio, total, payment_provider, payment_status, stripe_session_id, paypal_order_id)
     VALUES (@email, @nombre, @pais, @direccion, @moneda, @subtotal, @costo_envio, @total, @payment_provider, @payment_status, @stripe_session_id, @paypal_order_id)
   `)
-  const result = stmt.run(data)
+  const result = stmt.run({
+    email: data.email,
+    nombre: data.nombre || null,
+    pais: data.pais,
+    direccion: data.direccion || null,
+    moneda: data.moneda,
+    subtotal: data.subtotal,
+    costo_envio: data.costo_envio,
+    total: data.total,
+    payment_provider: data.payment_provider,
+    payment_status: data.payment_status,
+    stripe_session_id: data.stripe_session_id || null,
+    paypal_order_id: data.paypal_order_id || null,
+  })
   return db.prepare('SELECT * FROM orders WHERE id = ?').get(result.lastInsertRowid)
 }
 
