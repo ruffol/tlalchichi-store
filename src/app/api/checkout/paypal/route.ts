@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getPaypalBaseUrl } from '@/lib/paypal'
+import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
 export async function POST(req: Request) {
   try {
@@ -12,10 +12,11 @@ export async function POST(req: Request) {
 
     const baseUrl = getPaypalBaseUrl()
     console.log('[paypal] Using base URL:', baseUrl)
-    console.log('[paypal] Client ID:', process.env.PAYPAL_CLIENT_ID?.substring(0, 10) + '...')
+    console.log('[paypal] Client ID:', (getPaypalClientId() || '').substring(0, 10) + '...')
+    console.log('[paypal] Secret:', (getPaypalClientSecret() || '').substring(0, 5) + '...')
     console.log('[paypal] Sandbox:', process.env.PAYPAL_SANDBOX)
     const auth = Buffer.from(
-      `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
+      `${getPaypalClientId()}:${getPaypalClientSecret()}`
     ).toString('base64')
 
     const accessTokenRes = await fetch(

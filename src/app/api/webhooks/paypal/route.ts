@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
 import { createOrder, createOrderItems, decrementStock } from '@/lib/db'
 import { getResend } from '@/lib/resend'
-import { getPaypalBaseUrl } from '@/lib/paypal'
+import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
 async function getPayPalAccessToken(): Promise<string> {
   const baseUrl = getPaypalBaseUrl()
   const auth = Buffer.from(
-    `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
+    `${getPaypalClientId()}:${getPaypalClientSecret()}`
   ).toString('base64')
   const res = await fetch(`${baseUrl}/v1/oauth2/token`, {
     method: 'POST',
