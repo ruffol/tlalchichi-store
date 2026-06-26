@@ -82,20 +82,20 @@ export async function POST(req: Request) {
         if (process.env.RESEND_API_KEY) {
           const resend = getResend()
           await resend.emails.send({
-          from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
-          to: session.customer_details?.email || metadata.email,
-          subject: 'Gracias por tu compra! - Tlalchichi Store',
-          html: `
-            <h1>Gracias por tu compra!</h1>
-            <p>Hola ${metadata.nombre || 'Cliente'},</p>
-            <p>Tu pedido ha sido confirmado.</p>
-            <p><strong>Total:</strong> $${((totalAmount) / 100).toFixed(2)} ${moneda}</p>
-            <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
-            <p>Gracias por apoyar el arte mexicano!</p>
-          `,
-        })
-        console.log('[stripe-webhook] Email sent to', metadata.email)
-      }
+            from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
+            to: session.customer_details?.email || metadata.email,
+            subject: 'Gracias por tu compra! - Tlalchichi Store',
+            html: `
+              <h1>Gracias por tu compra!</h1>
+              <p>Hola ${metadata.nombre || 'Cliente'},</p>
+              <p>Tu pedido ha sido confirmado.</p>
+              <p><strong>Total:</strong> $${((totalAmount) / 100).toFixed(2)} ${moneda}</p>
+              <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
+              <p>Gracias por apoyar el arte mexicano!</p>
+            `,
+          })
+          console.log('[stripe-webhook] Email sent to', metadata.email)
+        }
       } catch (emailErr) {
         console.error('[stripe-webhook] Email error:', emailErr)
       }
