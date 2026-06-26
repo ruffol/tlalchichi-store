@@ -78,7 +78,7 @@ export default function HeroCarousel() {
             <img
               src={src}
               alt={alts[i]}
-              className="w-full h-full object-contain sm:object-cover"
+              className="w-full h-full object-contain"
               loading={i === 0 ? 'eager' : 'lazy'}
             />
 
