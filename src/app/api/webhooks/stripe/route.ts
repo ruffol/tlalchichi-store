@@ -95,6 +95,7 @@ export async function POST(req: Request) {
           `,
         })
         console.log('[stripe-webhook] Email sent to', metadata.email)
+      }
       } catch (emailErr) {
         console.error('[stripe-webhook] Email error:', emailErr)
       }

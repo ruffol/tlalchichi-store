@@ -23,11 +23,9 @@ const alts = [
   'Tlalchichi joven-viejo artesanal de Colima',
 ]
 
-interface Props {
-  locale: string
-}
+interface Props {}
 
-export default function HeroCarousel({ locale }: Props) {
+export default function HeroCarousel() {
   const [current, setCurrent] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
@@ -88,13 +86,13 @@ export default function HeroCarousel({ locale }: Props) {
             </p>
             <div className="flex gap-4 justify-center">
               <Link
-                href={`/${locale}/productos`}
+                href="/productos"
                 className="inline-flex items-center px-6 py-3 bg-terracota text-white font-medium rounded-xl hover:bg-terracota-dark transition-colors shadow-lg shadow-terracota/25"
               >
                 Ver productos
               </Link>
               <Link
-                href={`/${locale}/nosotros`}
+                href="/nosotros"
                 className="inline-flex items-center px-6 py-3 bg-card border border-arena text-foreground font-medium rounded-xl hover:bg-arena transition-colors"
               >
                 Nuestra Historia
