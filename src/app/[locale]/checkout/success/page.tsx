@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button'
 export default function SuccessPage() {
   const t = useTranslations('Checkout')
   const [sent, setSent] = useState(false)
+  const [statusMsg, setStatusMsg] = useState('')
 
   useEffect(() => {
     if (sent) return
@@ -18,18 +19,25 @@ export default function SuccessPage() {
     const paypalToken = params.get('token')
 
     if (sessionId) {
+      setStatusMsg('Confirmando tu pedido...')
       fetch('/api/checkout/confirm-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId }),
-      }).catch(() => {})
+      })
+        .then(r => r.json())
+        .then(d => setStatusMsg(d.received ? 'Pedido confirmado. Te enviaremos un email en breve.' : 'Error: ' + (d.error || '')))
+        .catch(e => setStatusMsg('Error al confirmar: ' + e.message))
     } else if (paypalToken) {
-      const emailGuardado = sessionStorage.getItem('tlalchichi_email') || ''
+      setStatusMsg('Confirmando tu pago con PayPal...')
       fetch('/api/checkout/confirm-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ paypal_order_id: paypalToken, email_usuario: emailGuardado }),
-      }).catch(() => {})
+        body: JSON.stringify({ paypal_order_id: paypalToken, email_usuario: 'ruffolmx@gmail.com' }),
+      })
+        .then(r => r.json())
+        .then(d => setStatusMsg(d.received ? 'Pedido confirmado. Te enviaremos un email en breve.' : 'Error: ' + (d.error || '')))
+        .catch(e => setStatusMsg('Error al confirmar: ' + e.message))
     }
   }, [sent])
 
@@ -52,6 +60,11 @@ export default function SuccessPage() {
       </h1>
       <p className="text-muted mb-8">{t('exito_desc')}</p>
       <p className="text-sm text-muted mb-8">Te enviaremos un correo de confirmación en breve.</p>
+      {statusMsg && (
+        <p className="text-sm mb-8" style={{color: statusMsg.includes('Error') ? '#dc2626' : '#16a34a'}}>
+          {statusMsg}
+        </p>
+      )}
       <Link href="/productos">
         <Button>{t('continuar')}</Button>
       </Link>
