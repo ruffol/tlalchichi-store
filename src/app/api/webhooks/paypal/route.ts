@@ -103,6 +103,7 @@ export async function POST(req: Request) {
 
       const paypalOrder = await fetchPayPalOrder(orderId)
       const purchaseUnit = paypalOrder.purchase_units?.[0]
+      const amount = parseFloat(purchaseUnit?.amount?.value || '0')
       const moneda = purchaseUnit?.amount?.currency_code || 'USD'
       const shipping = purchaseUnit?.shipping || {}
 

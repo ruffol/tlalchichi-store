@@ -13,13 +13,21 @@ export default function SuccessPage() {
     if (sent) return
     setSent(true)
 
-    // Notificar al servidor para confirmar la orden y enviar email
-    const sessionId = new URLSearchParams(window.location.search).get('session_id')
+    const params = new URLSearchParams(window.location.search)
+    const sessionId = params.get('session_id')
+    const paypalToken = params.get('token')
+
     if (sessionId) {
       fetch('/api/checkout/confirm-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId }),
+      }).catch(() => {})
+    } else if (paypalToken) {
+      fetch('/api/checkout/confirm-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ paypal_order_id: paypalToken }),
       }).catch(() => {})
     }
   }, [sent])
