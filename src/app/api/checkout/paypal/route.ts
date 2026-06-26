@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { getPaypalBaseUrl } from '@/lib/paypal'
 
 export async function POST(req: Request) {
   try {
@@ -9,12 +10,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Carrito vacío' }, { status: 400 })
     }
 
+    const baseUrl = getPaypalBaseUrl()
     const auth = Buffer.from(
       `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
     ).toString('base64')
 
     const accessTokenRes = await fetch(
-      'https://api-m.paypal.com/v1/oauth2/token',
+      `${baseUrl}/v1/oauth2/token`,
       {
         method: 'POST',
         headers: {
@@ -38,7 +40,7 @@ export async function POST(req: Request) {
     const total = itemTotal + shippingCost
 
     const orderRes = await fetch(
-      'https://api-m.paypal.com/v2/checkout/orders',
+      `${baseUrl}/v2/checkout/orders`,
       {
         method: 'POST',
         headers: {

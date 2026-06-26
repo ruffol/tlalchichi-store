@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server'
 import { createOrder, createOrderItems, decrementStock } from '@/lib/db'
 import { getResend } from '@/lib/resend'
+import { getPaypalBaseUrl } from '@/lib/paypal'
 
 async function getPayPalAccessToken(): Promise<string> {
+  const baseUrl = getPaypalBaseUrl()
   const auth = Buffer.from(
     `${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
   ).toString('base64')
-  const res = await fetch('https://api-m.paypal.com/v1/oauth2/token', {
+  const res = await fetch(`${baseUrl}/v1/oauth2/token`, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${auth}`,
@@ -41,9 +43,10 @@ async function verifyPayPalWebhook(
   }
 
   try {
+    const baseUrl = getPaypalBaseUrl()
     const access_token = await getPayPalAccessToken()
     const verifyRes = await fetch(
-      'https://api-m.paypal.com/v1/notifications/verify-webhook-signature',
+      `${baseUrl}/v1/notifications/verify-webhook-signature`,
       {
         method: 'POST',
         headers: {
@@ -70,8 +73,9 @@ async function verifyPayPalWebhook(
 }
 
 async function fetchPayPalOrder(orderId: string): Promise<any> {
+  const baseUrl = getPaypalBaseUrl()
   const access_token = await getPayPalAccessToken()
-  const res = await fetch(`https://api-m.paypal.com/v2/checkout/orders/${orderId}`, {
+  const res = await fetch(`${baseUrl}/v2/checkout/orders/${orderId}`, {
     headers: { Authorization: `Bearer ${access_token}` },
   })
   if (!res.ok) throw new Error(`Failed to fetch PayPal order ${orderId}`)
@@ -157,19 +161,22 @@ export async function POST(req: Request) {
       }
 
       try {
-        await getResend().emails.send({
-          from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
-          to: paypalOrder.payer?.email_address || '',
-          subject: '¡Gracias por tu compra!',
-          html: `
-            <h1>¡Gracias por tu compra!</h1>
-            <p>Hola ${paypalOrder.payer?.name?.given_name || 'Cliente'},</p>
-            <p>Tu pedido ha sido confirmado.</p>
-            <p><strong>Total:</strong> $${amount.toFixed(2)} ${moneda}</p>
-            <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
-            <p>¡Gracias por apoyar el arte mexicano!</p>
-          `,
-        })
+        if (process.env.RESEND_API_KEY) {
+          const resend = getResend()
+          await resend.emails.send({
+            from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
+            to: paypalOrder.payer?.email_address || '',
+            subject: 'Gracias por tu compra! - Tlalchichi Store',
+            html: `
+              <h1>Gracias por tu compra!</h1>
+              <p>Hola ${paypalOrder.payer?.name?.given_name || 'Cliente'},</p>
+              <p>Tu pedido ha sido confirmado.</p>
+              <p><strong>Total:</strong> $${amount.toFixed(2)} ${moneda}</p>
+              <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
+              <p>Gracias por apoyar el arte mexicano!</p>
+            `,
+          })
+        }
       } catch (emailErr) {
         console.error('Email error:', emailErr)
       }
