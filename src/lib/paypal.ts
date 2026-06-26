@@ -1,5 +1,6 @@
 export function getPaypalBaseUrl(): string {
-  return process.env.PAYPAL_SANDBOX === 'true'
+  const sandbox = (process.env.PAYPAL_SANDBOX || '').trim().toLowerCase()
+  return sandbox === 'true' || sandbox === '1'
     ? 'https://api-m.sandbox.paypal.com'
     : 'https://api-m.paypal.com'
 }
