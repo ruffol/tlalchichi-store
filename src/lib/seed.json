@@ -1,150 +1,326 @@
 [
   {
-    "slug": "llavero-tlalchichi-sentado",
-    "nombre_es": "Llavero Tlalchichi Sentado",
-    "nombre_en": "Sitting Tlalchichi Keychain",
-    "descripcion_es": "Llavero artesanal con figura de Tlalchichi sentado. Hecho a mano en barro de Colima.",
-    "descripcion_en": "Handcrafted keychain with a sitting Tlalchichi figure. Made by hand in Colima clay.",
-    "historia_es": "Los llaveros Tlalchichi mantienen viva la tradición milenaria de Colima en un formato portable.",
-    "historia_en": "Tlalchichi keychains keep the millenary tradition of Colima alive in a portable format.",
-    "categoria_es": "Llaveros",
-    "categoria_en": "Keychains",
-    "precio_mxn": 35,
-    "precio_usd": 2,
-    "stock": 69,
-    "destacado": true,
-    "imagenes": [
-      "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
-      },
-      {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
-      }
-    ]
-  },
-  {
-    "slug": "llavero-tlalchichi-joven-viejo",
-    "nombre_es": "Llavero Tlalchichi Joven-Viejo",
-    "nombre_en": "Young-Old Tlalchichi Keychain",
-    "descripcion_es": "Llavero de doble rostro que representa el ciclo de la vida. Pieza única de barro artesanal.",
-    "descripcion_en": "Two-faced keychain representing the cycle of life. Unique handcrafted clay piece.",
-    "historia_es": "La dualidad juventud-vejez es un concepto fundamental en la cosmovisión mesoamericana.",
-    "historia_en": "The youth-old age duality is a fundamental concept in the Mesoamerican worldview.",
+    "slug": "llavero-mascara",
+    "nombre_es": "Llavero Mascara",
+    "nombre_en": "Mascara Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Llaveros",
     "categoria_en": "Keychains",
     "precio_mxn": 35,
     "precio_usd": 2,
     "stock": 42,
-    "destacado": true,
+    "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
+      "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Barro Natural",
         "nombre_en": "Natural Clay",
         "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
-        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#EAE0D5",
-        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       }
     ]
   },
   {
-    "slug": "llavero-tlalchichi-parado",
-    "nombre_es": "Llavero Tlalchichi Parado",
-    "nombre_en": "Standing Tlalchichi Keychain",
-    "descripcion_es": "Llavero con Tlalchichi de pie, guardian portatil. Artesanía tradicional de Colima.",
-    "descripcion_en": "Keychain with standing guardian Tlalchichi. Traditional Colima craftsmanship.",
-    "historia_es": "El Tlalchichi de pie era el guardián por excelencia, protector del hogar.",
-    "historia_en": "The standing Tlalchichi was the ultimate guardian, protector of the home.",
+    "slug": "llavero-acostado",
+    "nombre_es": "Llavero Acostado",
+    "nombre_en": "Acostado Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Llaveros",
     "categoria_en": "Keychains",
     "precio_mxn": 35,
     "precio_usd": 2,
-    "stock": 67,
-    "destacado": true,
+    "stock": 42,
+    "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-parado-colima.png"
+      "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Barro Natural",
         "nombre_en": "Natural Clay",
         "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
-        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#EAE0D5",
-        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       }
     ]
   },
   {
-    "slug": "portamaceta-tlalchichi-acostado",
-    "nombre_es": "Portamaceta Tlalchichi Acostado",
-    "nombre_en": "Lying Tlalchichi Planter",
-    "descripcion_es": "Portamaceta artesanal con Tlalchichi en posición de descanso. Ideal para suculentas y cactus.",
-    "descripcion_en": "Handcrafted planter with a resting Tlalchichi. Perfect for succulents and cacti.",
-    "historia_es": "Los Tlalchichis acostados representan el descanso y la tranquilidad del espíritu.",
-    "historia_en": "Lying Tlalchichis represent rest and tranquility of the spirit.",
+    "slug": "llavero-joven_viejo",
+    "nombre_es": "Llavero Joven Viejo",
+    "nombre_en": "Joven Viejo Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "llavero-mascara_danza",
+    "nombre_es": "Llavero Mascara Danza",
+    "nombre_en": "Mascara Danza Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "llavero-parado",
+    "nombre_es": "Llavero Parado",
+    "nombre_en": "Parado Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "llavero-sentado",
+    "nombre_es": "Llavero Sentado",
+    "nombre_en": "Sentado Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "llavero-viejo_sentado",
+    "nombre_es": "Llavero Viejo Sentado",
+    "nombre_en": "Viejo Sentado Keychain",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-acostado",
+    "nombre_es": "Portamaceta Acostado",
+    "nombre_en": "Acostado Planter",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
     "precio_mxn": 210,
     "precio_usd": 11,
     "stock": 42,
-    "destacado": true,
+    "destacado": false,
     "imagenes": [
       "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
     ],
@@ -156,12 +332,6 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       },
       {
-        "nombre_es": "Verde Maguey",
-        "nombre_en": "Maguey Green",
-        "hex": "#4A7C59",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      },
-      {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
@@ -172,23 +342,29 @@
         "nombre_en": "Black",
         "hex": "#2D2D2D",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       }
     ]
   },
   {
-    "slug": "portamaceta-tlalchichi-acostado-mediano",
-    "nombre_es": "Portamaceta Tlalchichi Acostado Mediano",
-    "nombre_en": "Medium Lying Tlalchichi Planter",
-    "descripcion_es": "Portamaceta tamaño mediano con Tlalchichi acostado. Perfecto para decorar cualquier espacio.",
-    "descripcion_en": "Medium planter with a lying Tlalchichi. Perfect for decorating any space.",
-    "historia_es": "Cada portamaceta Tlalchichi es única, tallada y pintada a mano en Colima.",
-    "historia_en": "Each Tlalchichi planter is unique, hand-carved and hand-painted in Colima.",
+    "slug": "portamaceta-acostado_mediano",
+    "nombre_es": "Portamaceta Acostado Mediano",
+    "nombre_en": "Acostado Mediano Planter",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
     "precio_mxn": 210,
     "precio_usd": 11,
-    "stock": 67,
-    "destacado": true,
+    "stock": 42,
+    "destacado": false,
     "imagenes": [
       "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
     ],
@@ -200,12 +376,6 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       },
       {
-        "nombre_es": "Verde Maguey",
-        "nombre_en": "Maguey Green",
-        "hex": "#4A7C59",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      },
-      {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
@@ -216,22 +386,28 @@
         "nombre_en": "Black",
         "hex": "#2D2D2D",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       }
     ]
   },
   {
-    "slug": "portamaceta-tlalchichi-sentado",
-    "nombre_es": "Portamaceta Tlalchichi Sentado",
-    "nombre_en": "Sitting Tlalchichi Planter",
-    "descripcion_es": "Maceta decorativa con Tlalchichi sentado. Artesanía tradicional de barro de Colima.",
-    "descripcion_en": "Decorative planter with a sitting Tlalchichi. Traditional Colima clay craftsmanship.",
-    "historia_es": "La tradición de los Tlalchichis se remonta a las culturas prehispánicas del occidente de México.",
-    "historia_en": "The tradition of Tlalchichis dates back to pre-Hispanic cultures of western Mexico.",
+    "slug": "portamaceta-sentado",
+    "nombre_es": "Portamaceta Sentado",
+    "nombre_en": "Sentado Planter",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
     "precio_mxn": 210,
     "precio_usd": 11,
-    "stock": 69,
+    "stock": 42,
     "destacado": false,
     "imagenes": [
       "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
@@ -244,12 +420,6 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       },
       {
-        "nombre_es": "Verde Maguey",
-        "nombre_en": "Maguey Green",
-        "hex": "#4A7C59",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      },
-      {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
@@ -260,105 +430,23 @@
         "nombre_en": "Black",
         "hex": "#2D2D2D",
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       }
     ]
   },
   {
-    "slug": "alcancia-tlalchichi-sentado",
-    "nombre_es": "Alcancía Tlalchichi Sentado",
-    "nombre_en": "Sitting Tlalchichi Piggy Bank",
-    "descripcion_es": "Alcancía artesanal con forma de Tlalchichi sentado. Ahorra con estilo mexicano.",
-    "descripcion_en": "Handcrafted piggy bank shaped like a sitting Tlalchichi. Save with Mexican style.",
-    "historia_es": "Las alcancías Tlalchichi mantienen la tradición de ahorro con un toque cultural único.",
-    "historia_en": "Tlalchichi piggy banks keep the savings tradition with a unique cultural touch.",
-    "categoria_es": "Alcancías",
-    "categoria_en": "Piggy Banks",
-    "precio_mxn": 160,
-    "precio_usd": 9,
-    "stock": 42,
-    "destacado": true,
-    "imagenes": [
-      "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Rojo Óxido",
-        "nombre_en": "Rust Red",
-        "hex": "#8B3A3A",
-        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Crema",
-        "nombre_en": "Cream",
-        "hex": "#F5DEB3",
-        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-      }
-    ]
-  },
-  {
-    "slug": "alcancia-tlalchichi-viejo-sentado",
-    "nombre_es": "Alcancía Tlalchichi Viejo Sentado",
-    "nombre_en": "Old Sitting Tlalchichi Piggy Bank",
-    "descripcion_es": "Alcancía del Tlalchichi viejo sentado, símbolo de sabiduría y prosperidad. Barro artesanal de Colima.",
-    "descripcion_en": "Old sitting Tlalchichi piggy bank, symbol of wisdom and prosperity. Handcrafted Colima clay.",
-    "historia_es": "El Tlalchichi viejo simboliza la sabiduría de los ancestros y la protección del hogar.",
-    "historia_en": "The old Tlalchichi symbolizes the wisdom of ancestors and protection of the home.",
-    "categoria_es": "Alcancías",
-    "categoria_en": "Piggy Banks",
-    "precio_mxn": 160,
-    "precio_usd": 9,
-    "stock": 69,
-    "destacado": true,
-    "imagenes": [
-      "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Rojo Óxido",
-        "nombre_en": "Rust Red",
-        "hex": "#8B3A3A",
-        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Crema",
-        "nombre_en": "Cream",
-        "hex": "#F5DEB3",
-        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-      }
-    ]
-  },
-  {
-    "slug": "alcancia-tlalchichi-mascara",
-    "nombre_es": "Alcancía Tlalchichi Máscara",
-    "nombre_en": "Mask Tlalchichi Piggy Bank",
-    "descripcion_es": "Alcancía con Tlalchichi usando máscara tradicional. Inspirado en danzas folclóricas mexicanas.",
-    "descripcion_en": "Piggy bank with Tlalchichi wearing a traditional mask. Inspired by Mexican folk dances.",
-    "historia_es": "Las máscaras en la cultura mexicana tienen un profundo significado espiritual y ceremonial.",
-    "historia_en": "Masks in Mexican culture have deep spiritual and ceremonial meaning.",
+    "slug": "alcacia-mascara",
+    "nombre_es": "Alcancía Mascara",
+    "nombre_en": "Mascara Piggy Bank",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Alcancías",
     "categoria_en": "Piggy Banks",
     "precio_mxn": 160,
@@ -376,9 +464,9 @@
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       },
       {
-        "nombre_es": "Rojo Óxido",
-        "nombre_en": "Rust Red",
-        "hex": "#8B3A3A",
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       },
       {
@@ -388,27 +476,115 @@
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       },
       {
-        "nombre_es": "Crema",
-        "nombre_en": "Cream",
-        "hex": "#F5DEB3",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       }
     ]
   },
   {
-    "slug": "cuenco-tlalchichi-mazorca",
-    "nombre_es": "Cuenco Tlalchichi Mazorca",
-    "nombre_en": "Corncob Tlalchichi Bowl",
-    "descripcion_es": "Cuenco decorativo con Tlalchichi y mazorca. Símbolo de abundancia y prosperidad.",
-    "descripcion_en": "Decorative bowl with Tlalchichi and corncob. Symbol of abundance and prosperity.",
-    "historia_es": "El maíz es sagrado en la cultura mexicana. Este Tlalchichi representa la conexión con la tierra.",
-    "historia_en": "Corn is sacred in Mexican culture. This Tlalchichi represents the connection with the earth.",
+    "slug": "alcacia-sentado",
+    "nombre_es": "Alcancía Sentado",
+    "nombre_en": "Sentado Piggy Bank",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Alcancías",
+    "categoria_en": "Piggy Banks",
+    "precio_mxn": 160,
+    "precio_usd": 9,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "alcacia-viejo_sentado",
+    "nombre_es": "Alcancía Viejo Sentado",
+    "nombre_en": "Viejo Sentado Piggy Bank",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Alcancías",
+    "categoria_en": "Piggy Banks",
+    "precio_mxn": 160,
+    "precio_usd": 9,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Barro Natural",
+        "nombre_en": "Natural Clay",
+        "hex": "#B87333",
+        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Terracota",
+        "nombre_en": "Terracotta",
+        "hex": "#C86A4E",
+        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#EAE0D5",
+        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "cuenco-mazorca",
+    "nombre_es": "Cuenco Mazorca",
+    "nombre_en": "Mazorca Bowl",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Cuencos",
     "categoria_en": "Bowls",
     "precio_mxn": 210,
     "precio_usd": 11,
-    "stock": 67,
-    "destacado": true,
+    "stock": 42,
+    "destacado": false,
     "imagenes": [
       "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
     ],
@@ -420,15 +596,15 @@
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       },
       {
-        "nombre_es": "Azul Añil",
-        "nombre_en": "Indigo Blue",
-        "hex": "#264653",
-        "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
-      },
-      {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
+        "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       },
       {
@@ -440,13 +616,13 @@
     ]
   },
   {
-    "slug": "cuenco-tlalchichi-viejo-color",
-    "nombre_es": "Cuenco Tlalchichi Viejo Edición Color",
-    "nombre_en": "Color Edition Old Tlalchichi Bowl",
-    "descripcion_es": "Cuenco del Tlalchichi viejo en edición especial de color. Pieza decorativa única de Colima.",
-    "descripcion_en": "Color edition old Tlalchichi bowl. Unique decorative piece from Colima.",
-    "historia_es": "Cada cuenco Tlalchichi es una pieza única que combina funcionalidad y arte tradicional.",
-    "historia_en": "Each Tlalchichi bowl is a unique piece combining functionality and traditional art.",
+    "slug": "cuenco-viejo_sentado_color",
+    "nombre_es": "Cuenco Viejo Sentado Color",
+    "nombre_en": "Viejo Sentado Color Bowl",
+    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
+    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
+    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Cuencos",
     "categoria_en": "Bowls",
     "precio_mxn": 210,
@@ -464,15 +640,15 @@
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       },
       {
-        "nombre_es": "Azul Añil",
-        "nombre_en": "Indigo Blue",
-        "hex": "#264653",
-        "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
-      },
-      {
         "nombre_es": "Terracota",
         "nombre_en": "Terracotta",
         "hex": "#C86A4E",
+        "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       },
       {

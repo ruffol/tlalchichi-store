@@ -74,13 +74,15 @@ export default async function ProductosPage({ params, searchParams }: Props) {
   }
 
   return (
-    <div>
-      {selectedType && (
-        <CategoryHero
-          nombre={categoryName}
-          imagenes={catImages[tipo] || []}
-          locale={locale}
-        />
+    <>
+      {selectedType && tipo && catImages[tipo] && catImages[tipo].length > 0 && (
+        <section className="relative h-[40vh] overflow-hidden bg-arena">
+          <img src={catImages[tipo][0]} alt={categoryName} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute bottom-8 left-0 right-0 text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">{categoryName}</h1>
+          </div>
+        </section>
       )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl sm:text-4xl font-bold text-negro-suave mb-8">
@@ -117,5 +119,6 @@ export default async function ProductosPage({ params, searchParams }: Props) {
         <ProductGrid models={models} locale={locale} />
       </Suspense>
     </div>
+    </>
   )
 }
