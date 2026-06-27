@@ -21,6 +21,7 @@ export function getDb(): Database.Database {
     _db.pragma('journal_mode = WAL')
     _db.pragma('foreign_keys = ON')
     initTables()
+    migrateOrderItemsSchema()
     migrateOldProducts()
     seedColors()
     seedProductTypes()
@@ -154,6 +155,24 @@ function initTables() {
     for (const [key, value] of defaults) {
       insert.run(key, value)
     }
+  }
+}
+
+function migrateOrderItemsSchema() {
+  const db = _db!
+  // Add new variant columns to existing order_items table if missing
+  const tableInfo = db.prepare("PRAGMA table_info('order_items')").all() as any[]
+  const hasModelId = tableInfo.some((c: any) => c.name === 'model_id')
+  if (!hasModelId) {
+    db.exec('ALTER TABLE order_items ADD COLUMN model_id INTEGER')
+  }
+  const hasProductTypeId = tableInfo.some((c: any) => c.name === 'product_type_id')
+  if (!hasProductTypeId) {
+    db.exec('ALTER TABLE order_items ADD COLUMN product_type_id INTEGER')
+  }
+  const hasColorId = tableInfo.some((c: any) => c.name === 'color_id')
+  if (!hasColorId) {
+    db.exec('ALTER TABLE order_items ADD COLUMN color_id INTEGER')
   }
 }
 
