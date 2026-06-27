@@ -8,9 +8,22 @@ export interface Model {
   historia_es: string | null
   historia_en: string | null
   imagenes: string[]
+  categoria_es: string
+  categoria_en: string
+  precio_mxn: number
+  precio_usd: number
+  stock: number
   destacado: boolean
   activo: boolean
+  colores: ColorOption[]
   created_at: string
+}
+
+export interface ColorOption {
+  nombre_es: string
+  nombre_en: string
+  hex: string
+  imagen: string
 }
 
 export type ModelFormData = {
@@ -22,6 +35,12 @@ export type ModelFormData = {
   historia_es: string
   historia_en: string
   imagenes: string[]
+  categoria_es: string
+  categoria_en: string
+  precio_mxn: number
+  precio_usd: number
+  stock: number
+  colores: ColorOption[]
 }
 
 export interface ProductType {

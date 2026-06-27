@@ -31,7 +31,6 @@ export function getDb(): Database.Database {
 
 function initTables() {
   const db = _db!
-
   db.exec(`
     CREATE TABLE IF NOT EXISTS products (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,14 +43,14 @@ function initTables() {
       historia_en TEXT,
       categoria_es TEXT NOT NULL,
       categoria_en TEXT NOT NULL,
-      precio_mxn INTEGER NOT NULL,
+      precio_mxn REAL NOT NULL,
       precio_usd REAL NOT NULL,
       stock INTEGER NOT NULL DEFAULT 0,
-      peso_kg REAL,
-      imagenes TEXT DEFAULT '[]',
+      imagenes TEXT,
+      colores TEXT,
       destacado INTEGER DEFAULT 0,
       activo INTEGER DEFAULT 1,
-      created_at TEXT DEFAULT (datetime('now'))
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
     )
   `)
 
@@ -478,6 +477,7 @@ function normalizeProduct(row: any): any {
   return {
     ...row,
     imagenes: typeof row.imagenes === 'string' ? JSON.parse(row.imagenes) : row.imagenes || [],
+    colores: typeof row.colores === 'string' ? JSON.parse(row.colores) : row.colores || [],
     destacado: !!row.destacado,
     activo: !!row.activo,
   }
@@ -494,8 +494,8 @@ export function upsertProduct(data: any): any {
     return db.prepare('SELECT * FROM products WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
-      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, @activo)
+      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
     `).run(data)
     return db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid)
   }
