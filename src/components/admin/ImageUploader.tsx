@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useState } from 'react'
 
 interface ImageUploaderProps {
   images: string[]
@@ -8,12 +8,19 @@ interface ImageUploaderProps {
 }
 
 export default function ImageUploader({ images, onChange }: ImageUploaderProps) {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [urlInput, setUrlInput] = useState('')
 
   const handleAddUrl = () => {
-    const url = prompt('Pega la URL de la imagen:')
-    if (url && url.trim()) {
-      onChange([...images, url.trim()])
+    const url = urlInput.trim()
+    if (!url) return
+    onChange([...images, url])
+    setUrlInput('')
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleAddUrl()
     }
   }
 
@@ -34,13 +41,13 @@ export default function ImageUploader({ images, onChange }: ImageUploaderProps) 
         Imágenes del producto
       </label>
 
-      <p className="text-xs text-negro-suave/40">
+      <p className="text-xs text-muted">
         Las imágenes deben estar en <code className="bg-arena px-1 rounded">/public/img/productos/</code>.
         La primera imagen es la principal.
       </p>
 
       {images.length > 0 && (
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {images.map((url, i) => (
             <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border border-arena bg-arena/30">
               {url.startsWith('http') || url.startsWith('/') ? (
@@ -53,11 +60,11 @@ export default function ImageUploader({ images, onChange }: ImageUploaderProps) 
                     (e.target as HTMLImageElement).src = ''
                     ;(e.target as HTMLImageElement).classList.add('hidden')
                     const parent = (e.target as HTMLImageElement).parentElement
-                    if (parent) parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-negro-suave/20 text-xs p-2">Sin imagen</div>'
+                    if (parent) parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-muted text-xs p-2">Sin imagen</div>'
                   }}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-negro-suave/30 text-xs p-2 text-center break-all">
+                <div className="w-full h-full flex items-center justify-center text-muted/40 text-xs p-2 text-center break-all">
                   {url}
                 </div>
               )}
@@ -89,13 +96,24 @@ export default function ImageUploader({ images, onChange }: ImageUploaderProps) 
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={handleAddUrl}
-        className="px-4 py-2 text-sm font-medium border-2 border-dashed border-arena rounded-lg text-negro-suave/60 hover:border-terracota hover:text-terracota transition-colors"
-      >
-        + Agregar imagen (URL)
-      </button>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={urlInput}
+          onChange={(e) => setUrlInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Pega la URL de la imagen..."
+          className="flex-1 px-4 py-2 text-sm rounded-xl border border-arena bg-card text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors"
+        />
+        <button
+          type="button"
+          onClick={handleAddUrl}
+          disabled={!urlInput.trim()}
+          className="px-4 py-2 text-sm font-medium rounded-xl bg-terracota text-white hover:bg-terracota-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
+          Agregar
+        </button>
+      </div>
     </div>
   )
 }

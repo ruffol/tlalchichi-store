@@ -20,7 +20,9 @@ export default function AdminLayout({
 
   useEffect(() => {
     const token = sessionStorage.getItem('admin_token')
-    if (token) setAuthed(true)
+    if (token) {
+      queueMicrotask(() => setAuthed(true))
+    }
   }, [])
 
   const handleLogin = async () => {
@@ -43,6 +45,11 @@ export default function AdminLayout({
       setError(true)
     }
     setLoading(false)
+  }
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_token')
+    setAuthed(false)
   }
 
   if (!authed) {
@@ -69,20 +76,28 @@ export default function AdminLayout({
   }
 
   const isActive = (href: string) =>
-    pathname === href ? 'bg-arena text-negro-suave' : 'text-negro-suave/60 hover:text-negro-suave'
+    pathname === href ? 'bg-arena text-negro-suave' : 'text-muted hover:text-negro-suave'
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="flex items-center gap-6 mb-8 pb-4 border-b border-arena">
-        <h1 className="text-2xl font-bold text-negro-suave">{t('titulo')}</h1>
-        <nav className="flex gap-4 text-sm font-medium">
-          <Link href="/admin" className={isActive('/admin')}>
-            {t('productos')}
-          </Link>
-          <Link href="/admin/ordenes" className={isActive('/admin/ordenes')}>
-            {t('ordenes')}
-          </Link>
-        </nav>
+      <div className="flex items-center justify-between gap-6 mb-8 pb-4 border-b border-arena">
+        <div className="flex items-center gap-6 min-w-0">
+          <h1 className="text-2xl font-bold text-negro-suave">{t('titulo')}</h1>
+          <nav className="flex gap-1 text-sm font-medium">
+            <Link href="/admin" className={`px-3 py-1.5 rounded-lg transition-colors ${isActive('/admin')}`}>
+              {t('productos')}
+            </Link>
+            <Link href="/admin/ordenes" className={`px-3 py-1.5 rounded-lg transition-colors ${isActive('/admin/ordenes')}`}>
+              {t('ordenes')}
+            </Link>
+          </nav>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="text-sm text-muted hover:text-negro-suave transition-colors px-3 py-1.5 rounded-lg hover:bg-arena/50"
+        >
+          Cerrar sesión
+        </button>
       </div>
       {children}
     </div>
