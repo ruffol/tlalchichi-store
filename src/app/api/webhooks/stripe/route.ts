@@ -58,21 +58,22 @@ export async function POST(req: Request) {
         stripe_session_id: session.id,
       })
 
-      // Crear order_items desde el metadata (mas confiable que line items de Stripe)
       if (itemsData.length > 0) {
         const orderItems = itemsData.map((item: any) => ({
           order_id: order.id,
-          product_id: parseInt(item.id) || 0,
+          model_id: item.modelId || 0,
+          product_type_id: item.productTypeId || 0,
+          color_id: item.colorId || 0,
           quantity: item.quantity || 1,
           precio_unitario: Math.round((item.precio || 0) * (moneda === 'MXN' ? 100 : 100)),
         }))
         createOrderItems(orderItems)
 
-        // Decrementar stock
         for (const item of itemsData) {
-          const productId = parseInt(item.id)
-          if (productId) {
-            decrementStock(productId, item.quantity || 1)
+          const modelId = item.modelId
+          const productTypeId = item.productTypeId
+          if (modelId && productTypeId) {
+            decrementStock(modelId, productTypeId, item.quantity || 1)
           }
         }
       }

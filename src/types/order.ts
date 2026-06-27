@@ -1,5 +1,5 @@
 export interface Order {
-  id: string
+  id: number
   email: string
   nombre: string | null
   pais: string
@@ -16,9 +16,11 @@ export interface Order {
 }
 
 export interface OrderItem {
-  id: string
-  order_id: string
-  product_id: string
+  id: number
+  order_id: number
+  model_id: number
+  product_type_id: number
+  color_id: number
   quantity: number
   precio_unitario: number
 }

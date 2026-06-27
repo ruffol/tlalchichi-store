@@ -11,10 +11,6 @@ export async function POST(req: Request) {
     }
 
     const baseUrl = getPaypalBaseUrl()
-    console.log('[paypal] Using base URL:', baseUrl)
-    console.log('[paypal] Client ID:', (getPaypalClientId() || '').substring(0, 10) + '...')
-    console.log('[paypal] Secret:', (getPaypalClientSecret() || '').substring(0, 5) + '...')
-    console.log('[paypal] Sandbox:', process.env.PAYPAL_SANDBOX)
     const auth = Buffer.from(
       `${getPaypalClientId()}:${getPaypalClientSecret()}`
     ).toString('base64')
@@ -77,6 +73,7 @@ export async function POST(req: Request) {
                 },
                 quantity: item.quantity.toString(),
                 category: 'PHYSICAL_GOODS',
+                sku: `${item.modelId}-${item.productTypeId}-${item.colorId}`,
               })),
               shipping: {
                 name: { full_name: nombre || 'Cliente' },

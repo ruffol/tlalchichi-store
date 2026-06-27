@@ -21,7 +21,9 @@ export function getDb(): Database.Database {
     _db.pragma('journal_mode = WAL')
     _db.pragma('foreign_keys = ON')
     initTables()
-    seedOnce()
+    migrateOldProducts()
+    seedColors()
+    seedProductTypes()
   }
   return _db
 }
@@ -53,6 +55,54 @@ function initTables() {
   `)
 
   db.exec(`
+    CREATE TABLE IF NOT EXISTS models (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      slug TEXT UNIQUE NOT NULL,
+      nombre_es TEXT NOT NULL,
+      nombre_en TEXT NOT NULL,
+      descripcion_es TEXT,
+      descripcion_en TEXT,
+      historia_es TEXT,
+      historia_en TEXT,
+      imagenes TEXT DEFAULT '[]',
+      destacado INTEGER DEFAULT 0,
+      activo INTEGER DEFAULT 1,
+      created_at TEXT DEFAULT (datetime('now'))
+    )
+  `)
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS product_types (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      slug TEXT UNIQUE NOT NULL,
+      nombre_es TEXT NOT NULL,
+      nombre_en TEXT NOT NULL,
+      precio_mxn INTEGER NOT NULL,
+      precio_usd REAL NOT NULL
+    )
+  `)
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS colors (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      slug TEXT UNIQUE NOT NULL,
+      nombre_es TEXT NOT NULL,
+      nombre_en TEXT NOT NULL,
+      hex_code TEXT NOT NULL
+    )
+  `)
+
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS model_availability (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      model_id INTEGER NOT NULL REFERENCES models(id),
+      product_type_id INTEGER NOT NULL REFERENCES product_types(id),
+      stock INTEGER NOT NULL DEFAULT 0,
+      UNIQUE(model_id, product_type_id)
+    )
+  `)
+
+  db.exec(`
     CREATE TABLE IF NOT EXISTS orders (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT NOT NULL,
@@ -75,7 +125,9 @@ function initTables() {
     CREATE TABLE IF NOT EXISTS order_items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
-      product_id INTEGER,
+      model_id INTEGER,
+      product_type_id INTEGER,
+      color_id INTEGER,
       quantity INTEGER NOT NULL,
       precio_unitario INTEGER NOT NULL
     )
@@ -105,39 +157,106 @@ function initTables() {
   }
 }
 
-function seedOnce() {
+function migrateOldProducts() {
   const db = _db!
-  if (seedProducts.length === 0) return
+  const existing = db.prepare('SELECT COUNT(*) as count FROM models').get() as any
+  if (existing.count > 0) return
 
-  const count = db.prepare('SELECT COUNT(*) as count FROM products').get() as any
-  if (count.count > 0) return
+  const oldProducts = db.prepare('SELECT * FROM products').all() as any[]
+  if (oldProducts.length === 0) return
 
-  console.log('[seed] Insertando', seedProducts.length, 'productos iniciales...')
-
-  const insert = db.prepare(`
-    INSERT OR IGNORE INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
-    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, 1)
+  const insertModel = db.prepare(`
+    INSERT OR IGNORE INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, imagenes, destacado, activo)
+    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @imagenes, @destacado, @activo)
   `)
 
-  let inserted = 0
-  for (const product of seedProducts) {
-    try {
-      insert.run({
-        ...product,
-        imagenes: JSON.stringify(product.imagenes),
-        destacado: product.destacado ? 1 : 0,
+  const typeSlugMap = new Map<string, { slug: string; id: number }>()
+  const getTypeId = db.prepare('SELECT id FROM product_types WHERE slug = ?')
+
+  const insertAvail = db.prepare(`
+    INSERT OR IGNORE INTO model_availability (model_id, product_type_id, stock)
+    VALUES (@model_id, @product_type_id, @stock)
+  `)
+
+  for (const p of oldProducts) {
+    const catSlug = p.categoria_es
+      .toLowerCase()
+      .replace(/[^a-záéíóúñ]+/g, '-')
+      .replace(/^-|-$/g, '')
+
+    insertModel.run({
+      slug: p.slug,
+      nombre_es: p.nombre_es,
+      nombre_en: p.nombre_en,
+      descripcion_es: p.descripcion_es || null,
+      descripcion_en: p.descripcion_en || null,
+      historia_es: p.historia_es || null,
+      historia_en: p.historia_en || null,
+      imagenes: p.imagenes || '[]',
+      destacado: p.destacado || 0,
+      activo: p.activo ?? 1,
+    })
+
+    const modelRow = db.prepare('SELECT id FROM models WHERE slug = ?').get(p.slug) as any
+    if (!modelRow) continue
+
+    const typeRow = getTypeId.get(catSlug) as any
+    if (typeRow) {
+      insertAvail.run({
+        model_id: modelRow.id,
+        product_type_id: typeRow.id,
+        stock: p.stock,
       })
-      inserted++
-    } catch (e) {
-      console.error('[seed] Error insertando producto', product.slug, ':', e)
     }
   }
-  console.log('[seed] Insertados', inserted, 'de', seedProducts.length, 'productos')
 }
 
-export function getProducts(opts?: { destacado?: boolean; categoria?: string; slug?: string; activo?: boolean }): any[] {
+function seedColors() {
+  const db = _db!
+  const count = db.prepare('SELECT COUNT(*) as count FROM colors').get() as any
+  if (count.count > 0) return
+
+  const colors = [
+    { slug: 'blanco', nombre_es: 'Blanco', nombre_en: 'White', hex_code: '#F5F5F5' },
+    { slug: 'negro', nombre_es: 'Negro', nombre_en: 'Black', hex_code: '#2D2D2D' },
+    { slug: 'naranja', nombre_es: 'Naranja', nombre_en: 'Orange', hex_code: '#E87A3E' },
+    { slug: 'transparente', nombre_es: 'Transparente', nombre_en: 'Transparent', hex_code: '#B8B8B8' },
+  ]
+
+  const insert = db.prepare('INSERT INTO colors (slug, nombre_es, nombre_en, hex_code) VALUES (@slug, @nombre_es, @nombre_en, @hex_code)')
+  for (const c of colors) insert.run(c)
+}
+
+function seedProductTypes() {
+  const db = _db!
+  const count = db.prepare('SELECT COUNT(*) as count FROM product_types').get() as any
+  if (count.count > 0) return
+
+  const types = [
+    { slug: 'llaveros', nombre_es: 'LLAveros', nombre_en: 'Keychains', precio_mxn: 35, precio_usd: 2 },
+    { slug: 'centros-de-mesa', nombre_es: 'Centros de mesa', nombre_en: 'Centerpieces', precio_mxn: 160, precio_usd: 9 },
+    { slug: 'portamacetas', nombre_es: 'Portamacetas', nombre_en: 'Plant Pot Holders', precio_mxn: 210, precio_usd: 11 },
+    { slug: 'alcancia', nombre_es: 'Alcancías', nombre_en: 'Piggy Banks', precio_mxn: 160, precio_usd: 9 },
+  ]
+
+  const insert = db.prepare('INSERT INTO product_types (slug, nombre_es, nombre_en, precio_mxn, precio_usd) VALUES (@slug, @nombre_es, @nombre_en, @precio_mxn, @precio_usd)')
+  for (const t of types) insert.run(t)
+}
+
+// ── Model queries ──
+
+function normalizeModel(row: any): any {
+  return {
+    ...row,
+    imagenes: typeof row.imagenes === 'string' ? JSON.parse(row.imagenes) : row.imagenes || [],
+    destacado: !!row.destacado,
+    activo: !!row.activo,
+  }
+}
+
+export function getModels(opts?: { destacado?: boolean; slug?: string; activo?: boolean }): any[] {
   const db = getDb()
-  let sql = 'SELECT * FROM products WHERE 1=1'
+  let sql = 'SELECT * FROM models WHERE 1=1'
   const params: any[] = []
 
   if (opts?.slug) {
@@ -152,11 +271,172 @@ export function getProducts(opts?: { destacado?: boolean; categoria?: string; sl
     sql += ' AND destacado = ?'
     params.push(opts.destacado ? 1 : 0)
   }
-  if (opts?.categoria) {
-    sql += ' AND (categoria_es = ? OR categoria_en = ?)'
-    params.push(opts.categoria, opts.categoria)
-  }
 
+  sql += ' ORDER BY id ASC'
+  const rows = db.prepare(sql).all(...params) as any[]
+  return rows.map(normalizeModel)
+}
+
+export function getModelsByType(typeSlug: string): any[] {
+  const db = getDb()
+  const rows = db.prepare(`
+    SELECT DISTINCT m.* FROM models m
+    JOIN model_availability ma ON ma.model_id = m.id
+    JOIN product_types pt ON pt.id = ma.product_type_id
+    WHERE pt.slug = ? AND m.activo = 1 AND ma.stock > 0
+    ORDER BY m.id ASC
+  `).all(typeSlug) as any[]
+  return rows.map(normalizeModel)
+}
+
+export function getModelBySlug(slug: string): any | null {
+  const db = getDb()
+  const row = db.prepare('SELECT * FROM models WHERE slug = ? AND activo = 1').get(slug) as any
+  return row ? normalizeModel(row) : null
+}
+
+export function getModelById(id: number): any | null {
+  const db = getDb()
+  const row = db.prepare('SELECT * FROM models WHERE id = ?').get(id) as any
+  return row ? normalizeModel(row) : null
+}
+
+export function upsertModel(data: any): any {
+  const db = getDb()
+  const exists = db.prepare('SELECT id FROM models WHERE slug = ?').get(data.slug) as any
+  if (exists) {
+    db.prepare(`
+      UPDATE models SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, imagenes=@imagenes, destacado=@destacado, activo=@activo
+      WHERE id = @id
+    `).run(data)
+    return db.prepare('SELECT * FROM models WHERE id = ?').get(exists.id)
+  } else {
+    const result = db.prepare(`
+      INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, imagenes, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @imagenes, @destacado, @activo)
+    `).run(data)
+    return db.prepare('SELECT * FROM models WHERE id = ?').get(result.lastInsertRowid)
+  }
+}
+
+export function deleteModel(id: number) {
+  const db = getDb()
+  db.prepare('DELETE FROM models WHERE id = ?').run(id)
+}
+
+// ── Product type queries ──
+
+export function getProductTypes(): any[] {
+  const db = getDb()
+  return db.prepare('SELECT * FROM product_types ORDER BY id ASC').all() as any[]
+}
+
+export function getProductTypeBySlug(slug: string): any | null {
+  const db = getDb()
+  return db.prepare('SELECT * FROM product_types WHERE slug = ?').get(slug) as any || null
+}
+
+export function upsertProductType(data: any): any {
+  const db = getDb()
+  const exists = db.prepare('SELECT id FROM product_types WHERE slug = ?').get(data.slug) as any
+  if (exists) {
+    db.prepare(`
+      UPDATE product_types SET nombre_es=@nombre_es, nombre_en=@nombre_en, precio_mxn=@precio_mxn, precio_usd=@precio_usd
+      WHERE id = @id
+    `).run(data)
+    return db.prepare('SELECT * FROM product_types WHERE id = ?').get(exists.id)
+  } else {
+    const result = db.prepare(`
+      INSERT INTO product_types (slug, nombre_es, nombre_en, precio_mxn, precio_usd)
+      VALUES (@slug, @nombre_es, @nombre_en, @precio_mxn, @precio_usd)
+    `).run(data)
+    return db.prepare('SELECT * FROM product_types WHERE id = ?').get(result.lastInsertRowid)
+  }
+}
+
+export function deleteProductType(id: number) {
+  const db = getDb()
+  db.prepare('DELETE FROM product_types WHERE id = ?').run(id)
+}
+
+// ── Color queries ──
+
+export function getColors(): any[] {
+  const db = getDb()
+  return db.prepare('SELECT * FROM colors ORDER BY id ASC').all() as any[]
+}
+
+export function upsertColor(data: any): any {
+  const db = getDb()
+  const exists = db.prepare('SELECT id FROM colors WHERE slug = ?').get(data.slug) as any
+  if (exists) {
+    db.prepare(`UPDATE colors SET nombre_es=@nombre_es, nombre_en=@nombre_en, hex_code=@hex_code WHERE id = @id`).run(data)
+    return db.prepare('SELECT * FROM colors WHERE id = ?').get(exists.id)
+  } else {
+    const result = db.prepare(`INSERT INTO colors (slug, nombre_es, nombre_en, hex_code) VALUES (@slug, @nombre_es, @nombre_en, @hex_code)`).run(data)
+    return db.prepare('SELECT * FROM colors WHERE id = ?').get(result.lastInsertRowid)
+  }
+}
+
+export function deleteColor(id: number) {
+  const db = getDb()
+  db.prepare('DELETE FROM colors WHERE id = ?').run(id)
+}
+
+// ── Model availability queries ──
+
+export function getAvailability(modelId?: number, productTypeId?: number): any[] {
+  const db = getDb()
+  let sql = 'SELECT ma.*, pt.nombre_es as type_nombre_es, pt.nombre_en as type_nombre_en FROM model_availability ma JOIN product_types pt ON pt.id = ma.product_type_id WHERE 1=1'
+  const params: any[] = []
+  if (modelId) { sql += ' AND ma.model_id = ?'; params.push(modelId) }
+  if (productTypeId) { sql += ' AND ma.product_type_id = ?'; params.push(productTypeId) }
+  return db.prepare(sql).all(...params) as any[]
+}
+
+export function getModelTypes(modelId: number): any[] {
+  const db = getDb()
+  return db.prepare(`
+    SELECT pt.*, ma.stock, ma.id as availability_id
+    FROM model_availability ma
+    JOIN product_types pt ON pt.id = ma.product_type_id
+    WHERE ma.model_id = ? AND ma.stock > 0
+    ORDER BY pt.id ASC
+  `).all(modelId) as any[]
+}
+
+export function upsertAvailability(data: any): any {
+  const db = getDb()
+  const exists = db.prepare('SELECT id FROM model_availability WHERE model_id = ? AND product_type_id = ?').get(data.model_id, data.product_type_id) as any
+  if (exists) {
+    db.prepare(`UPDATE model_availability SET stock=@stock WHERE id = @id`).run({ ...data, id: exists.id })
+    return db.prepare('SELECT * FROM model_availability WHERE id = ?').get(exists.id)
+  } else {
+    const result = db.prepare(`INSERT INTO model_availability (model_id, product_type_id, stock) VALUES (@model_id, @product_type_id, @stock)`).run(data)
+    return db.prepare('SELECT * FROM model_availability WHERE id = ?').get(result.lastInsertRowid)
+  }
+}
+
+export function deleteAvailability(id: number) {
+  const db = getDb()
+  db.prepare('DELETE FROM model_availability WHERE id = ?').run(id)
+}
+
+export function decrementStock(modelId: number, productTypeId: number, quantity: number) {
+  const db = getDb()
+  db.prepare('UPDATE model_availability SET stock = MAX(0, stock - ?) WHERE model_id = ? AND product_type_id = ? AND stock >= ?').run(quantity, modelId, productTypeId, quantity)
+}
+
+// ── Legacy product queries (for backward compat) ──
+
+export function getProducts(opts?: { destacado?: boolean; categoria?: string; slug?: string; activo?: boolean }): any[] {
+  const db = getDb()
+  let sql = 'SELECT * FROM products WHERE 1=1'
+  const params: any[] = []
+  if (opts?.slug) { sql += ' AND slug = ?'; params.push(opts.slug) }
+  if (opts?.activo !== undefined) { sql += ' AND activo = ?'; params.push(opts.activo ? 1 : 0) }
+  if (opts?.destacado !== undefined) { sql += ' AND destacado = ?'; params.push(opts.destacado ? 1 : 0) }
+  if (opts?.categoria) { sql += ' AND (categoria_es = ? OR categoria_en = ?)'; params.push(opts.categoria, opts.categoria) }
   sql += ' ORDER BY id ASC'
   const rows = db.prepare(sql).all(...params) as any[]
   return rows.map(normalizeProduct)
@@ -183,6 +463,31 @@ function normalizeProduct(row: any): any {
     activo: !!row.activo,
   }
 }
+
+export function upsertProduct(data: any): any {
+  const db = getDb()
+  const exists = db.prepare('SELECT id FROM products WHERE slug = ?').get(data.slug) as any
+  if (exists) {
+    db.prepare(`
+      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en, precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock, imagenes=@imagenes, destacado=@destacado, activo=@activo
+      WHERE id = @id
+    `).run(data)
+    return db.prepare('SELECT * FROM products WHERE id = ?').get(exists.id)
+  } else {
+    const result = db.prepare(`
+      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, @activo)
+    `).run(data)
+    return db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid)
+  }
+}
+
+export function deleteProduct(id: number) {
+  const db = getDb()
+  db.prepare('DELETE FROM products WHERE id = ?').run(id)
+}
+
+// ── Order queries ──
 
 export function createOrder(data: {
   email: string
@@ -220,40 +525,12 @@ export function createOrder(data: {
   return db.prepare('SELECT * FROM orders WHERE id = ?').get(result.lastInsertRowid)
 }
 
-export function createOrderItems(items: { order_id: number; product_id: number; quantity: number; precio_unitario: number }[]) {
+export function createOrderItems(items: { order_id: number; model_id: number; product_type_id: number; color_id: number; quantity: number; precio_unitario: number }[]) {
   const db = getDb()
-  const stmt = db.prepare('INSERT INTO order_items (order_id, product_id, quantity, precio_unitario) VALUES (@order_id, @product_id, @quantity, @precio_unitario)')
+  const stmt = db.prepare('INSERT INTO order_items (order_id, model_id, product_type_id, color_id, quantity, precio_unitario) VALUES (@order_id, @model_id, @product_type_id, @color_id, @quantity, @precio_unitario)')
   for (const item of items) {
     stmt.run(item)
   }
-}
-
-export function decrementStock(productId: number, quantity: number) {
-  const db = getDb()
-  db.prepare('UPDATE products SET stock = MAX(0, stock - ?) WHERE id = ? AND stock >= ?').run(quantity, productId, quantity)
-}
-
-export function upsertProduct(data: any): any {
-  const db = getDb()
-  const exists = db.prepare('SELECT id FROM products WHERE slug = ?').get(data.slug) as any
-  if (exists) {
-    db.prepare(`
-      UPDATE products SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, categoria_es=@categoria_es, categoria_en=@categoria_en,       precio_mxn=@precio_mxn, precio_usd=@precio_usd, stock=@stock, imagenes=@imagenes, destacado=@destacado, activo=@activo
-      WHERE id = @id
-    `).run(data)
-    return db.prepare('SELECT * FROM products WHERE id = ?').get(exists.id)
-  } else {
-    const result = db.prepare(`
-      INSERT INTO products (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @destacado, @activo)
-    `).run(data)
-    return db.prepare('SELECT * FROM products WHERE id = ?').get(result.lastInsertRowid)
-  }
-}
-
-export function deleteProduct(id: number) {
-  const db = getDb()
-  db.prepare('DELETE FROM products WHERE id = ?').run(id)
 }
 
 export function getOrders(): any[] {
@@ -267,7 +544,14 @@ export function getOrders(): any[] {
 
 export function getOrderItems(orderId: number): any[] {
   const db = getDb()
-  return db.prepare('SELECT * FROM order_items WHERE order_id = ?').all(orderId)
+  return db.prepare(`
+    SELECT oi.*, m.nombre_es, m.nombre_en, m.slug as model_slug, pt.nombre_es as type_nombre_es, c.nombre_es as color_nombre_es, c.hex_code
+    FROM order_items oi
+    LEFT JOIN models m ON m.id = oi.model_id
+    LEFT JOIN product_types pt ON pt.id = oi.product_type_id
+    LEFT JOIN colors c ON c.id = oi.color_id
+    WHERE oi.order_id = ?
+  `).all(orderId)
 }
 
 export function getSetting(key: string): string | null {

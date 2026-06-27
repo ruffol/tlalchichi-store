@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
-import { getProducts } from '@/lib/db'
+import { getModels } from '@/lib/db'
 import ProductGrid from '@/components/product/ProductGrid'
 import HeroCarousel from '@/components/layout/HeroCarousel'
 
@@ -11,13 +11,13 @@ interface Props {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'HomePage' })
-  const products = getProducts({ destacado: true, activo: true })
+  const models = getModels({ destacado: true, activo: true })
 
   return (
     <>
       <HeroCarousel />
 
-      {products.length > 0 && (
+      {models.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="flex items-center justify-between mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-negro-suave tracking-tight">
@@ -30,7 +30,7 @@ export default async function HomePage({ params }: Props) {
               {t('cta')} &rarr;
             </Link>
           </div>
-          <ProductGrid products={products} locale={locale} />
+          <ProductGrid models={models} locale={locale} />
         </section>
       )}
 

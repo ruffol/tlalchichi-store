@@ -64,33 +64,47 @@ export default function CartDrawer() {
               <>
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                   {items.map((item) => {
-                    const precio = moneda === 'MXN' ? item.product.precio_mxn : item.product.precio_usd
+                    const v = item.variant
+                    const precio = moneda === 'MXN' ? v.precio_mxn : v.precio_usd
+                    const nombre = locale === 'es' ? v.nombre_es : v.nombre_en
+                    const tipo = locale === 'es' ? v.typeNombreEs : v.typeNombreEn
+                    const color = locale === 'es' ? v.colorNombreEs : v.colorNombreEn
+
                     return (
-                      <div key={item.product.id} className="flex gap-3">
+                      <div key={`${v.modelId}-${v.typeId}-${v.colorId}`} className="flex gap-3">
                         <div className="w-20 h-20 bg-arena rounded-xl flex-shrink-0 overflow-hidden">
-                          {item.product.imagen_principal && (
+                          {v.image && (
                             <img
-                              src={item.product.imagen_principal}
-                              alt={item.product.nombre_es}
+                              src={v.image}
+                              alt={nombre}
                               className="w-full h-full object-cover"
                             />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm truncate">{locale === 'es' ? item.product.nombre_es : item.product.nombre_en}</p>
+                          <p className="font-medium text-sm truncate">{nombre}</p>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <span className="text-xs text-muted">{tipo}</span>
+                            <span
+                              className="w-3 h-3 rounded-full inline-block border border-arena"
+                              style={{ backgroundColor: v.colorHex }}
+                              title={color}
+                            />
+                            <span className="text-xs text-muted">{color}</span>
+                          </div>
                           <p className="text-sm text-negro-suave/60 mt-1">
                             {moneda === 'MXN' ? `$${precio} MXN` : `$${precio.toFixed(2)} USD`}
                           </p>
                           <div className="flex items-center gap-2 mt-2">
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              onClick={() => updateQuantity(v, item.quantity - 1)}
                               className="w-7 h-7 rounded-full border border-arena flex items-center justify-center text-sm hover:bg-arena"
                             >
                               -
                             </button>
                             <span className="text-sm w-6 text-center">{item.quantity}</span>
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                              onClick={() => updateQuantity(v, item.quantity + 1)}
                               className="w-7 h-7 rounded-full border border-arena flex items-center justify-center text-sm hover:bg-arena"
                             >
                               +
@@ -98,7 +112,7 @@ export default function CartDrawer() {
                           </div>
                         </div>
                         <button
-                          onClick={() => removeItem(item.product.id)}
+                          onClick={() => removeItem(v)}
                           className="text-negro-suave/30 hover:text-red-500 transition-colors"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">

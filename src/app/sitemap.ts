@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { locales } from '@/i18n/routing'
-import { getProducts } from '@/lib/db'
+import { getModels } from '@/lib/db'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Productos desde la base de datos
   try {
-    const products = getProducts({ activo: true })
+    const products = getModels({ activo: true })
     for (const locale of locales) {
       for (const product of products) {
         entries.push({

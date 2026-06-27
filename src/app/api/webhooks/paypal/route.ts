@@ -107,12 +107,17 @@ export async function POST(req: Request) {
       const moneda = purchaseUnit?.amount?.currency_code || 'USD'
       const shipping = purchaseUnit?.shipping || {}
 
-      const items = (purchaseUnit?.items || []).map((item: any, index: number) => ({
-        name: item.name,
-        quantity: parseInt(item.quantity || '1'),
-        unit_amount: parseFloat(item.unit_amount?.value || '0'),
-        sku: item.sku || `${index}`,
-      }))
+      const items = (purchaseUnit?.items || []).map((item: any, index: number) => {
+        const skuParts = (item.sku || `${index}`).split('-')
+        return {
+          name: item.name,
+          quantity: parseInt(item.quantity || '1'),
+          unit_amount: parseFloat(item.unit_amount?.value || '0'),
+          modelId: parseInt(skuParts[0]) || 0,
+          productTypeId: parseInt(skuParts[1]) || 0,
+          colorId: parseInt(skuParts[2]) || 0,
+        }
+      })
 
       const itemTotal = items.reduce(
         (sum: number, item: any) => sum + item.unit_amount * item.quantity,
@@ -144,7 +149,9 @@ export async function POST(req: Request) {
 
       const orderItems = items.map((item: any) => ({
         order_id: order.id,
-        product_id: parseInt(item.sku || '0'),
+        model_id: item.modelId,
+        product_type_id: item.productTypeId,
+        color_id: item.colorId,
         quantity: item.quantity,
         precio_unitario: Math.round(item.unit_amount * 100),
       }))
@@ -154,9 +161,8 @@ export async function POST(req: Request) {
       }
 
       for (const item of items) {
-        const productId = parseInt(item.sku || '0')
-        if (productId) {
-          decrementStock(productId, item.quantity)
+        if (item.modelId && item.productTypeId) {
+          decrementStock(item.modelId, item.productTypeId, item.quantity)
         }
       }
 

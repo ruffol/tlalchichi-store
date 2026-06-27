@@ -2,22 +2,22 @@
 
 import { useTranslations } from 'next-intl'
 import { useCartStore } from '@/store/cart'
-import type { Product } from '@/types'
+import type { CartItemVariant } from '@/types'
 import Button from '@/components/ui/Button'
 import { useState } from 'react'
 
 interface Props {
-  product: Product
+  variant: CartItemVariant
 }
 
-export default function AddToCartButton({ product }: Props) {
+export default function AddToCartButton({ variant }: Props) {
   const t = useTranslations('ProductDetail')
   const addItem = useCartStore((s) => s.addItem)
   const openCart = useCartStore((s) => s.openCart)
   const [added, setAdded] = useState(false)
 
   const handleClick = () => {
-    addItem(product)
+    addItem(variant)
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)
     openCart()
@@ -26,11 +26,11 @@ export default function AddToCartButton({ product }: Props) {
   return (
     <Button
       onClick={handleClick}
-      disabled={product.stock <= 0}
+      disabled={variant.stock <= 0}
       size="lg"
       className="flex-1"
     >
-      {product.stock <= 0
+      {variant.stock <= 0
         ? t('sin_stock')
         : added
         ? t('agregado')

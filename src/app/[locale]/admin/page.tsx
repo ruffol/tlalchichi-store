@@ -2,12 +2,14 @@
 
 import { useTranslations } from 'next-intl'
 import { useState, useEffect, useMemo } from 'react'
-import type { Product, ProductFormData } from '@/types'
+import type { Model, ProductType, Color, ModelAvailability } from '@/types'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import ImageUploader from '@/components/admin/ImageUploader'
 
-const emptyForm = (): ProductFormData & { imagenes: string[] } => ({
+type Tab = 'models' | 'types' | 'colors' | 'availability'
+
+const emptyModel = {
   slug: '',
   nombre_es: '',
   nombre_en: '',
@@ -15,49 +17,81 @@ const emptyForm = (): ProductFormData & { imagenes: string[] } => ({
   descripcion_en: '',
   historia_es: '',
   historia_en: '',
-  categoria_es: '',
-  categoria_en: '',
+  destacado: false,
+  imagenes: [] as string[],
+}
+
+const emptyType = {
+  slug: '',
+  nombre_es: '',
+  nombre_en: '',
   precio_mxn: 0,
   precio_usd: 0,
-  stock: 0,
-  peso_kg: 0,
-  imagenes: [],
-})
+}
 
-type AdminProduct = Product & { imagenes: string[] }
+const emptyColor = {
+  slug: '',
+  nombre_es: '',
+  nombre_en: '',
+  hex_code: '',
+}
 
-export default function AdminProductosPage() {
+export default function AdminPage() {
   const t = useTranslations('Admin')
-  const [products, setProducts] = useState<AdminProduct[]>([])
+  const [tab, setTab] = useState<Tab>('models')
+
+  return (
+    <div>
+      <div className="flex gap-2 mb-8 border-b border-arena pb-4 overflow-x-auto">
+        {(['models', 'types', 'colors', 'availability'] as Tab[]).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
+              tab === t
+                ? 'bg-terracota text-white'
+                : 'bg-arena text-muted hover:bg-arena/80'
+            }`}
+          >
+            {t.charAt(0).toUpperCase() + t.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'models' && <ModelManager />}
+      {tab === 'types' && <TypeManager />}
+      {tab === 'colors' && <ColorManager />}
+      {tab === 'availability' && <AvailabilityManager />}
+    </div>
+  )
+}
+
+// ── Model Manager ──
+
+function ModelManager() {
+  const t = useTranslations('Admin')
+  const [models, setModels] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [editing, setEditing] = useState<number | null>(null)
   const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
   const [errors, setErrors] = useState<string[]>([])
   const [search, setSearch] = useState('')
-  const [form, setForm] = useState(emptyForm())
+  const [form, setForm] = useState(emptyModel)
 
   function authHeaders(): Record<string, string> {
     const token = sessionStorage.getItem('admin_token')
     return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
   }
 
-  async function loadProducts() {
-    const res = await fetch('/api/admin/products', { headers: authHeaders() })
+  async function loadModels() {
+    const res = await fetch('/api/admin/models', { headers: authHeaders() })
     const data = await res.json()
-    setProducts(data || [])
+    setModels(data || [])
     setLoading(false)
   }
 
-  useEffect(() => {
-    const headers = authHeaders()
-    fetch('/api/admin/products', { headers })
-      .then((r) => r.json())
-      .then((data) => {
-        setProducts(data || [])
-        setLoading(false)
-      })
-  }, [])
+  useEffect(() => { loadModels() }, [])
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type })
@@ -67,26 +101,29 @@ export default function AdminProductosPage() {
   const handleSave = async () => {
     setSaving(true)
     setErrors([])
-    const res = await fetch('/api/admin/products', {
+    const res = await fetch('/api/admin/models', {
       method: editing ? 'PUT' : 'POST',
       headers: authHeaders(),
-      body: JSON.stringify(editing ? { ...form, id: editing, imagen_principal: form.imagenes[0] || '' } : { ...form, imagen_principal: form.imagenes[0] || '' }),
+      body: JSON.stringify(editing ? { ...form, id: editing } : form),
     })
     const data = await res.json()
     if (res.ok) {
-      showToast(editing ? t('guardado') : t('creado'))
+      showToast(editing ? t('guardado') : 'Creado')
       setEditing(null)
-      setForm(emptyForm())
-      loadProducts()
+      setForm({ ...emptyModel })
+      loadModels()
     } else {
       setErrors(data.errors || ['Error al guardar'])
     }
     setSaving(false)
   }
 
-  const handleEdit = (p: AdminProduct) => {
-    setEditing(p.id as unknown as number)
+  const handleEdit = (p: any) => {
+    setEditing(p.id)
     setErrors([])
+    const imgs = p.imagenes
+      ? (typeof p.imagenes === 'string' ? JSON.parse(p.imagenes) : p.imagenes)
+      : []
     setForm({
       slug: p.slug,
       nombre_es: p.nombre_es,
@@ -95,38 +132,32 @@ export default function AdminProductosPage() {
       descripcion_en: p.descripcion_en || '',
       historia_es: p.historia_es || '',
       historia_en: p.historia_en || '',
-      categoria_es: p.categoria_es,
-      categoria_en: p.categoria_en,
-      precio_mxn: p.precio_mxn,
-      precio_usd: p.precio_usd,
-      stock: p.stock,
-      peso_kg: p.peso_kg || 0,
-      imagenes: p.imagenes || [],
+      destacado: !!p.destacado,
+      imagenes: imgs,
     })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('¿Eliminar producto?')) return
-    await fetch('/api/admin/products', {
+  const handleDelete = async (id: number) => {
+    if (!confirm('¿Eliminar modelo?')) return
+    await fetch('/api/admin/models', {
       method: 'DELETE',
       headers: authHeaders(),
       body: JSON.stringify({ id }),
     })
-    loadProducts()
-    showToast('Producto eliminado')
+    loadModels()
+    showToast('Modelo eliminado')
   }
 
-  const filteredProducts = useMemo(
-    () => products.filter((p) => {
+  const filtered = useMemo(
+    () => models.filter((p) => {
       if (!search) return true
       const q = search.toLowerCase()
       return p.nombre_es?.toLowerCase().includes(q)
         || p.nombre_en?.toLowerCase().includes(q)
         || p.slug?.toLowerCase().includes(q)
-        || p.categoria_es?.toLowerCase().includes(q)
     }),
-    [products, search],
+    [models, search],
   )
 
   if (loading) return <p className="text-center py-12 text-muted">{t('cargando')}</p>
@@ -143,7 +174,7 @@ export default function AdminProductosPage() {
 
       <div className="bg-card rounded-xl border border-arena p-6 mb-8">
         <h2 className="text-xl font-semibold mb-6">
-          {editing ? `${t('editar')}: ${form.nombre_es}` : t('nuevo_producto')}
+          {editing ? `Editar: ${form.nombre_es}` : 'Nuevo modelo'}
         </h2>
 
         {errors.length > 0 && (
@@ -161,27 +192,9 @@ export default function AdminProductosPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input label="Slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} placeholder="ej: tlalchichi-sentado" />
               <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input label={t('nombre_es')} value={form.nombre_es} onChange={(e) => setForm({ ...form, nombre_es: e.target.value })} />
-                <Input label={t('nombre_en')} value={form.nombre_en} onChange={(e) => setForm({ ...form, nombre_en: e.target.value })} />
+                <Input label="Nombre (ES)" value={form.nombre_es} onChange={(e) => setForm({ ...form, nombre_es: e.target.value })} />
+                <Input label="Nombre (EN)" value={form.nombre_en} onChange={(e) => setForm({ ...form, nombre_en: e.target.value })} />
               </div>
-            </div>
-          </div>
-
-          <div className="border-t border-arena pt-6">
-            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Precios y stock</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Input label={t('precio_mxn')} type="number" value={form.precio_mxn} onChange={(e) => setForm({ ...form, precio_mxn: parseInt(e.target.value) || 0 })} />
-              <Input label={t('precio_usd')} type="number" step="0.01" value={form.precio_usd} onChange={(e) => setForm({ ...form, precio_usd: parseFloat(e.target.value) || 0 })} />
-              <Input label={t('stock')} type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: parseInt(e.target.value) || 0 })} />
-              <Input label={t('peso_kg')} type="number" step="0.01" value={form.peso_kg} onChange={(e) => setForm({ ...form, peso_kg: parseFloat(e.target.value) || 0 })} />
-            </div>
-          </div>
-
-          <div className="border-t border-arena pt-6">
-            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Categoría</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input label={t('categoria_es')} value={form.categoria_es} onChange={(e) => setForm({ ...form, categoria_es: e.target.value })} placeholder="ej: Esculturas" />
-              <Input label={t('categoria_en')} value={form.categoria_en} onChange={(e) => setForm({ ...form, categoria_en: e.target.value })} placeholder="ej: Sculptures" />
             </div>
           </div>
 
@@ -189,7 +202,7 @@ export default function AdminProductosPage() {
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Contenido</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-negro-suave mb-1.5">{t('descripcion_es')}</label>
+                <label className="block text-sm font-medium text-negro-suave mb-1.5">Descripción (ES)</label>
                 <textarea
                   className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted resize-none h-24 focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors"
                   value={form.descripcion_es}
@@ -197,7 +210,7 @@ export default function AdminProductosPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-negro-suave mb-1.5">{t('descripcion_en')}</label>
+                <label className="block text-sm font-medium text-negro-suave mb-1.5">Descripción (EN)</label>
                 <textarea
                   className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted resize-none h-24 focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors"
                   value={form.descripcion_en}
@@ -205,7 +218,7 @@ export default function AdminProductosPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-negro-suave mb-1.5">{t('historia_es')}</label>
+                <label className="block text-sm font-medium text-negro-suave mb-1.5">Historia (ES)</label>
                 <textarea
                   className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted resize-none h-24 focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors"
                   value={form.historia_es}
@@ -213,7 +226,7 @@ export default function AdminProductosPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-negro-suave mb-1.5">{t('historia_en')}</label>
+                <label className="block text-sm font-medium text-negro-suave mb-1.5">Historia (EN)</label>
                 <textarea
                   className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted resize-none h-24 focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors"
                   value={form.historia_en}
@@ -221,6 +234,19 @@ export default function AdminProductosPage() {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="border-t border-arena pt-6">
+            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">Configuración</h3>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.destacado}
+                onChange={(e) => setForm({ ...form, destacado: e.target.checked })}
+                className="rounded border-arena"
+              />
+              <span className="text-sm font-medium">Destacado</span>
+            </label>
           </div>
 
           <div className="border-t border-arena pt-6">
@@ -232,10 +258,10 @@ export default function AdminProductosPage() {
         </div>
 
         <div className="flex gap-3 mt-6 pt-6 border-t border-arena">
-          <Button onClick={handleSave} loading={saving}>{t('guardar')}</Button>
+          <Button onClick={handleSave} loading={saving}>Guardar</Button>
           {editing && (
-            <Button variant="ghost" onClick={() => { setEditing(null); setForm(emptyForm()); setErrors([]) }}>
-              {t('cancelar')}
+            <Button variant="ghost" onClick={() => { setEditing(null); setForm({ ...emptyModel }); setErrors([]) }}>
+              Cancelar
             </Button>
           )}
         </div>
@@ -243,20 +269,18 @@ export default function AdminProductosPage() {
 
       <div>
         <div className="flex items-center justify-between mb-4 gap-4 flex-wrap">
-          <h2 className="text-xl font-semibold">{t('productos')} ({filteredProducts.length})</h2>
+          <h2 className="text-xl font-semibold">Modelos ({filtered.length})</h2>
           <input
             type="text"
-            placeholder="Buscar productos..."
+            placeholder="Buscar modelos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="px-4 py-2 rounded-xl border border-arena bg-card text-foreground text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracota/50 w-full sm:w-64"
           />
         </div>
 
-        {filteredProducts.length === 0 ? (
-          <p className="text-center py-12 text-muted">
-            {search ? 'Sin resultados' : 'No hay productos'}
-          </p>
+        {filtered.length === 0 ? (
+          <p className="text-center py-12 text-muted">{search ? 'Sin resultados' : 'No hay modelos'}</p>
         ) : (
           <div className="overflow-x-auto rounded-xl border border-arena">
             <table className="w-full text-sm">
@@ -264,56 +288,555 @@ export default function AdminProductosPage() {
                 <tr className="bg-arena text-left text-muted text-xs uppercase tracking-wider">
                   <th className="px-4 py-3 font-medium w-12"></th>
                   <th className="px-4 py-3 font-medium">Nombre</th>
-                  <th className="px-4 py-3 font-medium whitespace-nowrap">Precio MXN</th>
-                  <th className="px-4 py-3 font-medium whitespace-nowrap">Precio USD</th>
-                  <th className="px-4 py-3 font-medium">Stock</th>
-                  <th className="px-4 py-3 font-medium">Categoría</th>
+                  <th className="px-4 py-3 font-medium">Slug</th>
+                  <th className="px-4 py-3 font-medium">Destacado</th>
                   <th className="px-4 py-3 font-medium w-24"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-arena">
-                {filteredProducts.map((p) => (
-                  <tr key={p.id} className="bg-card hover:bg-arena/30 transition-colors">
-                    <td className="px-4 py-3">
-                      {p.imagenes?.[0] ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.imagenes[0]} alt="" className="w-10 h-10 rounded-lg object-cover" />
-                      ) : (
-                        <div className="w-10 h-10 rounded-lg bg-arena flex items-center justify-center text-muted text-xs">—</div>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 font-medium">{p.nombre_es}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">${p.precio_mxn}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">${p.precio_usd}</td>
-                    <td className="px-4 py-3">
-                      <span className={`inline-flex items-center gap-1.5 ${p.stock > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500'}`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${p.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`} />
-                        {p.stock}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-muted">{p.categoria_es}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex gap-1.5">
-                        <button
-                          onClick={() => handleEdit(p)}
-                          className="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-terracota text-white hover:bg-terracota-dark transition-colors"
-                        >
-                          {t('editar')}
-                        </button>
-                        <button
-                          onClick={() => handleDelete(p.id)}
-                          className="px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                        >
-                          {t('eliminar')}
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {filtered.map((p) => {
+                  const imgs = p.imagenes
+                    ? (typeof p.imagenes === 'string' ? JSON.parse(p.imagenes) : p.imagenes)
+                    : []
+                  return (
+                    <tr key={p.id} className="bg-card hover:bg-arena/30 transition-colors">
+                      <td className="px-4 py-3">
+                        {imgs[0] ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={imgs[0]} alt="" className="w-10 h-10 rounded-lg object-cover" />
+                        ) : (
+                          <div className="w-10 h-10 rounded-lg bg-arena flex items-center justify-center text-muted text-xs">—</div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 font-medium">{p.nombre_es}</td>
+                      <td className="px-4 py-3 text-muted">{p.slug}</td>
+                      <td className="px-4 py-3">
+                        {p.destacado ? (
+                          <span className="inline-flex items-center gap-1 text-green-600 dark:text-green-400 text-xs font-medium">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                            Sí
+                          </span>
+                        ) : (
+                          <span className="text-muted text-xs">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex gap-1.5">
+                          <button
+                            onClick={() => handleEdit(p)}
+                            className="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-terracota text-white hover:bg-terracota-dark transition-colors"
+                          >
+                            Editar
+                          </button>
+                          <button
+                            onClick={() => handleDelete(p.id)}
+                            className="px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                          >
+                            Eliminar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+// ── Type Manager ──
+
+function TypeManager() {
+  const [types, setTypes] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [editing, setEditing] = useState<number | null>(null)
+  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const [errors, setErrors] = useState<string[]>([])
+  const [form, setForm] = useState(emptyType)
+
+  function authHeaders(): Record<string, string> {
+    const token = sessionStorage.getItem('admin_token')
+    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+  }
+
+  async function loadTypes() {
+    const res = await fetch('/api/admin/product-types', { headers: authHeaders() })
+    const data = await res.json()
+    setTypes(data || [])
+    setLoading(false)
+  }
+
+  useEffect(() => { loadTypes() }, [])
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type })
+    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
+  }
+
+  const handleSave = async () => {
+    setSaving(true)
+    setErrors([])
+    const res = await fetch('/api/admin/product-types', {
+      method: editing ? 'PUT' : 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(editing ? { ...form, id: editing } : form),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      showToast(editing ? 'Guardado' : 'Creado')
+      setEditing(null)
+      setForm({ ...emptyType })
+      loadTypes()
+    } else {
+      setErrors(data.errors || ['Error al guardar'])
+    }
+    setSaving(false)
+  }
+
+  const handleEdit = (p: any) => {
+    setEditing(p.id)
+    setErrors([])
+    setForm({
+      slug: p.slug,
+      nombre_es: p.nombre_es,
+      nombre_en: p.nombre_en,
+      precio_mxn: p.precio_mxn,
+      precio_usd: p.precio_usd,
+    })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('¿Eliminar tipo de producto?')) return
+    await fetch('/api/admin/product-types', {
+      method: 'DELETE',
+      headers: authHeaders(),
+      body: JSON.stringify({ id }),
+    })
+    loadTypes()
+    showToast('Tipo eliminado')
+  }
+
+  if (loading) return <p className="text-center py-12 text-muted">Cargando...</p>
+
+  return (
+    <div>
+      {toast.message && (
+        <div className={`fixed top-4 right-4 z-50 px-5 py-3 rounded-xl shadow-lg text-sm animate-fade-in ${
+          toast.type === 'success' ? 'bg-terracota text-white' : 'bg-red-600 text-white'
+        }`}>
+          {toast.message}
+        </div>
+      )}
+
+      <div className="bg-card rounded-xl border border-arena p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-6">
+          {editing ? `Editar: ${form.nombre_es}` : 'Nuevo tipo de producto'}
+        </h2>
+
+        {errors.length > 0 && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+            <p className="text-sm font-medium text-red-700 dark:text-red-400 mb-1">Errores:</p>
+            <ul className="list-disc list-inside text-sm text-red-600 dark:text-red-300 space-y-0.5">
+              {errors.map((e, i) => <li key={i}>{e}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input label="Slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} placeholder="ej: llaveros" />
+          <Input label="Nombre (ES)" value={form.nombre_es} onChange={(e) => setForm({ ...form, nombre_es: e.target.value })} />
+          <Input label="Nombre (EN)" value={form.nombre_en} onChange={(e) => setForm({ ...form, nombre_en: e.target.value })} />
+          <Input label="Precio MXN" type="number" value={form.precio_mxn} onChange={(e) => setForm({ ...form, precio_mxn: parseInt(e.target.value) || 0 })} />
+          <Input label="Precio USD" type="number" step="0.01" value={form.precio_usd} onChange={(e) => setForm({ ...form, precio_usd: parseFloat(e.target.value) || 0 })} />
+        </div>
+
+        <div className="flex gap-3 mt-6 pt-6 border-t border-arena">
+          <Button onClick={handleSave} loading={saving}>Guardar</Button>
+          {editing && (
+            <Button variant="ghost" onClick={() => { setEditing(null); setForm({ ...emptyType }); setErrors([]) }}>
+              Cancelar
+            </Button>
+          )}
+        </div>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl border border-arena">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-arena text-left text-muted text-xs uppercase tracking-wider">
+              <th className="px-4 py-3 font-medium">Nombre</th>
+              <th className="px-4 py-3 font-medium">Slug</th>
+              <th className="px-4 py-3 font-medium">Precio MXN</th>
+              <th className="px-4 py-3 font-medium">Precio USD</th>
+              <th className="px-4 py-3 font-medium w-24"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-arena">
+            {types.map((p) => (
+              <tr key={p.id} className="bg-card hover:bg-arena/30 transition-colors">
+                <td className="px-4 py-3 font-medium">{p.nombre_es}</td>
+                <td className="px-4 py-3 text-muted">{p.slug}</td>
+                <td className="px-4 py-3">${p.precio_mxn}</td>
+                <td className="px-4 py-3">${p.precio_usd}</td>
+                <td className="px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <button onClick={() => handleEdit(p)} className="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-terracota text-white hover:bg-terracota-dark transition-colors">Editar</button>
+                    <button onClick={() => handleDelete(p.id)} className="px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+// ── Color Manager ──
+
+function ColorManager() {
+  const [colors, setColors] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [editing, setEditing] = useState<number | null>(null)
+  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const [errors, setErrors] = useState<string[]>([])
+  const [form, setForm] = useState(emptyColor)
+
+  function authHeaders(): Record<string, string> {
+    const token = sessionStorage.getItem('admin_token')
+    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+  }
+
+  async function loadColors() {
+    const res = await fetch('/api/admin/colors', { headers: authHeaders() })
+    const data = await res.json()
+    setColors(data || [])
+    setLoading(false)
+  }
+
+  useEffect(() => { loadColors() }, [])
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type })
+    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
+  }
+
+  const handleSave = async () => {
+    setSaving(true)
+    setErrors([])
+    const res = await fetch('/api/admin/colors', {
+      method: editing ? 'PUT' : 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(editing ? { ...form, id: editing } : form),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      showToast(editing ? 'Guardado' : 'Creado')
+      setEditing(null)
+      setForm({ ...emptyColor })
+      loadColors()
+    } else {
+      setErrors(data.errors || ['Error al guardar'])
+    }
+    setSaving(false)
+  }
+
+  const handleEdit = (p: any) => {
+    setEditing(p.id)
+    setErrors([])
+    setForm({ slug: p.slug, nombre_es: p.nombre_es, nombre_en: p.nombre_en, hex_code: p.hex_code })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('¿Eliminar color?')) return
+    await fetch('/api/admin/colors', {
+      method: 'DELETE',
+      headers: authHeaders(),
+      body: JSON.stringify({ id }),
+    })
+    loadColors()
+    showToast('Color eliminado')
+  }
+
+  if (loading) return <p className="text-center py-12 text-muted">Cargando...</p>
+
+  return (
+    <div>
+      {toast.message && (
+        <div className={`fixed top-4 right-4 z-50 px-5 py-3 rounded-xl shadow-lg text-sm animate-fade-in ${
+          toast.type === 'success' ? 'bg-terracota text-white' : 'bg-red-600 text-white'
+        }`}>
+          {toast.message}
+        </div>
+      )}
+
+      <div className="bg-card rounded-xl border border-arena p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-6">
+          {editing ? `Editar: ${form.nombre_es}` : 'Nuevo color'}
+        </h2>
+
+        {errors.length > 0 && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+            <p className="text-sm font-medium text-red-700 dark:text-red-400 mb-1">Errores:</p>
+            <ul className="list-disc list-inside text-sm text-red-600 dark:text-red-300 space-y-0.5">
+              {errors.map((e, i) => <li key={i}>{e}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input label="Slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} placeholder="ej: blanco" />
+          <Input label="Nombre (ES)" value={form.nombre_es} onChange={(e) => setForm({ ...form, nombre_es: e.target.value })} />
+          <Input label="Nombre (EN)" value={form.nombre_en} onChange={(e) => setForm({ ...form, nombre_en: e.target.value })} />
+          <div>
+            <label className="block text-sm font-medium text-negro-suave mb-1.5">Código Hex</label>
+            <div className="flex gap-2 items-center">
+              <input
+                type="color"
+                value={form.hex_code || '#000000'}
+                onChange={(e) => setForm({ ...form, hex_code: e.target.value })}
+                className="w-10 h-10 rounded-lg border border-arena cursor-pointer"
+              />
+              <input
+                type="text"
+                value={form.hex_code}
+                onChange={(e) => setForm({ ...form, hex_code: e.target.value })}
+                placeholder="#FFFFFF"
+                className="flex-1 px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-3 mt-6 pt-6 border-t border-arena">
+          <Button onClick={handleSave} loading={saving}>Guardar</Button>
+          {editing && (
+            <Button variant="ghost" onClick={() => { setEditing(null); setForm({ ...emptyColor }); setErrors([]) }}>
+              Cancelar
+            </Button>
+          )}
+        </div>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl border border-arena">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-arena text-left text-muted text-xs uppercase tracking-wider">
+              <th className="px-4 py-3 font-medium w-12"></th>
+              <th className="px-4 py-3 font-medium">Nombre</th>
+              <th className="px-4 py-3 font-medium">Slug</th>
+              <th className="px-4 py-3 font-medium">Hex</th>
+              <th className="px-4 py-3 font-medium w-24"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-arena">
+            {colors.map((p) => (
+              <tr key={p.id} className="bg-card hover:bg-arena/30 transition-colors">
+                <td className="px-4 py-3">
+                  <div className="w-8 h-8 rounded-lg border border-arena" style={{ backgroundColor: p.hex_code }} />
+                </td>
+                <td className="px-4 py-3 font-medium">{p.nombre_es}</td>
+                <td className="px-4 py-3 text-muted">{p.slug}</td>
+                <td className="px-4 py-3 text-muted font-mono text-xs">{p.hex_code}</td>
+                <td className="px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <button onClick={() => handleEdit(p)} className="px-2.5 py-1.5 text-xs font-medium rounded-lg bg-terracota text-white hover:bg-terracota-dark transition-colors">Editar</button>
+                    <button onClick={() => handleDelete(p.id)} className="px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">Eliminar</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+// ── Availability Manager ──
+
+function AvailabilityManager() {
+  const [models, setModels] = useState<any[]>([])
+  const [types, setTypes] = useState<any[]>([])
+  const [availability, setAvailability] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const [errors, setErrors] = useState<string[]>([])
+  const [form, setForm] = useState({ model_id: 0, product_type_id: 0, stock: 0 })
+
+  function authHeaders(): Record<string, string> {
+    const token = sessionStorage.getItem('admin_token')
+    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+  }
+
+  async function loadAll() {
+    const [mRes, tRes, aRes] = await Promise.all([
+      fetch('/api/admin/models', { headers: authHeaders() }),
+      fetch('/api/admin/product-types', { headers: authHeaders() }),
+      fetch('/api/admin/availability', { headers: authHeaders() }),
+    ])
+    setModels(await mRes.json() || [])
+    setTypes(await tRes.json() || [])
+    setAvailability(await aRes.json() || [])
+    setLoading(false)
+  }
+
+  useEffect(() => { loadAll() }, [])
+
+  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type })
+    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
+  }
+
+  const handleSave = async () => {
+    if (!form.model_id || !form.product_type_id) {
+      setErrors(['Selecciona modelo y tipo'])
+      return
+    }
+    setSaving(true)
+    setErrors([])
+    const res = await fetch('/api/admin/availability', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(form),
+    })
+    const data = await res.json()
+    if (res.ok) {
+      showToast('Stock actualizado')
+      setForm({ model_id: 0, product_type_id: 0, stock: 0 })
+      loadAll()
+    } else {
+      setErrors(data.errors || ['Error al guardar'])
+    }
+    setSaving(false)
+  }
+
+  const handleDelete = async (id: number) => {
+    if (!confirm('¿Eliminar disponibilidad?')) return
+    await fetch('/api/admin/availability', {
+      method: 'DELETE',
+      headers: authHeaders(),
+      body: JSON.stringify({ id }),
+    })
+    loadAll()
+    showToast('Disponibilidad eliminada')
+  }
+
+  if (loading) return <p className="text-center py-12 text-muted">Cargando...</p>
+
+  return (
+    <div>
+      {toast.message && (
+        <div className={`fixed top-4 right-4 z-50 px-5 py-3 rounded-xl shadow-lg text-sm animate-fade-in ${
+          toast.type === 'success' ? 'bg-terracota text-white' : 'bg-red-600 text-white'
+        }`}>
+          {toast.message}
+        </div>
+      )}
+
+      <div className="bg-card rounded-xl border border-arena p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-6">Gestionar stock</h2>
+
+        {errors.length > 0 && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+            <p className="text-sm font-medium text-red-700 dark:text-red-400 mb-1">Errores:</p>
+            <ul className="list-disc list-inside text-sm text-red-600 dark:text-red-300 space-y-0.5">
+              {errors.map((e, i) => <li key={i}>{e}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-negro-suave mb-1.5">Modelo</label>
+            <select
+              value={form.model_id}
+              onChange={(e) => setForm({ ...form, model_id: parseInt(e.target.value) || 0 })}
+              className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors text-sm"
+            >
+              <option value={0}>Seleccionar modelo...</option>
+              {models.map((m: any) => (
+                <option key={m.id} value={m.id}>{m.nombre_es}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-negro-suave mb-1.5">Tipo de producto</label>
+            <select
+              value={form.product_type_id}
+              onChange={(e) => setForm({ ...form, product_type_id: parseInt(e.target.value) || 0 })}
+              className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors text-sm"
+            >
+              <option value={0}>Seleccionar tipo...</option>
+              {types.map((t: any) => (
+                <option key={t.id} value={t.id}>{t.nombre_es}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-negro-suave mb-1.5">Stock</label>
+            <input
+              type="number"
+              value={form.stock}
+              onChange={(e) => setForm({ ...form, stock: parseInt(e.target.value) || 0 })}
+              className="w-full px-4 py-2.5 rounded-xl border border-arena bg-card text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracota/50 focus:border-terracota transition-colors text-sm"
+              min={0}
+            />
+          </div>
+        </div>
+
+        <div className="flex gap-3 mt-6 pt-6 border-t border-arena">
+          <Button onClick={handleSave} loading={saving}>Guardar stock</Button>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl border border-arena">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-arena text-left text-muted text-xs uppercase tracking-wider">
+              <th className="px-4 py-3 font-medium">Modelo</th>
+              <th className="px-4 py-3 font-medium">Tipo</th>
+              <th className="px-4 py-3 font-medium">Stock</th>
+              <th className="px-4 py-3 font-medium w-24"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-arena">
+            {availability.map((a: any) => {
+              const model = models.find((m: any) => m.id === a.model_id)
+              const type = types.find((t: any) => t.id === a.product_type_id)
+              return (
+                <tr key={a.id} className="bg-card hover:bg-arena/30 transition-colors">
+                  <td className="px-4 py-3 font-medium">{model?.nombre_es || `ID: ${a.model_id}`}</td>
+                  <td className="px-4 py-3 text-muted">{type?.nombre_es || a.type_nombre_es || `ID: ${a.product_type_id}`}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-flex items-center gap-1.5 ${a.stock > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500'}`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${a.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`} />
+                      {a.stock}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <button
+                      onClick={() => handleDelete(a.id)}
+                      className="px-2.5 py-1.5 text-xs font-medium rounded-lg border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   )

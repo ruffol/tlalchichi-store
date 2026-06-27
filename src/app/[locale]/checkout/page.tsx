@@ -51,6 +51,16 @@ export default function CheckoutPage() {
     return null
   }
 
+  const checkoutItems = items.map((item) => ({
+    modelId: Number(item.variant.modelId),
+    productTypeId: Number(item.variant.typeId),
+    colorId: Number(item.variant.colorId),
+    nombre: item.variant.nombre_es,
+    precio: moneda === 'MXN' ? item.variant.precio_mxn : item.variant.precio_usd,
+    quantity: item.quantity,
+    imagen: item.variant.image,
+  }))
+
   const handleStripeClick = async () => {
     const formError = validateForm()
     if (formError) { setError(formError); return }
@@ -61,13 +71,7 @@ export default function CheckoutPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: items.map((i) => ({
-            id: i.product.id,
-            nombre: i.product.nombre_es,
-            precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
-            quantity: i.quantity,
-            imagen: i.product.imagen_principal,
-          })),
+          items: checkoutItems,
           pais,
           moneda,
           email: form.email,
@@ -86,17 +90,11 @@ export default function CheckoutPage() {
     }
   }
 
-  const handleStripeSuccess = () => {
-    clearCart()
-    router.push(`/checkout/success`)
-  }
-
   const handlePayPal = async () => {
     const formError = validateForm()
     if (formError) { setError(formError); return }
     setLoading('paypal')
     setError('')
-    // Guardar email para la pagina de exito
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('tlalchichi_email', form.email)
     }
@@ -105,13 +103,7 @@ export default function CheckoutPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: items.map((i) => ({
-            id: i.product.id,
-            nombre: i.product.nombre_es,
-            precio: moneda === 'MXN' ? i.product.precio_mxn : i.product.precio_usd,
-            quantity: i.quantity,
-            imagen: i.product.imagen_principal,
-          })),
+          items: checkoutItems,
           pais,
           moneda,
           email: form.email,
@@ -181,16 +173,25 @@ export default function CheckoutPage() {
 
         <div className="bg-arena/30 rounded-2xl p-6 space-y-3">
           <h3 className="font-semibold">{ct('resumen')}</h3>
-          {items.map((item) => (
-            <div key={item.product.id} className="flex justify-between text-sm">
-              <span>{locale === 'es' ? item.product.nombre_es : item.product.nombre_en} x{item.quantity}</span>
-              <span>
-                {moneda === 'MXN'
-                  ? `$${item.product.precio_mxn * item.quantity} MXN`
-                  : `$${(item.product.precio_usd * item.quantity).toFixed(2)} USD`}
-              </span>
-            </div>
-          ))}
+          {items.map((item) => {
+            const v = item.variant
+            const nombre = locale === 'es' ? v.nombre_es : v.nombre_en
+            const tipo = locale === 'es' ? v.typeNombreEs : v.typeNombreEn
+            const color = locale === 'es' ? v.colorNombreEs : v.colorNombreEn
+            const precio = moneda === 'MXN' ? v.precio_mxn : v.precio_usd
+            return (
+              <div key={`${v.modelId}-${v.typeId}-${v.colorId}`} className="flex justify-between text-sm">
+                <span className="truncate mr-4">
+                  {nombre} — {tipo} ({color}) x{item.quantity}
+                </span>
+                <span className="shrink-0">
+                  {moneda === 'MXN'
+                    ? `$${precio * item.quantity} MXN`
+                    : `$${(precio * item.quantity).toFixed(2)} USD`}
+                </span>
+              </div>
+            )
+          })}
           <div className="border-t border-arena pt-3 space-y-1">
             <div className="flex justify-between text-sm text-negro-suave/60">
               <span>{ct('subtotal')}</span>
@@ -270,7 +271,6 @@ export default function CheckoutPage() {
           </button>
         </div>
 
-        {/* Contacto */}
         <div className="text-center pt-6 border-t border-arena">
           <p className="text-xs text-muted mb-3">¿Tienes dudas antes de pagar?</p>
           <div className="flex items-center justify-center gap-4">

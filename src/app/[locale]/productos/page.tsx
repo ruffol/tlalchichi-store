@@ -1,18 +1,17 @@
 import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
-import { getProducts, getCategories } from '@/lib/db'
+import { getModels, getProductTypes, getModelsByType } from '@/lib/db'
 import { Link, locales } from '@/i18n/routing'
 import ProductGrid from '@/components/product/ProductGrid'
 
 interface Props {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ categoria?: string }>
+  searchParams: Promise<{ tipo?: string }>
 }
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'ProductGrid' })
-  const tHome = await getTranslations({ locale, namespace: 'HomePage' })
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
   const currentUrl = `${baseUrl}/${locale}/productos`
   const desc = locale === 'es'
@@ -52,11 +51,13 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProductosPage({ params, searchParams }: Props) {
   const { locale } = await params
-  const { categoria } = await searchParams
+  const { tipo } = await searchParams
   const t = await getTranslations({ locale, namespace: 'ProductGrid' })
 
-  const products = getProducts({ activo: true, categoria: categoria || undefined })
-  const categorias = getCategories(locale)
+  const models = tipo
+    ? getModelsByType(tipo)
+    : getModels({ activo: true })
+  const types = getProductTypes()
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -68,30 +69,30 @@ export default async function ProductosPage({ params, searchParams }: Props) {
         <Link
           href={`/productos`}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            !categoria
+            !tipo
               ? 'bg-terracota text-white'
               : 'bg-arena text-negro-suave hover:bg-arena/80'
           }`}
         >
           {t('filtro_todas')}
         </Link>
-        {categorias.map((cat: string) => (
+        {types.map((type: any) => (
           <Link
-            key={cat}
-            href={`/productos?categoria=${encodeURIComponent(cat)}`}
+            key={type.slug}
+            href={`/productos?tipo=${encodeURIComponent(type.slug)}`}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              categoria === cat
+              tipo === type.slug
                 ? 'bg-terracota text-white'
                 : 'bg-arena text-negro-suave hover:bg-arena/80'
             }`}
           >
-            {cat}
+            {locale === 'es' ? type.nombre_es : type.nombre_en}
           </Link>
         ))}
       </div>
 
-      <Suspense fallback={<div className="text-center py-12 text-negro-suave/40">Cargando...</div>}>
-        <ProductGrid products={products} locale={locale} />
+      <Suspense fallback={<div className="text-center py-12 text-muted">Cargando...</div>}>
+        <ProductGrid models={models} locale={locale} />
       </Suspense>
     </div>
   )

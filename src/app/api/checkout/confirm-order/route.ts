@@ -102,12 +102,16 @@ export async function POST(req: Request) {
       providerId = paypal_order_id
 
       const items = purchaseUnit?.items || []
-      itemsData = items.map((item: any, i: number) => ({
-        id: item.sku || `${i}`,
-        nombre: item.name,
-        quantity: parseInt(item.quantity || '1'),
-        precio: parseFloat(item.unit_amount?.value || '0'),
-      }))
+      itemsData = items.map((item: any, i: number) => {
+        const skuParts = (item.sku || '').split('-')
+        return {
+          modelId: parseInt(skuParts[0]) || 0,
+          productTypeId: parseInt(skuParts[1]) || 0,
+          colorId: parseInt(skuParts[2]) || 0,
+          quantity: parseInt(item.quantity || '1'),
+          precio: parseFloat(item.unit_amount?.value || '0'),
+        }
+      })
     }
 
     const order = createOrder({
@@ -122,15 +126,20 @@ export async function POST(req: Request) {
     if (itemsData.length > 0) {
       const orderItems = itemsData.map((item: any) => ({
         order_id: order.id,
-        product_id: parseInt(item.id) || 0,
+        model_id: item.modelId || 0,
+        product_type_id: item.productTypeId || 0,
+        color_id: item.colorId || 0,
         quantity: item.quantity || 1,
         precio_unitario: Math.round((item.precio || 0) * (moneda === 'MXN' ? 100 : 100)),
       }))
       createOrderItems(orderItems)
 
       for (const item of itemsData) {
-        const productId = parseInt(item.id)
-        if (productId) decrementStock(productId, item.quantity || 1)
+        const modelId = item.modelId
+        const productTypeId = item.productTypeId
+        if (modelId && productTypeId) {
+          decrementStock(modelId, productTypeId, item.quantity || 1)
+        }
       }
     }
 

@@ -1,38 +1,27 @@
 'use client'
 
 import { Link } from '@/i18n/routing'
-import type { Product } from '@/types'
-import Badge from '@/components/ui/Badge'
+import type { Model } from '@/types'
 
 interface Props {
-  product: Product
+  model: Model
   locale: string
 }
 
-export default function ProductCard({ product, locale }: Props) {
-  const nombre = locale === 'es' ? product.nombre_es : product.nombre_en
-  const categoria = locale === 'es' ? product.categoria_es : product.categoria_en
-  const precio = locale === 'es' ? product.precio_mxn : product.precio_usd
-  const moneda = locale === 'es' ? 'MXN' : 'USD'
-  const altText = locale === 'es' ? (product.alt_text_es || nombre) : (product.alt_text_en || nombre)
+export default function ProductCard({ model, locale }: Props) {
+  const nombre = locale === 'es' ? model.nombre_es : model.nombre_en
+  const imagen = model.imagenes?.[0] || ''
 
   return (
     <Link
-      href={`/producto/${product.slug}`}
+      href={`/producto/${model.slug}`}
       className="group bg-card border border-card hover:border-arena/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
     >
       <div className="aspect-[4/5] bg-arena overflow-hidden">
-        {product.imagen_principal ? (
+        {imagen ? (
           <img
-            src={product.imagen_principal}
-            alt={altText}
-            loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : product.imagenes?.[0] ? (
-          <img
-            src={product.imagenes[0]}
-            alt={altText}
+            src={imagen}
+            alt={nombre}
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
@@ -44,16 +33,10 @@ export default function ProductCard({ product, locale }: Props) {
           </div>
         )}
       </div>
-      <div className="p-4 space-y-2">
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-badge text-muted">
-          {categoria}
-        </span>
+      <div className="p-4 space-y-1.5">
         <h3 className="font-medium text-negro-suave group-hover:text-terracota transition-colors line-clamp-2">
           {nombre}
         </h3>
-        <p className="text-lg font-semibold text-terracota">
-          {moneda === 'MXN' ? `$${precio} MXN` : `$${precio.toFixed(2)} USD`}
-        </p>
       </div>
     </Link>
   )

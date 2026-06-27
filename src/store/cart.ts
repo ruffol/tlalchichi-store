@@ -2,16 +2,20 @@
 
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import type { CartItem, Product, ShippingDestination } from '@/types'
+import type { CartItem, CartItemVariant, ShippingDestination } from '@/types'
 import { SHIPPING_RATES } from '@/types'
+
+function variantKey(v: CartItemVariant): string {
+  return `${v.modelId}-${v.typeId}-${v.colorId}`
+}
 
 interface CartState {
   items: CartItem[]
   pais: ShippingDestination
   isOpen: boolean
-  addItem: (product: Product, quantity?: number) => void
-  removeItem: (productId: string) => void
-  updateQuantity: (productId: string, quantity: number) => void
+  addItem: (variant: CartItemVariant, quantity?: number) => void
+  removeItem: (variant: CartItemVariant) => void
+  updateQuantity: (variant: CartItemVariant, quantity: number) => void
   clearCart: () => void
   setPais: (pais: ShippingDestination) => void
   toggleCart: () => void
@@ -21,42 +25,49 @@ interface CartState {
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
       pais: 'MX' as ShippingDestination,
       isOpen: false,
 
-      addItem: (product, quantity = 1) =>
+      addItem: (variant, quantity = 1) =>
         set((state) => {
+          const key = variantKey(variant)
           const existing = state.items.find(
-            (item) => item.product.id === product.id
+            (item) => variantKey(item.variant) === key
           )
           if (existing) {
             return {
               items: state.items.map((item) =>
-                item.product.id === product.id
+                variantKey(item.variant) === key
                   ? { ...item, quantity: item.quantity + quantity }
                   : item
               ),
             }
           }
-          return { items: [...state.items, { product, quantity }] }
+          return { items: [...state.items, { variant, quantity }] }
         }),
 
-      removeItem: (productId) =>
-        set((state) => ({
-          items: state.items.filter((item) => item.product.id !== productId),
-        })),
+      removeItem: (variant) =>
+        set((state) => {
+          const key = variantKey(variant)
+          return {
+            items: state.items.filter((item) => variantKey(item.variant) !== key),
+          }
+        }),
 
-      updateQuantity: (productId, quantity) =>
-        set((state) => ({
-          items:
-            quantity <= 0
-              ? state.items.filter((item) => item.product.id !== productId)
-              : state.items.map((item) =>
-                  item.product.id === productId ? { ...item, quantity } : item
-                ),
-        })),
+      updateQuantity: (variant, quantity) =>
+        set((state) => {
+          const key = variantKey(variant)
+          return {
+            items:
+              quantity <= 0
+                ? state.items.filter((item) => variantKey(item.variant) !== key)
+                : state.items.map((item) =>
+                    variantKey(item.variant) === key ? { ...item, quantity } : item
+                  ),
+          }
+        }),
 
       clearCart: () => set({ items: [] }),
       setPais: (pais) => set({ pais }),
@@ -77,7 +88,7 @@ export const useCartStore = create<CartState>()(
 
 export function getSubtotal(items: CartItem[], moneda: 'MXN' | 'USD'): number {
   const key = moneda === 'MXN' ? 'precio_mxn' : 'precio_usd'
-  return items.reduce((total, item) => total + item.product[key] * item.quantity, 0)
+  return items.reduce((total, item) => total + item.variant[key] * item.quantity, 0)
 }
 
 export function getShippingCost(

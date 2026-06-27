@@ -1,7 +1,7 @@
-import type { Product } from './product'
+import type { CartItemVariant } from './model'
 
 export interface CartItem {
-  product: Product
+  variant: CartItemVariant
   quantity: number
 }
 
