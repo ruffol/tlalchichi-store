@@ -32,8 +32,10 @@ export const useCartStore = create<CartState>()(
 
       addItem: (variant, quantity = 1) =>
         set((state) => {
+          // Limpiar items invalidos del carrito
+          const validItems = state.items.filter(i => i?.variant && typeof i.variant === 'object')
           const key = variantKey(variant)
-          const existing = state.items.find(
+          const existing = validItems.find(
             (item) => variantKey(item.variant) === key
           )
           if (existing) {
@@ -88,7 +90,10 @@ export const useCartStore = create<CartState>()(
 
 export function getSubtotal(items: CartItem[], moneda: 'MXN' | 'USD'): number {
   const key = moneda === 'MXN' ? 'precio_mxn' : 'precio_usd'
-  return items.reduce((total, item) => total + item.variant[key] * item.quantity, 0)
+  return items.reduce((total, item) => {
+    const precio = item.variant?.[key as keyof typeof item.variant]
+    return total + (typeof precio === 'number' ? precio * item.quantity : 0)
+  }, 0)
 }
 
 export function getShippingCost(
