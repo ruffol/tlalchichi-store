@@ -59,8 +59,30 @@ export default async function ProductosPage({ params, searchParams }: Props) {
     : getModels({ activo: true })
   const types = getProductTypes()
 
+  // Encontrar el tipo seleccionado para obtener nombre e imágenes
+  const selectedType = tipo ? types.find((type: any) => type.slug === tipo) : null
+  const categoryName = selectedType
+    ? (locale === 'es' ? selectedType.nombre_es : selectedType.nombre_en)
+    : ''
+
+  // Imágenes del carrusel de categoría (desde la carpeta de imágenes)
+  const catImages: Record<string, string[]> = {
+    llaveros: ['/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png', '/img/productos/llaveros/tlalchichi-joven-viejo-colima.png', '/img/productos/llaveros/tlalchichi-parado-colima.png'],
+    portamacetas: ['/img/productos/portamacetas/tlalchichi-acostado-colima.png', '/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png', '/img/productos/portamacetas/tlalchichi-sentado-colima.png'],
+    alcacias: ['/img/productos/alcacias/tlalchichi-sentado-colima.png', '/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png', '/img/productos/alcacias/tlalchichi-mascara-colima.png'],
+    cuencos: ['/img/productos/cuencos/tlalchichi-mazorca-colima.png', '/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png'],
+  }
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div>
+      {selectedType && (
+        <CategoryHero
+          nombre={categoryName}
+          imagenes={catImages[tipo] || []}
+          locale={locale}
+        />
+      )}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl sm:text-4xl font-bold text-negro-suave mb-8">
         {t('titulo')}
       </h1>
