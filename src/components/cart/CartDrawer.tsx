@@ -10,8 +10,15 @@ export default function CartDrawer() {
   const t = useTranslations('Cart')
   const locale = useLocale()
   const { items, isOpen, closeCart, pais, setPais, removeItem, updateQuantity } = useCartStore()
-  const count = getItemCount(items)
-  const subtotal = getSubtotal(items, pais === 'MX' ? 'MXN' : 'USD')
+  
+  // Filtrar items invalidos (del localStorage viejo)
+  const validItems = items.filter((item) => {
+    const v = item?.variant
+    return v && typeof v.precio_mxn === 'number' && typeof v.precio_usd === 'number'
+  })
+
+  const count = getItemCount(validItems)
+  const subtotal = getSubtotal(validItems, pais === 'MX' ? 'MXN' : 'USD')
   const shipping = getShippingCost(pais, pais === 'MX' ? 'MXN' : 'USD')
   const total = subtotal + shipping
   const moneda = pais === 'MX' ? 'MXN' : 'USD'
@@ -40,7 +47,7 @@ export default function CartDrawer() {
           <div className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-card shadow-2xl flex flex-col">
             <div className="flex items-center justify-between p-4 border-b border-arena">
               <h2 className="text-lg font-semibold">
-                {t('titulo')} ({count})
+                {t('titulo')} ({getItemCount(validItems)})
               </h2>
               <button onClick={closeCart} className="p-2 text-negro-suave/60 hover:text-negro-suave">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -49,7 +56,7 @@ export default function CartDrawer() {
               </button>
             </div>
 
-            {items.length === 0 ? (
+            {validItems.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
                 <p className="text-negro-suave/50 mb-2">{t('vacio')}</p>
                 <p className="text-sm text-negro-suave/40 mb-6">{t('vacio_desc')}</p>
@@ -63,7 +70,7 @@ export default function CartDrawer() {
             ) : (
               <>
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                  {items.map((item) => {
+                  {validItems.map((item) => {
                     const v = item.variant
                     const precio = moneda === 'MXN' ? v.precio_mxn : v.precio_usd
                     const nombre = locale === 'es' ? v.nombre_es : v.nombre_en
