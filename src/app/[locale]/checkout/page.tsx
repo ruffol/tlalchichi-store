@@ -231,8 +231,8 @@ export default function CheckoutPage() {
           {loading === 'stripe' ? (
             <button
               disabled
-              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors opacity-70"
-              style={{ background: 'linear-gradient(135deg, #635BFF, #0A2540)' }}
+              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors opacity-60"
+              style={{ background: '#635BFF' }}
             >
               <span className="flex items-center gap-2">
                 <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
@@ -245,11 +245,12 @@ export default function CheckoutPage() {
           ) : (
             <button
               onClick={handleStripeClick}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors hover:opacity-90"
-              style={{ background: 'linear-gradient(135deg, #635BFF, #0A2540)' }}
+              className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors hover:opacity-90 shadow-sm"
+              style={{ background: '#635BFF' }}
             >
-              <svg viewBox="0 0 48 20" className="w-10 h-4" fill="white">
-                <path d="M40.7 0C37.7 0 34.2 1.5 33 5.1c1.6-.5 3.1-.6 4.2-.6 2.3 0 4.3.6 5.8 1.8-1 3-3.7 5.2-7 5.2-.6 0-1.2-.1-1.7-.2l-.6 2.2c.7.1 1.5.2 2.3.2 4.5 0 8.3-2.8 9.7-7.1.5-1.6.7-3 .7-4.2C47.4.7 44.9 0 40.7 0zM33.3 12.2c-.3 0-.6-.1-.9-.2.1-.4.2-.8.3-1.2 1.2-4.9 5.5-8.6 10.5-8.6h.1c-.7-1.3-2-2.2-3.6-2.2-2.3 0-4.2 1.8-4.6 4.1-.2 1.2.3 2.4 1.3 3.1-.8.3-1.7.5-2.6.5.7.3 1.3.9 1.5 1.7.2.8 0 1.7-.6 2.3-.3.3-.7.5-1.2.5z"/>
+              <svg viewBox="0 0 48 20" className="w-9 h-4" fill="white">
+                <path d="M35.3 0C27.9 0 22.2 4.3 20.1 12.5c.6-.2 1.3-.3 2-.3 4 0 7.2 2.7 8 6.4.8 3.7-.3 7.7-2.9 10.5 2.5-.5 4.8-1.5 6.7-2.9 2.9-2.2 5-5.5 6-9.3 1-3.8.5-7.8-1.5-11.2-1-1.7-2.4-3.2-4-4.3-1.1-.7-2.3-1.3-3.5-1.7-.4-.1-.7-.2-1.1-.2-.9-.1-1.7-.2-2.5-.2-.4 0-.7 0-1.1.1h-.7c-.8.1-1.6.3-2.4.5C29.9 2.1 32.5 0 35.3 0z"/>
+                <path d="M30.4 4.4c-.5.2-1 .5-1.4.9-.4.4-.8.8-1.1 1.3-.3.5-.5 1-.7 1.5-.2.5-.3 1-.3 1.5 0 .5.1 1 .3 1.5.2.5.5 1 .8 1.4.3.4.7.8 1.1 1.1.4.3.9.6 1.4.8.5.2 1.1.3 1.7.3.6 0 1.2-.1 1.7-.3.5-.2 1-.5 1.4-.9.4-.4.8-.8 1.1-1.3.3-.5.5-1 .6-1.5.1-.5.2-1 .2-1.5 0-.5-.1-1-.2-1.5-.1-.5-.3-1-.6-1.5-.3-.5-.7-.9-1.1-1.3-.4-.4-.9-.7-1.4-.9-.5-.2-1.1-.3-1.7-.3-.6 0-1.2.1-1.7.3z"/>
               </svg>
               Pagar con Stripe
             </button>
@@ -257,7 +258,10 @@ export default function CheckoutPage() {
           <button
             onClick={handlePayPal}
             disabled={loading === 'paypal'}
-            className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium bg-[#0070BA] hover:bg-[#003087] text-white transition-colors disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-medium text-white transition-colors disabled:opacity-50 shadow-sm"
+            style={{ background: '#003087' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = '#002268'}
+            onMouseLeave={(e) => e.currentTarget.style.background = '#003087'}
           >
             {loading === 'paypal' ? (
               <span className="flex items-center gap-2">
