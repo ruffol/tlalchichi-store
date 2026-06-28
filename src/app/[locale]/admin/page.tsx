@@ -296,6 +296,52 @@ function ModelManager() {
                 images={form.imagenes}
                 onChange={(imagenes) => setForm({ ...form, imagenes })}
               />
+
+              {/* Descripciones */}
+              <div className="border-t border-arena pt-4 space-y-3">
+                <p className="text-xs font-semibold text-muted uppercase tracking-wider">Descripciones</p>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">Descripción (ES)</label>
+                  <textarea
+                    className="w-full px-3 py-2 rounded-xl border border-arena bg-card text-foreground text-sm resize-none h-20 focus:outline-none focus:ring-2 focus:ring-terracota/50"
+                    value={form.descripcion_es}
+                    onChange={(e) => setForm({ ...form, descripcion_es: e.target.value })}
+                    placeholder="Descripción del producto..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">Descripción (EN)</label>
+                  <textarea
+                    className="w-full px-3 py-2 rounded-xl border border-arena bg-card text-foreground text-sm resize-none h-20 focus:outline-none focus:ring-2 focus:ring-terracota/50"
+                    value={form.descripcion_en}
+                    onChange={(e) => setForm({ ...form, descripcion_en: e.target.value })}
+                    placeholder="Product description..."
+                  />
+                </div>
+              </div>
+
+              {/* Historia */}
+              <div className="border-t border-arena pt-4 space-y-3">
+                <p className="text-xs font-semibold text-muted uppercase tracking-wider">Historia artesanal</p>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">Historia (ES)</label>
+                  <textarea
+                    className="w-full px-3 py-2 rounded-xl border border-arena bg-card text-foreground text-sm resize-none h-28 focus:outline-none focus:ring-2 focus:ring-terracota/50"
+                    value={form.historia_es}
+                    onChange={(e) => setForm({ ...form, historia_es: e.target.value })}
+                    placeholder="Historia y significado cultural del producto..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">Historia (EN)</label>
+                  <textarea
+                    className="w-full px-3 py-2 rounded-xl border border-arena bg-card text-foreground text-sm resize-none h-28 focus:outline-none focus:ring-2 focus:ring-terracota/50"
+                    value={form.historia_en}
+                    onChange={(e) => setForm({ ...form, historia_en: e.target.value })}
+                    placeholder="Cultural history and meaning..."
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
