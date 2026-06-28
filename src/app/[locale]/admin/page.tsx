@@ -6,6 +6,7 @@ import type { Model, ProductType, Color, ModelAvailability } from '@/types'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import ImageUploader from '@/components/admin/ImageUploader'
+import { authHeaders, useAdminToast } from '@/lib/admin-helpers'
 
 type Tab = 'models' | 'types' | 'colors' | 'availability'
 
@@ -34,6 +35,12 @@ const emptyColor = {
   nombre_es: '',
   nombre_en: '',
   hex_code: '',
+}
+
+const emptyAvailability = {
+  model_id: 0,
+  product_type_id: 0,
+  stock: 0,
 }
 
 export default function AdminPage() {
@@ -98,15 +105,10 @@ function ModelManager() {
   const [saving, setSaving] = useState(false)
   const [editing, setEditing] = useState<number | null>(null)
   const [showForm, setShowForm] = useState(false)
-  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const { toast, showToast } = useAdminToast()
   const [errors, setErrors] = useState<string[]>([])
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(MODEL_TEMPLATE)
-
-  function authHeaders(): Record<string, string> {
-    const token = sessionStorage.getItem('admin_token')
-    return token ? { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
-  }
 
   async function loadModels() {
     const res = await fetch('/api/admin/models', { headers: authHeaders() })
@@ -116,11 +118,6 @@ function ModelManager() {
   }
 
   useEffect(() => { loadModels() }, [])
-
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ message, type })
-    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
-  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -378,14 +375,9 @@ function TypeManager() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [editing, setEditing] = useState<number | null>(null)
-  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const { toast, showToast } = useAdminToast()
   const [errors, setErrors] = useState<string[]>([])
   const [form, setForm] = useState(emptyType)
-
-  function authHeaders(): Record<string, string> {
-    const token = sessionStorage.getItem('admin_token')
-    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
-  }
 
   async function loadTypes() {
     const res = await fetch('/api/admin/product-types', { headers: authHeaders() })
@@ -395,11 +387,6 @@ function TypeManager() {
   }
 
   useEffect(() => { loadTypes() }, [])
-
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ message, type })
-    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
-  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -529,14 +516,9 @@ function ColorManager() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [editing, setEditing] = useState<number | null>(null)
-  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const { toast, showToast } = useAdminToast()
   const [errors, setErrors] = useState<string[]>([])
   const [form, setForm] = useState(emptyColor)
-
-  function authHeaders(): Record<string, string> {
-    const token = sessionStorage.getItem('admin_token')
-    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
-  }
 
   async function loadColors() {
     const res = await fetch('/api/admin/colors', { headers: authHeaders() })
@@ -546,11 +528,6 @@ function ColorManager() {
   }
 
   useEffect(() => { loadColors() }, [])
-
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ message, type })
-    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
-  }
 
   const handleSave = async () => {
     setSaving(true)
@@ -693,14 +670,9 @@ function AvailabilityManager() {
   const [availability, setAvailability] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [toast, setToast] = useState({ message: '', type: 'success' as 'success' | 'error' })
+  const { toast, showToast } = useAdminToast()
   const [errors, setErrors] = useState<string[]>([])
-  const [form, setForm] = useState({ model_id: 0, product_type_id: 0, stock: 0 })
-
-  function authHeaders(): Record<string, string> {
-    const token = sessionStorage.getItem('admin_token')
-    return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
-  }
+  const [form, setForm] = useState(emptyAvailability)
 
   async function loadAll() {
     const [mRes, tRes, aRes] = await Promise.all([
@@ -715,11 +687,6 @@ function AvailabilityManager() {
   }
 
   useEffect(() => { loadAll() }, [])
-
-  const showToast = (message: string, type: 'success' | 'error' = 'success') => {
-    setToast({ message, type })
-    setTimeout(() => setToast({ message: '', type: 'success' }), 3000)
-  }
 
   const handleSave = async () => {
     if (!form.model_id || !form.product_type_id) {
