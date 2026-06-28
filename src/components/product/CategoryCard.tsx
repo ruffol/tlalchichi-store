@@ -7,10 +7,9 @@ interface Props {
   slug: string
   nombre: string
   imagenes: string[]
-  locale: string
 }
 
-export default function CategoryCard({ slug, nombre, imagenes, locale }: Props) {
+export default function CategoryCard({ slug, nombre, imagenes }: Props) {
   const [current, setCurrent] = useState(0)
 
   const next = useCallback(() => {
@@ -26,7 +25,7 @@ export default function CategoryCard({ slug, nombre, imagenes, locale }: Props) 
   if (!imagenes.length) {
     return (
       <Link
-        href={`/${locale}/productos?tipo=${slug}`}
+        href={`/productos?tipo=${slug}`}
         className="flex flex-col items-center justify-center gap-3 p-10 bg-card border border-arena rounded-2xl hover:border-terracota/50 hover:shadow-lg transition-all duration-300 min-h-[280px]"
       >
         <span className="text-lg font-semibold text-foreground">{nombre}</span>
@@ -37,7 +36,7 @@ export default function CategoryCard({ slug, nombre, imagenes, locale }: Props) 
 
   return (
     <Link
-      href={`/${locale}/productos?tipo=${slug}`}
+      href={`/productos?tipo=${slug}`}
       className="group block bg-card border border-arena rounded-2xl overflow-hidden hover:border-terracota/50 hover:shadow-lg transition-all duration-300"
     >
       {/* Mini carrusel */}

@@ -36,7 +36,6 @@ export default async function HomePage({ params }: Props) {
                 slug={type.slug}
                 nombre={locale === 'es' ? type.nombre_es : type.nombre_en}
                 imagenes={catImages[type.slug] || []}
-                locale={locale}
               />
             ))}
           </div>
