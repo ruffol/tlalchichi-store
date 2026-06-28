@@ -34,12 +34,9 @@ export async function POST(req: Request) {
         nombre,
         direccion: direccion || '',
         shipping_cost: shipping?.toString() || '0',
-        items: JSON.stringify(items.map((i: any) => ({
-          modelId: i.modelId,
-          productTypeId: i.productTypeId,
-          colorId: i.colorId,
-          quantity: i.quantity,
-          precio: i.precio,
+        items: JSON.stringify(items.slice(0, 8).map((i: any) => ({
+          q: i.quantity,
+          p: i.precio,
         }))),
       },
       success_url: `https://www.tlalchichi.xyz/${pais === 'MX' ? 'es' : 'en'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
