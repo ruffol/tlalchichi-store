@@ -364,14 +364,21 @@ export function upsertModel(data: any): any {
   const exists = db.prepare('SELECT id FROM models WHERE slug = ?').get(data.slug) as any
   if (exists) {
     db.prepare(`
-      UPDATE models SET nombre_es=@nombre_es, nombre_en=@nombre_en, descripcion_es=@descripcion_es, descripcion_en=@descripcion_en, historia_es=@historia_es, historia_en=@historia_en, imagenes=@imagenes, destacado=@destacado, activo=@activo
+      UPDATE models SET
+        slug=@slug, nombre_es=@nombre_es, nombre_en=@nombre_en,
+        descripcion_es=@descripcion_es, descripcion_en=@descripcion_en,
+        historia_es=@historia_es, historia_en=@historia_en,
+        categoria_es=@categoria_es, categoria_en=@categoria_en,
+        precio_mxn=@precio_mxn, precio_usd=@precio_usd,
+        stock=@stock, imagenes=@imagenes, colores=@colores,
+        destacado=@destacado, activo=@activo
       WHERE id = @id
     `).run(data)
     return db.prepare('SELECT * FROM models WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
-      INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, imagenes, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @imagenes, @destacado, @activo)
+      INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
     `).run(data)
     return db.prepare('SELECT * FROM models WHERE id = ?').get(result.lastInsertRowid)
   }
