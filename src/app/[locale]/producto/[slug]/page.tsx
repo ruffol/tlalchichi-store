@@ -1,12 +1,11 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
-import { getModelBySlug, getModelTypes, getColors } from '@/lib/db'
+import { getModelBySlug } from '@/lib/db'
 import { Link, locales } from '@/i18n/routing'
 import ProductGallery from '@/components/product/ProductGallery'
 import ClientWrapper from './ClientWrapper'
 import Badge from '@/components/ui/Badge'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import type { Color } from '@/types'
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>
@@ -65,8 +64,6 @@ export default async function ProductoDetailPage({ params }: Props) {
   const nombre = locale === 'es' ? model.nombre_es : model.nombre_en
   const descripcion = locale === 'es' ? model.descripcion_es : model.descripcion_en
   const historia = locale === 'es' ? model.historia_es : model.historia_en
-  const types = getModelTypes(model.id)
-  const colors = getColors()
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
   const altTexts = (model.imagenes || []).map((_: string) => nombre)
@@ -111,8 +108,6 @@ export default async function ProductoDetailPage({ params }: Props) {
 
           <ClientWrapper
             model={model}
-            types={types}
-            colors={colors}
             locale={locale}
           />
         </div>

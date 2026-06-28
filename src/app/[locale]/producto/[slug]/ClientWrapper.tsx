@@ -1,18 +1,10 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import AddToCartButton from './AddToCartButton'
-import type { CartItemVariant, Color } from '@/types'
+import type { CartItemVariant } from '@/types'
 
 interface ModelData {
-  id: number
-  slug: string
-  nombre_es: string
-  nombre_en: string
-  imagenes: string[]
-}
-
-interface TypeData {
   id: number
   slug: string
   nombre_es: string
@@ -20,133 +12,115 @@ interface TypeData {
   precio_mxn: number
   precio_usd: number
   stock: number
+  imagenes: string[]
+  colores: ColorOption[]
+  categoria_es: string
+}
+
+interface ColorOption {
+  nombre_es: string
+  nombre_en: string
+  hex: string
+  imagen: string
 }
 
 interface Props {
   model: ModelData
-  types: TypeData[]
-  colors: Color[]
   locale: string
 }
 
-export default function ClientWrapper({ model, types, colors, locale }: Props) {
-  const firstTypeId = types.length > 0 ? types[0].id : 0
-  const firstColorId = colors.length > 0 ? colors[0].id : 0
+export default function ClientWrapper({ model, locale }: Props) {
+  const colors = model.colores || []
+  const [selectedColorIndex, setSelectedColorIndex] = useState<number>(0)
 
-  const [selectedTypeId, setSelectedTypeId] = useState<number>(firstTypeId)
-  const [selectedColorId, setSelectedColorId] = useState<number>(firstColorId)
+  const selectedColor = colors[selectedColorIndex]
 
-  const selectedType = types.find((t) => t.id === selectedTypeId)
-
-  const variant = useMemo<CartItemVariant | null>(() => {
-    if (!selectedType) return null
-    const color = colors.find((c) => c.id === selectedColorId)
-    if (!color) return null
-    return {
-      modelId: String(model.id),
-      modelSlug: model.slug,
-      nombre_es: model.nombre_es,
-      nombre_en: model.nombre_en,
-      typeId: String(selectedType.id),
-      typeSlug: selectedType.slug,
-      typeNombreEs: selectedType.nombre_es,
-      typeNombreEn: selectedType.nombre_en,
-      colorId: String(color.id),
-      colorSlug: color.slug,
-      colorNombreEs: color.nombre_es,
-      colorNombreEn: color.nombre_en,
-      colorHex: color.hex_code,
-      image: model.imagenes?.[0] || '',
-      precio_mxn: selectedType.precio_mxn,
-      precio_usd: selectedType.precio_usd,
-      stock: selectedType.stock,
-    }
-  }, [selectedType, selectedColorId, model, colors])
+  const variant: CartItemVariant | null = {
+    modelId: String(model.id),
+    modelSlug: model.slug,
+    nombre_es: model.nombre_es,
+    nombre_en: model.nombre_en,
+    typeId: '1',
+    typeSlug: model.categoria_es?.toLowerCase() || '',
+    typeNombreEs: model.categoria_es || '',
+    typeNombreEn: model.categoria_es || '',
+    colorId: String(selectedColorIndex),
+    colorSlug: selectedColor?.nombre_es?.toLowerCase().replace(/\s/g, '-') || '',
+    colorNombreEs: selectedColor?.nombre_es || '',
+    colorNombreEn: selectedColor?.nombre_en || '',
+    colorHex: selectedColor?.hex || '#ccc',
+    image: selectedColor?.imagen || model.imagenes?.[0] || '',
+    precio_mxn: model.precio_mxn,
+    precio_usd: model.precio_usd,
+    stock: model.stock,
+  }
 
   return (
     <div className="space-y-6">
-      {/* Tipo de producto */}
+      {/* Precio */}
       <div>
-        <p className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
-          Tipo de producto
+        <p className="text-3xl font-semibold text-terracota">
+          {locale === 'es'
+            ? `$${model.precio_mxn} MXN`
+            : `$${model.precio_usd.toFixed(2)} USD`}
         </p>
-        <div className="flex flex-wrap gap-2">
-          {types.map((type) => {
-            const selected = type.id === selectedTypeId
-            return (
-              <button
-                key={type.id}
-                onClick={() => setSelectedTypeId(type.id)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  selected
-                    ? 'bg-terracota text-white shadow-md'
-                    : 'bg-arena text-negro-suave hover:bg-arena/80'
-                }`}
-              >
-                <span>{locale === 'es' ? type.nombre_es : type.nombre_en}</span>
-                <span className={`ml-2 ${selected ? 'text-white/80' : 'text-muted'}`}>
-                  {locale === 'es'
-                    ? `$${type.precio_mxn} MXN`
-                    : `$${type.precio_usd.toFixed(2)} USD`}
-                </span>
-              </button>
-            )
-          })}
-        </div>
+        <p className="text-sm text-muted mt-1">Stock: {model.stock}</p>
       </div>
 
-      {/* Color */}
-      <div>
-        <p className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
-          Color
-        </p>
-        <div className="flex gap-3">
-          {colors.map((color) => {
-            const selected = color.id === selectedColorId
-            return (
+      {/* Color selector */}
+      {colors.length > 0 && (
+        <div>
+          <p className="text-sm font-semibold text-muted uppercase tracking-wider mb-3">
+            Color
+          </p>
+          <div className="flex gap-3 flex-wrap">
+            {colors.map((color, i) => (
               <button
-                key={color.id}
-                onClick={() => setSelectedColorId(color.id)}
+                key={i}
+                onClick={() => setSelectedColorIndex(i)}
                 className={`w-10 h-10 rounded-full border-2 transition-all ${
-                  selected ? 'border-terracota ring-2 ring-terracota/30 scale-110' : 'border-arena hover:border-muted'
+                  i === selectedColorIndex
+                    ? 'border-terracota ring-2 ring-terracota/30 scale-110'
+                    : 'border-arena hover:border-muted'
                 }`}
                 title={locale === 'es' ? color.nombre_es : color.nombre_en}
-                style={{ backgroundColor: color.hex_code }}
+                style={{ backgroundColor: color.hex }}
               />
-            )
-          })}
-        </div>
-        <p className="text-sm text-muted mt-2">
-          {locale === 'es'
-            ? colors.find((c) => c.id === selectedColorId)?.nombre_es
-            : colors.find((c) => c.id === selectedColorId)?.nombre_en}
-        </p>
-      </div>
-
-      {/* Precio y stock */}
-      {selectedType && (
-        <div className="space-y-1 pt-2">
-          <p className="text-3xl font-semibold text-terracota">
-            {locale === 'es'
-              ? `$${selectedType.precio_mxn} MXN`
-              : `$${selectedType.precio_usd.toFixed(2)} USD`}
-          </p>
-          <div className="flex items-center gap-2 text-sm text-muted">
-            <span>Stock: {selectedType.stock}</span>
-            {selectedType.stock <= 3 && selectedType.stock > 0 && (
-              <span className="text-amber-600 font-medium">
-                — ¡Solo quedan {selectedType.stock}!
-              </span>
-            )}
+            ))}
           </div>
+          <p className="text-sm text-muted mt-2">
+            {locale === 'es' ? colors[selectedColorIndex]?.nombre_es : colors[selectedColorIndex]?.nombre_en}
+          </p>
         </div>
       )}
 
+      {/* Especificaciones */}
+      <div className="bg-arena/50 rounded-2xl p-6">
+        <h2 className="font-semibold text-negro-suave mb-3">Especificaciones</h2>
+        <ul className="space-y-2 text-sm text-muted">
+          <li className="flex justify-between">
+            <span>Material</span>
+            <span className="font-medium text-negro-suave">Plástico PET</span>
+          </li>
+          <li className="flex justify-between">
+            <span>Altura</span>
+            <span className="font-medium text-negro-suave">4.2 cm</span>
+          </li>
+          <li className="flex justify-between">
+            <span>Colores disponibles</span>
+            <span className="font-medium text-negro-suave">{colors.length}</span>
+          </li>
+        </ul>
+      </div>
+
       {/* Add to cart */}
-      {variant && (
+      {variant && model.stock > 0 && (
         <div className="pt-4">
           <AddToCartButton variant={variant} />
         </div>
+      )}
+      {model.stock <= 0 && (
+        <p className="text-amber-600 font-medium text-center py-4">Sin stock disponible</p>
       )}
     </div>
   )
