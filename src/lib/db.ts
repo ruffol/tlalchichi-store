@@ -328,13 +328,22 @@ export function getModels(opts?: { destacado?: boolean; slug?: string; activo?: 
 export function getModelsByType(typeSlug: string): any[] {
   const db = getDb()
   const rows = db.prepare(`
-    SELECT DISTINCT m.* FROM models m
-    JOIN model_availability ma ON ma.model_id = m.id
-    JOIN product_types pt ON pt.id = ma.product_type_id
-    WHERE pt.slug = ? AND m.activo = 1 AND ma.stock > 0
-    ORDER BY m.id ASC
-  `).all(typeSlug) as any[]
-  return rows.map(normalizeModel)
+    SELECT * FROM models
+    WHERE categoria_es IS NOT NULL AND activo = 1
+    ORDER BY id ASC
+  `).all() as any[]
+
+  // Filtrar por slug de categoria (llaveros, portamacetas, etc.)
+  const slugToCat: Record<string, string> = {
+    llaveros: 'Llaveros',
+    portamacetas: 'Portamacetas',
+    alcacias: 'Alcancías',
+    cuencos: 'Cuencos',
+  }
+  const catName = slugToCat[typeSlug]
+  if (!catName) return []
+
+  return rows.filter((m: any) => m.categoria_es === catName).map(normalizeModel)
 }
 
 export function getModelBySlug(slug: string): any | null {
