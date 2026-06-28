@@ -47,17 +47,8 @@ export async function POST(req: Request) {
       amount: {
         currency_code: moneda,
         value: total.toFixed(2),
-        breakdown: {
-          item_total: { currency_code: moneda, value: itemTotal.toFixed(2) },
-          shipping: { currency_code: moneda, value: shippingCost.toFixed(2) },
-        },
       },
-      items: items.map((item: any) => ({
-        name: item.nombre || 'Producto',
-        unit_amount: { currency_code: moneda, value: (item.precio || 0).toFixed(2) },
-        quantity: String(item.quantity || 1),
-        category: 'PHYSICAL_GOODS',
-      })),
+      description: 'Compra en Tlalchichi Store',
       shipping: {
         name: { full_name: nombre || 'Cliente' },
         address: {
