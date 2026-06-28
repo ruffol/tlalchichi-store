@@ -105,7 +105,7 @@ function ModelManager() {
 
   function authHeaders(): Record<string, string> {
     const token = sessionStorage.getItem('admin_token')
-    return token ? { Authorization: *** ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+    return token ? { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
   }
 
   async function loadModels() {
