@@ -16,14 +16,21 @@ export default function CheckoutPage() {
   const locale = useLocale()
   const router = useRouter()
   const { items, pais, setPais, clearCart } = useCartStore()
+  
+  // Filtrar items invalidos
+  const validItems = items.filter((item) => {
+    const v = item?.variant
+    return v && typeof v.precio_mxn === 'number' && typeof v.precio_usd === 'number'
+  })
+
   const moneda = pais === 'MX' ? 'MXN' : 'USD'
-  const subtotal = getSubtotal(items, moneda)
-  const total = getTotal(items, pais, moneda)
+  const subtotal = getSubtotal(validItems, moneda)
+  const total = getTotal(validItems, pais, moneda)
   const [loading, setLoading] = useState<'stripe' | 'paypal' | null>(null)
   const [error, setError] = useState('')
   const [form, setForm] = useState({ email: '', nombre: '', direccion: '', ciudad: '', estado: '', cp: '' })
 
-  if (items.length === 0) {
+  if (validItems.length === 0) {
     return (
       <div className="max-w-md mx-auto px-4 py-24 text-center">
         <p className="text-negro-suave/50 mb-4">{ct('vacio')}</p>
@@ -51,7 +58,7 @@ export default function CheckoutPage() {
     return null
   }
 
-  const checkoutItems = items.map((item) => ({
+  const checkoutItems = validItems.map((item) => ({
     modelId: Number(item.variant.modelId),
     productTypeId: Number(item.variant.typeId),
     colorId: Number(item.variant.colorId),
@@ -173,7 +180,7 @@ export default function CheckoutPage() {
 
         <div className="bg-arena/30 rounded-2xl p-6 space-y-3">
           <h3 className="font-semibold">{ct('resumen')}</h3>
-          {items.map((item) => {
+          {validItems.map((item) => {
             const v = item.variant
             const nombre = locale === 'es' ? v.nombre_es : v.nombre_en
             const tipo = locale === 'es' ? v.typeNombreEs : v.typeNombreEn
