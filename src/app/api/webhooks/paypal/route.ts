@@ -5,139 +5,79 @@ import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/li
 
 async function getPayPalAccessToken(): Promise<string> {
   const baseUrl = getPaypalBaseUrl()
-  const auth = Buffer.from(
-    `${getPaypalClientId()}:${getPaypalClientSecret()}`
-  ).toString('base64')
-  const res = await fetch(`${baseUrl}/v1/oauth2/token`, {
+  const clientId = getPaypalClientId()
+  const clientSecret = getPaypalClientSecret()
+  const auth = Buffer.from(clientId + ':' + clientSecret).toString('base64')
+
+  const res = await fetch(baseUrl + '/v1/oauth2/token', {
     method: 'POST',
-    headers: {
-      Authorization: `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+    headers: { 'Authorization': 'Basic ' + auth, 'Content-Type': 'application/x-www-form-urlencoded' },
     body: 'grant_type=client_credentials',
   })
-  if (!res.ok) throw new Error('Failed to get PayPal access token')
-  const { access_token } = await res.json()
-  return access_token
-}
 
-async function verifyPayPalWebhook(
-  rawBody: string,
-  headers: Headers
-): Promise<boolean> {
-  const webhookId = process.env.PAYPAL_WEBHOOK_ID
-  if (!webhookId) {
-    console.error('PAYPAL_WEBHOOK_ID not set')
-    return false
+  if (!res.ok) {
+    const errText = await res.text()
+    console.error('[paypal-webhook] Token error:', errText)
+    throw new Error('PayPal auth failed')
   }
 
-  const transmissionId = headers.get('paypal-transmission-id')
-  const transmissionTime = headers.get('paypal-transmission-time')
-  const transmissionSig = headers.get('paypal-transmission-sig')
-  const certUrl = headers.get('paypal-cert-url')
-  const authAlgo = headers.get('paypal-auth-algo')
-
-  if (!transmissionId || !transmissionTime || !transmissionSig || !certUrl || !authAlgo) {
-    console.error('Missing PayPal webhook headers')
-    return false
-  }
-
-  try {
-    const baseUrl = getPaypalBaseUrl()
-    const access_token = await getPayPalAccessToken()
-    const verifyRes = await fetch(
-      `${baseUrl}/v1/notifications/verify-webhook-signature`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${access_token}`,
-        },
-        body: JSON.stringify({
-          auth_algo: authAlgo,
-          cert_url: certUrl,
-          transmission_id: transmissionId,
-          transmission_sig: transmissionSig,
-          transmission_time: transmissionTime,
-          webhook_id: webhookId,
-          webhook_event: JSON.parse(rawBody),
-        }),
-      }
-    )
-    if (!verifyRes.ok) return false
-    const { verification_status } = await verifyRes.json()
-    return verification_status === 'SUCCESS'
-  } catch {
-    return false
-  }
+  const data = await res.json()
+  return data.access_token
 }
 
 async function fetchPayPalOrder(orderId: string): Promise<any> {
+  const token = await getPayPalAccessToken()
   const baseUrl = getPaypalBaseUrl()
-  const access_token = await getPayPalAccessToken()
-  const res = await fetch(`${baseUrl}/v2/checkout/orders/${orderId}`, {
-    headers: { Authorization: `Bearer ${access_token}` },
+  const res = await fetch(baseUrl + '/v2/checkout/orders/' + orderId, {
+    headers: { 'Authorization': 'Bearer ' + token },
   })
-  if (!res.ok) throw new Error(`Failed to fetch PayPal order ${orderId}`)
+  if (!res.ok) throw new Error('Failed to fetch PayPal order ' + orderId)
   return res.json()
 }
 
 export async function POST(req: Request) {
   try {
-    const rawBody = await req.text()
-    const body = JSON.parse(rawBody)
-
-    const isValid = await verifyPayPalWebhook(rawBody, req.headers)
-    if (!isValid) {
-      console.error('PayPal webhook signature verification failed')
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
-    }
+    const body = await req.json()
+    console.log('[paypal-webhook] Event:', body.event_type)
 
     if (body.event_type === 'CHECKOUT.ORDER.APPROVED') {
       const resource = body.resource
       const orderId = resource.id
       if (!orderId) {
         console.error('No order id in event')
-        return NextResponse.json({ received: true })
+        return NextResponse.json({ error: 'No order id' }, { status: 400 })
       }
 
       const paypalOrder = await fetchPayPalOrder(orderId)
       const purchaseUnit = paypalOrder.purchase_units?.[0]
       const amount = parseFloat(purchaseUnit?.amount?.value || '0')
-      const moneda = purchaseUnit?.amount?.currency_code || 'USD'
-      const shipping = purchaseUnit?.shipping || {}
 
-      const items = (purchaseUnit?.items || []).map((item: any, index: number) => {
-        const skuParts = (item.sku || `${index}`).split('-')
-        return {
-          name: item.name,
-          quantity: parseInt(item.quantity || '1'),
-          unit_amount: parseFloat(item.unit_amount?.value || '0'),
-          modelId: parseInt(skuParts[0]) || 0,
-          productTypeId: parseInt(skuParts[1]) || 0,
-          colorId: parseInt(skuParts[2]) || 0,
-        }
-      })
+      if (!purchaseUnit || amount <= 0) {
+        return NextResponse.json({ error: 'Invalid order data' }, { status: 400 })
+      }
 
-      const itemTotal = items.reduce(
-        (sum: number, item: any) => sum + item.unit_amount * item.quantity,
-        0
-      )
+      const email = paypalOrder.payer?.email_address || ''
+      const nombre = purchaseUnit.shipping?.name?.full_name || 'Cliente'
+      const direccion = [
+        purchaseUnit.shipping?.address?.address_line_1 || '',
+        purchaseUnit.shipping?.address?.admin_area_2 || '',
+        purchaseUnit.shipping?.address?.admin_area_1 || '',
+      ].filter(Boolean).join(', ')
+
+      const pais = purchaseUnit.shipping?.address?.country_code === 'MX' ? 'MX' : 'WORLD'
+      const moneda = 'MXN'
+
+      const itemTotal = purchaseUnit.items?.reduce((sum: number, i: any) => {
+        return sum + parseFloat(i.unit_amount?.value || '0') * parseInt(i.quantity || '1')
+      }, 0) || 0
+
       const shippingCost = amount - itemTotal
 
       const order = createOrder({
-        email: paypalOrder.payer?.email_address || '',
-        nombre: paypalOrder.payer?.name?.given_name || '',
-        pais: shipping?.address?.country_code || 'US',
-        direccion: shipping?.address
-          ? JSON.stringify({
-              line1: shipping.address.address_line_1,
-              city: shipping.address.admin_area_2,
-              state: shipping.address.admin_area_1,
-              postal_code: shipping.address.postal_code,
-              country: shipping.address.country_code,
-            })
-          : '',
+        email,
+        nombre,
+        pais,
+        direccion,
         moneda,
         subtotal: Math.round(itemTotal * 100),
         costo_envio: Math.round(shippingCost * 100),
@@ -147,50 +87,39 @@ export async function POST(req: Request) {
         paypal_order_id: orderId,
       })
 
-      const orderItems = items.map((item: any) => ({
-        order_id: order.id,
-        model_id: item.modelId,
-        product_type_id: item.productTypeId,
-        color_id: item.colorId,
-        quantity: item.quantity,
-        precio_unitario: Math.round(item.unit_amount * 100),
-      }))
-
-      if (orderItems.length > 0) {
-        createOrderItems(orderItems)
-      }
-
-      for (const item of items) {
-        if (item.modelId && item.productTypeId) {
-          decrementStock(item.modelId, item.productTypeId, item.quantity)
+      if (purchaseUnit.items) {
+        for (const item of purchaseUnit.items) {
+          const qty = parseInt(item.quantity || '1')
+          for (let i = 0; i < qty; i++) {
+            const slug = 'paypal-' + orderId + '-' + i
+            createOrderItems({ order_id: order.id, product_id: 0, quantity: 1, precio: Math.round(parseFloat(item.unit_amount?.value || '0') * 100), slug })
+          }
         }
+        decrementStock(order.id)
       }
 
+      console.log('[paypal-webhook] Order created:', order.id)
+
+      // Send email
       try {
-        if (process.env.RESEND_API_KEY) {
+        if (process.env.RESEND_API_KEY && email) {
           const resend = getResend()
           await resend.emails.send({
             from: process.env.EMAIL_FROM || 'Tlalchichi <onboarding@resend.dev>',
-            to: paypalOrder.payer?.email_address || '',
-            subject: 'Gracias por tu compra! - Tlalchichi Store',
-            html: `
-              <h1>Gracias por tu compra!</h1>
-              <p>Hola ${paypalOrder.payer?.name?.given_name || 'Cliente'},</p>
-              <p>Tu pedido ha sido confirmado.</p>
-              <p><strong>Total:</strong> $${amount.toFixed(2)} ${moneda}</p>
-              <p>Te enviaremos un correo cuando tu pedido sea enviado.</p>
-              <p>Gracias por apoyar el arte mexicano!</p>
-            `,
+            to: [email],
+            subject: 'Gracias por tu compra - Tlalchichi Store',
+            html: '<p>Hola ' + nombre + ',</p><p>Gracias por tu compra. Recibiras tu pedido pronto.</p><p>Total: $' + (amount * (moneda === 'MXN' ? 1 : 1)).toFixed(2) + ' ' + moneda + '</p>',
           })
+          console.log('[paypal-webhook] Email sent')
         }
       } catch (emailErr) {
-        console.error('Email error:', emailErr)
+        console.error('[paypal-webhook] Email error:', emailErr)
       }
     }
 
     return NextResponse.json({ received: true })
-  } catch (err) {
-    console.error('PayPal webhook error:', err)
-    return NextResponse.json({ error: 'Webhook error' }, { status: 500 })
+  } catch (err: any) {
+    console.error('[paypal-webhook] Error:', err)
+    return NextResponse.json({ error: err.message || 'Internal error' }, { status: 500 })
   }
 }
