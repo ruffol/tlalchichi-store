@@ -308,138 +308,6 @@
     ]
   },
   {
-    "slug": "portamaceta-acostado",
-    "nombre_es": "Portamaceta Acostado",
-    "nombre_en": "Acostado Planter",
-    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
-    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
-    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
-    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
-    "categoria_es": "Portamacetas",
-    "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
-    "stock": 42,
-    "destacado": false,
-    "imagenes": [
-      "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#F5F5F5",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      },
-      {
-        "nombre_es": "Traslúcido",
-        "nombre_en": "Translucent",
-        "hex": "#D4D4D4",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      },
-      {
-        "nombre_es": "Naranja",
-        "nombre_en": "Orange",
-        "hex": "#E87A3E",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      }
-    ]
-  },
-  {
-    "slug": "portamaceta-acostado_mediano",
-    "nombre_es": "Portamaceta Acostado Mediano",
-    "nombre_en": "Acostado Mediano Planter",
-    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
-    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
-    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
-    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
-    "categoria_es": "Portamacetas",
-    "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
-    "stock": 42,
-    "destacado": false,
-    "imagenes": [
-      "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#F5F5F5",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      },
-      {
-        "nombre_es": "Traslúcido",
-        "nombre_en": "Translucent",
-        "hex": "#D4D4D4",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      },
-      {
-        "nombre_es": "Naranja",
-        "nombre_en": "Orange",
-        "hex": "#E87A3E",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      }
-    ]
-  },
-  {
-    "slug": "portamaceta-sentado",
-    "nombre_es": "Portamaceta Sentado",
-    "nombre_en": "Sentado Planter",
-    "descripcion_es": "Artesanía tradicional de Colima. Hecho a mano con barro natural.",
-    "descripcion_en": "Traditional Colima craftsmanship. Handmade with natural clay.",
-    "historia_es": "Pieza única de la tradición Tlalchichi de Colima, México.",
-    "historia_en": "Unique piece from the Tlalchichi tradition of Colima, Mexico.",
-    "categoria_es": "Portamacetas",
-    "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
-    "stock": 42,
-    "destacado": false,
-    "imagenes": [
-      "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-    ],
-    "colores": [
-      {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#F5F5F5",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Negro",
-        "nombre_en": "Black",
-        "hex": "#2D2D2D",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Traslúcido",
-        "nombre_en": "Translucent",
-        "hex": "#D4D4D4",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Naranja",
-        "nombre_en": "Orange",
-        "hex": "#E87A3E",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      }
-    ]
-  },
-  {
     "slug": "alcacia-mascara",
     "nombre_es": "Alcancía Mascara",
     "nombre_en": "Mascara Piggy Bank",
@@ -656,6 +524,314 @@
         "nombre_en": "Orange",
         "hex": "#E87A3E",
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-acostado",
+    "nombre_es": "Portamaceta Tlalchichi Acostado",
+    "nombre_en": "Tlalchichi Acostado Planter",
+    "descripcion_es": "Reproducción fiel a escala de un Tlalchichi en posición de descanso, fabricado en plástico PET de alta resistencia. Portamaceta artesanal que captura la serenidad del perro cebollo mesoamericano.",
+    "descripcion_en": "Faithful scale reproduction of a resting Tlalchichi, made in high-resistance PET plastic. An artisan planter capturing the serenity of the Mesoamerican hairless dog.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-acostado-mediano",
+    "nombre_es": "Portamaceta Tlalchichi Acostado Mediano",
+    "nombre_en": "Tlalchichi Acostado Mediano Planter",
+    "descripcion_es": "Reproducción en formato mediano de un Tlalchichi acostado, fabricado en plástico PET de alta resistencia. Portamaceta ideal para plantas de tamaño medio con diseño tradicional.",
+    "descripcion_en": "Medium-sized reproduction of a resting Tlalchichi, made in high-resistance PET plastic. Ideal for medium plants with traditional design.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-mascara-danza",
+    "nombre_es": "Portamaceta Tlalchichi Máscara Danza",
+    "nombre_en": "Tlalchichi Máscara Danza Planter",
+    "descripcion_es": "Portamaceta con figura de Tlalchichi danzante con máscara ceremonial, fabricado en plástico PET. Captura el movimiento y la espiritualidad de las danzas prehispánicas.",
+    "descripcion_en": "Planter featuring a dancing Tlalchichi with ceremonial mask, made in PET plastic. Captures the movement and spirituality of pre-Hispanic dances.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-mazorca",
+    "nombre_es": "Portamaceta Tlalchichi Mazorca",
+    "nombre_en": "Tlalchichi Mazorca Planter",
+    "descripcion_es": "Portamaceta Tlalchichi sosteniendo una mazorca, símbolo de abundancia y fertilidad. Fabricado en plástico PET de alta resistencia.",
+    "descripcion_en": "Tlalchichi planter holding a corncob, symbol of abundance and fertility. Made in high-resistance PET plastic.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-parado",
+    "nombre_es": "Portamaceta Tlalchichi Parado",
+    "nombre_en": "Tlalchichi Parado Planter",
+    "descripcion_es": "Portamaceta con Tlalchichi en posición erguida, fabricado en plástico PET de alta resistencia. Representa la vigilancia y protección del hogar.",
+    "descripcion_en": "Standing Tlalchichi planter, made in high-resistance PET plastic. Represents vigilance and home protection.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-parado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-parado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-sentado",
+    "nombre_es": "Portamaceta Tlalchichi Sentado",
+    "nombre_en": "Tlalchichi Sentado Planter",
+    "descripcion_es": "Portamaceta con Tlalchichi en posición sedente, fabricado en plástico PET de alta resistencia. Ideal para cactus y suculentas.",
+    "descripcion_en": "Seated Tlalchichi planter, made in high-resistance PET plastic. Ideal for cacti and succulents.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      }
+    ]
+  },
+  {
+    "slug": "portamaceta-viejo-sentado",
+    "nombre_es": "Portamaceta Tlalchichi Viejo Sentado",
+    "nombre_en": "Tlalchichi Viejo Sentado Planter",
+    "descripcion_es": "Portamaceta con Tlalchichi anciano sentado, fabricado en plástico PET de alta resistencia. Refleja la sabiduría y la tradición.",
+    "descripcion_en": "Seated elderly Tlalchichi planter, made in high-resistance PET plastic. Reflects wisdom and tradition.",
+    "historia_es": "Portamaceta artesanal inspirada en la tradición Tlalchichi de Colima, México.",
+    "historia_en": "Artisan planter inspired by the Tlalchichi tradition of Colima, Mexico.",
+    "categoria_es": "Portamacetas",
+    "categoria_en": "Planters",
+    "precio_mxn": 210,
+    "precio_usd": 11,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
       }
     ]
   }
