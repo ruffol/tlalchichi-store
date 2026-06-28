@@ -25,6 +25,7 @@ export function getDb(): Database.Database {
     migrateOldProducts()
     seedColors()
     seedProductTypes()
+    seedModels()
   }
   return _db
 }
@@ -70,6 +71,14 @@ function initTables() {
       created_at TEXT DEFAULT (datetime('now'))
     )
   `)
+
+  // Add columns for flat product model if missing (for seed.json compat)
+  try { db.exec('ALTER TABLE models ADD COLUMN categoria_es TEXT') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN categoria_en TEXT') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN precio_mxn REAL') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN precio_usd REAL') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN stock INTEGER DEFAULT 0') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN colores TEXT') } catch {}
 
   db.exec(`
     CREATE TABLE IF NOT EXISTS product_types (
@@ -231,34 +240,55 @@ function migrateOldProducts() {
 
 function seedColors() {
   const db = _db!
-  const count = db.prepare('SELECT COUNT(*) as count FROM colors').get() as any
-  if (count.count > 0) return
-
+  // Siempre resiembra colores para que coincidan con seed.json
+  db.exec('DELETE FROM colors')
   const colors = [
-    { slug: 'blanco', nombre_es: 'Blanco', nombre_en: 'White', hex_code: '#F5F5F5' },
+    { slug: 'barro-natural', nombre_es: 'Barro Natural', nombre_en: 'Natural Clay', hex_code: '#B87333' },
+    { slug: 'terracota', nombre_es: 'Terracota', nombre_en: 'Terracotta', hex_code: '#C86A4E' },
     { slug: 'negro', nombre_es: 'Negro', nombre_en: 'Black', hex_code: '#2D2D2D' },
-    { slug: 'naranja', nombre_es: 'Naranja', nombre_en: 'Orange', hex_code: '#E87A3E' },
-    { slug: 'transparente', nombre_es: 'Transparente', nombre_en: 'Transparent', hex_code: '#B8B8B8' },
+    { slug: 'blanco', nombre_es: 'Blanco', nombre_en: 'White', hex_code: '#EAE0D5' },
   ]
 
   const insert = db.prepare('INSERT INTO colors (slug, nombre_es, nombre_en, hex_code) VALUES (@slug, @nombre_es, @nombre_en, @hex_code)')
   for (const c of colors) insert.run(c)
+  console.log('[seed] Colors seeded:', colors.length)
 }
 
 function seedProductTypes() {
   const db = _db!
-  const count = db.prepare('SELECT COUNT(*) as count FROM product_types').get() as any
-  if (count.count > 0) return
-
+  db.exec('DELETE FROM product_types')
   const types = [
-    { slug: 'llaveros', nombre_es: 'LLAveros', nombre_en: 'Keychains', precio_mxn: 35, precio_usd: 2 },
-    { slug: 'centros-de-mesa', nombre_es: 'Centros de mesa', nombre_en: 'Centerpieces', precio_mxn: 160, precio_usd: 9 },
-    { slug: 'portamacetas', nombre_es: 'Portamacetas', nombre_en: 'Plant Pot Holders', precio_mxn: 210, precio_usd: 11 },
-    { slug: 'alcancia', nombre_es: 'Alcancías', nombre_en: 'Piggy Banks', precio_mxn: 160, precio_usd: 9 },
+    { slug: 'llaveros', nombre_es: 'Llaveros', nombre_en: 'Keychains', precio_mxn: 35, precio_usd: 2 },
+    { slug: 'portamacetas', nombre_es: 'Portamacetas', nombre_en: 'Planters', precio_mxn: 210, precio_usd: 11 },
+    { slug: 'alcacias', nombre_es: 'Alcancías', nombre_en: 'Piggy Banks', precio_mxn: 160, precio_usd: 9 },
+    { slug: 'cuencos', nombre_es: 'Cuencos', nombre_en: 'Bowls', precio_mxn: 210, precio_usd: 11 },
   ]
 
   const insert = db.prepare('INSERT INTO product_types (slug, nombre_es, nombre_en, precio_mxn, precio_usd) VALUES (@slug, @nombre_es, @nombre_en, @precio_mxn, @precio_usd)')
   for (const t of types) insert.run(t)
+  console.log('[seed] Product types seeded:', types.length)
+}
+
+function seedModels() {
+  const db = _db!
+  if (seedProducts.length === 0) return
+  db.exec('DELETE FROM models')
+  const insert = db.prepare(`
+    INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
+    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
+  `)
+  let count = 0
+  for (const p of seedProducts) {
+    insert.run({
+      ...p,
+      imagenes: JSON.stringify(p.imagenes || []),
+      colores: JSON.stringify(p.colores || []),
+      destacado: p.destacado ? 1 : 0,
+      activo: p.activo !== undefined ? (p.activo ? 1 : 0) : 1,
+    })
+    count++
+  }
+  console.log('[seed] Models seeded:', count)
 }
 
 // ── Model queries ──
