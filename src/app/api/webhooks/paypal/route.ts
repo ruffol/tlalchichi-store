@@ -92,7 +92,7 @@ export async function POST(req: Request) {
           const qty = parseInt(item.quantity || '1')
           for (let i = 0; i < qty; i++) {
             const slug = 'paypal-' + orderId + '-' + i
-            createOrderItems({ order_id: order.id, product_id: 0, quantity: 1, precio: Math.round(parseFloat(item.unit_amount?.value || '0') * 100), slug })
+            createOrderItems([{ order_id: order.id, model_id: 0, product_type_id: 0, color_id: 0, quantity: 1, precio_unitario: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) }])
           }
         }
         decrementStock(order.id)
