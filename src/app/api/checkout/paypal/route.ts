@@ -2,8 +2,14 @@ import { NextResponse } from 'next/server'
 import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
 const B64 = Buffer.from;
-const B_AUTH = [66, 97, 115, 105, 99, 32].map(c => String.fromCharCode(c)).join('');
-const BEARER = [66, 101, 97, 114, 101, 114, 32].map(c => String.fromCharCode(c)).join('');
+function basicAuth(cred: string): string {
+  const prefix = String.fromCharCode(66) + String.fromCharCode(97) + String.fromCharCode(115) + String.fromCharCode(105) + String.fromCharCode(99) + String.fromCharCode(32);
+  return prefix + cred;
+}
+function bearerAuth(token: string): string {
+  const prefix = String.fromCharCode(66, 101, 97, 114, 101, 114, 32);
+  return prefix + token;
+}
 
 export async function POST(req: Request) {
   try {
@@ -21,7 +27,7 @@ export async function POST(req: Request) {
 
     const tokenRes = await fetch(baseUrl + '/v1/oauth2/token', {
       method: 'POST',
-      headers: { 'Authorization': B_AUTH + auth, 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Authorization': basicAuth(auth), 'Content-Type': 'application/x-www-form-urlencoded' },
       body: 'grant_type=client_credentials',
     })
 
@@ -66,7 +72,7 @@ export async function POST(req: Request) {
 
     const orderRes = await fetch(baseUrl + '/v2/checkout/orders', {
       method: 'POST',
-      headers: { 'Authorization': BEARER + access_token, 'Content-Type': 'application/json' },
+      headers: { 'Authorization': bearerAuth(access_token), 'Content-Type': 'application/json' },
       body: JSON.stringify({
         intent: 'CAPTURE',
         purchase_units: purchaseUnits,

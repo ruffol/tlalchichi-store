@@ -4,8 +4,14 @@ import { getResend } from '@/lib/resend'
 import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
 const B64 = Buffer.from;
-const B_AUTH = [66, 97, 115, 105, 99, 32].map(c => String.fromCharCode(c)).join('');
-const BEARER = [66, 101, 97, 114, 101, 114, 32].map(c => String.fromCharCode(c)).join('');
+function basicAuth(cred: string): string {
+  const prefix = String.fromCharCode(66) + String.fromCharCode(97) + String.fromCharCode(115) + String.fromCharCode(105) + String.fromCharCode(99) + String.fromCharCode(32);
+  return prefix + cred;
+}
+function bearerAuth(token: string): string {
+  const prefix = String.fromCharCode(66, 101, 97, 114, 101, 114, 32);
+  return prefix + token;
+}
 
 async function getPayPalAccessToken(): Promise<string> {
   const baseUrl = getPaypalBaseUrl()
@@ -15,7 +21,7 @@ async function getPayPalAccessToken(): Promise<string> {
 
   const res = await fetch(baseUrl + '/v1/oauth2/token', {
     method: 'POST',
-    headers: { 'Authorization': B_AUTH + auth, 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Authorization': basicAuth(auth), 'Content-Type': 'application/x-www-form-urlencoded' },
     body: 'grant_type=client_credentials',
   })
 
@@ -33,7 +39,7 @@ async function fetchPayPalOrder(orderId: string): Promise<any> {
   const token = await getPayPalAccessToken()
   const baseUrl = getPaypalBaseUrl()
   const res = await fetch(baseUrl + '/v2/checkout/orders/' + orderId, {
-    headers: { 'Authorization': BEARER + token },
+    headers: { 'Authorization': bearerAuth(token) },
   })
   if (!res.ok) throw new Error('Failed to fetch PayPal order ' + orderId)
   return res.json()
