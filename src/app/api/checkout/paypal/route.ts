@@ -27,8 +27,9 @@ export async function POST(req: Request) {
       }
     )
     if (!accessTokenRes.ok) {
-      console.error('PayPal auth error:', await accessTokenRes.text())
-      return NextResponse.json({ error: 'Error de autenticación con PayPal' }, { status: 500 })
+      const errorText = await accessTokenRes.text()
+      console.error('[paypal] Auth error:', baseUrl, errorText)
+      return NextResponse.json({ error: `PayPal auth: ${errorText.substring(0, 100)}` }, { status: 500 })
     }
     const { access_token } = await accessTokenRes.json()
 

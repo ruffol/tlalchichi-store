@@ -42,8 +42,8 @@ export async function POST(req: Request) {
           precio: i.precio,
         }))),
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'}/${pais === 'MX' ? 'es' : 'en'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'}/${pais === 'MX' ? 'es' : 'en'}/checkout`,
+      success_url: `https://www.tlalchichi.xyz/${pais === 'MX' ? 'es' : 'en'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://www.tlalchichi.xyz/${pais === 'MX' ? 'es' : 'en'}/checkout`,
     })
 
     return NextResponse.json({ id: session.id, url: session.url })
