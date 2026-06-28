@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createOrder, decrementStock } from '@/lib/db'
+import { createOrder } from '@/lib/db'
 import { getResend } from '@/lib/resend'
 import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
@@ -88,9 +88,6 @@ export async function POST(req: Request) {
       })
 
       console.log('[paypal-webhook] Order created:', order.id)
-
-      // Decrement stock
-      try { decrementStock(order.id) } catch (e) { console.error('[paypal] stock error:', e) }
 
       console.log('[paypal-webhook] Order created:', order.id)
 
