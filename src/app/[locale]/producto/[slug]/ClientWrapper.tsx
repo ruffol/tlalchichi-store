@@ -30,7 +30,7 @@ interface Props {
 }
 
 export default function ClientWrapper({ model, locale }: Props) {
-  const colors = model.colores || []
+  const colors = Array.isArray(model.colores) ? model.colores : []
   const [selectedColorIndex, setSelectedColorIndex] = useState<number>(0)
 
   const selectedColor = colors[selectedColorIndex]

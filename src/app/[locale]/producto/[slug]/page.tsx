@@ -66,7 +66,7 @@ export default async function ProductoDetailPage({ params }: Props) {
   const historia = locale === 'es' ? model.historia_es : model.historia_en
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 
-  const altTexts = (model.imagenes || []).map((_: string) => nombre)
+  const altTexts = (Array.isArray(model.imagenes) ? model.imagenes : []).map((_: string) => nombre)
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -78,7 +78,7 @@ export default async function ProductoDetailPage({ params }: Props) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mt-8">
         <ProductGallery
-          images={model.imagenes || []}
+          images={Array.isArray(model.imagenes) ? model.imagenes : []}
           principal={model.imagenes?.[0] || null}
           nombre={nombre}
           altTexts={altTexts}
