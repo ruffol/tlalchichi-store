@@ -18,15 +18,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       },
       {
@@ -36,9 +30,15 @@
         "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       }
     ]
@@ -62,15 +62,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       },
       {
@@ -80,9 +74,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       }
     ]
@@ -106,15 +106,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
       },
       {
@@ -124,9 +118,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
       }
     ]
@@ -150,15 +150,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
       },
       {
@@ -168,9 +162,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
       }
     ]
@@ -194,15 +194,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
       },
       {
@@ -212,9 +206,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
       }
     ]
@@ -238,15 +238,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
       },
       {
@@ -256,9 +250,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
       }
     ]
@@ -282,15 +282,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
       },
       {
@@ -300,9 +294,15 @@
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
       }
     ]
@@ -326,15 +326,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       },
       {
@@ -344,9 +338,15 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       }
     ]
@@ -370,15 +370,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       },
       {
@@ -388,9 +382,15 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       }
     ]
@@ -414,15 +414,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       },
       {
@@ -432,9 +426,15 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       }
     ]
@@ -458,15 +458,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       },
       {
@@ -476,9 +470,15 @@
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       }
     ]
@@ -502,15 +502,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
       },
       {
@@ -520,9 +514,15 @@
         "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
       }
     ]
@@ -546,15 +546,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
       },
       {
@@ -564,9 +558,15 @@
         "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
       }
     ]
@@ -590,15 +590,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       },
       {
@@ -608,9 +602,15 @@
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       }
     ]
@@ -634,15 +634,9 @@
     ],
     "colores": [
       {
-        "nombre_es": "Barro Natural",
-        "nombre_en": "Natural Clay",
-        "hex": "#B87333",
-        "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
-      },
-      {
-        "nombre_es": "Terracota",
-        "nombre_en": "Terracotta",
-        "hex": "#C86A4E",
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       },
       {
@@ -652,9 +646,15 @@
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       },
       {
-        "nombre_es": "Blanco",
-        "nombre_en": "White",
-        "hex": "#EAE0D5",
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       }
     ]

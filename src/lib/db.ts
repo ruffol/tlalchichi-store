@@ -243,10 +243,10 @@ function seedColors() {
   // Siempre resiembra colores para que coincidan con seed.json
   db.exec('DELETE FROM colors')
   const colors = [
-    { slug: 'barro-natural', nombre_es: 'Barro Natural', nombre_en: 'Natural Clay', hex_code: '#B87333' },
-    { slug: 'terracota', nombre_es: 'Terracota', nombre_en: 'Terracotta', hex_code: '#C86A4E' },
+    { slug: 'blanco', nombre_es: 'Blanco', nombre_en: 'White', hex_code: '#F5F5F5' },
     { slug: 'negro', nombre_es: 'Negro', nombre_en: 'Black', hex_code: '#2D2D2D' },
-    { slug: 'blanco', nombre_es: 'Blanco', nombre_en: 'White', hex_code: '#EAE0D5' },
+    { slug: 'traslucido', nombre_es: 'Traslúcido', nombre_en: 'Translucent', hex_code: '#D4D4D4' },
+    { slug: 'naranja', nombre_es: 'Naranja', nombre_en: 'Orange', hex_code: '#E87A3E' },
   ]
 
   const insert = db.prepare('INSERT INTO colors (slug, nombre_es, nombre_en, hex_code) VALUES (@slug, @nombre_es, @nombre_en, @hex_code)')

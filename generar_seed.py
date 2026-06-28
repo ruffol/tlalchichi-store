@@ -41,10 +41,10 @@ def product_from_img(cat_folder, cat_es, cat_en, filename, mxn, usd, colors):
 # Color sets per category
 def make_colors(img_path):
     return [
-        {"nombre_es": "Barro Natural", "nombre_en": "Natural Clay", "hex": "#B87333", "imagen": img_path},
-        {"nombre_es": "Terracota", "nombre_en": "Terracotta", "hex": "#C86A4E", "imagen": img_path},
+        {"nombre_es": "Blanco", "nombre_en": "White", "hex": "#F5F5F5", "imagen": img_path},
         {"nombre_es": "Negro", "nombre_en": "Black", "hex": "#2D2D2D", "imagen": img_path},
-        {"nombre_es": "Blanco", "nombre_en": "White", "hex": "#EAE0D5", "imagen": img_path},
+        {"nombre_es": "Traslúcido", "nombre_en": "Translucent", "hex": "#D4D4D4", "imagen": img_path},
+        {"nombre_es": "Naranja", "nombre_en": "Orange", "hex": "#E87A3E", "imagen": img_path},
     ]
 
 seed = []
