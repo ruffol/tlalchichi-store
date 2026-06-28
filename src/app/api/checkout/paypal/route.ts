@@ -67,17 +67,6 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         intent: 'CAPTURE',
         purchase_units: purchaseUnits,
-        payment_source: {
-          paypal: {
-            experience_context: {
-              payment_method_preference: 'IMMEDIATE_PAYMENT_REQUIRED',
-              landing_page: 'LOGIN',
-              user_action: 'PAY_NOW',
-              return_url: 'https://www.tlalchichi.xyz/' + (pais === 'MX' ? 'es' : 'en') + '/checkout/success',
-              cancel_url: 'https://www.tlalchichi.xyz/' + (pais === 'MX' ? 'es' : 'en') + '/checkout',
-            },
-          },
-        },
       }),
     })
 
