@@ -23,7 +23,7 @@ export async function POST(req: Request) {
           currency: moneda.toLowerCase(),
           product_data: {
             name: item.nombre,
-            images: item.imagen ? [item.imagen] : [],
+            images: item.imagen ? [`https://www.tlalchichi.xyz${item.imagen}`] : [],
           },
           unit_amount: formatAmountForStripe(item.precio, moneda),
         },

@@ -1,7 +1,10 @@
 export function getPaypalBaseUrl(): string {
   const sandbox = (process.env.PAYPAL_SANDBOX || '').trim().toLowerCase()
-  console.log('[paypal] Sandbox env:', sandbox)
-  return sandbox === 'true' || sandbox === '1'
+  const paypalEnv = (process.env.PAYPAL_ENV || '').trim().toLowerCase()
+  console.log('[paypal] Sandbox env:', sandbox, '| PAYPAL_ENV:', paypalEnv)
+  // Accept multiple truthy values
+  const isSandbox = sandbox === 'true' || sandbox === '1' || sandbox === 'yes' || paypalEnv === 'sandbox'
+  return isSandbox
     ? 'https://api-m.sandbox.paypal.com'
     : 'https://api-m.paypal.com'
 }
