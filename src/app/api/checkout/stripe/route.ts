@@ -6,6 +6,10 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { items, pais, moneda, email, nombre, direccion, shipping } = body
 
+    if (!items || items.length === 0) {
+      return NextResponse.json({ error: 'El carrito está vacío' }, { status: 400 })
+    }
+
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -46,7 +50,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error('Stripe checkout error:', err)
     return NextResponse.json(
-      { error: 'Error creating checkout session' },
+      { error: err instanceof Error ? err.message : 'Error creating checkout session' },
       { status: 500 }
     )
   }
