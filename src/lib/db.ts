@@ -373,13 +373,13 @@ export function upsertModel(data: any): any {
         stock=@stock, imagenes=@imagenes, colores=@colores,
         destacado=@destacado, activo=@activo
       WHERE id = @id
-    `).run(data)
+      `).run({ ...data, activo: data.activo !== undefined ? data.activo : 1 })
     return db.prepare('SELECT * FROM models WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
       INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
       VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
-    `).run(data)
+    `).run({ ...data, activo: data.activo !== undefined ? data.activo : 1 })
     return db.prepare('SELECT * FROM models WHERE id = ?').get(result.lastInsertRowid)
   }
 }
