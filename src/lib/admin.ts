@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { getSetting } from '@/lib/db'
 
 export function getAdminSecret(): string {
-  return process.env.ADMIN_SECRET || getSetting('admin_secret') || 'admin123'
+  return process.env.ADMIN_SECRET || getSetting('admin_secret') || console.error('⚠️ ADMIN_SECRET no configurado — usando fallback inseguro') || 'admin_inseguro_cambiar'
 }
 
 const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000
