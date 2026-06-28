@@ -46,15 +46,15 @@ export async function POST(req: Request) {
     const purchaseUnits = [{
       amount: {
         currency_code: moneda,
-        value: (total / (moneda === 'MXN' ? 100 : 100)).toFixed(2),
+        value: total.toFixed(2),
         breakdown: {
-          item_total: { currency_code: moneda, value: (itemTotal / (moneda === 'MXN' ? 100 : 100)).toFixed(2) },
-          shipping: { currency_code: moneda, value: (shippingCost / (moneda === 'MXN' ? 100 : 100)).toFixed(2) },
+          item_total: { currency_code: moneda, value: itemTotal.toFixed(2) },
+          shipping: { currency_code: moneda, value: shippingCost.toFixed(2) },
         },
       },
       items: items.map((item: any) => ({
         name: item.nombre || 'Producto',
-        unit_amount: { currency_code: moneda, value: ((item.precio || 0) / (moneda === 'MXN' ? 100 : 100)).toFixed(2) },
+        unit_amount: { currency_code: moneda, value: (item.precio || 0).toFixed(2) },
         quantity: String(item.quantity || 1),
         category: 'PHYSICAL_GOODS',
       })),
