@@ -6,7 +6,8 @@ import type { CartItem, CartItemVariant, ShippingDestination } from '@/types'
 import { SHIPPING_RATES } from '@/types'
 
 function variantKey(v: CartItemVariant): string {
-  return `${v.modelId}-${v.typeId}-${v.colorId}`
+  if (!v) return ''
+  return `${v.modelId ?? 0}-${v.typeId ?? 0}-${v.colorId ?? 0}`
 }
 
 interface CartState {
