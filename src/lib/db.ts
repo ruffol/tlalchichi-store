@@ -297,6 +297,7 @@ function normalizeModel(row: any): any {
   return {
     ...row,
     imagenes: typeof row.imagenes === 'string' ? JSON.parse(row.imagenes) : row.imagenes || [],
+    colores: typeof row.colores === 'string' ? JSON.parse(row.colores) : row.colores || [],
     destacado: !!row.destacado,
     activo: !!row.activo,
   }
