@@ -91,6 +91,7 @@ export async function POST(req: Request) {
     })
 
     const orderData = await orderRes.json()
+    console.log('[paypal] Order response:', JSON.stringify(orderData).substring(0, 500))
     if (!orderRes.ok) {
       console.error('[paypal] Create order error:', JSON.stringify(orderData))
       return NextResponse.json({ error: 'Error al crear orden PayPal: ' + (orderData.message || 'desconocido') }, { status: 500 })
