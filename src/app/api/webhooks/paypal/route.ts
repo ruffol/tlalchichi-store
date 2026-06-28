@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createOrder, createOrderItems, decrementStock } from '@/lib/db'
+import { createOrder, decrementStock } from '@/lib/db'
 import { getResend } from '@/lib/resend'
 import { getPaypalBaseUrl, getPaypalClientId, getPaypalClientSecret } from '@/lib/paypal'
 
@@ -87,16 +87,10 @@ export async function POST(req: Request) {
         paypal_order_id: orderId,
       })
 
-      if (purchaseUnit.items) {
-        for (const item of purchaseUnit.items) {
-          const qty = parseInt(item.quantity || '1')
-          for (let i = 0; i < qty; i++) {
-            const slug = 'paypal-' + orderId + '-' + i
-            createOrderItems([{ order_id: order.id, model_id: 0, product_type_id: 0, color_id: 0, quantity: 1, precio_unitario: Math.round(parseFloat(item.unit_amount?.value || '0') * 100) }])
-          }
-        }
-        decrementStock(order.id)
-      }
+      console.log('[paypal-webhook] Order created:', order.id)
+
+      // Decrement stock
+      try { decrementStock(order.id) } catch (e) { console.error('[paypal] stock error:', e) }
 
       console.log('[paypal-webhook] Order created:', order.id)
 
