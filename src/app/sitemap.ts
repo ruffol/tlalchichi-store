@@ -3,13 +3,14 @@ import { locales } from '@/i18n/routing'
 import { getModels } from '@/lib/db'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
-  const today = '2026-06-24'
+  const baseUrl = 'https://www.tlalchichi.xyz'
+  const today = new Date().toISOString().split('T')[0]
 
-  const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' }[] = [
-    { path: '', priority: 1, freq: 'weekly' },
-    { path: '/productos', priority: 0.9, freq: 'weekly' },
-    { path: '/nosotros', priority: 0.7, freq: 'monthly' },
+  const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' | 'daily' }[] = [
+    { path: '', priority: 1, freq: 'daily' },
+    { path: '/productos', priority: 0.9, freq: 'daily' },
+    { path: '/checkout', priority: 0.3, freq: 'monthly' },
+    { path: '/nosotros', priority: 0.7, freq: 'weekly' },
   ]
 
   const entries: MetadataRoute.Sitemap = []
