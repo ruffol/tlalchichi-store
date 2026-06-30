@@ -7,12 +7,12 @@
     "admin": "Admin"
   },
   "HomePage": {
-    "titulo": "AcuarioColima",
-    "subtitulo": "Peces tropicales, plantas, peceras y accesorios. Todo lo que necesitas para tu pecera",
+    "titulo": "Tlalchichi Store",
+    "subtitulo": "Figuras de Tlalchichis — Hecho en Colima con amor y tradición",
     "cta": "Ver productos",
-    "destacados": "Productos",
-    "historia_titulo": "Sobre AcuarioColima",
-    "historia_texto": "Tienda especializada en acuariofilia ubicada en Colima. Ofrecemos peces tropicales, plantas acuáticas, peceras y accesorios de calidad para que tu acuario luzca espectacular."
+    "destacados": "Productos Destacados",
+    "historia_titulo": "Nuestra Historia",
+    "historia_texto": "Los Tlalchichis son figuras de cerámica prehispánica de Colima, México. Cada pieza cuenta una historia de generaciones de artesanos que preservan esta tradición milenaria."
   },
   "ProductGrid": {
     "titulo": "Nuestros Productos",

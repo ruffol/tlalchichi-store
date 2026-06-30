@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     const paymentMethods = ['card']
     if (moneda === 'MXN') {
-      paymentMethods.push('oxxo', 'spei')
+      paymentMethods.push('oxxo')
     }
 
     const stripe = getStripe()
