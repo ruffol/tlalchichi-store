@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getStripe, formatAmountForStripe } from '@/lib/stripe'
+import { getStripePriceIds, syncProductToStripe } from '@/lib/stripe-sync'
 
 export async function POST(req: Request) {
   try {
@@ -16,6 +17,38 @@ export async function POST(req: Request) {
     }
 
     const stripe = getStripe()
+
+    // Build line_items using stored Stripe prices when available
+    const lineItems = []
+    for (const item of items) {
+      let priceId = null
+      if (item.modelId) {
+        const cached = getStripePriceIds(Number(item.modelId))
+        if (cached) {
+          priceId = moneda === 'MXN' ? cached.priceMxn : cached.priceUsd
+        }
+      }
+      if (priceId) {
+        lineItems.push({
+          price: priceId,
+          quantity: item.quantity,
+        })
+      } else {
+        // Fallback: use inline price_data
+        lineItems.push({
+          price_data: {
+            currency: moneda.toLowerCase(),
+            product_data: {
+              name: item.nombre,
+              images: item.imagen ? [`https://www.tlalchichi.xyz${item.imagen}`] : [],
+            },
+            unit_amount: formatAmountForStripe(item.precio, moneda),
+          },
+          quantity: item.quantity,
+        })
+      }
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: paymentMethods as any,
@@ -39,17 +72,7 @@ export async function POST(req: Request) {
           },
         },
       ],
-      line_items: items.map((item: any) => ({
-        price_data: {
-          currency: moneda.toLowerCase(),
-          product_data: {
-            name: item.nombre,
-            images: item.imagen ? [`https://www.tlalchichi.xyz${item.imagen}`] : [],
-          },
-          unit_amount: formatAmountForStripe(item.precio, moneda),
-        },
-        quantity: item.quantity,
-      })),
+      line_items: lineItems,
       metadata: {
         pais,
         nombre,

@@ -1,7 +1,10 @@
 import Database from 'better-sqlite3'
 import path from 'path'
 import seedData from './seed.json'
+import type { Model, ProductType, Color, ModelAvailability } from '@/types'
 const seedProducts: any[] = seedData
+
+// ── Initialization ──
 
 const DB_PATH = process.env.NODE_ENV === 'production'
   ? '/data/tlalchichi.db'
@@ -26,6 +29,8 @@ export function getDb(): Database.Database {
     seedColors()
     seedProductTypes()
     seedModels()
+    // Sync products to Stripe (non-blocking)
+    syncProductsToStripeAsync()
   }
   return _db
 }
@@ -630,4 +635,17 @@ export function getSetting(key: string): string | null {
 export function setSetting(key: string, value: string) {
   const db = getDb()
   db.prepare('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)').run(key, value)
+}
+
+// ── Stripe sync (non-blocking) ──
+
+export function syncProductsToStripeAsync() {
+  // Dynamic import to avoid circular dependency
+  import('./stripe-sync').then(mod => {
+    mod.syncAllProductsToStripe().catch(err => {
+      console.error('[stripe-sync] Error syncing products:', err?.message || err)
+    })
+  }).catch(() => {
+    // stripe-sync module not available (e.g. missing deps)
+  })
 }
