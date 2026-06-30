@@ -23,6 +23,22 @@ export async function POST(req: Request) {
       shipping_address_collection: {
         allowed_countries: ['MX', 'US', 'CA', 'DE', 'FR', 'ES', 'IT', 'GB', 'NL'],
       },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: {
+              amount: formatAmountForStripe(shipping || 0, moneda),
+              currency: moneda.toLowerCase(),
+            },
+            display_name: pais === 'MX' ? 'Envío a México' : 'Envío internacional',
+            delivery_estimate: {
+              minimum: { unit: 'business_day', value: 5 },
+              maximum: { unit: 'business_day', value: 10 },
+            },
+          },
+        },
+      ],
       line_items: items.map((item: any) => ({
         price_data: {
           currency: moneda.toLowerCase(),
