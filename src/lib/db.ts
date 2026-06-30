@@ -75,9 +75,10 @@ function initTables() {
   // Add columns for flat product model if missing (for seed.json compat)
   try { db.exec('ALTER TABLE models ADD COLUMN categoria_es TEXT') } catch {}
   try { db.exec('ALTER TABLE models ADD COLUMN categoria_en TEXT') } catch {}
-  try { db.exec('ALTER TABLE models ADD COLUMN precio_mxn REAL') } catch {}
-  try { db.exec('ALTER TABLE models ADD COLUMN precio_usd REAL') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN precio_mxn REAL DEFAULT 0') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN precio_usd REAL DEFAULT 0') } catch {}
   try { db.exec('ALTER TABLE models ADD COLUMN stock INTEGER DEFAULT 0') } catch {}
+  try { db.exec('ALTER TABLE models ADD COLUMN peso_kg REAL DEFAULT 0.1') } catch {}
   try { db.exec('ALTER TABLE models ADD COLUMN colores TEXT') } catch {}
 
   db.exec(`
@@ -274,8 +275,8 @@ function seedModels() {
   if (seedProducts.length === 0) return
   db.exec('DELETE FROM models')
   const insert = db.prepare(`
-    INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
-    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
+    INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, colores, destacado, activo)
+    VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @colores, @destacado, @activo)
   `)
   let count = 0
   for (const p of seedProducts) {
@@ -370,15 +371,15 @@ export function upsertModel(data: any): any {
         historia_es=@historia_es, historia_en=@historia_en,
         categoria_es=@categoria_es, categoria_en=@categoria_en,
         precio_mxn=@precio_mxn, precio_usd=@precio_usd,
-        stock=@stock, imagenes=@imagenes, colores=@colores,
+        stock=@stock, peso_kg=@peso_kg, imagenes=@imagenes, colores=@colores,
         destacado=@destacado, activo=@activo
       WHERE id = @id
       `).run({ ...data, activo: data.activo !== undefined ? data.activo : 1 })
     return db.prepare('SELECT * FROM models WHERE id = ?').get(exists.id)
   } else {
     const result = db.prepare(`
-      INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, imagenes, colores, destacado, activo)
-      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @imagenes, @colores, @destacado, @activo)
+      INSERT INTO models (slug, nombre_es, nombre_en, descripcion_es, descripcion_en, historia_es, historia_en, categoria_es, categoria_en, precio_mxn, precio_usd, stock, peso_kg, imagenes, colores, destacado, activo)
+      VALUES (@slug, @nombre_es, @nombre_en, @descripcion_es, @descripcion_en, @historia_es, @historia_en, @categoria_es, @categoria_en, @precio_mxn, @precio_usd, @stock, @peso_kg, @imagenes, @colores, @destacado, @activo)
     `).run({ ...data, activo: data.activo !== undefined ? data.activo : 1 })
     return db.prepare('SELECT * FROM models WHERE id = ?').get(result.lastInsertRowid)
   }

@@ -10,10 +10,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'El carrito está vacío' }, { status: 400 })
     }
 
+    const paymentMethods = ['card']
+    if (moneda === 'MXN') {
+      paymentMethods.push('oxxo', 'spei')
+    }
+
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
+      payment_method_types: paymentMethods,
       customer_email: email,
       shipping_address_collection: {
         allowed_countries: ['MX', 'US', 'CA', 'DE', 'FR', 'ES', 'IT', 'GB', 'NL'],

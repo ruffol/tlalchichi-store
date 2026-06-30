@@ -255,6 +255,9 @@ export default function CheckoutPage() {
               Pagar con Stripe
             </button>
           )}
+          <p className="text-xs text-center text-negro-suave/50 -mt-2">
+            💳 Tarjeta | 🏪 OXXO | 💰 SPEI
+          </p>
           <button
             onClick={handlePayPal}
             disabled={loading === 'paypal'}

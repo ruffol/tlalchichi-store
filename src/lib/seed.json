@@ -41,7 +41,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-acostado",
@@ -85,7 +86,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-joven_viejo",
@@ -129,7 +131,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-mascara_danza",
@@ -173,7 +176,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-parado",
@@ -217,7 +221,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-sentado",
@@ -261,7 +266,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "llavero-viejo_sentado",
@@ -305,7 +311,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.1
   },
   {
     "slug": "alcacia-mascara",
@@ -349,7 +356,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.3
   },
   {
     "slug": "alcacia-sentado",
@@ -393,7 +401,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.3
   },
   {
     "slug": "alcacia-viejo_sentado",
@@ -437,7 +446,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.3
   },
   {
     "slug": "cuenco-mazorca",
@@ -481,7 +491,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.3
   },
   {
     "slug": "cuenco-viejo_sentado_color",
@@ -525,7 +536,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.3
   },
   {
     "slug": "portamaceta-acostado",
@@ -569,7 +581,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-acostado-mediano",
@@ -613,7 +626,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-mediano-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-mascara-danza",
@@ -657,7 +671,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-mascara-danza-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-mazorca",
@@ -701,7 +716,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-parado",
@@ -745,7 +761,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-parado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-sentado",
@@ -789,7 +806,8 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   },
   {
     "slug": "portamaceta-viejo-sentado",
@@ -833,6 +851,7 @@
         "hex": "#E87A3E",
         "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-colima.png"
       }
-    ]
+    ],
+    "peso_kg": 0.5
   }
 ]
