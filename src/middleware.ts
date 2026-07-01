@@ -27,5 +27,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|img|favicon.ico|robots.txt).*)', '/sitemap.xml'],
+  matcher: ['/((?!api|_next|img|favicon.ico|robots.txt|sitemap.xml).*)', '/sitemap.xml'],
 }
