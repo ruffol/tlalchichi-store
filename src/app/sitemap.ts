@@ -6,6 +6,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.tlalchichi.xyz'
   const today = new Date().toISOString().split('T')[0]
 
+  const categories = ['llaveros', 'portamacetas', 'alcacias', 'cuencos']
+
   const staticPages: { path: string; priority: number; freq: 'weekly' | 'monthly' | 'daily' }[] = [
     { path: '', priority: 1, freq: 'daily' },
     { path: '/productos', priority: 0.9, freq: 'daily' },
