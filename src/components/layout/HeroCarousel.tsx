@@ -94,7 +94,7 @@ export default function HeroCarousel() {
               Tlalchichi Store
             </h1>
             <p className="text-base sm:text-lg text-muted mb-8 max-w-xl mx-auto">
-              Figuras de Tlalchichis — Hecho en Colima con amor y tradición
+              Figuras Tlalchichi impresas en 3D en plástico PET — hechas en Colima
             </p>
             <div className="flex gap-4 justify-center">
               <Link

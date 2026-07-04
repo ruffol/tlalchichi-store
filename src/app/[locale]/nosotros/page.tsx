@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: Props) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
   const currentUrl = `${baseUrl}/${locale}/nosotros`
   const desc = locale === 'es'
-    ? 'Descubre el origen y significado de los Tlalchichis, los perros de tierra de Colima. Réplicas en plástico PET de las famosas figuras tlalchichi colima.'
-    : 'Discover the origin and meaning of Tlalchichis, the dogs of the earth from Colima. PET plastic replicas of the famous Tlalchichi figures from Colima Mexico.'
+    ? 'Descubre el origen y significado de los Tlalchichis, los perros de tierra de Colima. Réplicas impresas en 3D en plástico PET — llaveros 3D colima, impresión 3D colima.'
+    : 'Discover the origin and meaning of Tlalchichis, the dogs of the earth from Colima. 3D printed PET plastic replicas — 3D printed keychains Colima, 3D printing Colima Mexico.'
 
   const alternateLanguages: Record<string, string> = {}
   for (const l of locales) {

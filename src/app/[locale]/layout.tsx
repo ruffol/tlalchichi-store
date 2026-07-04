@@ -108,7 +108,7 @@ export default async function LocaleLayout({
               '@type': 'WebSite',
               name: 'Tlalchichi Store',
               url: baseUrl,
-              description: 'Figuras Tlalchichi de plástico PET — hechas en Colima',
+              description: 'Figuras Tlalchichi impresas en 3D en plástico PET — hechas en Colima. Llaveros 3D Colima, impresión 3D.',
               inLanguage: locale === 'es' ? 'es-MX' : 'en-US',
             }),
           }}
@@ -122,7 +122,7 @@ export default async function LocaleLayout({
               name: 'Tlalchichi Store',
               url: baseUrl,
               logo: `${baseUrl}/img/iconologotlalchichi.svg`,
-              description: 'Tienda de figuras Tlalchichi de plástico PET hechas en Colima, México',
+              description: 'Tienda de figuras Tlalchichi impresas en 3D en plástico PET — hechas en Colima, México. Llaveros 3D, portamacetas y más.',
               address: { '@type': 'PostalAddress', addressCountry: 'MX' },
             }),
           }}
