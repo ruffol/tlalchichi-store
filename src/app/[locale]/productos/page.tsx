@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: Props) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
   const currentUrl = `${baseUrl}/${locale}/productos`
   const desc = locale === 'es'
-    ? 'Explora nuestra colección de figuras de Tlalchichis artesanales de Colima. Perros de la tierra hechos a mano con tradición milenaria.'
-    : 'Explore our collection of handmade Tlalchichi figurines from Colima. Dogs of the earth crafted with millenary tradition.'
+    ? 'Explora nuestra colección de figuras Tlalchichi de plástico PET hechas en Colima. Llaveros, portamacetas, alcancías y cuencos — perfectos como recuerdos y regalos.'
+    : 'Explore our collection of Tlalchichi PET plastic figures made in Colima. Keychains, planters, piggy banks and bowls — perfect as souvenirs and gifts.'
 
   const alternateLanguages: Record<string, string> = {}
   for (const l of locales) {

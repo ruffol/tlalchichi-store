@@ -20,19 +20,19 @@ const images = [
 ]
 
 const alts = [
-  'Tlalchichi parado artesanal de Colima',
-  'Tlalchichi sentado artesanal de Colima',
-  'Tlalchichi viejo sentado artesanal de Colima',
-  'Tlalchichi acostado artesanal de Colima',
-  'Tlalchichi con mazorca artesanal de Colima',
-  'Tlalchichi con máscara artesanal de Colima',
-  'Tlalchichi joven-viejo artesanal de Colima',
-  'Tlalchichi acostado mediano artesanal de Colima',
-  'Tlalchichi con máscara de danza artesanal de Colima',
-  'Tlalchichi con mazorca de abundancia artesanal de Colima',
-  'Tlalchichi parado guardián artesanal de Colima',
-  'Tlalchichi sentado miniatura artesanal de Colima',
-  'Tlalchichi viejo sentado color artesanal de Colima',
+  'Tlalchichi parado — figura tlalchichi colima',
+  'Tlalchichi sentado — tlalchichis colima México',
+  'Tlalchichi viejo sentado — tlalchichi artesanía colimense',
+  'Tlalchichi acostado — tlalchichis maceta decorativo',
+  'Tlalchichi con mazorca — tlalchichi colima plástico PET',
+  'Tlalchichi con máscara — llavero tlalchichi colima',
+  'Tlalchichi joven-viejo — tlalchichis pareja colima',
+  'Tlalchichi acostado mediano — portamaceta tlalchichi colima',
+  'Tlalchichi con máscara de danza — tlalchichi danza colima',
+  'Tlalchichi con mazorca de abundancia — tlalchichi abundancia colima',
+  'Tlalchichi parado guardián — guardian tlalchichi colima',
+  'Tlalchichi sentado miniatura — mini tlalchichi colima',
+  'Tlalchichi viejo sentado color — tlalchichi color colima',
 ]
 
 interface Props {}

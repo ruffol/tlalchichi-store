@@ -8,11 +8,11 @@
   },
   "HomePage": {
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Handmade Tlalchichi figurines — crafted with love and tradition",
+    "subtitulo": "Tlalchichi PET plastic figures — made in Colima Mexico",
     "cta": "View products",
     "destacados": "Featured Products",
     "historia_titulo": "Our Story",
-    "historia_texto": "Tlalchichis are pre-Hispanic ceramic figures from Colima, Mexico. Each piece tells a story of generations of artisans preserving this millenary tradition."
+    "historia_texto": "Tlalchichis are figures inspired by pre-Hispanic ceramics from Colima, Mexico. Tlalchichi colima, tlalchichis planter, keychains and more — high-resistance PET plastic replicas."
   },
   "ProductGrid": {
     "titulo": "Our Products",
@@ -132,9 +132,9 @@
     "espiritual_texto": "Mesoamerican cultures believed that dogs represented guides for the souls of the dead. The ceramic Tlalchichis placed in tombs had a fundamental function: to accompany and guide the soul of the deceased through the dangers of Mictlán, the Aztec underworld.",
     "espiritual_texto_2": "According to Mexica mythology, the god Xólotl created the xoloitzcuintle from a splinter of the Bone of Life. The sacred mission of these dogs was to guide their owners through the nine levels of the underworld until reaching eternal rest.",
     "mision_titulo": "Our Mission",
-    "mision_texto": "Preserve and share traditional Mexican artisan techniques, connecting artisans with the world.",
-    "proceso_titulo": "The Artisan Process",
-    "proceso_texto": "Each piece is unique. From material selection to the final detail, everything is handmade with dedication and patience.",
+    "mision_texto": "Share the Tlalchichi culture of Colima with the world through accessible high-quality PET plastic replicas.",
+    "proceso_titulo": "Our Process",
+    "proceso_texto": "Each replica is made from high-resistance PET plastic, capturing the details of the original Tlalchichi figures from Colima.",
     "valores_titulo": "Our Values",
     "valores_lista": ["Tradition", "Quality", "Fair Trade", "Sustainability"],
     "cta": "Explore products"
@@ -158,6 +158,6 @@
     "confirmacion_texto": "Thank you for your purchase. Here are your order details:",
     "confirmacion_total": "Total paid: {{total}}",
     "confirmacion_envio": "Ship to: {{direccion}}",
-    "confirmacion_gracias": "Thank you for supporting Mexican art!"
+    "confirmacion_gracias": "Thank you for your purchase! Follow us on social media @tlalchichistore"
   }
 }

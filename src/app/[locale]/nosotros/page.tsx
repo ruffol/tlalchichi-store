@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: Props) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.tlalchichi.xyz'
   const currentUrl = `${baseUrl}/${locale}/nosotros`
   const desc = locale === 'es'
-    ? 'Descubre el origen y significado de los Tlalchichis, los perros de tierra de Colima. Arte prehispánico hecho a mano con tradición milenaria.'
-    : 'Discover the origin and meaning of Tlalchichis, the dogs of the earth from Colima. Pre-Hispanic art handmade with millenary tradition.'
+    ? 'Descubre el origen y significado de los Tlalchichis, los perros de tierra de Colima. Réplicas en plástico PET de las famosas figuras tlalchichi colima.'
+    : 'Discover the origin and meaning of Tlalchichis, the dogs of the earth from Colima. PET plastic replicas of the famous Tlalchichi figures from Colima Mexico.'
 
   const alternateLanguages: Record<string, string> = {}
   for (const l of locales) {

@@ -108,7 +108,7 @@ export default async function LocaleLayout({
               '@type': 'WebSite',
               name: 'Tlalchichi Store',
               url: baseUrl,
-              description: 'Figuras de Tlalchichis — Hecho en Colima con amor y tradición',
+              description: 'Figuras Tlalchichi de plástico PET — hechas en Colima',
               inLanguage: locale === 'es' ? 'es-MX' : 'en-US',
             }),
           }}
@@ -122,7 +122,7 @@ export default async function LocaleLayout({
               name: 'Tlalchichi Store',
               url: baseUrl,
               logo: `${baseUrl}/img/iconologotlalchichi.svg`,
-              description: 'Tienda de figuras artesanales de Tlalchichis de Colima, México',
+              description: 'Tienda de figuras Tlalchichi de plástico PET hechas en Colima, México',
               address: { '@type': 'PostalAddress', addressCountry: 'MX' },
             }),
           }}

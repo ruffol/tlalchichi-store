@@ -8,11 +8,11 @@
   },
   "HomePage": {
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Figuras de Tlalchichis — Hecho en Colima con amor y tradición",
+    "subtitulo": "Figuras Tlalchichi de plástico PET — hechas en Colima",
     "cta": "Ver productos",
     "destacados": "Productos Destacados",
     "historia_titulo": "Nuestra Historia",
-    "historia_texto": "Los Tlalchichis son figuras de cerámica prehispánica de Colima, México. Cada pieza cuenta una historia de generaciones de artesanos que preservan esta tradición milenaria."
+    "historia_texto": "Los Tlalchichis son figuras inspiradas en cerámica prehispánica de Colima, México. Tlalchichi colima, tlalchichis maceta, llaveros y más — réplicas en plástico PET de alta resistencia."
   },
   "ProductGrid": {
     "titulo": "Nuestros Productos",
@@ -132,9 +132,9 @@
     "espiritual_texto": "En las culturas mesoamericanas se creía que los perros representaban guías del alma de los muertos. Los Tlalchichis de cerámica colocados en las tumbas tenían una función fundamental: acompañar y guiar el alma del difunto a través de los peligros del Mictlán, el inframundo azteca.",
     "espiritual_texto_2": "Según la mitología mexica, el dios Xólotl creó al xoloitzcuintle a partir de una astilla del Hueso de la Vida. La misión sagrada de estos perros era guiar a sus dueños a través de los nueve niveles del inframundo hasta llegar al descanso eterno.",
     "mision_titulo": "Nuestra Misión",
-    "mision_texto": "Preservar y compartir las técnicas artesanales tradicionales mexicanas, conectando a los artesanos con el mundo.",
-    "proceso_titulo": "El Proceso Artesanal",
-    "proceso_texto": "Cada pieza es única. Desde la selección de materiales hasta el último detalle, todo se hace a mano con dedicación y paciencia.",
+    "mision_texto": "Compartir la cultura tlalchichi de Colima con el mundo a través de réplicas accesibles en plástico PET de alta calidad.",
+    "proceso_titulo": "Nuestro Proceso",
+    "proceso_texto": "Cada réplica se fabrica en plástico PET de alta resistencia, capturando los detalles de las figuras tlalchichi originales de Colima.",
     "valores_titulo": "Nuestros Valores",
     "valores_lista": ["Tradición", "Calidad", "Comercio Justo", "Sostenibilidad"],
     "cta": "Explorar productos"
@@ -158,6 +158,6 @@
     "confirmacion_texto": "Gracias por tu compra. Aquí están los detalles de tu pedido:",
     "confirmacion_total": "Total pagado: {{total}}",
     "confirmacion_envio": "Enviar a: {{direccion}}",
-    "confirmacion_gracias": "¡Gracias por apoyar el arte mexicano!"
+    "confirmacion_gracias": "¡Gracias por tu compra! Síguenos en redes como @tlalchichistore"
   }
 }

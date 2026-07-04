@@ -17,11 +17,11 @@ export async function generateMetadata({ params }: Props) {
   const nombre = locale === 'es' ? type.nombre_es : type.nombre_en
   const currentUrl = `${baseUrl}/${locale}/categoria/${slug}`
   const title = locale === 'es'
-    ? `Tlalchichis ${nombre} — Figuras artesanales de Colima`
-    : `Tlalchichi ${nombre} — Handmade figurines from Colima`
+    ? `Tlalchichis ${nombre} — Figuras tlalchichi de plástico PET hechas en Colima`
+    : `Tlalchichi ${nombre} — PET plastic Tlalchichi figures made in Colima`
   const desc = locale === 'es'
-    ? `Descubre nuestra colección de Tlalchichis ${nombre}. Figuras artesanales hechas a mano en Colima, México.`
-    : `Discover our collection of Tlalchichi ${nombre}. Handmade artisan figurines from Colima, Mexico.`
+    ? `Descubre nuestra colección de Tlalchichis ${nombre}. Réplicas en plástico PET de las icónicas figuras tlalchichi de Colima, México.`
+    : `Discover our Tlalchichi ${nombre} collection. PET plastic replicas of the iconic Tlalchichi figures from Colima, Mexico.`
 
   const alternateLanguages: Record<string, string> = {}
   for (const l of locales) {

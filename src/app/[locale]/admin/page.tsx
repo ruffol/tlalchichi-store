@@ -322,7 +322,7 @@ function ModelManager() {
 
               {/* Historia */}
               <div className="border-t border-arena pt-4 space-y-3">
-                <p className="text-xs font-semibold text-muted uppercase tracking-wider">Historia artesanal</p>
+                <p className="text-xs font-semibold text-muted uppercase tracking-wider">Historia del Tlalchichi</p>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-1">Historia (ES)</label>
                   <textarea
