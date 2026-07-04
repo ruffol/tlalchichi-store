@@ -8,7 +8,7 @@ export const defaultLocale: Locale = 'es'
 export const routing = defineRouting({
   locales,
   defaultLocale,
-  localePrefix: 'always',
+  localePrefix: 'as-needed',
 })
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =
