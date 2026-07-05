@@ -95,6 +95,11 @@ export default async function ProductoDetailPage({ params }: Props) {
             </p>
           )}
 
+          <ClientWrapper
+            model={model}
+            locale={locale}
+          />
+
           <div className="bg-card border border-arena rounded-2xl p-5 space-y-2">
             <h2 className="font-semibold text-negro-suave text-sm uppercase tracking-wide">Especificaciones</h2>
             <div className="text-sm text-muted space-y-1">
@@ -116,11 +121,6 @@ export default async function ProductoDetailPage({ params }: Props) {
               </p>
             </div>
           )}
-
-          <ClientWrapper
-            model={model}
-            locale={locale}
-          />
         </div>
       </div>
     </div>
