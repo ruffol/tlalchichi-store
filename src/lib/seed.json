@@ -14,32 +14,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+      "/img/productos/llaveros/tlalchichi-mascara-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Lavero-tlalchichi-mascara-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-colima.png"
       }
     ],
     "peso_kg": 0.1
@@ -59,32 +59,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+      "/img/productos/llaveros/tlalchichi-acostado-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-acostado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-colima.png"
       }
     ],
     "peso_kg": 0.1
@@ -104,32 +104,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+      "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-joven-viejo-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-joven-viejo-colima.png"
       }
     ],
     "peso_kg": 0.1
@@ -149,32 +149,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+      "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
       }
     ],
     "peso_kg": 0.1
@@ -194,40 +194,40 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+      "/img/productos/llaveros/tlalchichi-parado-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-parado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       }
     ],
     "peso_kg": 0.1
   },
   {
-    "slug": "llavero-sentado",
-    "nombre_es": "Llavero Tlalchichi Sentado",
-    "nombre_en": "Tlalchichi Sentado Keychain",
+    "slug": "llavero-sentado-miniatura",
+    "nombre_es": "Llavero Tlalchichi Sentado Miniatura",
+    "nombre_en": "Tlalchichi Sentado Miniatura Keychain",
     "descripcion_es": "Reproducción de un Tlalchichi en posición sedente, fabricado en plástico PET de alta resistencia. Pieza que evoca la majestuosidad de las esculturas ceremoniales mesoamericanas.",
     "descripcion_en": "Reproduction of a seated Tlalchichi, faithfully reproduced from the original clay sculpture in PET plastic. A piece evoking the majesty of Mesoamerican ceremonial sculptures.",
     "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.\n\nLa postura sedente del Tlalchichi representa la contemplación y la sabiduría. En las culturas prehispánicas de Colima, estas figuras se utilizaban en altares domésticos para meditar y conectar con los ancestros.",
@@ -239,32 +239,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+      "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
       }
     ],
     "peso_kg": 0.1
@@ -284,32 +284,167 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+      "/img/productos/llaveros/tlalchichi-viejo-sentado-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/Llavero-tlalchichi-viejo-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-colima.png"
+      }
+    ],
+    "peso_kg": 0.1
+  },
+  {
+    "slug": "llavero-acostado-mediano",
+    "nombre_es": "Llavero Tlalchichi Acostado Mediano",
+    "nombre_en": "Tlalchichi Acostado Mediano Keychain",
+    "descripcion_es": "Reproducción en formato mediano de un Tlalchichi acostado, fabricado en plástico PET de alta resistencia. Llavero de tamaño intermedio con diseño tradicional.",
+    "descripcion_en": "Medium-sized reproduction of a resting Tlalchichi, made in high-resistance PET plastic. Mid-size keychain with traditional design.",
+    "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.",
+    "historia_en": "Tlalchichis are one of the most representative figures of the state of Colima and are part of the region's cultural heritage. Inspired by ancient clay dogs found in archaeological sites in western Mexico, these sculptures reflect the close relationship that pre-Hispanic civilizations maintained with these animals, regarded as companions, guardians, and symbols of loyalty.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/tlalchichi-acostado-mediano-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-mediano-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/llaveros/tlalchichi-acostado-mediano-colima.png"
+      }
+    ],
+    "peso_kg": 0.1
+  },
+  {
+    "slug": "llavero-mazorca",
+    "nombre_es": "Llavero Tlalchichi Mazorca",
+    "nombre_en": "Tlalchichi Mazorca Keychain",
+    "descripcion_es": "Llavero Tlalchichi sosteniendo una mazorca, símbolo de abundancia y fertilidad. Fabricado en plástico PET de alta resistencia.",
+    "descripcion_en": "Tlalchichi keychain holding a corncob, symbol of abundance and fertility. Made in high-resistance PET plastic.",
+    "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.",
+    "historia_en": "Tlalchichis are one of the most representative figures of the state of Colima and are part of the region's cultural heritage. Inspired by ancient clay dogs found in archaeological sites in western Mexico, these sculptures reflect the close relationship that pre-Hispanic civilizations maintained with these animals, regarded as companions, guardians, and symbols of loyalty.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/tlalchichi-mazorca-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/llaveros/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/tlalchichi-mazorca-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/llaveros/tlalchichi-mazorca-colima.png"
+      }
+    ],
+    "peso_kg": 0.1
+  },
+  {
+    "slug": "llavero-viejo-sentado-color",
+    "nombre_es": "Llavero Tlalchichi Viejo Sentado Color",
+    "nombre_en": "Tlalchichi Viejo Sentado Color Keychain",
+    "descripcion_es": "Reproducción detallada de un Tlalchichi anciano sentado en color, reproducido en plástico PET de alta resistencia. Refleja la experiencia y la veneración por los mayores en la cultura mesoamericana.",
+    "descripcion_en": "Detailed reproduction of a seated elderly Tlalchichi in color, reproduced in high-resistance PET plastic. Reflects the experience and veneration of elders in Mesoamerican culture.",
+    "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.",
+    "historia_en": "Tlalchichis are one of the most representative figures of the state of Colima and are part of the region's cultural heritage. Inspired by ancient clay dogs found in archaeological sites in western Mexico, these sculptures reflect the close relationship that pre-Hispanic civilizations maintained with these animals, regarded as companions, guardians, and symbols of loyalty.",
+    "categoria_es": "Llaveros",
+    "categoria_en": "Keychains",
+    "precio_mxn": 35,
+    "precio_usd": 2,
+    "stock": 42,
+    "destacado": false,
+    "imagenes": [
+      "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+    ],
+    "colores": [
+      {
+        "nombre_es": "Blanco",
+        "nombre_en": "White",
+        "hex": "#F5F5F5",
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+      },
+      {
+        "nombre_es": "Negro",
+        "nombre_en": "Black",
+        "hex": "#2D2D2D",
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+      },
+      {
+        "nombre_es": "Traslúcido",
+        "nombre_en": "Translucent",
+        "hex": "#D4D4D4",
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+      },
+      {
+        "nombre_es": "Naranja",
+        "nombre_en": "Orange",
+        "hex": "#E87A3E",
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
       }
     ],
     "peso_kg": 0.1

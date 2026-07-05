@@ -50,10 +50,11 @@ def make_colors(img_path):
 seed = []
 
 # Llaveros - each image = product
-for f in ['Lavero-tlalchichi-mascara-colima.png', 'Llavero-tlalchichi-acostado-colima.png',
-          'Llavero-tlalchichi-joven-viejo-colima.png', 'Llavero-tlalchichi-mascara-danza-colima.png',
-          'Llavero-tlalchichi-parado-colima.png', 'Llavero-tlalchichi-sentado-colima.png',
-          'Llavero-tlalchichi-viejo-sentado-colima.png']:
+for f in ['tlalchichi-mascara-colima.png', 'tlalchichi-acostado-colima.png',
+          'tlalchichi-acostado-mediano-colima.png', 'tlalchichi-joven-viejo-colima.png',
+          'tlalchichi-mascara-danza-colima.png', 'tlalchichi-mazorca-colima.png',
+          'tlalchichi-parado-colima.png', 'tlalchichi-sentado-miniatura-colima.png',
+          'tlalchichi-viejo-sentado-colima.png', 'tlalchichi-viejo-sentado-color-colima.png']:
     p = product_from_img('llaveros', 'Llaveros', 'Keychains', f, 35, 2, make_colors(f'/img/productos/llaveros/{f}'))
     seed.append(p)
 
