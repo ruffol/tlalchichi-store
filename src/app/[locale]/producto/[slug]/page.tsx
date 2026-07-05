@@ -100,15 +100,15 @@ export default async function ProductoDetailPage({ params }: Props) {
             locale={locale}
           />
 
-          <div className="bg-card border border-arena rounded-2xl p-5 space-y-2">
-            <h2 className="font-semibold text-negro-suave text-sm uppercase tracking-wide">Especificaciones</h2>
-            <div className="text-sm text-muted space-y-1">
-              <p><span className="font-medium text-negro-suave">Material:</span> Plástico PET</p>
+          <div className="bg-arena/50 rounded-2xl p-6">
+            <h2 className="font-semibold text-negro-suave mb-3">Especificaciones</h2>
+            <ul className="space-y-2 text-sm text-muted">
+              <li className="flex justify-between"><span>Material</span><span className="font-medium text-negro-suave">Plástico PET</span></li>
               {model.altura_cm && (
-                <p><span className="font-medium text-negro-suave">Altura:</span> {model.altura_cm} cm</p>
+                <li className="flex justify-between"><span>Altura</span><span className="font-medium text-negro-suave">{model.altura_cm} cm</span></li>
               )}
-              <p><span className="font-medium text-negro-suave">Colores disponibles:</span> {model.colores.map((c: { nombre_es: string; nombre_en: string }) => locale === 'es' ? c.nombre_es : c.nombre_en).join(', ')}</p>
-            </div>
+              <li className="flex justify-between"><span>Colores disponibles</span><span className="font-medium text-negro-suave">{model.colores.length}</span></li>
+            </ul>
           </div>
 
           {historia && (
