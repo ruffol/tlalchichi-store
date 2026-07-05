@@ -95,11 +95,16 @@ export default async function ProductoDetailPage({ params }: Props) {
             </p>
           )}
 
-          {model.altura_cm && (
-            <p className="text-sm text-muted">
-              Altura: {model.altura_cm} cm
-            </p>
-          )}
+          <div className="bg-card border border-arena rounded-2xl p-5 space-y-2">
+            <h2 className="font-semibold text-negro-suave text-sm uppercase tracking-wide">Especificaciones</h2>
+            <div className="text-sm text-muted space-y-1">
+              <p><span className="font-medium text-negro-suave">Material:</span> Plástico PET</p>
+              {model.altura_cm && (
+                <p><span className="font-medium text-negro-suave">Altura:</span> {model.altura_cm} cm</p>
+              )}
+              <p><span className="font-medium text-negro-suave">Colores disponibles:</span> {model.colores.map((c: { nombre_es: string; nombre_en: string }) => locale === 'es' ? c.nombre_es : c.nombre_en).join(', ')}</p>
+            </div>
+          </div>
 
           {historia && (
             <div className="bg-arena/50 rounded-2xl p-6">
