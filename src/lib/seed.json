@@ -143,8 +143,8 @@
     "nombre_en": "Tlalchichi Mask 2 Keychain",
     "descripcion_es": "Llavero Tlalchichi impreso en 3D en plástico PET de alta resistencia — réplica de las icónicas figuras tlalchichi de Colima. Llavero 3D Colima, tlalchichi impreso 3D.",
     "descripcion_en": "Tlalchichi keychain 3D printed in high-resistance PET plastic — replica of the iconic Tlalchichi figures from Colima. 3D printed keychain Colima.",
-    "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.\n\nLas figuras danzantes con máscara representaban a los chamanes que guiaban las ceremonias religiosas. El perro Tlalchichi, al ser considerado un guía espiritual, se fusionaba con la figura del chamán danzante para conectar el mundo terrenal con el inframundo.",
-    "historia_en": "Tlalchichis are one of the most representative figures of the state of Colima and are part of the region's cultural heritage. Inspired by ancient clay dogs found in archaeological sites in western Mexico, these sculptures reflect the close relationship that pre-Hispanic civilizations maintained with these animals, regarded as companions, guardians, and symbols of loyalty.\n\nMasked dancing figures represented the shamans who led religious ceremonies. The Tlalchichi dog, being considered a spiritual guide, merged with the dancing shaman figure to connect the earthly world with the underworld.",
+    "historia_es": "Los Tlalchichis son una de las figuras más representativas del estado de Colima y forman parte del patrimonio cultural de la región. Inspirados en antiguos perros de barro encontrados en zonas arqueológicas del occidente de México, estas esculturas reflejan la estrecha relación que las civilizaciones prehispánicas mantenían con estos animales, considerados compañeros, guardianes y símbolos de lealtad.",
+    "historia_en": "Tlalchichis are one of the most representative figures of the state of Colima and are part of the region's cultural heritage. Inspired by ancient clay dogs found in archaeological sites in western Mexico, these sculptures reflect the close relationship that pre-Hispanic civilizations maintained with these animals, regarded as companions, guardians, and symbols of loyalty.",
     "categoria_es": "Llaveros",
     "categoria_en": "Keychains",
     "precio_mxn": 35,
@@ -152,32 +152,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
+      "/img/productos/llaveros/tlalchichi-mascara2-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara2-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara2-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara2-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/tlalchichi-mascara-danza-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-mascara2-colima.png"
       }
     ],
     "peso_kg": 0.1,
