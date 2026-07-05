@@ -100,17 +100,6 @@ export default async function ProductoDetailPage({ params }: Props) {
             locale={locale}
           />
 
-          <div className="bg-arena/50 rounded-2xl p-6">
-            <h2 className="font-semibold text-negro-suave mb-3">Especificaciones</h2>
-            <ul className="space-y-2 text-sm text-muted">
-              <li className="flex justify-between"><span>Material</span><span className="font-medium text-negro-suave">Plástico PET</span></li>
-              {model.altura_cm && (
-                <li className="flex justify-between"><span>Altura</span><span className="font-medium text-negro-suave">{model.altura_cm} cm</span></li>
-              )}
-              <li className="flex justify-between"><span>Colores disponibles</span><span className="font-medium text-negro-suave">{model.colores.length}</span></li>
-            </ul>
-          </div>
-
           {historia && (
             <div className="bg-arena/50 rounded-2xl p-6">
               <h2 className="font-semibold text-negro-suave mb-2">

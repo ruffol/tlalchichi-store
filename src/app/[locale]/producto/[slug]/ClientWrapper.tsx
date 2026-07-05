@@ -15,6 +15,7 @@ interface ModelData {
   imagenes: string[]
   colores: ColorOption[]
   categoria_es: string
+  altura_cm?: number
 }
 
 interface ColorOption {
@@ -102,10 +103,12 @@ export default function ClientWrapper({ model, locale }: Props) {
             <span>Material</span>
             <span className="font-medium text-negro-suave">Plástico PET</span>
           </li>
-          <li className="flex justify-between">
-            <span>Altura</span>
-            <span className="font-medium text-negro-suave">4.2 cm</span>
-          </li>
+          {model.altura_cm && (
+            <li className="flex justify-between">
+              <span>Altura</span>
+              <span className="font-medium text-negro-suave">{model.altura_cm} cm</span>
+            </li>
+          )}
           <li className="flex justify-between">
             <span>Colores disponibles</span>
             <span className="font-medium text-negro-suave">{colors.length}</span>
