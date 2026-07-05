@@ -95,6 +95,12 @@ export default async function ProductoDetailPage({ params }: Props) {
             </p>
           )}
 
+          {model.altura_cm && (
+            <p className="text-sm text-muted">
+              Altura: {model.altura_cm} cm
+            </p>
+          )}
+
           {historia && (
             <div className="bg-arena/50 rounded-2xl p-6">
               <h2 className="font-semibold text-negro-suave mb-2">

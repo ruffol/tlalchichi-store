@@ -16,6 +16,7 @@ export interface Model {
   destacado: boolean
   activo: boolean
   colores: ColorOption[]
+  altura_cm?: number
   created_at: string
 }
 
@@ -41,6 +42,7 @@ export type ModelFormData = {
   precio_usd: number
   stock: number
   colores: ColorOption[]
+  altura_cm?: number
 }
 
 export interface ProductType {
