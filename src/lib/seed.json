@@ -502,7 +502,8 @@
         "imagen": "/img/productos/alcacias/tlalchichi-mascara-colima.png"
       }
     ],
-    "peso_kg": 0.3
+    "peso_kg": 0.3,
+    "altura_cm": 12.0
   },
   {
     "slug": "alcacia-sentado",
@@ -547,7 +548,8 @@
         "imagen": "/img/productos/alcacias/tlalchichi-sentado-colima.png"
       }
     ],
-    "peso_kg": 0.3
+    "peso_kg": 0.3,
+    "altura_cm": 12.0
   },
   {
     "slug": "alcacia-viejo_sentado",
@@ -592,7 +594,8 @@
         "imagen": "/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png"
       }
     ],
-    "peso_kg": 0.3
+    "peso_kg": 0.3,
+    "altura_cm": 12.0
   },
   {
     "slug": "cuenco-mazorca",
@@ -637,7 +640,8 @@
         "imagen": "/img/productos/cuencos/tlalchichi-mazorca-colima.png"
       }
     ],
-    "peso_kg": 0.3
+    "peso_kg": 0.3,
+    "altura_cm": 10.0
   },
   {
     "slug": "cuenco-viejo_sentado_color",
@@ -682,7 +686,8 @@
         "imagen": "/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png"
       }
     ],
-    "peso_kg": 0.3
+    "peso_kg": 0.3,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-acostado",
@@ -727,7 +732,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-acostado-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-mediano-sentado",
@@ -772,7 +778,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-mediano-sentado-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-mascara",
@@ -817,7 +824,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-mascara-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-mazorca",
@@ -834,35 +842,36 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/portamacetas/tlalchichi-mazorca-.render-colima.png"
+      "/img/productos/portamacetas/tlalchichi-mazorca-render-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-.render-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-render-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-.render-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-render-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-.render-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-render-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-.render-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-mazorca-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-parado",
@@ -907,7 +916,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-parado-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-sentado-miniatura",
@@ -924,35 +934,36 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png"
+      "/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png"
+        "imagen": "/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-viejo-sentado",
@@ -997,7 +1008,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-mascara-2",
@@ -1042,7 +1054,8 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-mascara2-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   },
   {
     "slug": "portamaceta-viejo-sentado-2",
@@ -1087,6 +1100,7 @@
         "imagen": "/img/productos/portamacetas/tlalchichi-viejo-sentado2-render-colima.png"
       }
     ],
-    "peso_kg": 0.5
+    "peso_kg": 0.5,
+    "altura_cm": 10.0
   }
 ]
