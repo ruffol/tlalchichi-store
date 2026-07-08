@@ -244,32 +244,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
+      "/img/productos/llaveros/tlalchichi-sentado-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
       }
     ],
     "peso_kg": 0.1,
@@ -428,32 +428,32 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+      "/img/productos/llaveros/tlalchichi-viejo-sentado-2-colima.png"
     ],
     "colores": [
       {
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-2-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-2-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-2-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-color-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-viejo-sentado-2-colima.png"
       }
     ],
     "peso_kg": 0.1,
@@ -699,8 +699,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -745,8 +745,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -791,8 +791,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -837,8 +837,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -883,8 +883,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -929,8 +929,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -975,8 +975,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -1021,8 +1021,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [
@@ -1067,8 +1067,8 @@
     "historia_en": "Planter inspired by the Tlalchichi tradition of Colima, Mexico.",
     "categoria_es": "Portamacetas",
     "categoria_en": "Planters",
-    "precio_mxn": 210,
-    "precio_usd": 11,
+    "precio_mxn": 350,
+    "precio_usd": 18,
     "stock": 42,
     "destacado": false,
     "imagenes": [

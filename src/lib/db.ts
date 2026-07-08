@@ -266,7 +266,7 @@ function seedProductTypes() {
   db.exec('DELETE FROM product_types')
   const types = [
     { slug: 'llaveros', nombre_es: 'Llaveros', nombre_en: 'Keychains', precio_mxn: 35, precio_usd: 2 },
-    { slug: 'portamacetas', nombre_es: 'Portamacetas', nombre_en: 'Planters', precio_mxn: 210, precio_usd: 11 },
+    { slug: 'portamacetas', nombre_es: 'Portamacetas', nombre_en: 'Planters', precio_mxn: 350, precio_usd: 18 },
     { slug: 'alcacias', nombre_es: 'Alcancías', nombre_en: 'Piggy Banks', precio_mxn: 160, precio_usd: 9 },
     { slug: 'cuencos', nombre_es: 'Cuencos', nombre_en: 'Bowls', precio_mxn: 210, precio_usd: 11 },
   ]

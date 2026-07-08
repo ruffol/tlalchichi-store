@@ -67,8 +67,8 @@ export default async function ProductosPage({ params, searchParams }: Props) {
 
   // Imágenes del carrusel de categoría (desde la carpeta de imágenes)
   const catImages: Record<string, string[]> = {
-    llaveros: ['/img/productos/llaveros/tlalchichi-sentado-miniatura-colima.png', '/img/productos/llaveros/tlalchichi-parado-colima.png', '/img/productos/llaveros/tlalchichi-joven-viejo-colima.png', '/img/productos/llaveros/varios1.png', '/img/productos/llaveros/varios2.png'],
-    portamacetas: ['/img/productos/portamacetas/tlalchichi-acostado-render-colima.png', '/img/productos/portamacetas/tlalchichi-mediano-sentado-render-colima.png', '/img/productos/portamacetas/tlalchichi-sentado-miniatura-rebder-colima.png'],
+    llaveros: ['/img/productos/llaveros/tlalchichi-sentado-colima.png', '/img/productos/llaveros/tlalchichi-parado-colima.png', '/img/productos/llaveros/tlalchichi-joven-viejo-colima.png', '/img/productos/llaveros/varios1.png', '/img/productos/llaveros/varios2.png'],
+    portamacetas: ['/img/productos/portamacetas/tlalchichi-acostado-render-colima.png', '/img/productos/portamacetas/tlalchichi-mediano-sentado-render-colima.png', '/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png'],
     alcacias: ['/img/productos/alcacias/tlalchichi-sentado-colima.png', '/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png', '/img/productos/alcacias/tlalchichi-mascara-colima.png'],
     cuencos: ['/img/productos/cuencos/tlalchichi-mazorca-colima.png', '/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png'],
   }
