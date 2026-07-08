@@ -42,6 +42,8 @@
   "Story": {
     "badge": "Historia",
     "titulo": "¿Qué es un Tlalchichi?",
+    "titulo_largo": "Hace más de 2,000 años…",
+    "texto_intro": "Los antiguos habitantes de Colima creaban figuras de perros de barro que acompañaban a las personas en su viaje al más allá.",
     "caption": "Cerámica prehispánica",
     "caption_periodo": "Colima, 300 a.C. — 400 d.C.",
     "texto_1": "El término \"Tlalchichi\" proviene del náhuatl \"tlalli\" (tierra) y \"chichi\" (perro), que se traduce como \"perro de la tierra\". Representa las emblemáticas figuras de cerámica creadas por las antiguas culturas del occidente de México.",
@@ -57,6 +59,11 @@
     "paso_3": "Acabado",
     "paso_4": "Empaque",
     "paso_5": "Envío"
+  },
+  "Gallery": {
+    "badge": "Galería",
+    "titulo": "Tlalchichis en tu espacio",
+    "subtitulo": "Imagina estas piezas en tu hogar, oficina o jardín."
   },
   "ProductGrid": {
     "titulo": "Nuestros Productos",

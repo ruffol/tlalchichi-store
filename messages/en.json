@@ -42,10 +42,12 @@
   "Story": {
     "badge": "History",
     "titulo": "What is a Tlalchichi?",
-    "caption": "Pre-Hispanic ceramics",
+    "titulo_largo": "Over 2,000 years ago…",
+    "texto_intro": "The ancient inhabitants of Colima created clay dog figures that accompanied people on their journey to the afterlife.",
+    "caption": "Pre-Hispanic pottery",
     "caption_periodo": "Colima, 300 BC — 400 AD",
-    "texto_1": "The term \"Tlalchichi\" comes from the Nahuatl \"tlalli\" (earth) and \"chichi\" (dog), meaning \"dog of the earth.\" It represents the iconic ceramic figures created by the ancient cultures of western Mexico.",
-    "texto_2": "These pieces were not mere ornaments — they were placed in tombs to guide the souls of the deceased through Mictlán. Today, our replicas keep that connection to Colima's history and spirituality alive.",
+    "texto_1": "The term \"Tlalchichi\" comes from the Nahuatl \"tlalli\" (earth) and \"chichi\" (dog), meaning \"earth dog\". It represents the iconic ceramic figures created by the ancient cultures of western Mexico.",
+    "texto_2": "These pieces were not mere decorations: they were placed in tombs to guide the souls of the deceased through Mictlán. Today, our replicas keep alive that connection to Colima's history and spirituality.",
     "cta": "Learn more"
   },
   "Process": {
@@ -57,6 +59,11 @@
     "paso_3": "Finishing",
     "paso_4": "Packaging",
     "paso_5": "Shipping"
+  },
+  "Gallery": {
+    "badge": "Gallery",
+    "titulo": "Tlalchichis in your space",
+    "subtitulo": "Imagine these pieces in your home, office, or garden."
   },
   "ProductGrid": {
     "titulo": "Our Products",
