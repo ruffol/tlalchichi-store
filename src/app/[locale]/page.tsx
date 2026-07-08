@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { getModels, getProductTypes } from '@/lib/db'
 import HeroSection from '@/components/layout/HeroCarousel'
+import StoryCarousel from '@/components/layout/StoryCarousel'
 import type { Model } from '@/types'
 
 interface Props {
@@ -14,11 +15,11 @@ export default async function HomePage({ params }: Props) {
   const ht = await getTranslations({ locale, namespace: 'Hero' })
   const tt = await getTranslations({ locale, namespace: 'TrustBar' })
   const st = await getTranslations({ locale, namespace: 'Story' })
-  const pt = await getTranslations({ locale, namespace: 'Process' })
   const gt = await getTranslations({ locale, namespace: 'Gallery' })
 
   // Gracefully handle missing database (development without native module)
   let featuredModels: any[] = []
+  let topModels: any[] = []
   let productTypes: any[] = []
   try {
     productTypes = getProductTypes()
@@ -26,6 +27,8 @@ export default async function HomePage({ params }: Props) {
     if (featuredModels.length === 0) {
       featuredModels = getModels({ activo: true }).slice(0, 4)
     }
+    // Top 3 best sellers (fallback: first 3 active models)
+    topModels = getModels({ activo: true }).slice(0, 3)
   } catch {
     // DB not available — render the landing page without products
   }
@@ -73,25 +76,23 @@ export default async function HomePage({ params }: Props) {
 
         <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col lg:flex-row items-stretch min-h-[70vh] lg:min-h-[75vh] py-16 lg:py-0">
-            {/* Image — takes half on desktop */}
-            <div className="w-full lg:w-1/2 relative overflow-hidden lg:min-h-[75vh] -mx-6 sm:-mx-10 lg:mx-0 lg:rounded-2xl">
-              <img
-                src="/img/carrucel/tlalchichi-viejo-sentado-colima.png"
-                alt="Tlalchichi — cerámica prehispánica de Colima"
-                className="w-full h-full object-cover absolute inset-0"
-                loading="lazy"
+            {/* Image carousel — 3 más vendidos */}
+            {topModels.length > 0 ? (
+              <StoryCarousel
+                models={topModels}
+                locale={locale}
+                caption={st('caption')}
+                captionPeriodo={st('caption_periodo')}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              {/* Floating caption */}
-              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm border border-arena/60 rounded-xl px-5 py-3 shadow-sm">
-                <p className="text-[0.7rem] font-medium text-muted uppercase tracking-wider">
-                  {st('caption')}
-                </p>
-                <p className="text-sm font-semibold text-negro-suave mt-0.5">
-                  {st('caption_periodo')}
-                </p>
+            ) : (
+              <div className="w-full lg:w-1/2 relative overflow-hidden lg:min-h-[75vh] -mx-6 sm:-mx-10 lg:mx-0 lg:rounded-2xl bg-arena">
+                <div className="absolute inset-0 flex items-center justify-center text-muted/30">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={0.8} stroke="currentColor" className="w-20 h-20">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                  </svg>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Text — takes other half */}
             <div className="w-full lg:w-1/2 flex items-center py-12 lg:py-16 lg:pl-16 xl:pl-20">
@@ -167,61 +168,6 @@ export default async function HomePage({ params }: Props) {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          PROCESS — con imágenes
-          ══════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28 bg-arena-light/40">
-        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-          <div className="text-center mb-16">
-            <p className="text-[0.75rem] font-medium text-terracota uppercase tracking-[0.15em] mb-3">
-              {pt('badge')}
-            </p>
-            <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] font-bold tracking-tight text-negro-suave">
-              {pt('titulo')}
-            </h2>
-            <p className="text-base text-muted mt-3 max-w-md mx-auto">
-              {pt('subtitulo')}
-            </p>
-          </div>
-
-          <div className="space-y-16 md:space-y-20">
-            {[
-              { step: 1, icon: 'pen', label: pt('paso_1'), img: '/img/carrucel/tlalchichi-parado-colima.png', desc: locale === 'es' ? 'Modelado digital a partir de las piezas originales de Colima.' : 'Digital modeling based on original Colima pieces.' },
-              { step: 2, icon: 'printer', label: pt('paso_2'), img: '/img/productos/portamacetas/tlalchichi-parado-render-colima.png', desc: locale === 'es' ? 'Impresión 3D en PET reciclado de alta resistencia.' : '3D printing in high-resistance recycled PET.' },
-              { step: 3, icon: 'sparkles', label: pt('paso_3'), img: '/img/productos/portamacetas/tlalchichi-mediano-sentado-render-colima.png', desc: locale === 'es' ? 'Acabado manual para garantizar calidad y durabilidad.' : 'Manual finishing to ensure quality and durability.' },
-              { step: 4, icon: 'box', label: pt('paso_4'), img: '/img/productos/portamacetas/tlalchichi-mascara-render-colima.png', desc: locale === 'es' ? 'Empaque cuidadoso listo para enviar a todo México.' : 'Careful packaging ready to ship nationwide.' },
-              { step: 5, icon: 'truck', label: pt('paso_5'), img: '/img/carrucel/tlalchichi-parado-colima.png', desc: locale === 'es' ? 'De Colima directamente a tu hogar.' : 'From Colima straight to your home.' },
-            ].map((item, i) => (
-              <div key={item.step} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-14`}>
-                {/* Image */}
-                <div className="w-full md:w-1/2">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-arena shadow-sm">
-                    <img
-                      src={item.img}
-                      alt={item.label}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                {/* Content */}
-                <div className="w-full md:w-1/2 max-w-md">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-terracota/10 border border-terracota/20 flex items-center justify-center shrink-0">
-                      <span className="text-lg font-bold text-terracota">0{item.step}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-negro-suave">{item.label}</h3>
-                  </div>
-                  <p className="text-base text-muted leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
