@@ -105,7 +105,7 @@ export default function ClientWrapper({ model, locale }: Props) {
           </li>
           {model.altura_cm && (
             <li className="flex justify-between">
-              <span>Altura</span>
+              <span>{model.categoria_es === 'Portamacetas' ? 'Diámetro' : 'Altura'}</span>
               <span className="font-medium text-negro-suave">{model.altura_cm} cm</span>
             </li>
           )}
