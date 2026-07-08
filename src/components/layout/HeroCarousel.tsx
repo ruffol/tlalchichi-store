@@ -9,6 +9,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal'
 export default function HeroSection() {
   const t = useTranslations('Hero')
   const productRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
@@ -68,22 +69,22 @@ export default function HeroSection() {
             </ScrollReveal>
 
             <ScrollReveal delay={2}>
-              <p className="text-[clamp(0.9375rem,1.1vw,1.0625rem)] leading-relaxed text-muted max-w-md mb-10">
+              <p className="text-[clamp(0.9375rem,1.1vw,1.125rem)] leading-[1.7] text-muted max-w-[520px] mb-10">
                 {t('subtitulo')}
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={3}>
               <div className="flex flex-wrap gap-4">
-                <Link href="/productos" className="btn-terracota">
+                <Link href="/productos" className="btn-terracota btn-shine">
                   {t('cta_primario')}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 icon-shift">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </Link>
                 <Link href="/nosotros" className="btn-outline">
                   {t('cta_secundario')}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 icon-shift">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </Link>
@@ -111,7 +112,10 @@ export default function HeroSection() {
           </div>
 
           {/* ── Right Column: Product Image (55%) ── */}
-          <div className="w-full lg:w-[55%] relative flex items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10">
+          <div
+            ref={containerRef}
+            className="w-full lg:w-[55%] relative flex items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10"
+          >
             <ScrollReveal delay={2}>
               <div
                 ref={productRef}
@@ -146,15 +150,41 @@ export default function HeroSection() {
               </div>
             </ScrollReveal>
 
+            {/* ── Connecting lines SVG ── */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
+              viewBox="0 0 800 800"
+              preserveAspectRatio="none"
+            >
+              {/* Line from top-left badge (Tamaño) toward product center */}
+              <path
+                d="M 100 110 Q 200 160, 350 250"
+                fill="none"
+                stroke="rgba(201,106,69,0.12)"
+                strokeWidth="1.5"
+                strokeDasharray="4 4"
+                className="connect-line"
+              />
+              {/* Line from bottom-right badge (Material) toward product center */}
+              <path
+                d="M 700 680 Q 550 600, 380 350"
+                fill="none"
+                stroke="rgba(201,106,69,0.12)"
+                strokeWidth="1.5"
+                strokeDasharray="4 4"
+                className="connect-line"
+              />
+            </svg>
+
             {/* Floating detail badges */}
             <div className="absolute top-[12%] -left-4 lg:-left-8 hidden sm:block">
-              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm">
+              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm badge-pulse">
                 <p className="text-[0.65rem] font-medium text-muted uppercase tracking-wider">{t('detalle_1')}</p>
                 <p className="text-sm font-semibold text-negro-suave mt-0.5">4.2 cm</p>
               </div>
             </div>
             <div className="absolute bottom-[25%] -right-4 lg:-right-8 hidden sm:block">
-              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm">
+              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm badge-pulse" style={{ animationDelay: '0.15s' }}>
                 <p className="text-[0.65rem] font-medium text-muted uppercase tracking-wider">{t('detalle_2')}</p>
                 <p className="text-sm font-semibold text-negro-suave mt-0.5">PET</p>
               </div>

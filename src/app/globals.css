@@ -290,3 +290,76 @@ body {
 .hero-product-glow {
   background: radial-gradient(ellipse at center, rgba(201, 106, 69, 0.08) 0%, rgba(201, 106, 69, 0.03) 40%, transparent 70%);
 }
+
+/* ── Sprint 2: Animations & Microinteractions ── */
+
+/* Button shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s cubic-bezier(0.25, 0.4, 0.25, 1);
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  left: 120%;
+}
+
+/* Icon shift on hover */
+.icon-shift {
+  transition: transform 0.25s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+
+.btn-terracota:hover .icon-shift,
+.btn-outline:hover .icon-shift {
+  transform: translateX(3px);
+}
+
+/* Connecting lines animation */
+.connect-line {
+  stroke-dashoffset: 100;
+  animation: draw-line 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Badge gentle pulse */
+.badge-pulse {
+  animation: badge-fade-in 0.5s ease-out 0.3s both, badge-float 4s ease-in-out 0.8s infinite;
+}
+
+@keyframes badge-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
