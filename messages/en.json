@@ -9,7 +9,7 @@
   },
   "Hero": {
     "badge": "Made in Colima",
-    "titulo": "Take home a piece of Colima's history",
+    "titulo": "A piece that connects tradition and contemporary design",
     "subtitulo": "Figures inspired by the ancient clay dogs of Colima. Each piece captures the essence of a millenary tradition, crafted with modern, durable materials.",
     "cta_primario": "Explore collection",
     "cta_secundario": "Our story",
@@ -19,10 +19,10 @@
     "detalle_2": "Material"
   },
   "TrustBar": {
-    "envio": "Shipping across Mexico",
-    "cultura": "Inspired by Colima culture",
-    "regalo": "Perfect for gifting",
-    "fabricacion": "Made to order"
+    "item_1": "Recycled PET",
+    "item_2": "Designed in Colima",
+    "item_3": "Local production",
+    "item_4": "Nationwide shipping"
   },
   "HomePage": {
     "coleccion_badge": "Collection",

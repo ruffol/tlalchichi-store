@@ -37,46 +37,27 @@ export default async function HomePage({ params }: Props) {
       <HeroSection />
 
       {/* ══════════════════════════════════════════
-          TRUST BAR
+          TRUST BAR — Minimalista
           ══════════════════════════════════════════ */}
-      <section className="relative border-y border-arena/50">
+      <section className="trust-bar-minimal">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 py-8 lg:py-10">
+          <div className="flex items-center justify-center h-[72px] gap-0">
             {[
-              { icon: 'truck', label: tt('envio') },
-              { icon: 'heart', label: tt('cultura') },
-              { icon: 'gift', label: tt('regalo') },
-              { icon: 'package', label: tt('fabricacion') },
+              tt('item_1'),
+              tt('item_2'),
+              tt('item_3'),
+              tt('item_4'),
             ].map((item, i) => (
-              <div
-                key={item.label}
-                className="flex items-center gap-3"
-              >
-                <div className="w-9 h-9 rounded-full bg-arena flex items-center justify-center shrink-0">
-                  {item.icon === 'truck' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-4 h-4 text-terracota">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                    </svg>
-                  )}
-                  {item.icon === 'heart' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-4 h-4 text-terracota">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                    </svg>
-                  )}
-                  {item.icon === 'gift' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-4 h-4 text-terracota">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-                    </svg>
-                  )}
-                  {item.icon === 'package' && (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-4 h-4 text-terracota">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-                    </svg>
-                  )}
+              <div key={item} className="flex items-center">
+                {i > 0 && <div className="trust-sep-v mx-6 lg:mx-10 shrink-0" />}
+                <div className="flex items-center gap-2.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-[18px] h-[18px] text-terracota/70 shrink-0">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span className="text-[0.8125rem] text-[#555] dark:text-[#a09892] font-medium whitespace-nowrap">
+                    {item}
+                  </span>
                 </div>
-                <span className="text-[0.8125rem] font-medium text-negro-suave/80 leading-snug">
-                  {item.label}
-                </span>
               </div>
             ))}
           </div>

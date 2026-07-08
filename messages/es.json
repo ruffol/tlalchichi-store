@@ -9,7 +9,7 @@
   },
   "Hero": {
     "badge": "Hecho en Colima",
-    "titulo": "Llévate un pedazo de la historia de Colima",
+    "titulo": "Una pieza que conecta tradición y diseño contemporáneo",
     "subtitulo": "Figuras inspiradas en los antiguos perros de barro de Colima. Cada pieza captura la esencia de una tradición milenaria, fabricada con materiales modernos y duraderos.",
     "cta_primario": "Explorar colección",
     "cta_secundario": "Conoce la historia",
@@ -19,10 +19,10 @@
     "detalle_2": "Material"
   },
   "TrustBar": {
-    "envio": "Envíos a todo México",
-    "cultura": "Inspirado en la cultura de Colima",
-    "regalo": "Ideal para regalo",
-    "fabricacion": "Fabricación bajo pedido"
+    "item_1": "PET reciclado",
+    "item_2": "Diseñado en Colima",
+    "item_3": "Producción local",
+    "item_4": "Envíos a todo México"
   },
   "HomePage": {
     "coleccion_badge": "Colección",
