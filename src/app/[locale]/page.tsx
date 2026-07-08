@@ -2,7 +2,6 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { getModels, getProductTypes } from '@/lib/db'
 import HeroSection from '@/components/layout/HeroCarousel'
-import StoryCarousel from '@/components/layout/StoryCarousel'
 import type { Model } from '@/types'
 
 interface Props {
@@ -12,7 +11,6 @@ interface Props {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'HomePage' })
-  const ht = await getTranslations({ locale, namespace: 'Hero' })
   const tt = await getTranslations({ locale, namespace: 'TrustBar' })
   const st = await getTranslations({ locale, namespace: 'Story' })
   const gt = await getTranslations({ locale, namespace: 'Gallery' })
@@ -38,7 +36,7 @@ export default async function HomePage({ params }: Props) {
       {/* ══════════════════════════════════════════
           HERO
           ══════════════════════════════════════════ */}
-      <HeroSection />
+      <HeroSection models={topModels} locale={locale} />
 
       {/* ══════════════════════════════════════════
           TRUST BAR
@@ -76,23 +74,25 @@ export default async function HomePage({ params }: Props) {
 
         <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col lg:flex-row items-stretch min-h-[70vh] lg:min-h-[75vh] py-16 lg:py-0">
-            {/* Image carousel — 3 más vendidos */}
-            {topModels.length > 0 ? (
-              <StoryCarousel
-                models={topModels}
-                locale={locale}
-                caption={st('caption')}
-                captionPeriodo={st('caption_periodo')}
+            {/* Image — takes half on desktop */}
+            <div className="w-full lg:w-1/2 relative overflow-hidden lg:min-h-[75vh] -mx-6 sm:-mx-10 lg:mx-0 lg:rounded-2xl">
+              <img
+                src="/img/carrucel/tlalchichi-viejo-sentado-colima.png"
+                alt="Tlalchichi — cerámica prehispánica de Colima"
+                className="w-full h-full object-cover absolute inset-0"
+                loading="lazy"
               />
-            ) : (
-              <div className="w-full lg:w-1/2 relative overflow-hidden lg:min-h-[75vh] -mx-6 sm:-mx-10 lg:mx-0 lg:rounded-2xl bg-arena">
-                <div className="absolute inset-0 flex items-center justify-center text-muted/30">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={0.8} stroke="currentColor" className="w-20 h-20">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.41a2.25 2.25 0 013.182 0l2.909 2.91m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                  </svg>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              {/* Floating caption */}
+              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm border border-arena/60 rounded-xl px-5 py-3 shadow-sm">
+                <p className="text-[0.7rem] font-medium text-muted uppercase tracking-wider">
+                  {st('caption')}
+                </p>
+                <p className="text-sm font-semibold text-negro-suave mt-0.5">
+                  {st('caption_periodo')}
+                </p>
               </div>
-            )}
+            </div>
 
             {/* Text — takes other half */}
             <div className="w-full lg:w-1/2 flex items-center py-12 lg:py-16 lg:pl-16 xl:pl-20">

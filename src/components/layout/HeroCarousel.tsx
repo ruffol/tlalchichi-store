@@ -1,18 +1,53 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import ScrollReveal from '@/components/ui/ScrollReveal'
+import { useCartStore } from '@/store/cart'
+import type { CartItemVariant } from '@/types'
 
-export default function HeroSection() {
+interface HeroProduct {
+  id: number
+  slug: string
+  nombre_es: string
+  nombre_en: string
+  imagenes: string[]
+  precio_mxn: number
+  precio_usd: number
+  stock: number
+  colores?: Array<{ nombre_es: string; nombre_en: string; hex: string; imagen: string }>
+}
+
+interface Props {
+  models?: HeroProduct[]
+  locale?: string
+}
+
+export default function HeroSection({ models, locale }: Props) {
   const t = useTranslations('Hero')
   const productRef = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const addItem = useCartStore((s) => s.addItem)
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
+  const [slide, setSlide] = useState(0)
+  const [addedSlides, setAddedSlides] = useState<Set<number>>(new Set())
+
+  const hasCarousel = models && models.length > 0
+  const total = hasCarousel ? models.length : 0
+
+  const next = useCallback(() => {
+    if (!total) return
+    setSlide((c) => (c + 1) % total)
+  }, [total])
+
+  useEffect(() => {
+    if (total <= 1) return
+    const timer = setInterval(next, 4500)
+    return () => clearInterval(timer)
+  }, [next, total])
 
   useEffect(() => {
     const el = productRef.current
@@ -45,9 +80,41 @@ export default function HeroSection() {
     }
   }, [])
 
+  const handleAddToCart = (m: HeroProduct) => {
+    const color = m.colores?.[0]
+    const img = color?.imagen || m.imagenes?.[0] || ''
+    const variant: CartItemVariant = {
+      modelId: String(m.id),
+      modelSlug: m.slug,
+      nombre_es: m.nombre_es,
+      nombre_en: m.nombre_en,
+      typeId: '1',
+      typeSlug: '',
+      typeNombreEs: '',
+      typeNombreEn: '',
+      colorId: '0',
+      colorSlug: color?.nombre_es?.toLowerCase().replace(/\s/g, '-') || '',
+      colorNombreEs: color?.nombre_es || '',
+      colorNombreEn: color?.nombre_en || '',
+      colorHex: color?.hex || '#ccc',
+      image: img,
+      precio_mxn: m.precio_mxn,
+      precio_usd: m.precio_usd,
+      stock: m.stock,
+    }
+    addItem(variant)
+    setAddedSlides((prev) => new Set(prev).add(slide))
+    setTimeout(() => {
+      setAddedSlides((prev) => {
+        const next = new Set(prev)
+        next.delete(slide)
+        return next
+      })
+    }, 2000)
+  }
+
   return (
     <section className="relative w-full overflow-hidden bg-hero-gradient bg-clay-texture">
-      {/* Thin top line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-terracota/10 to-transparent" />
 
       <div className="relative mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
@@ -55,7 +122,6 @@ export default function HeroSection() {
           {/* ── Left Column: Text (45%) ── */}
           <div className="w-full lg:w-[45%] lg:pr-10 xl:pr-16 z-10 pt-12 lg:pt-0">
             <ScrollReveal>
-              {/* Subtle badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracota/8 border border-terracota/12 text-terracota text-[0.75rem] font-medium tracking-wide uppercase mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-terracota/60" />
                 {t('badge')}
@@ -91,7 +157,6 @@ export default function HeroSection() {
               </div>
             </ScrollReveal>
 
-            {/* Trust signals row */}
             <ScrollReveal delay={4}>
               <div className="mt-12 flex items-center gap-6 text-[0.8125rem] text-muted/80">
                 <div className="flex items-center gap-2">
@@ -111,11 +176,8 @@ export default function HeroSection() {
             </ScrollReveal>
           </div>
 
-          {/* ── Right Column: Product Image (55%) ── */}
-          <div
-            ref={containerRef}
-            className="w-full lg:w-[55%] relative flex items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10"
-          >
+          {/* ── Right Column: Product Image / Carousel (55%) ── */}
+          <div className="w-full lg:w-[55%] relative flex items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10">
             <ScrollReveal delay={2}>
               <div
                 ref={productRef}
@@ -132,63 +194,108 @@ export default function HeroSection() {
                   marginRight: '-20px',
                 }}
               >
-                {/* Glow effect behind the product */}
+                {/* Glow effect */}
                 <div className="absolute inset-0 hero-product-glow rounded-full scale-150 translate-y-[-5%]" />
 
-                {/* Main product image */}
-                <Image
-                  src="/img/carrucel/tlalchichi-parado-colima.png"
-                  alt="Tlalchichi — figura inspirada en los perros de barro de Colima"
-                  className="hero-image-float relative w-full max-w-[500px] lg:max-w-[540px] h-auto object-contain"
-                  priority
-                  width={540}
-                  height={620}
-                />
+                {/* Product images carousel */}
+                <div className="relative w-full max-w-[500px] lg:max-w-[540px] aspect-[5/6] mx-auto">
+                  {hasCarousel ? (
+                    <>
+                      {models.map((m, i) => {
+                        const img = m.imagenes?.[0] || ''
+                        return (
+                          <div
+                            key={m.slug}
+                            className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                            style={{ opacity: i === slide ? 1 : 0 }}
+                          >
+                            <Image
+                              src={img}
+                              alt={locale === 'es' ? m.nombre_es : m.nombre_en}
+                              className="hero-image-float w-full h-full object-contain"
+                              priority={i === 0}
+                              width={540}
+                              height={620}
+                            />
+                          </div>
+                        )
+                      })}
+
+                      {/* Floating add-to-cart button */}
+                      <div
+                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 transition-all duration-300"
+                        style={{ opacity: 1 }}
+                      >
+                        {models[slide].stock > 0 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              handleAddToCart(models[slide])
+                            }}
+                            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
+                              addedSlides.has(slide)
+                                ? 'bg-emerald-500 text-white scale-105'
+                                : 'bg-white/95 text-negro-suave border border-arena/60 hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
+                            }`}
+                          >
+                            {addedSlides.has(slide) ? (
+                              <>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                {locale === 'es' ? '¡Agregado!' : 'Added!'}
+                              </>
+                            ) : (
+                              <>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                                {locale === 'es' ? 'Agregar al carrito' : 'Add to cart'}
+                                <span className="text-xs opacity-70">${models[slide].precio_mxn}</span>
+                              </>
+                            )}
+                          </button>
+                        ) : (
+                          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white/80 text-muted border border-arena/40 shadow-sm">
+                            {locale === 'es' ? 'Sin stock' : 'Out of stock'}
+                          </span>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <Image
+                      src="/img/carrucel/tlalchichi-parado-colima.png"
+                      alt="Tlalchichi — figura inspirada en los perros de barro de Colima"
+                      className="hero-image-float w-full h-full object-contain"
+                      priority
+                      width={540}
+                      height={620}
+                    />
+                  )}
+                </div>
+
+                {/* Dots */}
+                {hasCarousel && total > 1 && (
+                  <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    {models.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSlide(i)}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                          i === slide
+                            ? 'bg-terracota w-6'
+                            : 'bg-terracota/20 w-1.5 hover:bg-terracota/40'
+                        }`}
+                        aria-label={`Slide ${i + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
 
                 {/* Subtle ground shadow */}
                 <div className="absolute bottom-[-8%] left-[15%] right-[15%] h-6 bg-gradient-to-r from-transparent via-terracota/6 to-transparent blur-xl rounded-full" />
               </div>
             </ScrollReveal>
-
-            {/* ── Connecting lines SVG ── */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
-              viewBox="0 0 800 800"
-              preserveAspectRatio="none"
-            >
-              {/* Line from top-left badge (Tamaño) toward product center */}
-              <path
-                d="M 100 110 Q 200 160, 350 250"
-                fill="none"
-                stroke="rgba(201,106,69,0.12)"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
-                className="connect-line"
-              />
-              {/* Line from bottom-right badge (Material) toward product center */}
-              <path
-                d="M 700 680 Q 550 600, 380 350"
-                fill="none"
-                stroke="rgba(201,106,69,0.12)"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
-                className="connect-line"
-              />
-            </svg>
-
-            {/* Floating detail badges */}
-            <div className="absolute top-[12%] -left-4 lg:-left-8 hidden sm:block">
-              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm badge-pulse">
-                <p className="text-[0.65rem] font-medium text-muted uppercase tracking-wider">{t('detalle_1')}</p>
-                <p className="text-sm font-semibold text-negro-suave mt-0.5">4.2 cm</p>
-              </div>
-            </div>
-            <div className="absolute bottom-[25%] -right-4 lg:-right-8 hidden sm:block">
-              <div className="bg-white/90 backdrop-blur-sm border border-arena/50 rounded-xl px-3.5 py-2 shadow-sm badge-pulse" style={{ animationDelay: '0.15s' }}>
-                <p className="text-[0.65rem] font-medium text-muted uppercase tracking-wider">{t('detalle_2')}</p>
-                <p className="text-sm font-semibold text-negro-suave mt-0.5">PET</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
