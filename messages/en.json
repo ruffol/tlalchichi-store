@@ -4,15 +4,59 @@
     "productos": "Products",
     "nosotros": "About Us",
     "carrito": "Cart",
-    "admin": "Admin"
+    "admin": "Admin",
+    "comprar": "Buy"
+  },
+  "Hero": {
+    "badge": "Made in Colima",
+    "titulo": "Take home a piece of Colima's history",
+    "subtitulo": "Figures inspired by the ancient clay dogs of Colima. Each piece captures the essence of a millenary tradition, crafted with modern, durable materials.",
+    "cta_primario": "Explore collection",
+    "cta_secundario": "Our story",
+    "confianza_1": "Shipping across Mexico",
+    "confianza_2": "Made to order",
+    "detalle_1": "Size",
+    "detalle_2": "Material"
+  },
+  "TrustBar": {
+    "envio": "Shipping across Mexico",
+    "cultura": "Inspired by Colima culture",
+    "regalo": "Perfect for gifting",
+    "fabricacion": "Made to order"
   },
   "HomePage": {
+    "coleccion_badge": "Collection",
+    "coleccion_titulo": "Our Tlalchichis",
+    "ver_todos": "View all products",
+    "cta_badge": "Ready for yours",
+    "cta_titulo": "Bring Colima's tradition to your home",
+    "cta_texto": "Each piece is unique, crafted with dedication and high-quality materials.",
+    "cta_boton": "Explore products",
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Tlalchichi 3D printed PET plastic figures — made in Colima Mexico. 3D printed keychains, planters and more.",
+    "subtitulo": "Tlalchichi figures inspired by Colima's clay dogs — unique PET plastic pieces. Keychains, planters, piggy banks and bowls.",
     "cta": "View products",
     "destacados": "Featured Products",
     "historia_titulo": "Our Story",
-    "historia_texto": "Tlalchichis are figures inspired by pre-Hispanic ceramics from Colima, Mexico. Tlalchichi colima, tlalchichis planter, 3D printed keychains and more — high-resistance 3D printed PET plastic replicas."
+    "historia_texto": "Tlalchichis are figures inspired by pre-Hispanic ceramics from Colima, Mexico. 3D printed PET plastic replicas — keychains, planters and more."
+  },
+  "Story": {
+    "badge": "History",
+    "titulo": "What is a Tlalchichi?",
+    "caption": "Pre-Hispanic ceramics",
+    "caption_periodo": "Colima, 300 BC — 400 AD",
+    "texto_1": "The term \"Tlalchichi\" comes from the Nahuatl \"tlalli\" (earth) and \"chichi\" (dog), meaning \"dog of the earth.\" It represents the iconic ceramic figures created by the ancient cultures of western Mexico.",
+    "texto_2": "These pieces were not mere ornaments — they were placed in tombs to guide the souls of the deceased through Mictlán. Today, our replicas keep that connection to Colima's history and spirituality alive.",
+    "cta": "Learn more"
+  },
+  "Process": {
+    "badge": "Process",
+    "titulo": "From Colima to your home",
+    "subtitulo": "Each piece follows a careful process to ensure the highest quality.",
+    "paso_1": "Design",
+    "paso_2": "Printing",
+    "paso_3": "Finishing",
+    "paso_4": "Packaging",
+    "paso_5": "Shipping"
   },
   "ProductGrid": {
     "titulo": "Our Products",

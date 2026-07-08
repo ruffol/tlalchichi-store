@@ -4,15 +4,59 @@
     "productos": "Productos",
     "nosotros": "Nosotros",
     "carrito": "Carrito",
-    "admin": "Admin"
+    "admin": "Admin",
+    "comprar": "Comprar"
+  },
+  "Hero": {
+    "badge": "Hecho en Colima",
+    "titulo": "Llévate un pedazo de la historia de Colima",
+    "subtitulo": "Figuras inspiradas en los antiguos perros de barro de Colima. Cada pieza captura la esencia de una tradición milenaria, fabricada con materiales modernos y duraderos.",
+    "cta_primario": "Explorar colección",
+    "cta_secundario": "Conoce la historia",
+    "confianza_1": "Envíos a todo México",
+    "confianza_2": "Hecho bajo pedido",
+    "detalle_1": "Tamaño",
+    "detalle_2": "Material"
+  },
+  "TrustBar": {
+    "envio": "Envíos a todo México",
+    "cultura": "Inspirado en la cultura de Colima",
+    "regalo": "Ideal para regalo",
+    "fabricacion": "Fabricación bajo pedido"
   },
   "HomePage": {
+    "coleccion_badge": "Colección",
+    "coleccion_titulo": "Nuestros Tlalchichis",
+    "ver_todos": "Ver todos los productos",
+    "cta_badge": "Listo para el tuyo",
+    "cta_titulo": "Lleva la tradición de Colima a tu hogar",
+    "cta_texto": "Cada pieza es única, fabricada con dedicación y materiales de alta calidad.",
+    "cta_boton": "Explorar productos",
     "titulo": "Tlalchichi Store",
-    "subtitulo": "Figuras Tlalchichi impresas en 3D — plástico PET hecho en Colima. Llaveros 3D Colima, impresión 3D.",
+    "subtitulo": "Figuras Tlalchichi inspiradas en los perros de barro de Colima — piezas únicas en plástico PET. Llaveros, portamacetas, alcancías y cuencos.",
     "cta": "Ver productos",
     "destacados": "Productos Destacados",
     "historia_titulo": "Nuestra Historia",
     "historia_texto": "Los Tlalchichis son figuras inspiradas en cerámica prehispánica de Colima, México. Tlalchichi colima, tlalchichis maceta, llaveros 3D colima y más — réplicas en plástico PET impresas en 3D de alta resistencia."
+  },
+  "Story": {
+    "badge": "Historia",
+    "titulo": "¿Qué es un Tlalchichi?",
+    "caption": "Cerámica prehispánica",
+    "caption_periodo": "Colima, 300 a.C. — 400 d.C.",
+    "texto_1": "El término \"Tlalchichi\" proviene del náhuatl \"tlalli\" (tierra) y \"chichi\" (perro), que se traduce como \"perro de la tierra\". Representa las emblemáticas figuras de cerámica creadas por las antiguas culturas del occidente de México.",
+    "texto_2": "Estas piezas no eran simples adornos: se colocaban en las tumbas para guiar el alma de los difuntos a través del Mictlán. Hoy, nuestras réplicas mantienen viva esa conexión con la historia y la espiritualidad de Colima.",
+    "cta": "Conocer más"
+  },
+  "Process": {
+    "badge": "Proceso",
+    "titulo": "De Colima a tu hogar",
+    "subtitulo": "Cada pieza sigue un proceso cuidadoso para garantizar la mejor calidad.",
+    "paso_1": "Diseño",
+    "paso_2": "Impresión",
+    "paso_3": "Acabado",
+    "paso_4": "Empaque",
+    "paso_5": "Envío"
   },
   "ProductGrid": {
     "titulo": "Nuestros Productos",

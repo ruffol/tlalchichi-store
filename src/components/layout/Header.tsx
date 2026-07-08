@@ -16,60 +16,66 @@ export default function Header() {
   const count = getItemCount(items)
 
   return (
-    <header className="sticky top-0 z-40 bg-blanco/95 backdrop-blur-sm border-b border-arena">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="sticky top-0 z-40 navbar-glass">
+      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          {/* Logo — left */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-semibold tracking-tight text-negro-suave hover:text-terracota transition-colors"
+            className="flex items-center gap-2.5 shrink-0"
           >
-            <img src="/img/weblogotlalchichi.png" alt="Tlalchichi" className="h-8 w-auto" />
-            Tlalchichi
+            <img src="/img/weblogotlalchichi.png" alt="Tlalchichi" className="h-7 w-auto lg:h-8" />
+            <span className="text-base lg:text-lg font-semibold tracking-tight text-negro-suave">
+              Tlalchichi
+            </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Navigation — centered */}
+          <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             <Link
               href="/"
-              className="text-sm font-medium text-negro-suave/70 hover:text-terracota transition-colors"
+              className="text-[0.8125rem] font-medium text-negro-suave/60 hover:text-negro-suave transition-colors duration-200 tracking-wide"
             >
               {t('inicio')}
             </Link>
             <Link
               href="/productos"
-              className="text-sm font-medium text-negro-suave/70 hover:text-terracota transition-colors"
+              className="text-[0.8125rem] font-medium text-negro-suave/60 hover:text-negro-suave transition-colors duration-200 tracking-wide"
             >
               {t('productos')}
             </Link>
             <Link
               href="/nosotros"
-              className="text-sm font-medium text-negro-suave/70 hover:text-terracota transition-colors"
+              className="text-[0.8125rem] font-medium text-negro-suave/60 hover:text-negro-suave transition-colors duration-200 tracking-wide"
             >
               {t('nosotros')}
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="md:hidden p-2 text-negro-suave/70 hover:text-terracota transition-colors"
-              aria-label="Menú"
+          {/* Right side */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Comprar button — visible on desktop */}
+            <Link
+              href="/productos"
+              className="hidden lg:inline-flex items-center px-5 py-2 bg-terracota text-white text-[0.8125rem] font-medium rounded-full hover:bg-terracota-dark transition-all duration-200"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            </button>
+              {t('comprar')}
+            </Link>
+
             <ThemeToggle />
             <LanguageToggle />
+
+            {/* Cart button */}
             <button
               onClick={openCart}
-              className="relative p-2 text-negro-suave/70 hover:text-terracota transition-colors"
+              className="relative p-2.5 text-negro-suave/60 hover:text-negro-suave transition-colors duration-200"
               aria-label={t('carrito')}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth={1.3}
                 stroke="currentColor"
                 className="w-5 h-5"
               >
@@ -80,10 +86,21 @@ export default function Header() {
                 />
               </svg>
               {count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-terracota text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 bg-terracota text-white text-[10px] font-bold rounded-full w-4.5 h-4.5 flex items-center justify-center">
                   {count > 9 ? '9+' : count}
                 </span>
               )}
+            </button>
+
+            {/* Mobile menu trigger */}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="md:hidden p-2.5 text-negro-suave/60 hover:text-negro-suave transition-colors duration-200"
+              aria-label="Menú"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.3} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
             </button>
           </div>
         </div>
