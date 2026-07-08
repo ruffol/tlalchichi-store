@@ -204,8 +204,9 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                 {/* Glow effect */}
                 <div className="absolute inset-0 hero-product-glow rounded-full scale-150 translate-y-[-5%]" />
 
-                {/* Product images carousel */}
-                <div className="relative w-full max-w-[500px] lg:max-w-[540px] mx-auto">
+                {/* Product images carousel — dentro de tarjeta */}
+                <div className="hero-product-card">
+                  <div className="relative w-full max-w-[500px] lg:max-w-[540px] mx-auto">
                   {activeModels.map((m, i) => {
                     const img = m.imagenes?.[0] || ''
                     return (
@@ -264,6 +265,7 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                         {locale === 'es' ? 'Sin stock' : 'Out of stock'}
                       </span>
                     )}
+                  </div>
                   </div>
                 </div>
 

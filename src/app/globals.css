@@ -2,69 +2,81 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 🏺 Tlalchichi Design System — Warm Artisanal Palette v2 */
+/* 🏺 Tlalchichi Design System — Warm Artisanal Palette v3 */
 :root {
-  /* Light theme — warm parchment */
-  --bg-page: #faf7f2;
-  --bg-card: #ffffff;
-  --bg-arena: #f5f0eb;
-  --bg-arena-light: #f0ebe4;
-  --bg-hero: #f5f0eb;
+  /* ── Surface hierarchy (never two large surfaces same color) ── */
+  --bg-nav: #F7F3EF;
+  --bg-hero: #FCFAF7;
+  --bg-page: #FBF8F4;
+  --bg-section-alt: #F5F1EC;
+  --bg-card: #FFFFFF;
+  --bg-arena: #F2EDE6;
+  --bg-arena-light: #EDE7DF;
 
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6560;
-  --text-muted: #9e9790;
+  /* ── Text ── */
+  --text-primary: #1A1A1A;
+  --text-secondary: #575757;
+  --text-muted: #8A847E;
 
+  /* ── Accent ── */
   --accent: #C96A45;
   --accent-dark: #B85E3D;
   --accent-light: #D9875E;
 
-  --border-subtle: rgba(26, 26, 26, 0.06);
-  --border-arena: #e5ddd5;
+  /* ── Borders & lines ── */
+  --border-subtle: rgba(26, 26, 26, 0.05);
+  --color-arena: #E9DED3;
+  --border-arena: #E9DED3;
   --border-card: rgba(26, 26, 26, 0.04);
 
+  /* ── Shadows ── */
   --shadow-card: 0 1px 3px rgba(44, 40, 35, 0.04), 0 4px 12px rgba(44, 40, 35, 0.03);
   --shadow-hero: 0 20px 60px rgba(200, 106, 78, 0.15), 0 8px 24px rgba(0, 0, 0, 0.06);
   --shadow-btn: 0 4px 14px rgba(200, 106, 78, 0.25);
 
-  --footer-bg: #1a1a1a;
-  --footer-text: #a09892;
+  /* ── Footer ── */
+  --footer-bg: #1A1A1A;
+  --footer-text: #A09892;
   --footer-border: rgba(255, 255, 255, 0.08);
 
-  --badge-bg: #f5f0eb;
-  --badge-text: #6b6560;
+  /* ── Misc ── */
+  --badge-bg: #F2EDE6;
+  --badge-text: #575757;
 }
 
 .dark {
   /* Dark theme — warm charcoal, no pure blacks */
+  --bg-nav: #1C1A18;
+  --bg-hero: #1A1816;
   --bg-page: #181614;
-  --bg-card: #22201c;
-  --bg-arena: #22201c;
-  --bg-arena-light: #2a2723;
-  --bg-hero: #1a1816;
+  --bg-section-alt: #22201C;
+  --bg-card: #22201C;
+  --bg-arena: #22201C;
+  --bg-arena-light: #2A2723;
 
-  --text-primary: #e8e2da;
-  --text-secondary: #a09892;
-  --text-muted: #706a64;
+  --text-primary: #E8E2DA;
+  --text-secondary: #B8B0A8;
+  --text-muted: #8A847E;
 
   --accent: #C96A45;
   --accent-dark: #B85E3D;
   --accent-light: #D9875E;
 
   --border-subtle: rgba(232, 226, 218, 0.08);
-  --border-arena: #2a2723;
+  --color-arena: #3A3530;
+  --border-arena: #3A3530;
   --border-card: rgba(232, 226, 218, 0.06);
 
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
   --shadow-hero: 0 20px 60px rgba(200, 106, 78, 0.08), 0 8px 24px rgba(0, 0, 0, 0.2);
   --shadow-btn: 0 4px 14px rgba(200, 106, 78, 0.3);
 
-  --footer-bg: #0f0e0c;
-  --footer-text: #706a64;
+  --footer-bg: #0F0E0C;
+  --footer-text: #8A847E;
   --footer-border: rgba(255, 255, 255, 0.06);
 
-  --badge-bg: #2a2723;
-  --badge-text: #a09892;
+  --badge-bg: #2A2723;
+  --badge-text: #B8B0A8;
 }
 
 @theme inline {
@@ -79,6 +91,7 @@
   --color-blanco: var(--bg-card);
   --color-muted: var(--text-secondary);
   --color-card: var(--bg-card);
+  --color-arena-border: var(--color-arena);
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-fade-up: fade-up 0.6s ease-out;
@@ -125,30 +138,21 @@ body {
    ============================================================ */
 .bg-clay-texture {
   background-color: inherit;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
-/* Soft gradient backgrounds for hero */
+/* Soft gradient backgrounds for hero — radial warm light */
 .bg-hero-gradient {
-  background: linear-gradient(
-    180deg,
-    #FFFDFB 0%,
-    #FBF7F3 20%,
-    #F7F0EB 45%,
-    #F2EAE0 70%,
-    #EDE3D7 100%
-  );
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(201, 106, 69, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(201, 106, 69, 0.04) 0%, transparent 40%),
+    var(--bg-hero);
 }
 
 .dark .bg-hero-gradient {
-  background: linear-gradient(
-    180deg,
-    #1a1816 0%,
-    #1f1c1a 25%,
-    #22201c 50%,
-    #252220 75%,
-    #2a2723 100%
-  );
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(201, 106, 69, 0.12) 0%, transparent 50%),
+    var(--bg-hero);
 }
 
 /* Section gradient separator */
@@ -188,7 +192,7 @@ body {
 
 /* Smooth button transitions */
 .btn-terracota {
-  background: var(--accent);
+  background: linear-gradient(135deg, #C96A45, #B9603F);
   color: white;
   border-radius: 9999px;
   padding: 0.875rem 2rem;
@@ -202,7 +206,7 @@ body {
 }
 
 .btn-terracota:hover {
-  background: var(--accent-dark);
+  background: linear-gradient(135deg, #B9603F, #B85E3D);
   box-shadow: 0 8px 28px rgba(201, 106, 69, 0.35);
   transform: translateY(-2px) scale(1.02);
 }
@@ -239,23 +243,34 @@ body {
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.12)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.06));
 }
 
+/* Hero product card — wraps the image for depth */
+.hero-product-card {
+  background: #F5F1EC;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.dark .hero-product-card {
+  background: #22201C;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+}
+
 /* Hero product scale wrapper */
 .hero-product-wrap {
   transform: scale(1.18);
   transform-origin: center center;
 }
 
-/* Navbar glass effect */
+/* Navbar — distinct surface from hero */
 .navbar-glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border-bottom: 1px solid rgba(26, 26, 26, 0.04);
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-arena);
 }
 
 .dark .navbar-glass {
-  background: rgba(24, 22, 20, 0.85);
-  border-bottom: 1px solid rgba(232, 226, 218, 0.04);
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--border-arena);
 }
 
 /* Trust bar separator */
