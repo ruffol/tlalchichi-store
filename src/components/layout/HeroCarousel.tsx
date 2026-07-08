@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useEffect, useState, useCallback } from 'react'
-import Image from 'next/image'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import ScrollReveal from '@/components/ui/ScrollReveal'
@@ -206,85 +205,71 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                 <div className="absolute inset-0 hero-product-glow rounded-full scale-150 translate-y-[-5%]" />
 
                 {/* Product images carousel */}
-                <div className="relative w-full max-w-[500px] lg:max-w-[540px] aspect-[5/6] mx-auto">
-                  {hasCarousel ? (
-                    <>
-                      {activeModels.map((m, i) => {
-                        const img = m.imagenes?.[0] || ''
-                        return (
-                          <div
-                            key={m.slug}
-                            className="absolute inset-0 transition-opacity duration-700 ease-in-out"
-                            style={{ opacity: i === slide ? 1 : 0 }}
-                          >
-                            <Image
-                              src={img}
-                              alt={locale === 'es' ? m.nombre_es : m.nombre_en}
-                              className="hero-image-float w-full h-full object-contain"
-                              priority={i === 0}
-                              width={540}
-                              height={620}
-                            />
-                          </div>
-                        )
-                      })}
-
-                      {/* Floating add-to-cart button */}
+                <div className="relative w-full max-w-[500px] lg:max-w-[540px] mx-auto">
+                  {activeModels.map((m, i) => {
+                    const img = m.imagenes?.[0] || ''
+                    return (
                       <div
-                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 transition-all duration-300"
-                        style={{ opacity: 1 }}
+                        key={m.slug}
+                        className="hero-image-float w-full"
+                        style={{
+                          opacity: i === slide ? 1 : 0,
+                          transition: 'opacity 0.7s ease-in-out',
+                          display: i === slide ? 'block' : 'none',
+                        }}
                       >
-                        {activeModels[slide].stock > 0 ? (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              handleAddToCart(activeModels[slide])
-                            }}
-                            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
-                              addedSlides.has(slide)
-                                ? 'bg-emerald-500 text-white scale-105'
-                                : 'bg-white/95 text-negro-suave border border-arena/60 hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
-                            }`}
-                          >
-                            {addedSlides.has(slide) ? (
-                              <>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                </svg>
-                                {locale === 'es' ? '¡Agregado!' : 'Added!'}
-                              </>
-                            ) : (
-                              <>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                {locale === 'es' ? 'Agregar al carrito' : 'Add to cart'}
-                                <span className="text-xs opacity-70">${activeModels[slide].precio_mxn}</span>
-                              </>
-                            )}
-                          </button>
-                        ) : (
-                          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white/80 text-muted border border-arena/40 shadow-sm">
-                            {locale === 'es' ? 'Sin stock' : 'Out of stock'}
-                          </span>
-                        )}
+                        <img
+                          src={img}
+                          alt={locale === 'es' ? m.nombre_es : m.nombre_en}
+                          className="w-full h-auto object-contain"
+                          style={{ maxHeight: '65vh' }}
+                        />
                       </div>
-                    </>
-                  ) : (
-                    <Image
-                      src="/img/carrucel/tlalchichi-parado-colima.png"
-                      alt="Tlalchichi — figura inspirada en los perros de barro de Colima"
-                      className="hero-image-float w-full h-full object-contain"
-                      priority
-                      width={540}
-                      height={620}
-                    />
-                  )}
+                    )
+                  })}
+
+                  {/* Floating add-to-cart button */}
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20">
+                    {activeModels[slide].stock > 0 ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleAddToCart(activeModels[slide])
+                        }}
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
+                          addedSlides.has(slide)
+                            ? 'bg-emerald-500 text-white scale-105'
+                            : 'bg-white/95 text-negro-suave border border-arena/60 hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
+                        }`}
+                      >
+                        {addedSlides.has(slide) ? (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                            {locale === 'es' ? '¡Agregado!' : 'Added!'}
+                          </>
+                        ) : (
+                          <>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            {locale === 'es' ? 'Agregar al carrito' : 'Add to cart'}
+                            <span className="text-xs opacity-70">${activeModels[slide].precio_mxn}</span>
+                          </>
+                        )}
+                      </button>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white/80 text-muted border border-arena/40 shadow-sm">
+                        {locale === 'es' ? 'Sin stock' : 'Out of stock'}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Dots */}
-                {hasCarousel && total > 1 && (
-                  <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {total > 1 && (
+                  <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                     {activeModels.map((_, i) => (
                       <button
                         key={i}
