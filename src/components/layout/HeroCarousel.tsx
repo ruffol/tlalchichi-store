@@ -25,7 +25,7 @@ interface Props {
   locale?: string
 }
 
-export default function HeroSection({ models, locale }: Props) {
+export default function HeroSection({ models: propModels, locale }: Props) {
   const t = useTranslations('Hero')
   const productRef = useRef<HTMLDivElement>(null)
   const addItem = useCartStore((s) => s.addItem)
@@ -35,8 +35,16 @@ export default function HeroSection({ models, locale }: Props) {
   const [slide, setSlide] = useState(0)
   const [addedSlides, setAddedSlides] = useState<Set<number>>(new Set())
 
-  const hasCarousel = models && models.length > 0
-  const total = hasCarousel ? models.length : 0
+  // Fallback products when DB is not available
+  const fallbackModels: HeroProduct[] = [
+    { id: 0, slug: 'llavero-parado', nombre_es: 'Llavero Tlalchichi Parado', nombre_en: 'Tlalchichi Parado Keychain', imagenes: ['/img/productos/llaveros/tlalchichi-parado-colima.png'], precio_mxn: 35, precio_usd: 2, stock: 42 },
+    { id: 1, slug: 'llavero-sentado', nombre_es: 'Llavero Tlalchichi Sentado', nombre_en: 'Tlalchichi Sentado Keychain', imagenes: ['/img/productos/llaveros/tlalchichi-sentado-colima.png'], precio_mxn: 35, precio_usd: 2, stock: 42 },
+    { id: 2, slug: 'portamaceta-parado', nombre_es: 'Portamaceta Tlalchichi Parado', nombre_en: 'Tlalchichi Parado Planter', imagenes: ['/img/productos/portamacetas/tlalchichi-parado-render-colima.png'], precio_mxn: 350, precio_usd: 18, stock: 42 },
+  ]
+
+  const activeModels = (propModels && propModels.length > 0) ? propModels : fallbackModels
+  const hasCarousel = true
+  const total = activeModels.length
 
   const next = useCallback(() => {
     if (!total) return
@@ -201,7 +209,7 @@ export default function HeroSection({ models, locale }: Props) {
                 <div className="relative w-full max-w-[500px] lg:max-w-[540px] aspect-[5/6] mx-auto">
                   {hasCarousel ? (
                     <>
-                      {models.map((m, i) => {
+                      {activeModels.map((m, i) => {
                         const img = m.imagenes?.[0] || ''
                         return (
                           <div
@@ -226,11 +234,11 @@ export default function HeroSection({ models, locale }: Props) {
                         className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 transition-all duration-300"
                         style={{ opacity: 1 }}
                       >
-                        {models[slide].stock > 0 ? (
+                        {activeModels[slide].stock > 0 ? (
                           <button
                             onClick={(e) => {
                               e.stopPropagation()
-                              handleAddToCart(models[slide])
+                              handleAddToCart(activeModels[slide])
                             }}
                             className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
                               addedSlides.has(slide)
@@ -251,7 +259,7 @@ export default function HeroSection({ models, locale }: Props) {
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
                                 {locale === 'es' ? 'Agregar al carrito' : 'Add to cart'}
-                                <span className="text-xs opacity-70">${models[slide].precio_mxn}</span>
+                                <span className="text-xs opacity-70">${activeModels[slide].precio_mxn}</span>
                               </>
                             )}
                           </button>
@@ -277,7 +285,7 @@ export default function HeroSection({ models, locale }: Props) {
                 {/* Dots */}
                 {hasCarousel && total > 1 && (
                   <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                    {models.map((_, i) => (
+                    {activeModels.map((_, i) => (
                       <button
                         key={i}
                         onClick={() => setSlide(i)}
