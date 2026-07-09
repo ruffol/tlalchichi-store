@@ -13,16 +13,20 @@ interface Props {
 export default function ProductCard({ model, locale }: Props) {
   const addItem = useCartStore((s) => s.addItem)
   const [added, setAdded] = useState(false)
+  const [selectedColorIdx, setSelectedColorIdx] = useState(0)
   const nombre = locale === 'es' ? model.nombre_es : model.nombre_en
-  const imagen = model.imagenes?.[0] || ''
   const colores = Array.isArray(model.colores) ? model.colores : []
   const isES = locale === 'es'
   const precio = isES ? model.precio_mxn : model.precio_usd
+  const selectedColor = colores[selectedColorIdx]
+
+  // Show first color's image, or fallback to model image
+  const displayImg = selectedColor?.imagen || model.imagenes?.[0] || ''
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    const color = colores[0]
+    const color = selectedColor
     const variant: CartItemVariant = {
       modelId: String(model.id),
       modelSlug: model.slug,
@@ -32,12 +36,12 @@ export default function ProductCard({ model, locale }: Props) {
       typeSlug: '',
       typeNombreEs: '',
       typeNombreEn: '',
-      colorId: '0',
+      colorId: String(selectedColorIdx),
       colorSlug: color?.nombre_es?.toLowerCase().replace(/\s/g, '-') || '',
       colorNombreEs: color?.nombre_es || '',
       colorNombreEn: color?.nombre_en || '',
       colorHex: color?.hex || '#ccc',
-      image: color?.imagen || imagen,
+      image: color?.imagen || displayImg,
       precio_mxn: model.precio_mxn,
       precio_usd: model.precio_usd,
       stock: model.stock,
@@ -54,9 +58,9 @@ export default function ProductCard({ model, locale }: Props) {
         className="block"
       >
         <div className="aspect-[4/5] bg-arena overflow-hidden">
-          {imagen ? (
+          {displayImg ? (
             <img
-              src={imagen}
+              src={displayImg}
               alt={nombre}
               loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -77,6 +81,33 @@ export default function ProductCard({ model, locale }: Props) {
             {nombre}
           </h3>
         </Link>
+
+        {/* Color selector */}
+        {colores.length > 0 && (
+          <div className="flex items-center gap-1.5">
+            {colores.map((color, i) => (
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setSelectedColorIdx(i)
+                }}
+                className={`w-5 h-5 rounded-full border-2 transition-all duration-200 ${
+                  i === selectedColorIdx
+                    ? 'border-terracota scale-110 ring-1 ring-terracota/30'
+                    : 'border-arena hover:border-muted'
+                }`}
+                style={{ backgroundColor: color.hex }}
+                title={isES ? color.nombre_es : color.nombre_en}
+                aria-label={isES ? color.nombre_es : color.nombre_en}
+              />
+            ))}
+            <span className="text-[0.7rem] text-muted ml-1">
+              {isES ? selectedColor?.nombre_es : selectedColor?.nombre_en}
+            </span>
+          </div>
+        )}
 
         <div className="flex items-center justify-between mt-auto">
           <span className="text-base font-semibold text-negro-suave">
