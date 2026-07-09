@@ -243,7 +243,7 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                         className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
                           addedSlides.has(slide)
                             ? 'bg-emerald-500 text-white scale-105'
-                            : 'bg-[#E5D5C8] text-negro-suave border border-white/40 shadow-md hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
+                            : 'bg-[#E5D5C8] dark:bg-[#3A3530] text-[#1A1A1A] dark:text-[#E8E2DA] border border-white/40 dark:border-white/10 shadow-md hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
                         }`}
                       >
                         {addedSlides.has(slide) ? (
