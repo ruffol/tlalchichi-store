@@ -88,7 +88,10 @@ const MODEL_TEMPLATE = {
   precio_mxn: 35,
   precio_usd: 2,
   stock: 42,
+  peso_kg: 0.1,
+  altura_cm: 4.2,
   destacado: false,
+  activo: true,
   imagenes: [] as string[],
   colores: [
     { nombre_es: 'Blanco', nombre_en: 'White', hex: '#F5F5F5', imagen: '' },
@@ -163,7 +166,10 @@ function ModelManager() {
       precio_mxn: p.precio_mxn || 0,
       precio_usd: p.precio_usd || 0,
       stock: p.stock || 0,
+      peso_kg: p.peso_kg ?? 0.1,
+      altura_cm: p.altura_cm ?? 4.2,
       destacado: !!p.destacado,
+      activo: p.activo !== undefined ? !!p.activo : true,
       imagenes: imgs,
       colores: cols,
     })

@@ -25,6 +25,7 @@ export async function POST(req: Request) {
   const model = upsertModel({
     ...data,
     imagenes: data.imagenes ? JSON.stringify(data.imagenes) : '[]',
+    colores: data.colores ? JSON.stringify(data.colores) : '[]',
     destacado: data.destacado ? 1 : 0,
     activo: data.activo !== undefined ? (data.activo ? 1 : 0) : 1,
   })
