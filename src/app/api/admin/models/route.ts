@@ -36,20 +36,28 @@ export async function PUT(req: Request) {
   const auth = requireAdmin(req)
   if (auth) return auth
 
-  const data = await req.json()
-  const errors: string[] = []
-  if (!data.slug?.trim()) errors.push('Slug requerido')
-  if (errors.length > 0) {
-    return NextResponse.json({ errors }, { status: 400 })
-  }
+  try {
+    const data = await req.json()
+    const errors: string[] = []
+    if (!data.slug?.trim()) errors.push('Slug requerido')
+    if (errors.length > 0) {
+      return NextResponse.json({ errors }, { status: 400 })
+    }
 
-  const model = upsertModel({
-    ...data,
-    imagenes: data.imagenes ? JSON.stringify(data.imagenes) : '[]',
-    colores: data.colores ? JSON.stringify(data.colores) : '[]',
-    destacado: data.destacado ? 1 : 0,
-  })
-  return NextResponse.json(model)
+    const model = upsertModel({
+      ...data,
+      imagenes: data.imagenes ? JSON.stringify(data.imagenes) : '[]',
+      colores: data.colores ? JSON.stringify(data.colores) : '[]',
+      destacado: data.destacado ? 1 : 0,
+      activo: data.activo !== undefined ? (data.activo ? 1 : 0) : 1,
+      peso_kg: data.peso_kg ?? 0.1,
+      altura_cm: data.altura_cm ?? 4.2,
+    })
+    return NextResponse.json(model)
+  } catch (e: any) {
+    console.error('[PUT /api/admin/models]', e)
+    return NextResponse.json({ errors: [e.message || 'Error interno'] }, { status: 500 })
+  }
 }
 
 export async function DELETE(req: Request) {
