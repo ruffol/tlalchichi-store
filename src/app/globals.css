@@ -141,11 +141,10 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
-/* Soft gradient backgrounds for hero — radial warm light */
+/* Soft gradient backgrounds for hero — single radial warm light */
 .bg-hero-gradient {
   background:
     radial-gradient(ellipse at 70% 30%, rgba(201, 106, 69, 0.10) 0%, transparent 50%),
-    radial-gradient(ellipse at 30% 80%, rgba(201, 106, 69, 0.04) 0%, transparent 40%),
     var(--bg-hero);
 }
 
@@ -245,14 +244,16 @@ body {
 
 /* Hero product card — wraps the image for depth */
 .hero-product-card {
-  background: #F5F1EC;
+  background: #F9F6F2;
+  border: 1px solid rgba(201, 106, 69, 0.08);
   border-radius: 24px;
-  padding: 1.5rem;
+  padding: 0.75rem;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
 }
 
 .dark .hero-product-card {
   background: #22201C;
+  border: 1px solid rgba(201, 106, 69, 0.12);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 

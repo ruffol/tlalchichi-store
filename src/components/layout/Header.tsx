@@ -24,14 +24,14 @@ export default function Header() {
             href="/"
             className="flex items-center gap-2.5 shrink-0"
           >
-            <img src="/img/weblogotlalchichi.png" alt="Tlalchichi" className="h-7 w-auto lg:h-8" />
-            <span className="text-base lg:text-lg font-semibold tracking-tight text-negro-suave">
+            <img src="/img/weblogotlalchichi.png" alt="Tlalchichi" className="h-8 w-auto lg:h-9" />
+            <span className="text-base lg:text-xl font-semibold tracking-tight text-negro-suave">
               Tlalchichi
             </span>
           </Link>
 
           {/* Navigation — centered */}
-          <nav className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+          <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             <Link
               href="/"
               className="text-[0.8125rem] font-medium text-negro-suave/60 hover:text-negro-suave transition-colors duration-200 tracking-wide"

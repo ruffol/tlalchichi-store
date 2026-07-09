@@ -128,21 +128,24 @@ export default function HeroSection({ models: propModels, locale }: Props) {
         <div className="flex flex-col lg:flex-row items-center min-h-[85vh] lg:min-h-[90vh] py-20 lg:py-0">
           {/* ── Left Column: Text (45%) ── */}
           <div className="w-full lg:w-[45%] lg:pr-10 xl:pr-16 z-10 pt-12 lg:pt-0">
+            {/* Decorative vertical line — luxury detail */}
+            <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-terracota/20 via-terracota/5 to-transparent" style={{ left: '2rem' }} />
+            
             <ScrollReveal>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracota/8 border border-terracota/12 text-terracota text-[0.75rem] font-medium tracking-wide uppercase mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracota/8 border border-terracota/12 text-terracota text-[0.75rem] font-medium tracking-wide uppercase mb-10">
                 <span className="w-1.5 h-1.5 rounded-full bg-terracota/60" />
                 {t('badge')}
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={1}>
-              <h1 className="text-[clamp(2.2rem,4.5vw,4rem)] font-bold leading-[1.05] tracking-tight text-negro-suave mb-6 max-w-xl">
+              <h1 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.05] tracking-tight text-negro-suave mb-6 max-w-lg">
                 {t('titulo')}
               </h1>
             </ScrollReveal>
 
             <ScrollReveal delay={2}>
-              <p className="text-[clamp(0.9375rem,1.1vw,1.125rem)] leading-[1.7] text-muted max-w-[520px] mb-10">
+              <p className="text-[clamp(0.9375rem,1.1vw,1.125rem)] leading-[1.7] text-muted max-w-[500px] mb-14">
                 {t('subtitulo')}
               </p>
             </ScrollReveal>
