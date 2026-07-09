@@ -171,8 +171,8 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                 className="relative cursor-default"
                 style={{
                   transform: isHovering
-                    ? `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.06)`
-                    : 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1.06)',
+                    ? `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(0.95)`
+                    : 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(0.95)',
                   transition: isHovering
                     ? 'transform 0.08s ease-out'
                     : 'transform 0.5s cubic-bezier(0.25, 0.4, 0.25, 1)',
