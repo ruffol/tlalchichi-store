@@ -43,7 +43,7 @@ export default async function HomePage({ params }: Props) {
           ══════════════════════════════════════════ */}
       <section className="trust-bar-minimal">
         <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
-          <div className="flex items-center justify-center h-[72px] gap-0">
+          <div className="grid grid-cols-2 md:flex md:items-center md:justify-center md:h-[72px] md:gap-0 py-5 md:py-0 gap-y-3 gap-x-4">
             {[
               tt('item_1'),
               tt('item_2'),
@@ -51,12 +51,12 @@ export default async function HomePage({ params }: Props) {
               tt('item_4'),
             ].map((item, i) => (
               <div key={item} className="flex items-center">
-                {i > 0 && <div className="trust-sep-v mx-6 lg:mx-10 shrink-0" />}
+                {i > 0 && <div className="hidden md:block trust-sep-v mx-6 lg:mx-10 shrink-0" />}
                 <div className="flex items-center gap-2.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-[18px] h-[18px] text-terracota/70 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-[16px] h-[16px] md:w-[18px] md:h-[18px] text-terracota/70 shrink-0">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
-                  <span className="text-[0.8125rem] text-[#555] dark:text-[#a09892] font-medium whitespace-nowrap">
+                  <span className="text-[0.75rem] md:text-[0.8125rem] text-[#555] dark:text-[#a09892] font-medium whitespace-nowrap">
                     {item}
                   </span>
                 </div>
