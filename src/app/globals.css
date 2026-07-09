@@ -55,12 +55,12 @@
   --bg-arena-light: #2A2723;
 
   --text-primary: #E8E2DA;
-  --text-secondary: #B8B0A8;
-  --text-muted: #8A847E;
+  --text-secondary: #C8C0B6;   /* ↑ Bumped for readability on dark bg */
+  --text-muted: #A09892;       /* ↑ Was #8A847E — low contrast on #181614 */
 
-  --accent: #C96A45;
-  --accent-dark: #B85E3D;
-  --accent-light: #D9875E;
+  --accent: #D4775A;           /* ↑ Slightly lighter for dark mode contrast */
+  --accent-dark: #C96A45;
+  --accent-light: #E89B7A;
 
   --border-subtle: rgba(232, 226, 218, 0.08);
   --color-arena: #3A3530;
@@ -308,6 +308,18 @@ body {
 }
 
 /* ── Sprint 2: Animations & Microinteractions ── */
+
+/* Dark mode text contrast floor — opacity-based text needs minimum visibility */
+.dark .text-negro-suave\/40,
+.dark .text-negro-suave\/50 {
+  color: rgba(232, 226, 218, 0.65) !important;
+}
+.dark .text-negro-suave\/30 {
+  color: rgba(232, 226, 218, 0.50) !important;
+}
+.dark .text-negro-suave\/20 {
+  color: rgba(232, 226, 218, 0.35) !important;
+}
 
 /* Button shine effect */
 .btn-shine {
