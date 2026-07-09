@@ -254,7 +254,7 @@
     "stock": 42,
     "destacado": false,
     "imagenes": [
-      "/img/productos/llaveros/tlalchichi-sentado-colima.png",
+      "/img/productos/llaveros/tlalchichi-parado-colima.png",
       "/img/productos/llaveros/colores.png",
       "/img/productos/llaveros/colores2.png"
     ],
@@ -263,25 +263,25 @@
         "nombre_es": "Blanco",
         "nombre_en": "White",
         "hex": "#F5F5F5",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Negro",
         "nombre_en": "Black",
         "hex": "#2D2D2D",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Traslúcido",
         "nombre_en": "Translucent",
         "hex": "#D4D4D4",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       },
       {
         "nombre_es": "Naranja",
         "nombre_en": "Orange",
         "hex": "#E87A3E",
-        "imagen": "/img/productos/llaveros/tlalchichi-sentado-colima.png"
+        "imagen": "/img/productos/llaveros/tlalchichi-parado-colima.png"
       }
     ],
     "peso_kg": 0.1,
