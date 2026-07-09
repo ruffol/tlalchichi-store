@@ -4,8 +4,6 @@ import { useRef, useEffect, useState, useCallback } from 'react'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
 import ScrollReveal from '@/components/ui/ScrollReveal'
-import { useCartStore } from '@/store/cart'
-import type { CartItemVariant } from '@/types'
 
 interface HeroProduct {
   id: number
@@ -16,7 +14,6 @@ interface HeroProduct {
   precio_mxn: number
   precio_usd: number
   stock: number
-  colores?: Array<{ nombre_es: string; nombre_en: string; hex: string; imagen: string }>
 }
 
 interface Props {
@@ -27,23 +24,21 @@ interface Props {
 export default function HeroSection({ models: propModels, locale }: Props) {
   const t = useTranslations('Hero')
   const productRef = useRef<HTMLDivElement>(null)
-  const addItem = useCartStore((s) => s.addItem)
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
   const [slide, setSlide] = useState(0)
-  const [addedSlides, setAddedSlides] = useState<Set<number>>(new Set())
 
-  // Fallback products when DB is not available
   const fallbackModels: HeroProduct[] = [
     { id: 0, slug: 'llavero-parado', nombre_es: 'Llavero Tlalchichi Parado', nombre_en: 'Tlalchichi Parado Keychain', imagenes: ['/img/productos/llaveros/tlalchichi-parado-colima.png'], precio_mxn: 35, precio_usd: 2, stock: 42 },
-    { id: 1, slug: 'llavero-sentado', nombre_es: 'Llavero Tlalchichi Sentado', nombre_en: 'Tlalchichi Sentado Keychain', imagenes: ['/img/productos/llaveros/tlalchichi-sentado-colima.png'], precio_mxn: 35, precio_usd: 2, stock: 42 },
+    { id: 1, slug: 'llavero-mascara', nombre_es: 'Llavero Tlalchichi con Máscara', nombre_en: 'Tlalchichi Mask Keychain', imagenes: ['/img/productos/llaveros/tlalchichi-mascara-colima.png'], precio_mxn: 35, precio_usd: 2, stock: 42 },
     { id: 2, slug: 'portamaceta-parado', nombre_es: 'Portamaceta Tlalchichi Parado', nombre_en: 'Tlalchichi Parado Planter', imagenes: ['/img/productos/portamacetas/tlalchichi-parado-render-colima.png'], precio_mxn: 350, precio_usd: 18, stock: 42 },
   ]
 
   const activeModels = (propModels && propModels.length > 0) ? propModels : fallbackModels
-  const hasCarousel = true
   const total = activeModels.length
+  const current = activeModels[slide]
+  const isES = locale === 'es'
 
   const next = useCallback(() => {
     if (!total) return
@@ -87,39 +82,6 @@ export default function HeroSection({ models: propModels, locale }: Props) {
     }
   }, [])
 
-  const handleAddToCart = (m: HeroProduct) => {
-    const color = m.colores?.[0]
-    const img = color?.imagen || m.imagenes?.[0] || ''
-    const variant: CartItemVariant = {
-      modelId: String(m.id),
-      modelSlug: m.slug,
-      nombre_es: m.nombre_es,
-      nombre_en: m.nombre_en,
-      typeId: '1',
-      typeSlug: '',
-      typeNombreEs: '',
-      typeNombreEn: '',
-      colorId: '0',
-      colorSlug: color?.nombre_es?.toLowerCase().replace(/\s/g, '-') || '',
-      colorNombreEs: color?.nombre_es || '',
-      colorNombreEn: color?.nombre_en || '',
-      colorHex: color?.hex || '#ccc',
-      image: img,
-      precio_mxn: m.precio_mxn,
-      precio_usd: m.precio_usd,
-      stock: m.stock,
-    }
-    addItem(variant)
-    setAddedSlides((prev) => new Set(prev).add(slide))
-    setTimeout(() => {
-      setAddedSlides((prev) => {
-        const next = new Set(prev)
-        next.delete(slide)
-        return next
-      })
-    }, 2000)
-  }
-
   return (
     <section className="relative w-full overflow-hidden bg-hero-gradient bg-clay-texture">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-terracota/10 to-transparent" />
@@ -128,9 +90,8 @@ export default function HeroSection({ models: propModels, locale }: Props) {
         <div className="flex flex-col lg:flex-row items-center min-h-[85vh] lg:min-h-[90vh] py-20 lg:py-0">
           {/* ── Left Column: Text (45%) ── */}
           <div className="w-full lg:w-[45%] lg:pr-10 xl:pr-16 z-10 pt-12 lg:pt-0">
-            {/* Decorative vertical line — luxury detail */}
             <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-terracota/20 via-terracota/5 to-transparent" style={{ left: '2rem' }} />
-            
+
             <ScrollReveal>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracota/8 border border-terracota/12 text-terracota text-[0.75rem] font-medium tracking-wide uppercase mb-10">
                 <span className="w-1.5 h-1.5 rounded-full bg-terracota/60" />
@@ -145,49 +106,31 @@ export default function HeroSection({ models: propModels, locale }: Props) {
             </ScrollReveal>
 
             <ScrollReveal delay={2}>
-              <p className="text-[clamp(0.9375rem,1.1vw,1.125rem)] leading-[1.7] text-muted max-w-[500px] mb-14">
+              <p className="text-[clamp(0.9375rem,1.1vw,1.125rem)] font-medium leading-[1.7] text-muted max-w-[500px] mb-14">
                 {t('subtitulo')}
               </p>
             </ScrollReveal>
 
             <ScrollReveal delay={3}>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <Link href="/productos" className="btn-terracota btn-shine">
                   {t('cta_primario')}
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 icon-shift">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </Link>
-                <Link href="/nosotros" className="btn-outline">
+                <Link href="/nosotros" className="group inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-muted hover:text-terracota transition-colors">
                   {t('cta_secundario')}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 icon-shift">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
                 </Link>
               </div>
             </ScrollReveal>
-
-            <ScrollReveal delay={4}>
-              <div className="mt-12 flex items-center gap-6 text-[0.8125rem] text-muted/80">
-                <div className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-terracota/60">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>{t('confianza_1')}</span>
-                </div>
-                <div className="trust-separator" />
-                <div className="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-terracota/60">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>{t('confianza_2')}</span>
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
 
-          {/* ── Right Column: Product Image / Carousel (55%) ── */}
-          <div className="w-full lg:w-[55%] relative flex items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10">
+          {/* ── Right Column: Product (55%) ── */}
+          <div className="w-full lg:w-[55%] relative flex flex-col items-center justify-center mt-12 lg:mt-0 lg:pl-6 xl:pl-10">
             <ScrollReveal delay={2}>
               <div
                 ref={productRef}
@@ -204,77 +147,51 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                   marginRight: '-20px',
                 }}
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 hero-product-glow rounded-full scale-150 translate-y-[-5%]" />
+                {/* Stronger glow behind product */}
+                <div className="absolute inset-0 hero-product-glow rounded-full scale-[1.8] translate-y-[-5%]" />
 
-                {/* Product images carousel — dentro de tarjeta */}
+                {/* Card with product image */}
                 <div className="hero-product-card">
                   <div className="relative w-full max-w-[500px] lg:max-w-[540px] mx-auto">
-                  {activeModels.map((m, i) => {
-                    const img = m.imagenes?.[0] || ''
-                    return (
-                      <div
-                        key={m.slug}
-                        className="hero-image-float w-full"
-                        style={{
-                          opacity: i === slide ? 1 : 0,
-                          transition: 'opacity 0.7s ease-in-out',
-                          display: i === slide ? 'block' : 'none',
-                        }}
-                      >
-                        <img
-                          src={img}
-                          alt={locale === 'es' ? m.nombre_es : m.nombre_en}
-                          className="w-full h-auto object-contain"
-                          style={{ maxHeight: '65vh' }}
-                        />
-                      </div>
-                    )
-                  })}
+                    {activeModels.map((m, i) => {
+                      const img = m.imagenes?.[0] || ''
+                      return (
+                        <div
+                          key={m.slug}
+                          className="w-full"
+                          style={{
+                            opacity: i === slide ? 1 : 0,
+                            transition: 'opacity 0.7s ease-in-out',
+                            display: i === slide ? 'block' : 'none',
+                          }}
+                        >
+                          <img
+                            src={img}
+                            alt={isES ? m.nombre_es : m.nombre_en}
+                            className="w-full h-auto object-contain hero-image-float"
+                            style={{ maxHeight: '68vh' }}
+                          />
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
 
-                  {/* Floating add-to-cart button */}
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20">
-                    {activeModels[slide].stock > 0 ? (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleAddToCart(activeModels[slide])
-                        }}
-                        className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium shadow-lg transition-all duration-200 ${
-                          addedSlides.has(slide)
-                            ? 'bg-emerald-500 text-white scale-105'
-                            : 'bg-[#E5D5C8] dark:bg-[#3A3530] text-[#1A1A1A] dark:text-[#E8E2DA] border border-white/40 dark:border-white/10 shadow-md hover:bg-terracota hover:text-white hover:border-terracota hover:shadow-xl'
-                        }`}
-                      >
-                        {addedSlides.has(slide) ? (
-                          <>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
-                            {locale === 'es' ? '¡Agregado!' : 'Added!'}
-                          </>
-                        ) : (
-                          <>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                            {locale === 'es' ? 'Agregar al carrito' : 'Add to cart'}
-                            <span className="text-xs opacity-70">${activeModels[slide].precio_mxn}</span>
-                          </>
-                        )}
-                      </button>
-                    ) : (
-                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white/80 text-muted border border-arena/40 shadow-sm">
-                        {locale === 'es' ? 'Sin stock' : 'Out of stock'}
-                      </span>
-                    )}
-                  </div>
-                  </div>
+                {/* Product name + price below card */}
+                <div className="text-center mt-5">
+                  <Link href={`/producto/${current.slug}`} className="hover:text-terracota transition-colors">
+                    <p className="text-sm font-semibold text-negro-suave">
+                      {isES ? current.nombre_es : current.nombre_en}
+                    </p>
+                  </Link>
+                  <p className="text-lg font-bold text-terracota mt-1">
+                    {isES ? `$${current.precio_mxn} MXN` : `$${current.precio_usd.toFixed(2)} USD`}
+                  </p>
                 </div>
 
                 {/* Dots */}
                 {total > 1 && (
-                  <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  <div className="flex justify-center gap-2 mt-4">
                     {activeModels.map((_, i) => (
                       <button
                         key={i}
@@ -290,10 +207,46 @@ export default function HeroSection({ models: propModels, locale }: Props) {
                   </div>
                 )}
 
-                {/* Subtle ground shadow */}
+                {/* Grund shadow */}
                 <div className="absolute bottom-[-8%] left-[15%] right-[15%] h-6 bg-gradient-to-r from-transparent via-terracota/6 to-transparent blur-xl rounded-full" />
               </div>
             </ScrollReveal>
+
+            {/* Floating trust badges around the product */}
+            <div className="hidden lg:block">
+              <div className="absolute -left-4 top-[18%] bg-white/90 backdrop-blur-sm border border-arena/60 rounded-xl px-3 py-2 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-3.5 h-3.5 text-terracota">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-[0.7rem] font-medium text-negro-suave whitespace-nowrap">{isES ? 'Hecho en Colima' : 'Made in Colima'}</span>
+                </div>
+              </div>
+              <div className="absolute -right-4 top-[35%] bg-white/90 backdrop-blur-sm border border-arena/60 rounded-xl px-3 py-2 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-3.5 h-3.5 text-terracota">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                  </svg>
+                  <span className="text-[0.7rem] font-medium text-negro-suave whitespace-nowrap">{isES ? 'Envíos nacionales' : 'Nationwide shipping'}</span>
+                </div>
+              </div>
+              <div className="absolute -left-4 bottom-[30%] bg-white/90 backdrop-blur-sm border border-arena/60 rounded-xl px-3 py-2 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-3.5 h-3.5 text-terracota">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                  </svg>
+                  <span className="text-[0.7rem] font-medium text-negro-suave whitespace-nowrap">{isES ? 'PET reciclado' : 'Recycled PET'}</span>
+                </div>
+              </div>
+              <div className="absolute -right-4 bottom-[18%] bg-white/90 backdrop-blur-sm border border-arena/60 rounded-xl px-3 py-2 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor" className="w-3.5 h-3.5 text-terracota">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                  </svg>
+                  <span className="text-[0.7rem] font-medium text-negro-suave whitespace-nowrap">{isES ? 'Edición exclusiva' : 'Exclusive edition'}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
