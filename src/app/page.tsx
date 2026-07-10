@@ -13,7 +13,7 @@ export default async function RootPage() {
     llaveros: ['/img/productos/llaveros/tlalchichi-sentado-colima.png', '/img/productos/llaveros/tlalchichi-parado-colima.png', '/img/productos/llaveros/tlalchichi-joven-viejo-colima.png', '/img/productos/llaveros/varios1.png', '/img/productos/llaveros/varios2.png'],
     portamacetas: ['/img/productos/portamacetas/tlalchichi-acostado-render-colima.png', '/img/productos/portamacetas/tlalchichi-mediano-sentado-render-colima.png', '/img/productos/portamacetas/tlalchichi-sentado-miniatura-render-colima.png'],
     alcacias: ['/img/productos/alcacias/tlalchichi-sentado-colima.png', '/img/productos/alcacias/tlalchichi-viejo-sentado-colima.png', '/img/productos/alcacias/tlalchichi-mascara-colima.png'],
-    cuencos: ['/img/productos/cuencos/tlalchichi-mazorca-colima.png', '/img/productos/cuencos/tlalchichi-viejo-sentado-color-colima.png'],
+    cuencos: ['/img/productos/cuencos/tlalchichi-parado-colima.png', '/img/productos/cuencos/tlalchichi-sentado-colima.png'],
   }
 
   return (
